@@ -13,6 +13,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset("./template/dist/css/adminlte.min.css") }}">
   @stack('addons-css')
+  @livewireStyles
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -67,9 +68,17 @@
                with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="{{ route('dashboard') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
-                <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('donatur') }}" class="nav-link {{ $active == 'donatur' ? 'active' : '' }}">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Donatur
                 </p>
               </a>
             </li>
@@ -133,7 +142,10 @@
   <script src="{{ asset("./template/dist/js/adminlte.min.js") }}"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{ asset("./template/dist/js/demo.js") }}"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   @stack('addons-js')
+  @livewireScripts
 </body>
 
 </html>

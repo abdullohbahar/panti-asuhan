@@ -16,9 +16,6 @@ return new class extends Migration
         Schema::create('donaturs', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('nama');
-            $table->string('provinsi');
-            $table->string('kabupaten');
-            $table->string('kecamatan');
             $table->text('alamat');
             $table->timestamps();
         });

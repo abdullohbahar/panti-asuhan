@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DonaturController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +21,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-// Auth Routes
-Route::get('/', [AuthController::class, 'index']);
+Route::get('/', [AuthController::class, 'index'])->middleware('guest');
 
-// Dashboard Routes
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/donatur', [DonaturController::class, 'index'])->name('donatur');
+});
