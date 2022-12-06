@@ -26,7 +26,7 @@
             <div class="inner">
               <h4>{{ $anak_asuh }}</h4>
 
-              <p>Anak Asuh</p>
+              <p>Jumlah Anak Asuh</p>
             </div>
             <div class="icon">
               <i class="fas fa-users"></i>
