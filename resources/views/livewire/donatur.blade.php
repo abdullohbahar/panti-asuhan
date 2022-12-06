@@ -46,9 +46,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($count == 0)
+                                    <tr>
+                                        <td colspan="4">Data Not Found</td>
+                                    </tr>
+                                @endif
                                 @foreach ($donaturs as $index => $donatur)
                                     <tr>
-                                        <td data-label="#">{{ $index+1 }}</td>
+                                        <td data-label="#">{{ $donaturs->firstItem() + $index }}</td>
                                         <td data-label="Nama Donatur">{{ $donatur->nama }}</td>
                                         <td data-label="Alamat">{{ $donatur->alamat }}</td>
                                         <td data-label="Aksi">
@@ -61,6 +66,9 @@
                         </table>
                     </div>
                 </div>
+            </div>
+            <div class="card-footer">
+                {{ $donaturs->links() }}
             </div>
         </div>
     </div>

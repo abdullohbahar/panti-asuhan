@@ -4,18 +4,34 @@ namespace App\Http\Livewire;
 
 use App\Models\Donatur as ModelsDonatur;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Donatur extends Component
 {
-    public $nama, $alamat, $id_donatur;
+    public $nama, $alamat, $id_donatur, $search;
+
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
     public function render()
     {
+        $search = '';
+
+        $query = ModelsDonatur::where(function ($q) use ($search) {
+            $q->orwhere('nama', 'like', '%' . $this->search . '%')
+                ->orwhere('alamat', 'like', '%' . $this->search . '%');
+        });
+
+        $donaturs = $query->paginate(10);
+        $count = $donaturs->count();
+
         $data = [
-            'donaturs' => ModelsDonatur::get(),
+            'donaturs' => $donaturs,
+            'count' => $count
         ];
+
         return view('livewire.donatur', $data);
     }
 
