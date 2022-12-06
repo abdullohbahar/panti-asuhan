@@ -13,7 +13,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'active' => 'dashboard'
+        ];
+
+        return view('dashboard', $data);
     }
 
     /**
