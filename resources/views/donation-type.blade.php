@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Donatur
+  Tipe Donasi
 @endsection
 
 @push('addons-css')
@@ -100,21 +100,21 @@
 
 @section('content')
 <div>
-  <livewire:donatur>
+  <livewire:donation-type>
 </div>
 @endsection
 
 @push('addons-js')
 <script>
   // Show modal add donatur
-  $("#btnAddDonatur").on("click", () => {
-    $("#modal-add-donatur").modal("show")
+  $("#btnAdd").on("click", () => {
+    $("#modal-add-donation-type").modal("show")
   })
 
   window.addEventListener('close-modal', event => {
     // close modal
-    $('#modal-add-donatur').modal('hide')
-    $('#modal-edit-donatur').modal('hide')
+    $('#modal-add-donation-type').modal('hide')
+    $('#modal-edit-donation-type').modal('hide')
 
     // sweetalert success
     const Toast = Swal.mixin({
