@@ -45,14 +45,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @if ($count == 0)
+                                @if ($count == 0)
                                     <tr>
-                                        <td colspan="4">Data Not Found</td>
+                                        <td colspan="3">Data Not Found</td>
                                     </tr>
-                                @endif --}}
+                                @endif
                                 @foreach ($types as $index => $type)
                                     <tr>
-                                        <td data-label="#">{{ $index }}</td>
+                                        <td data-label="#">{{ $types->firstItem() + $index }}</td>
                                         <td data-label="Tipe Donasi">{{ $type->jenis_donasi }}</td>
                                         <td data-label="Aksi">
                                             <button wire:click="show('{{ $type->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation-type"><i class="fas fa-pencil-alt"></i></button>
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                {{-- {{ $donaturs->links() }} --}}
+                {{ $types->links() }}
             </div>
         </div>
     </div>

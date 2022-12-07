@@ -4,19 +4,31 @@ namespace App\Http\Livewire;
 
 use App\Models\DonationType as ModelsDonationType;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class DonationType extends Component
 {
-    public $jenis_donasi, $id_jenis;
+    public $jenis_donasi, $id_jenis, $search;
 
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public function render()
     {
-        $query = ModelsDonationType::get();
+        $search = '';
+
+        $query = ModelsDonationType::where(function ($q) use ($search) {
+            $q->orwhere('jenis_donasi', 'like', '%' . $this->search . '%');
+        });
+
+        $types = $query->paginate(10);
+        $count = $types->count();
 
         $data = [
-            'types' => $query
+            'types' => $types,
+            'count' => $count
         ];
 
         return view('livewire.donation-type', $data);
