@@ -85,6 +85,7 @@ class DonationType extends Component
     public function deleteConfirmation($id)
     {
         $this->id_jenis = $id;
+
         $this->dispatchBrowserEvent('show-delete-confirmation');
     }
 

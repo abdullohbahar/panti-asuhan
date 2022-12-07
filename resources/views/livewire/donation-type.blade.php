@@ -1,7 +1,7 @@
 <div>
     {{-- Modal --}}
-    @include('livewire.modal.modal-add-donation-type')
-    @include('livewire.modal.modal-edit-donation-type')
+    @include('livewire.modal.donation-type.modal-add-donation-type')
+    @include('livewire.modal.donation-type.modal-edit-donation-type')
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">

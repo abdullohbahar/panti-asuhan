@@ -1,7 +1,7 @@
 <div>
     {{-- Modal --}}
-    @include('livewire.modal.modal-add-donatur')
-    @include('livewire.modal.modal-edit-donatur')
+    @include('livewire.modal.donatur.modal-add-donatur')
+    @include('livewire.modal.donatur.modal-edit-donatur')
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
@@ -25,7 +25,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-end">
-                    <div class="col-12">
+                    <div class="col-12 text-right">
                         <button id="btnAddDonatur" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donatur</b></button>
                     </div>
                 </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\DonaturController;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/donatur', [DonaturController::class, 'index'])->name('donatur');
     Route::get('/tipe-donasi', [DonationTypeController::class, 'index'])->name('donation.type');
+    Route::get('/donasi', [DonationController::class, 'index'])->name('donation');
 });

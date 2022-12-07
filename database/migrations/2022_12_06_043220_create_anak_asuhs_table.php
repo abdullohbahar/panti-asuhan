@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('foto');
             $table->foreignIdFor(Akta::class)->onUpdate('cascade')->onDelete('set null');;
             $table->foreignIdFor(KartuKeluarga::class)->onUpdate('cascade')->onDelete('set null');;
-            $table->foreignIdFor(Keluarga::class)->onUpdate('cascade')->onDelete('set null');;
+            $table->foreignUuid('keluarga_id')->onUpdate('cascade')->onDelete('set null');;
             $table->timestamps();
         });
     }

@@ -12,6 +12,18 @@
   <link rel="stylesheet" href="{{ asset("./template/plugins/fontawesome-free/css/all.min.css") }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset("./template/dist/css/adminlte.min.css") }}">
+  <link rel="stylesheet" href="{{ asset('./template/plugins/select2/css/select2.min.css') }}">
+
+  <style>
+    .select2-container--default .select2-selection--single{
+      height: 37px;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+      height: 35px !important;
+    }
+  </style>
+
   @stack('addons-css')
   @livewireStyles
 </head>
@@ -91,14 +103,14 @@
                     </p>
                   </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a href="{{ route('donation.type') }}" class="nav-link {{ $active == 'tipe' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tipe Donasi</p>
                   </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
-                  <a href="../../index3.html" class="nav-link">
+                  <a href="{{ route('donation') }}" class="nav-link {{ $active == 'donasi' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Donasi</p>
                   </a>
@@ -137,9 +149,15 @@
   <!-- AdminLTE for demo purposes -->
   <script src="{{ asset("./template/dist/js/demo.js") }}"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{{ asset('./template/plugins/select2/js/select2.full.min.js') }}"></script>
+
 
   @stack('addons-js')
+  @stack('component-scripts')
   @livewireScripts
+  {{-- <script>
+      $('.select2').select2();
+  </script> --}}
 </body>
 
 </html>
