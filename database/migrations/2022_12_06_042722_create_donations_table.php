@@ -20,7 +20,6 @@ return new class extends Migration
             $table->uuid('id');
             $table->foreignUuid('donatur_id')->onUpdate('cascade')->onDelete('set null');;
             $table->foreignUuid('donation_type_id')->onUpdate('cascade')->onDelete('set null');;
-            $table->foreignUuid('bukti_sumbangan_id')->onUpdate('cascade')->onDelete('set null');;
             $table->integer('nominal');
             $table->text('keterangan');
             $table->date('tanggal_sumbangan');

@@ -24,4 +24,9 @@ class Donation extends Model
     {
         return $this->belongsTo(Donatur::class);
     }
+
+    public function bukti_sumbangan()
+    {
+        return $this->hasMany(BuktiSumbangan::class);
+    }
 }

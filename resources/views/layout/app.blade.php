@@ -151,7 +151,6 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="{{ asset('./template/plugins/select2/js/select2.full.min.js') }}"></script>
 
-
   @stack('addons-js')
   @stack('component-scripts')
   @livewireScripts

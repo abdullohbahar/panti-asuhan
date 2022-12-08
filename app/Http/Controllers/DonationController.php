@@ -10,13 +10,20 @@ class DonationController extends Controller
 {
     public function index()
     {
-        // $donaturs = Donatur::get();
-
         $data = [
             'active' => 'donasi',
-            // 'donaturs' => $donaturs
         ];
 
         return view('donation', $data);
+    }
+
+    public function proofOfDonation($id)
+    {
+        $data = [
+            'active' => 'donasi',
+            'id' => $id
+        ];
+
+        return view('proof-of-donation', $data);
     }
 }

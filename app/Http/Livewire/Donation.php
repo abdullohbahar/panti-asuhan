@@ -10,7 +10,6 @@ class Donation extends Component
 {
     public $donation_id, $donatur_id, $nominal, $tanggal_sumbangan, $keterangan, $search;
     public $donation_type_id = "Dana";
-    public $bukti_sumbangan_id = "null";
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
     public function render()
@@ -19,9 +18,10 @@ class Donation extends Component
 
         $donaturs = Donatur::get();
 
-        $query = ModelsDonation::whereHas('donatur', function ($q) use ($search) {
+        $query = ModelsDonation::where('donation_type_id', "Dana")->whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%')
-                ->orwhere('tanggal_sumbangan', 'like', '%' . $this->search . '%');
+                ->orwhere('tanggal_sumbangan', 'like', '%' . $this->search . '%')
+                ->orwhere('keterangan', 'like', '%' . $this->search . '%');
         });
 
         $donations = $query->paginate(10);
@@ -41,10 +41,16 @@ class Donation extends Component
         return [
             'donatur_id' => 'required',
             'donation_type_id' => 'required',
-            'bukti_sumbangan_id' => 'required',
             'nominal' => 'required',
             'tanggal_sumbangan' => 'required',
             'keterangan' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nominal.required' => 'Nominal harus diisi'
         ];
     }
 

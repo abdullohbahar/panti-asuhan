@@ -32,4 +32,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/donatur', [DonaturController::class, 'index'])->name('donatur');
     Route::get('/tipe-donasi', [DonationTypeController::class, 'index'])->name('donation.type');
     Route::get('/donasi', [DonationController::class, 'index'])->name('donation');
+    Route::get('/bukti-donasi/{id}', [DonationController::class, 'proofOfDonation'])->name('proof.of.donation');
 });
