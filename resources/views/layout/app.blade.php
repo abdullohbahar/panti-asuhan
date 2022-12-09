@@ -86,6 +86,14 @@
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ route('anak.asuh') }}" class="nav-link {{ $active == 'anak-asuh' ? 'active' : '' }}">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Anak Asuh
+                </p>
+              </a>
+            </li>
             <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'donasi' ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-hands"></i>
@@ -130,7 +138,15 @@
     </div>
     <!-- /.content-wrapper -->
 
-    {{-- <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. --}}
+    <footer class="main-footer">
+      <!-- To the right -->
+      {{-- <div class="float-right d-none d-sm-inline">
+        Panti Asuhan AL-Dzikro
+      </div> --}}
+      <!-- Default to the left -->
+      {{-- <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. --}}
+      <strong>Panti Asuhan Al-Dzikro</strong>
+    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

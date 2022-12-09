@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnakAsuhController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationController;
@@ -33,4 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/tipe-donasi', [DonationTypeController::class, 'index'])->name('donation.type');
     Route::get('/donasi', [DonationController::class, 'index'])->name('donation');
     Route::get('/bukti-donasi/{id}', [DonationController::class, 'proofOfDonation'])->name('proof.of.donation');
+    Route::get('/anak-asuh', [AnakAsuhController::class, 'index'])->name('anak.asuh');
+    Route::get('/tambah-anak-asuh', [AnakAsuhController::class, 'create'])->name('tambah.anak.asuh');
 });
