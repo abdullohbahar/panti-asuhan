@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Tipe Donasi
+  Donasi
 @endsection
 
 @push('addons-css')
@@ -116,10 +116,17 @@
     $("#modal-add-donation-item").modal("show")
   })
 
+  $("#btnAddItem").on("click", () => {
+    $("#modal-add-donation-item").modal("show")
+  })
+  
+
   window.addEventListener('close-modal', event => {
     // close modal
     $('#modal-add-donation-money').modal('hide')
     $('#modal-edit-donation').modal('hide')
+    $('#modal-add-donation-item').modal('hide')
+    $('#modal-edit-donation-item').modal('hide')
 
     // sweetalert success
     const Toast = Swal.mixin({

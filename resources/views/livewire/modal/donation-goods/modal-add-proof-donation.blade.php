@@ -15,7 +15,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="">Bukti Donasi</label>
-                  <input type="file" wire:model="file" class="form-control @error('file') is-invalid @enderror" autofocus>
+                  <input type="file" wire:model="file" class="form-control @error('file') is-invalid @enderror" autofocus id="upload{{ $iteration }}">
                   @error('file')
                   <div class="invalid-feedback">
                     {{ $message }}

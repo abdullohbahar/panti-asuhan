@@ -111,6 +111,6 @@ class Donation extends Component
     public function destroy()
     {
         ModelsDonation::destroy($this->donation_id);
-        $this->dispatchBrowserEvent('deleted', ['message' => 'Donatur Berhasil Dihapus']);
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
     }
 }

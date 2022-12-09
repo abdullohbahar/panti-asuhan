@@ -1,5 +1,6 @@
 <div>
     @include('livewire.modal.donation-goods.modal-add-donation-item')
+    @include('livewire.modal.donation-goods.modal-edit-donation-item')
     <div class="card">
         <div class="card-header">
             <div class="row justify-content-between">
@@ -41,7 +42,7 @@
                                     <td data-label="Tanggal Donasi">{{ $donation->tanggal_sumbangan }}</td>
                                     <td data-label="Aksi">
                                         <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm"><i class="fas fa-upload"></i></a>
-                                        <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation"><i class="fas fa-pencil-alt"></i></button>
+                                        <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation-item"><i class="fas fa-pencil-alt"></i></button>
                                         <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>

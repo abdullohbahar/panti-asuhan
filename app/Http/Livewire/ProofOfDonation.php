@@ -9,7 +9,7 @@ use Livewire\WithFileUploads;
 
 class ProofOfDonation extends Component
 {
-    public $idproof, $file;
+    public $idproof, $file, $iteration;
     use WithFileUploads;
 
     public function render()
@@ -56,5 +56,6 @@ class ProofOfDonation extends Component
     public function resetInput()
     {
         $this->file = '';
+        $this->iteration++;
     }
 }

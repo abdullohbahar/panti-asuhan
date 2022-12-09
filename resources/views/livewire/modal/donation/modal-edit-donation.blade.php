@@ -61,7 +61,7 @@
               </div>
             </div>
             <div class="col-12">
-              <button type="submit" class="btn btn-success btn-block mt-2">Donasi</button>
+              <button type="submit" class="btn btn-success btn-block mt-2">Ubah</button>
             </div>
           </div>
         </form>
