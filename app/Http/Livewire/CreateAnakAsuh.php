@@ -70,5 +70,7 @@ class CreateAnakAsuh extends Component
             'nama_ibu_kandung' => $this->nama_ibu_kandung,
             'nohp_ortu' => $this->nohp_ortu,
         ]);
+
+        return redirect()->to('anak-asuh')->with('message', 'Data anak asuh berhasil ditambahkan');
     }
 }

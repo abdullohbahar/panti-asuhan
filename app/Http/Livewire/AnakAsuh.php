@@ -20,7 +20,7 @@ class AnakAsuh extends Component
                 ->orwhere('tanggal_lahir', 'like', '%' . $this->search . '%');
         });
 
-        $childs = $query->paginate(10);
+        $childs = $query->orderBy('nama_lengkap', 'asc')->paginate(10);
         $count = $childs->count();
 
         $data =  [
