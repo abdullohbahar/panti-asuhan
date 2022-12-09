@@ -38,6 +38,7 @@
                     @foreach ($files as $file)
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-5">
                             <img src="{{ asset('storage/'.$file->file) }}" class="img-fluid" alt="hello" srcset="">
+                            <button class="btn btn-danger mt-2 btn-block" wire:click="deleteConfirmation('{{ $file->id }}')">Hapus Foto</button>
                         </div>
                     @endforeach
                 </div>

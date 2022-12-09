@@ -9,8 +9,9 @@ use Livewire\WithFileUploads;
 
 class ProofOfDonation extends Component
 {
-    public $idproof, $file, $iteration;
+    public $idproof, $file, $iteration, $idfile;
     use WithFileUploads;
+    protected $listeners = ['deleteConfirmed' => 'destroy'];
 
     public function render()
     {
@@ -57,5 +58,24 @@ class ProofOfDonation extends Component
     {
         $this->file = '';
         $this->iteration++;
+    }
+
+    public function deleteConfirmation($id)
+    {
+        $this->idfile = $id;
+        $this->dispatchBrowserEvent('show-delete-confirmation');
+    }
+
+    public function destroy()
+    {
+        $image = BuktiSumbangan::find($this->idfile);
+
+        if ($image) {
+            unlink(public_path('storage/' . $image->file));
+        }
+
+        BuktiSumbangan::destroy($this->idfile);
+
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
     }
 }
