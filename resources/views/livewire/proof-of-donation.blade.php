@@ -33,11 +33,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row chocolat-parent">
+                <div class="row text-center">
                     <?php $no = 1 ?>
                     @foreach ($files as $file)
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-5">
-                            <img src="{{ asset('storage/'.$file->file) }}" class="img-fluid" alt="hello" srcset="">
+                            <img src="{{ asset('storage/'.$file->file) }}" class="img-fluid" style="width: 300px; height: 300px;" alt="hello" srcset="">
                             <button class="btn btn-danger mt-2 btn-block" wire:click="deleteConfirmation('{{ $file->id }}')">Hapus Foto</button>
                         </div>
                     @endforeach

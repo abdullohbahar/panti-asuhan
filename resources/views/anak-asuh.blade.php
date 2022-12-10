@@ -121,7 +121,7 @@
 
       Toast.fire({
         icon: 'success',
-        title: 'Data Anak Asuh Berhasil Ditambahkan'
+        title: '{{ session('message') }}'
       })
     </script>
 @endif

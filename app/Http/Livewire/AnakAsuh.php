@@ -4,10 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Models\AnakAsuh as ModelsAnakAsuh;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class AnakAsuh extends Component
 {
-    public $search, $idAnak;
+    use WithFileUploads;
+    public $search, $idAnak, $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $keterangan, $status, $akta, $kartu_keluarga, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
     public function render()

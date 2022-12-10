@@ -69,7 +69,7 @@
                                             {!! $child->tempat_lahir !!}, {{ $child->tanggal_lahir }}
                                         </td>
                                         <td data-label="Aksi">
-                                            <button wire:click="show('{{ $child->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation-child"><i class="fas fa-pencil-alt"></i></button>
+                                            <a href="{{ route('edit.data.anak.asuh',$child->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
                                             <button wire:click="deleteConfirmation('{{ $child->id }}')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                         </td>
                                     </tr>

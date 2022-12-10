@@ -39,7 +39,7 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h4>53</h4>
+              <h4>Rp. 15.500.000,00</h4>
 
               <p>Total Donasi</p>
             </div>
@@ -54,7 +54,7 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h4>44</h4>
+              <h4>100</h4>
 
               <p>Total Donatur</p>
             </div>
@@ -69,7 +69,7 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h4>65</h4>
+              <h4>Rp. 5.000.000,00</h4>
 
               <p>Total Tabungan Anak Asuh</p>
             </div>
