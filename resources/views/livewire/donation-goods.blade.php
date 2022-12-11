@@ -41,9 +41,9 @@
                                     <td data-label="Bukti Donasi">{{ $donation->keterangan }}</td>
                                     <td data-label="Tanggal Donasi">{{ $donation->tanggal_sumbangan }}</td>
                                     <td data-label="Aksi">
-                                        <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm"><i class="fas fa-upload"></i></a>
-                                        <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation-item"><i class="fas fa-pencil-alt"></i></button>
-                                        <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                        <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Bukti Donasi"><i class="fas fa-upload"></i></a>
+                                        <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation-item" data-toggle="tooltip" data-placement="top" title="Edit Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                        <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"></i></button>
                                     </td>
                                 </tr>
                             @endforeach

@@ -64,8 +64,8 @@
                                         <td data-label="Keterangan">{{ $donation->keterangan }}</td>
                                         <td data-label="Tanggal Donasi">{{ $donation->tanggal_sumbangan }}</td>
                                         <td data-label="Aksi">
-                                            <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                            <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
