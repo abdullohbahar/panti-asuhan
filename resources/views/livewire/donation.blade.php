@@ -60,7 +60,7 @@
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Nama Donatur">{{ $donation->donatur->nama }}</td>
-                                        <td data-label="Nominal">{{ $donation->nominal }}</td>
+                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->nominal, 2, ',', '.'); }}</td>
                                         <td data-label="Keterangan">{{ $donation->keterangan }}</td>
                                         <td data-label="Tanggal Donasi">{{ $donation->tanggal_sumbangan }}</td>
                                         <td data-label="Aksi">

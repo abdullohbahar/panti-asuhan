@@ -30,7 +30,7 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Nominal</label>
-                <input type="text" wire:model="nominal" class="form-control @error('nominal') is-invalid @enderror" id="" placeholder="Nominal" autofocus>
+                <input type="text" id="nominal" wire:model="nominal" class="form-control @error('nominal') is-invalid @enderror" id="" placeholder="Nominal" autofocus>
                 @error('nominal')
                   <div class="invalid-feedback">
                     {{ $message }}

@@ -63,6 +63,10 @@ class Donation extends Component
     {
         $validateData = $this->validate();
 
+        $removeChar = ['R', 'p', '.', ','];
+
+        $validateData['nominal'] = str_replace($removeChar, "", $validateData['nominal']);
+
         ModelsDonation::create($validateData);
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Ditambahkan']);
