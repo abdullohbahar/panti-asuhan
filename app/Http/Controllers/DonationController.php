@@ -17,10 +17,19 @@ class DonationController extends Controller
         return view('donation', $data);
     }
 
+    public function donationGoods()
+    {
+        $data = [
+            'active' => 'donasi-barang',
+        ];
+
+        return view('donation-goods', $data);
+    }
+
     public function proofOfDonation($id)
     {
         $data = [
-            'active' => 'donasi',
+            'active' => 'donasi-barang',
             'id' => $id
         ];
 

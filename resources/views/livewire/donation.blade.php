@@ -78,7 +78,6 @@
                 {{-- {{ $types->links() }} --}}
             </div>
         </div>
-        <livewire:donation-goods>
     </div>
   </section>
   <!-- /.content -->
