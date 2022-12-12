@@ -110,9 +110,9 @@
                   </a>
                 </li> --}}
                 <li class="nav-item">
-                  <a href="{{ route('donation') }}" class="nav-link {{ $active == 'donasi' ? 'active' : '' }}">
+                  <a href="{{ route('tabungan.anak.asuh') }}" class="nav-link {{ $active == 'tabungan' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Tabungan</p>
+                    <p>Tabungan Anak Asuh</p>
                   </a>
                 </li>
               </ul>

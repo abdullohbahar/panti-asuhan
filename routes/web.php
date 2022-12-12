@@ -6,7 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\DonaturController;
-use App\Http\Livewire\AnakAsuh;
+use App\Http\Controllers\SavingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,4 +39,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/anak-asuh', [AnakAsuhController::class, 'index'])->name('anak.asuh');
     Route::get('/tambah-anak-asuh', [AnakAsuhController::class, 'create'])->name('tambah.anak.asuh');
     Route::get('/edit-data-anak-asuh/{id}', [AnakAsuhController::class, 'show'])->name('edit.data.anak.asuh');
+    Route::get('/tabungan-anak-asuh', [SavingController::class, 'index'])->name('tabungan.anak.asuh');
 });
