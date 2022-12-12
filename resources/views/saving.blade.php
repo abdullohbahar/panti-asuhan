@@ -107,8 +107,8 @@
 @push('addons-js')
 <script>
   // Show modal add donatur
-  $("#btnAddProofDonation").on("click", () => {
-    $("#modal-add-proof-donation").modal("show")
+  $("#btnAddSaving").on("click", () => {
+    $("#modal-add-saving").modal("show")
   })
 
   window.addEventListener('close-modal', event => {

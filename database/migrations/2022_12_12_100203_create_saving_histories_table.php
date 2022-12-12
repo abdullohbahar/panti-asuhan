@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('savings', function (Blueprint $table) {
+        Schema::create('saving_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('anak_asuh_id')->onUpdate('cascade')->onDelete('set null');
-            $table->integer('total_tabungan');
+            $table->foreignUuid('saving_id')->onUpdate('cascade')->onDelete('set null');
+            $table->integer('nominal');
+            $table->date('tanggal_menabung');
+            $table->text('keterangan');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('savings');
+        Schema::dropIfExists('saving_histories');
     }
 };

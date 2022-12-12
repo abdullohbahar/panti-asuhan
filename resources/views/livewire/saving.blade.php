@@ -1,7 +1,7 @@
 <div>
     {{-- Modal --}}
-    @include('livewire.modal.donatur.modal-add-donatur')
-    @include('livewire.modal.donatur.modal-edit-donatur')
+    @include('livewire.modal.saving.modal-add-saving')
+    @include('livewire.modal.saving.modal-edit-saving')
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
@@ -26,7 +26,7 @@
             <div class="card-header">
                 <div class="row justify-content-end">
                     <div class="col-12 text-right">
-                        <button id="btnAddDonatur" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donatur</b></button>
+                        <button id="btnAddSaving" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Tabungan Anak Asuh</b></button>
                     </div>
                 </div>
             </div>
@@ -45,27 +45,27 @@
                                     <th scope="col" style="width: 200px !important">Aksi</th>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
+                            <tbody>
                                 @if ($count == 0)
                                     <tr>
                                         <td colspan="4">Data Not Found</td>
                                     </tr>
                                 @endif
-                                @foreach ($donaturs as $index => $donatur)
+                                @foreach ($savings as $index => $saving)
                                     <tr>
-                                        <td data-label="#">{{ $donaturs->firstItem() + $index }}</td>
-                                        <td data-label="Nama">{{ $donatur->nama }}</td>
-                                        <td data-label="Total Tabungan">{{ $donatur->alamat }}</td>
+                                        {{-- <td data-label="#">{{ $savings->firstItem() + $index }}</td> --}}
+                                        <td data-label="Nama">{{ $saving->nama }}</td>
+                                        <td data-label="Total Tabungan">{{ $saving->alamat }}</td>
                                         <td data-label="Aksi">
-                                            <button wire:click="show('{{ $donatur->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Lihat Riwayat Donasi">
+                                            <button wire:click="show('{{ $saving->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Lihat Riwayat Donasi">
                                                 <i class="fas fa-history"></i>
                                             </button>
-                                            <button wire:click="show('{{ $donatur->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Ubah Data Donatur"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $donatur->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Donatur"><i class="fas fa-trash-alt"></i></button>
+                                            <button wire:click="show('{{ $saving->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Ubah Data Donatur"><i class="fas fa-pencil-alt"></i></button>
+                                            <button wire:click="deleteConfirmation('{{ $saving->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Donatur"><i class="fas fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
-                            </tbody> --}}
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -78,3 +78,19 @@
   </section>
   <!-- /.content -->
 </div>
+
+@push('component-scripts')
+    <script>
+        $(document).on("livewire:load", function(){
+            $('.select2').select2();
+
+            $("body").on("change", "select[name='donatur_id']", function(){
+                @this.donatur_id = $(this).val()
+            })
+
+            Livewire.hook('message.processed', (message, component) => {
+                $('.select2').select2();
+            })
+        })
+    </script>
+@endpush

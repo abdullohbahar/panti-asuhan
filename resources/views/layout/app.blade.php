@@ -86,7 +86,7 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item {{ $active == 'anak-asuh' ? 'menu-open' : '' }}">
+            <li class="nav-item {{ $active == 'anak-asuh' || $active == 'tabungan' ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
