@@ -18,6 +18,7 @@ class Donation extends Model
         'nominal',
         'keterangan',
         'tanggal_sumbangan',
+        'jumlah',
     ];
 
     public function donatur()

@@ -26,7 +26,7 @@
             <div class="card-header">
                 <div class="row justify-content-end">
                     <div class="col-12 text-right">
-                        <button id="btnAddSaving" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Tabungan Anak Asuh</b></button>
+                        <button id="btnAddSaving" wire:click="resetInput" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Tabungan Anak Asuh</b></button>
                     </div>
                 </div>
             </div>

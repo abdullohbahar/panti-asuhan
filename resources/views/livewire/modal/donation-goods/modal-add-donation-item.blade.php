@@ -14,8 +14,8 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Nama Donatur</label>
-                <select name="donatur_id" wire:model="donatur_id" style="width: 100%" class="form-control select2 @error('donatur_id') is-invalid @enderror">
-                  <option>-- Pilih Donatur --</option>
+                <select name="donatur_id" wire:model="donatur_id" id="donatur_id" style="width: 100%" class="form-control select2 @error('donatur_id') is-invalid @enderror">
+                  <option value="">-- Pilih Donatur --</option>
                   @foreach ($donaturs as $donatur)
                       <option value="{{ $donatur->id }}">{{ $donatur->nama }}</option>
                   @endforeach
@@ -40,6 +40,19 @@
             </div>
             <div class="col-12">
               <div class="form-group">
+                <label>Jumlah</label>
+                <div class="input-group">
+                  <input wire:model="jumlah" type="text" class="form-control">
+                  <select wire:model="satuan" class="form-control" id="">
+                    <option value="">-- Pilih Satuan --</option>
+                    <option value="pack">Pack</option>
+                    <option value="box">Box</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
                   <label>Keterangan</label>
                   <textarea wire:model="keterangan" class="form-control @error('keterangan') is-invalid @enderror"></textarea>
                   @error('keterangan')
@@ -56,7 +69,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" wire:click="resetInput" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

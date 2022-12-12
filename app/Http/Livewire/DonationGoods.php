@@ -13,7 +13,7 @@ class DonationGoods extends Component
 {
     use WithFileUploads;
 
-    public $donation_id, $donatur_id, $tanggal_sumbangan, $keterangan, $search;
+    public $donation_id, $donatur_id, $tanggal_sumbangan, $keterangan, $search, $jumlah, $satuan;
     public $donation_type_id = "Barang";
     public $nominal = "0";
     protected $listeners = ['deleteConfirmed' => 'destroy'];
@@ -63,7 +63,14 @@ class DonationGoods extends Component
     {
         $validateData = $this->validate();
 
-        Donation::create($validateData);
+        Donation::create([
+            'donatur_id' => $this->donatur_id,
+            'donation_type_id' => $this->donation_type_id,
+            'tanggal_sumbangan' => $this->tanggal_sumbangan,
+            'nominal' => $this->nominal,
+            'keterangan' => $this->keterangan,
+            'jumlah' => $this->jumlah . " " . $this->satuan,
+        ]);
 
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Ditambahkan']);
@@ -74,6 +81,8 @@ class DonationGoods extends Component
         $this->donatur_id = '';
         $this->tanggal_sumbangan = '';
         $this->keterangan = '';
+        $this->jumlah = '';
+        $this->satuan = '';
     }
 
     public function show($id)
@@ -81,10 +90,14 @@ class DonationGoods extends Component
         $donation = Donation::find($id);
 
         if ($donation) {
+            $word = explode(" ", $donation->jumlah);
+
             $this->donation_id = $donation->id;
             $this->donatur_id = $donation->donatur_id;
             $this->tanggal_sumbangan = $donation->tanggal_sumbangan;
             $this->keterangan = $donation->keterangan;
+            $this->jumlah = $word[0];
+            $this->satuan = $word[1];
         }
     }
 

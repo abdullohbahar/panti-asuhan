@@ -26,7 +26,7 @@
             <div class="card-header">
                 <div class="row justify-content-end">
                     <div class="col-12 text-right">
-                        <button id="btnAddDonatur" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donatur</b></button>
+                        <button id="btnAddDonatur" wire:click="resetInput" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donatur</b></button>
                     </div>
                 </div>
             </div>

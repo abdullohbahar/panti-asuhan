@@ -29,7 +29,7 @@
                         <h5><b>Donasi Berupa Dana</b></h5>
                     </div>
                     <div class="col-4 text-right">
-                        <button id="btnAddMoney" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donasi</b></button>
+                        <button id="btnAddMoney" wire:click="resetInput" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donasi</b></button>
                     </div>
                 </div>
             </div>

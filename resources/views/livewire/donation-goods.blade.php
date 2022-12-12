@@ -28,7 +28,7 @@
                         <h5><b>Donasi Berupa Barang</b></h5>
                     </div>
                     <div class="col-4 text-right">
-                        <button id="btnAddItem" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donasi</b></button>
+                        <button id="btnAddItem" wire:click="resetInput" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donasi</b></button>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                                 <tr>
                                     <th scope="col" style="width: 50px !important">#</th>
                                     <th scope="col">Nama Donatur</th>
-                                    <th scope="col">Keterangan</th>
+                                    <th scope="col">Jumlah</th>
                                     <th scope="col">Tanggal Donasi</th>
                                     <th scope="col" style="width: 150px !important">Aksi</th>
                                 </tr>
@@ -58,7 +58,7 @@
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Tipe Donasi">{{ $donation->donatur->nama }}</td>
-                                        <td data-label="Bukti Donasi">{{ $donation->keterangan }}</td>
+                                        <td data-label="Jumlah">{{ $donation->jumlah }}</td>
                                         <td data-label="Tanggal Donasi">{{ $donation->tanggal_sumbangan }}</td>
                                         <td data-label="Aksi">
                                             <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Bukti Donasi"><i class="fas fa-upload"></i></a>
