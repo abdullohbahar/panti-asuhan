@@ -14,10 +14,10 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Nama Anak Asuh</label>
-                <select wire:model="anak_asuh_id" style="width: 100%" class="form-control select2 @error('anak_asuh_id') is-invalid @enderror">
+                <select name="anak_asuh_id" wire:model="anak_asuh_id" style="width: 100%" class="form-control select2 @error('anak_asuh_id') is-invalid @enderror">
                   <option>-- Pilih Anak Asuh --</option>
                   @foreach ($childs as $child)
-                      <option value="{{ $child->id }}">{{ $child->nama_lengkap }}</option>
+                      <option value="{{ $child->id }}">{{ $child->nama_lengkap }} </option>
                   @endforeach
                 </select>
                 @error('anak_asuh_id')

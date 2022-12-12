@@ -53,9 +53,9 @@
                                 @endif
                                 @foreach ($savings as $index => $saving)
                                     <tr>
-                                        {{-- <td data-label="#">{{ $savings->firstItem() + $index }}</td> --}}
-                                        <td data-label="Nama">{{ $saving->nama }}</td>
-                                        <td data-label="Total Tabungan">{{ $saving->alamat }}</td>
+                                        <td data-label="#">{{ $savings->firstItem() + $index }}</td>
+                                        <td data-label="Nama">{{ $saving->anakAsuh->nama_lengkap }}</td>
+                                        <td data-label="Total Tabungan">{{ $saving->total_tabungan }}</td>
                                         <td data-label="Aksi">
                                             <button wire:click="show('{{ $saving->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Lihat Riwayat Donasi">
                                                 <i class="fas fa-history"></i>
@@ -84,8 +84,8 @@
         $(document).on("livewire:load", function(){
             $('.select2').select2();
 
-            $("body").on("change", "select[name='donatur_id']", function(){
-                @this.donatur_id = $(this).val()
+            $("body").on("change", "select[name='anak_asuh_id']", function(){
+                @this.anak_asuh_id = $(this).val()
             })
 
             Livewire.hook('message.processed', (message, component) => {

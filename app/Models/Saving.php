@@ -13,8 +13,11 @@ class Saving extends Model
 
     protected $fillable = [
         'anak_asuh_id',
-        'nominal',
-        'tanggal_menabung',
-        'keterangan'
+        'total_tabungan',
     ];
+
+    public function anakAsuh()
+    {
+        return $this->belongsTo(AnakAsuh::class);
+    }
 }

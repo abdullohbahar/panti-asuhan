@@ -8,13 +8,18 @@ use Livewire\Component;
 
 class Saving extends Component
 {
-    public $anak_asuh_id;
+    public $anak_asuh_id, $search;
 
     public function render()
     {
-        $savings = ModelsSaving::get();
+        $search = '';
 
-        $count = 0;
+        $query = ModelsSaving::whereHas('anakAsuh', function ($q) use ($search) {
+            $q->where('nama_lengkap', 'like', '%' . $this->search . '%');
+        });
+
+        $savings = $query->paginate(10);
+        $count = $savings->count();
 
         $childs = AnakAsuh::get();
         $data = [
@@ -48,13 +53,13 @@ class Saving extends Component
 
     public function store()
     {
-        dd($this->anak_asuh_id);
         $this->validate();
 
         ModelsSaving::create([
             'anak_asuh_id' => $this->anak_asuh_id,
-            'total_nominal' => 0,
+            'total_tabungan' => 0,
         ]);
+
         $this->resetInput();
     }
 

@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('savings', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->foreignUuid('anak_asuh_id')->onUpdate('cascade')->onDelete('set null');
-            $table->integer('total_tabungan');
-            $table->timestamps();
+        Schema::table('donations', function (Blueprint $table) {
+            //
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('savings');
+        Schema::table('donations', function (Blueprint $table) {
+            //
+        });
     }
 };
