@@ -86,13 +86,36 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="{{ route('anak.asuh') }}" class="nav-link {{ $active == 'anak-asuh' ? 'active' : '' }}">
+            <li class="nav-item {{ $active == 'anak-asuh' ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Anak Asuh
+                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('anak.asuh') }}" class="nav-link {{ $active == 'anak-asuh' ? 'active' : '' }}">
+                    <i class="nav-icon far fa-circle"></i>
+                    <p>
+                      Data Anak Asuh
+                    </p>
+                  </a>
+                </li>
+                {{-- <li class="nav-item">
+                  <a href="{{ route('donation.type') }}" class="nav-link {{ $active == 'tipe' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tipe Donasi</p>
+                  </a>
+                </li> --}}
+                <li class="nav-item">
+                  <a href="{{ route('donation') }}" class="nav-link {{ $active == 'donasi' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tabungan</p>
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'donasi' || $active == 'donasi-barang' ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
