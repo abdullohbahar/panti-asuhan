@@ -36,6 +36,11 @@ class AnakAsuh extends Component
         return view('livewire.anak-asuh', $data);
     }
 
+    public function searchProduct()
+    {
+        $this->resetPage();
+    }
+
     public function deleteConfirmation($id)
     {
         $this->idAnak = $id;

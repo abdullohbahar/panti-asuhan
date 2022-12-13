@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="{{ asset("./template/dist/css/adminlte.min.css") }}">
   <link rel="stylesheet" href="{{ asset('./template/plugins/select2/css/select2.min.css') }}">
 
+  {{-- Date range --}}
+  <link rel="stylesheet" href="./template/plugins/daterangepicker/daterangepicker.css">
+
   <style>
     .select2-container--default .select2-selection--single{
       height: 37px;
@@ -195,6 +198,15 @@
   <script src="{{ asset("./template/dist/js/demo.js") }}"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="{{ asset('./template/plugins/select2/js/select2.full.min.js') }}"></script>
+
+  <!-- InputMask -->
+  <script src="./template/plugins/moment/moment.min.js"></script>
+
+  {{-- Date Range --}}
+  <script src="./template/plugins/daterangepicker/daterangepicker.js"></script>
+  <script>
+        $('#reservation').daterangepicker()
+  </script>
 
   {{-- format idr --}}
   <script src="{{ asset('./js/rupiah.js') }}"></script>

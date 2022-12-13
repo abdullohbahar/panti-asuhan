@@ -25,7 +25,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-end">
-                    <div class="col-12">
+                    <div class="col-12 text-right">
                         <a href="{{ route('tambah.anak.asuh') }}" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Data Anak Asuh</b></a>
                     </div>
                 </div>
