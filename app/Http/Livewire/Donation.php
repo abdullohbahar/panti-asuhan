@@ -22,9 +22,8 @@ class Donation extends Component
         $donaturs = Donatur::get();
 
         $query = ModelsDonation::where('donation_type_id', "Dana")->whereHas('donatur', function ($q) use ($search) {
-            $q->where('nama', 'like', '%' . $this->search . '%')
-                ->orwhere('tanggal_sumbangan', 'like', '%' . $this->search . '%')
-                ->orwhere('keterangan', 'like', '%' . $this->search . '%');
+            $q->where('nama', 'like', '%' . $this->search . '%');
+            // ->orwhere('tanggal_sumbangan', 'like', '%' . $this->search . '%');
         });
 
         $donations = $query->paginate(10);

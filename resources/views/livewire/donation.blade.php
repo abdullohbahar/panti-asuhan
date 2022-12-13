@@ -36,7 +36,7 @@
             <div class="card-body">
                 <div class="row justify-content-end">
                     <div class="col-0 mr-2">
-                        <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari">
+                        <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Nama Donatur">
                     </div>
                     <div class="col-12 mt-2">
                         <table class="table-data">
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                {{-- {{ $types->links() }} --}}
+                {{ $donations->links() }}
             </div>
         </div>
     </div>

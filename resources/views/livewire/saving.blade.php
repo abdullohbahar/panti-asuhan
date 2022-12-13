@@ -1,7 +1,6 @@
 <div>
     {{-- Modal --}}
     @include('livewire.modal.saving.modal-add-saving')
-    @include('livewire.modal.saving.modal-edit-saving')
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
@@ -60,8 +59,7 @@
                                             <button wire:click="show('{{ $saving->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Lihat Riwayat Donasi">
                                                 <i class="fas fa-history"></i>
                                             </button>
-                                            <button wire:click="show('{{ $saving->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Ubah Data Donatur"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $saving->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Donatur"><i class="fas fa-trash-alt"></i></button>
+                                            <button wire:click="deleteConfirmation('{{ $saving->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Tabungan"><i class="fas fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach

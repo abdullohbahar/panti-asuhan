@@ -61,6 +61,7 @@ class Saving extends Component
         ]);
 
         $this->resetInput();
+        $this->dispatchBrowserEvent('close-modal', ['message' => 'Berhasil Menambah Tabungan']);
     }
 
     public function resetInput()

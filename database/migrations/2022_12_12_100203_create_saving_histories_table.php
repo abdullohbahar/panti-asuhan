@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignUuid('anak_asuh_id')->onUpdate('cascade')->onDelete('set null');
             $table->foreignUuid('saving_id')->onUpdate('cascade')->onDelete('set null');
             $table->integer('nominal');
-            $table->date('tanggal_menabung');
+            $table->string('status');
+            $table->date('tanggal');
             $table->text('keterangan');
             $table->timestamps();
         });

@@ -113,8 +113,7 @@
 
   window.addEventListener('close-modal', event => {
     // close modal
-    $('#modal-add-proof-donation').modal('hide')
-    $('#modal-edit-donatur').modal('hide')
+    $('#modal-add-saving').modal('hide')
 
     // sweetalert success
     const Toast = Swal.mixin({
