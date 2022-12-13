@@ -5,12 +5,15 @@ namespace App\Http\Livewire;
 use App\Models\Donation as ModelsDonation;
 use App\Models\Donatur;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Donation extends Component
 {
     public $donation_id, $donatur_id, $nominal, $tanggal_sumbangan, $keterangan, $search;
     public $donation_type_id = "Dana";
     protected $listeners = ['deleteConfirmed' => 'destroy'];
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {

@@ -8,10 +8,13 @@ use App\Models\Donatur;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class DonationGoods extends Component
 {
     use WithFileUploads;
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public $donation_id, $donatur_id, $tanggal_sumbangan, $keterangan, $search, $jumlah, $satuan;
     public $donation_type_id = "Barang";
