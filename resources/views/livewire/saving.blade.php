@@ -56,9 +56,9 @@
                                         <td data-label="Nama">{{ $saving->anakAsuh->nama_lengkap }}</td>
                                         <td data-label="Total Tabungan">{{ $saving->total_tabungan }}</td>
                                         <td data-label="Aksi">
-                                            <button wire:click="show('{{ $saving->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Lihat Riwayat Donasi">
+                                            <a href="{{ route('detail.tabungan.anak.asuh',$saving->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Lihat Riwayat Menabung">
                                                 <i class="fas fa-history"></i>
-                                            </button>
+                                            </a>
                                             <button wire:click="deleteConfirmation('{{ $saving->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Tabungan"><i class="fas fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                {{-- {{ $donaturs->links() }} --}}
+                {{ $savings->links() }}
             </div>
         </div>
     </div>

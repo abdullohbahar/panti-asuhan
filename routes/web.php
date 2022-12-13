@@ -40,4 +40,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/tambah-anak-asuh', [AnakAsuhController::class, 'create'])->name('tambah.anak.asuh');
     Route::get('/edit-data-anak-asuh/{id}', [AnakAsuhController::class, 'show'])->name('edit.data.anak.asuh');
     Route::get('/tabungan-anak-asuh', [SavingController::class, 'index'])->name('tabungan.anak.asuh');
+    Route::get('/detail-tabungan-anak-asuh/{id}', [SavingController::class, 'show'])->name('detail.tabungan.anak.asuh');
 });

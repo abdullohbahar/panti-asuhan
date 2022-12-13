@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('saving_histories', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
             $table->foreignUuid('anak_asuh_id')->onUpdate('cascade')->onDelete('set null');
             $table->foreignUuid('saving_id')->onUpdate('cascade')->onDelete('set null');
-            $table->integer('nominal');
-            $table->string('status');
             $table->date('tanggal');
-            $table->text('keterangan');
+            $table->integer('mengambil')->nullable();
+            $table->integer('menabung')->nullable();
+            $table->integer('saldo')->nullable();
             $table->timestamps();
         });
     }

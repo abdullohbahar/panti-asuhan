@@ -14,4 +14,14 @@ class SavingController extends Controller
 
         return view('saving', $data);
     }
+
+    public function show($id)
+    {
+        $data = [
+            'active' => 'tabungan',
+            'id' => $id
+        ];
+
+        return view('saving-history', $data);
+    }
 }
