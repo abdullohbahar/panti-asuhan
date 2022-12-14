@@ -81,8 +81,11 @@
             </div>
             <div class="card-header">
                 <div class="row justify-content-end">
-                    <div class="col-12">
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-left">
                         <h5>Saldo Tersedia : <b>{{ "Rp " . number_format($saldo, 2, ',', '.'); }}</b></h5>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-right">
+                        <a href="{{ route('cetak.tabungan.anak.asuh',$savings[0]->saving_id) }}" class="btn btn-info">Cetak</a>
                     </div>
                 </div>
             </div>
@@ -110,9 +113,17 @@
                                     <tr>
                                         <td data-label="#">{{ $no++ }}</td>
                                         <td data-label="Tanggal">{{ $saving->tanggal }}</td>
-                                        <td data-label="Debet">{{ "Rp " . number_format($saving->mengambil, 2, ',', '.'); }}</td>
-                                        <td data-label="Kredit">{{ "Rp " . number_format($saving->menabung, 2, ',', '.'); }}</td>
-                                        <td data-label="Saldo">{{ "Rp " . number_format($saving->saldo, 2, ',', '.'); }}</td>
+                                        <td data-label="Debet">
+                                            @if ($saving->mengambil)
+                                                {{ "Rp " . number_format($saving->mengambil, 2, ',', '.'); }}
+                                            @endif
+                                        </td>
+                                        <td data-label="Kredit">
+                                            @if ($saving->menabung)
+                                                {{ "Rp " . number_format($saving->menabung, 2, ',', '.'); }}
+                                            @endif
+                                        </td>
+                                        <td class="text-right" data-label="Saldo">{{ "Rp " . number_format($saving->saldo, 2, ',', '.'); }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
