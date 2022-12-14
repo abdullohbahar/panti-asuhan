@@ -54,7 +54,7 @@
                                     <tr>
                                         <td data-label="#">{{ $savings->firstItem() + $index }}</td>
                                         <td data-label="Nama">{{ $saving->anakAsuh->nama_lengkap }}</td>
-                                        <td data-label="Total Tabungan">{{ $saving->total_tabungan }}</td>
+                                        <td data-label="Total Tabungan">{{ "Rp " . number_format($saving->total_tabungan, 2, ',', '.'); }}</td>
                                         <td data-label="Aksi">
                                             <a href="{{ route('detail.tabungan.anak.asuh',$saving->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Lihat Riwayat Menabung">
                                                 <i class="fas fa-history"></i>
