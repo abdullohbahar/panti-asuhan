@@ -50,30 +50,35 @@ class SavingHistory extends Component
     {
         $validateData = $this->validate();
 
+        $saldo = Saving::find($this->idsaving);
+
         $removeChar = ['R', 'p', '.', ','];
 
         $validateData['nominal'] = str_replace($removeChar, "", $validateData['nominal']);
 
         $nominal = str_replace(' ', '', $validateData['nominal']);
 
-        $saldo = Saving::find($this->idsaving);
-
         $anakAsuhId = $saldo->anak_asuh_id;
 
         if ($this->status == 'Mengambil') {
-            ModelsSavingHistory::create([
-                'anak_asuh_id' => $anakAsuhId,
-                'saving_id' => $this->idsaving,
-                'tanggal' => $this->tanggal,
-                'mengambil' => $nominal,
-                'saldo' => $saldo->total_tabungan - $nominal,
-            ]);
+            if ($nominal >= $saldo->total_tabungan) {
+                $this->dispatchBrowserEvent('show-error');
+            } else {
+                ModelsSavingHistory::create([
+                    'anak_asuh_id' => $anakAsuhId,
+                    'saving_id' => $this->idsaving,
+                    'tanggal' => $this->tanggal,
+                    'mengambil' => $nominal,
+                    'saldo' => $saldo->total_tabungan - $nominal,
+                ]);
+                $totalSaldo = $saldo->total_tabungan - $nominal;
 
-            $totalSaldo = $saldo->total_tabungan - $nominal;
+                Saving::where('id', $this->idsaving)->update([
+                    'total_tabungan' => $totalSaldo
+                ]);
 
-            Saving::where('id', $this->idsaving)->update([
-                'total_tabungan' => $totalSaldo
-            ]);
+                $this->dispatchBrowserEvent('close-modal', ['message' => 'Berhasil ' . $this->status]);
+            }
         } else {
             ModelsSavingHistory::create([
                 'anak_asuh_id' => $anakAsuhId,
@@ -88,8 +93,8 @@ class SavingHistory extends Component
             Saving::where('id', $this->idsaving)->update([
                 'total_tabungan' => $totalSaldo
             ]);
-        }
 
-        $this->dispatchBrowserEvent('close-modal', ['message' => 'Berhasil ' . $this->status]);
+            $this->dispatchBrowserEvent('close-modal', ['message' => 'Berhasil ' . $this->status]);
+        }
     }
 }

@@ -141,6 +141,7 @@
             Livewire.hook('message.processed', (message, component) => {
                 $('.select2').select2();
             })
+
         })
     </script>
 @endpush

@@ -134,6 +134,13 @@
     })
   })
 
+  window.addEventListener('show-error', event => {
+    Swal.fire({
+      icon: 'error',
+      text: 'Maaf Anda Tidak Bisa Melakukan Pengambilan Karena Saldo Tidak Mencukupi!',
+    })
+  })
+
   // Delete Confirmation
     window.addEventListener('show-delete-confirmation',event =>{
       Swal.fire({
