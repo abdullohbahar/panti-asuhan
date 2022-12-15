@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 class Donation extends Component
 {
-    public $donation_id, $donatur_id, $nominal, $tanggal_sumbangan, $keterangan, $search;
+    public $donation_id, $donatur_id, $nominal, $tanggal_sumbangan, $keterangan, $search, $date1, $date2, $filterDonaturId;
     public $donation_type_id = "Dana";
     protected $listeners = ['deleteConfirmed' => 'destroy'];
     use WithPagination;
@@ -17,14 +17,26 @@ class Donation extends Component
 
     public function render()
     {
+        // dump($this->filterDonaturId);
         $search = '';
+        $date1 = '';
+        $date2 = '';
+        $filterDonaturId = '';
 
-        $donaturs = Donatur::get();
+        $donaturs = Donatur::orderBy('nama', 'asc')->get();
 
         $query = ModelsDonation::where('donation_type_id', "Dana")->whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%');
-            // ->orwhere('tanggal_sumbangan', 'like', '%' . $this->search . '%');
+        })->when($this->date1, function ($query) use ($date1, $date2) {
+            $query->whereBetween('tanggal_sumbangan', [$this->date1, $this->date2]);
+        })->when($this->filterDonaturId, function ($query) use ($filterDonaturId) {
+            $query->whereHas('donatur', function ($query) use ($filterDonaturId) {
+                $query->where('id', $this->filterDonaturId);
+            });
         });
+
+        // dump($query->tosql());
+        // dump($this->filterDonaturId);
 
         $donations = $query->paginate(10);
         $count = $donations->count();
@@ -118,5 +130,10 @@ class Donation extends Component
     {
         ModelsDonation::destroy($this->donation_id);
         $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
+    }
+
+    public function search()
+    {
+        $this->resetPage();
     }
 }
