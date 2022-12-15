@@ -7,6 +7,7 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\DonaturController;
 use App\Http\Controllers\SavingController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,4 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/tabungan-anak-asuh', [SavingController::class, 'index'])->name('tabungan.anak.asuh');
     Route::get('/detail-tabungan-anak-asuh/{id}', [SavingController::class, 'show'])->name('detail.tabungan.anak.asuh');
     Route::get('/cetak-tabungan-anak-asuh/{id}', [SavingController::class, 'print'])->name('cetak.tabungan.anak.asuh');
+
+    Route::group(['prefix' => 'pengaturan'], function () {
+        Route::get('/satuan', [SettingController::class, 'unit'])->name('satuan');
+    });
 });

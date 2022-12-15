@@ -154,6 +154,23 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item {{ $active == 'satuan' ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-cog"></i>
+                <p>
+                  Pengaturan
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('satuan') }}" class="nav-link {{ $active == 'satuan' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Satuan Barang</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
