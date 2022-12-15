@@ -30,6 +30,7 @@ Route::get('/', [AuthController::class, 'index'])->middleware('guest');
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/donatur', [DonaturController::class, 'index'])->name('donatur');
     Route::get('/tipe-donasi', [DonationTypeController::class, 'index'])->name('donation.type');
