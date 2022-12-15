@@ -45,8 +45,9 @@
                   <input wire:model="jumlah" type="text" class="form-control">
                   <select wire:model="satuan" class="form-control" id="">
                     <option>-- Pilih Satuan --</option>
-                    <option value="pack">Pack</option>
-                    <option value="box">Box</option>
+                    @foreach ($units as $unit)
+                      <option value="{{ $unit->unit }}">{{ $unit->unit }}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>

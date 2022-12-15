@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\BuktiSumbangan;
 use App\Models\Donation;
 use App\Models\Donatur;
+use App\Models\Unit;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -37,10 +38,13 @@ class DonationGoods extends Component
         $donations = $query->paginate(10);
         $count = $donations->count();
 
+        $units = Unit::get();
+
         $data = [
             'donaturs' => $donaturs,
             'donations' => $donations,
-            'count' => $count
+            'count' => $count,
+            'units' => $units
         ];
 
         return view('livewire.donation-goods', $data);
@@ -112,6 +116,7 @@ class DonationGoods extends Component
             'donatur_id' => $this->donatur_id,
             'tanggal_sumbangan' => $this->tanggal_sumbangan,
             'keterangan' => $this->keterangan,
+            'jumlah' => $this->jumlah . " " . $this->satuan,
         ]);
 
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
