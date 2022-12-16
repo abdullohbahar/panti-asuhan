@@ -33,7 +33,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <h5>Total Donasi Terkumpul</h5>
+                    <div class="col-12">
+                        <h5>Total Donasi Terkumpul: <b>{{ "Rp " . number_format($totalDana->total, 2, ',', '.'); }}</b></h5>
+                    </div>
                 </div>
             </div>
             <div class="card-header">
@@ -107,7 +109,7 @@
                                         <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_sumbangan)) }}</td>
                                         <td data-label="Aksi">
                                             <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
+                                            {{-- <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button> --}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -143,5 +145,32 @@
                 $('.select2').select2();
             })
         })
+
+
+        var rupiah = document.getElementById("nominal2");
+        rupiah.addEventListener("keyup", function (e) {
+            // tambahkan 'Rp.' pada saat form di ketik
+            // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+            rupiah.value = formatRupiah(this.value, "Rp. ");
+        });
+
+        /* Fungsi formatRupiah */
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, "").toString(),
+                split = number_string.split(","),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+                separator = sisa ? "." : "";
+                rupiah += separator + ribuan.join(".");
+            }
+
+            rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+            return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+        }
+
     </script>
 @endpush

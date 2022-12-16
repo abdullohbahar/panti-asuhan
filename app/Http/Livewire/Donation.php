@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Donation as ModelsDonation;
 use App\Models\Donatur;
+use App\Models\TotalDanaDonation;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -37,11 +38,13 @@ class Donation extends Component
 
         $donations = $query->paginate(10);
         $count = $donations->count();
+        $totalDonation = TotalDanaDonation::first();
 
         $data = [
             'donaturs' => $donaturs,
             'donations' => $donations,
-            'count' => $count
+            'count' => $count,
+            'totalDana' => $totalDonation
         ];
 
         return view('livewire.donation', $data);
@@ -54,7 +57,7 @@ class Donation extends Component
             'donation_type_id' => 'required',
             'nominal' => 'required',
             'tanggal_sumbangan' => 'required',
-            'keterangan' => 'required'
+            'keterangan' => ''
         ];
     }
 
@@ -97,7 +100,7 @@ class Donation extends Component
         if ($donation) {
             $this->donation_id = $donation->id;
             $this->donatur_id = $donation->donatur_id;
-            $this->nominal = $donation->nominal;
+            $this->nominal = "Rp " . number_format($donation->nominal, 0, '', '.');
             $this->tanggal_sumbangan = $donation->tanggal_sumbangan;
             $this->keterangan = $donation->keterangan;
         }
@@ -105,13 +108,37 @@ class Donation extends Component
 
     public function update()
     {
+        // Validate Data
         $validateData = $this->validate();
 
+        // Ambil nominal donasi berdasarkan id
+        $nominalDonation = ModelsDonation::where('id', $this->donation_id)->get('nominal');
+
+        // hapus character
+        $removeChar = ['R', 'p', '.', ','];
+        $nominal = str_replace($removeChar, "", $this->nominal);
+
+        // Update data
         ModelsDonation::where('id', $this->donation_id)->update([
             'donatur_id' => $this->donatur_id,
-            'nominal' => $this->nominal,
+            'nominal' => $nominal,
             'tanggal_sumbangan' => $this->tanggal_sumbangan,
             'keterangan' => $this->keterangan,
+        ]);
+
+        // Ambil total donas
+        $queryTotal = TotalDanaDonation::where('id', 1);
+        $getTotal = $queryTotal->get();
+
+        // kurangi total donasi yang ada dengan nominal donasi berdasarkan id sebelum diubah
+        $countTotal = $getTotal[0]->total - $nominalDonation[0]->nominal;
+
+        // tambah total donasi dengan nominal donasi berdasarkan id setelah diubah 
+        $total = $countTotal + $nominal;
+
+        // Update total donasi
+        $updateTotal = $queryTotal->update([
+            'total' => $total
         ]);
 
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
