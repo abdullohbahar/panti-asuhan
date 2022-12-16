@@ -35,9 +35,6 @@ class Donation extends Component
             });
         });
 
-        // dump($query->tosql());
-        // dump($this->filterDonaturId);
-
         $donations = $query->paginate(10);
         $count = $donations->count();
 
@@ -135,5 +132,27 @@ class Donation extends Component
     public function search()
     {
         $this->resetPage();
+    }
+
+    public function print()
+    {
+        $search = '';
+        $date1 = '';
+        $date2 = '';
+        $filterDonaturId = '';
+
+        $query = ModelsDonation::where('donation_type_id', "Dana")->whereHas('donatur', function ($q) use ($search) {
+            $q->where('nama', 'like', '%' . $this->search . '%');
+        })->when($this->date1, function ($query) use ($date1, $date2) {
+            $query->whereBetween('tanggal_sumbangan', [$this->date1, $this->date2]);
+        })->when($this->filterDonaturId, function ($query) use ($filterDonaturId) {
+            $query->whereHas('donatur', function ($query) use ($filterDonaturId) {
+                $query->where('id', $this->filterDonaturId);
+            });
+        });
+
+        $donations = $query->get();
+
+        dump($donations);
     }
 }

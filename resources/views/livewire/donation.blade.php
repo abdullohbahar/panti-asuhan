@@ -32,23 +32,26 @@
                         <button id="btnAddMoney" wire:click="resetInput" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donasi</b></button>
                     </div>
                 </div>
+                <div class="row">
+                    <h5>Total Donasi Terkumpul</h5>
+                </div>
             </div>
             <div class="card-header">
                 <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
+                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
                             <input type="date" wire:model.defer="date1" class="form-control" name="" id="">
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
+                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
                             <input type="date" wire:model.defer="date2" class="form-control" name="" id="">
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
                         <div class="form-group">
                             <select name="filterDonaturId" wire:model.defer="filterDonaturId" style="width: 100%" class="select2" id="donaturs">
-                                    <option value="">Tampilkan Semua Donatur</option>
+                                    <option value="">Semua Donatur</option>
                                 @foreach ($donaturs as $donatur)
                                     <option value="{{ $donatur->id }}">{{ $donatur->nama }}</option>
                                 @endforeach
@@ -57,7 +60,17 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <button wire:click="search" id="search" class="btn btn-info">Tampilkan Data</button>
+                            <button wire:click="search" id="search" class="btn btn-info btn-block">Filter Data</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                        <div class="form-group">
+                            <a href="{{ route('donation') }}" class="btn btn-warning btn-block">Reset Filter</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
+                        <div class="form-group">
+                            <button wire:click="print" id="print" class="btn btn-primary btn-block"><i class="fas fa-print"></i> Cetak</button>
                         </div>
                     </div>
                 </div>
