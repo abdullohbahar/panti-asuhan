@@ -25,8 +25,15 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-end">
-                    <div class="col-12 text-right">
-                        <button id="btnAddDonatur" wire:click="resetInput" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donatur</b></button>
+                    <div class="col-4 text-right">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <button wire:click="exportExcel" class="btn btn-warning btn-sm btn-block"><b><i class="fas fa-print"></i> Export</b></button>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <button id="btnAddDonatur" wire:click="resetInput" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Donatur</b></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

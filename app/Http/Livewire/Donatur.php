@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\DonaturExport;
 use App\Models\Donatur as ModelsDonatur;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -95,5 +96,10 @@ class Donatur extends Component
     {
         ModelsDonatur::destroy($this->id_donatur);
         $this->dispatchBrowserEvent('deleted', ['message' => 'Donatur Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return (new DonaturExport)->download('Donatur.xlsx');
     }
 }
