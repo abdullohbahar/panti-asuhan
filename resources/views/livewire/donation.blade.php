@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
                         <div class="form-group">
-                            <button wire:click="print" id="print" class="btn btn-primary btn-block"><i class="fas fa-print"></i> Cetak</button>
+                            <a href="{{ route('cetak.donasi') }}" id="print" class="btn btn-primary btn-block"><i class="fas fa-print"></i> Cetak</a>
                         </div>
                     </div>
                 </div>

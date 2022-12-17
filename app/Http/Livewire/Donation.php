@@ -7,6 +7,8 @@ use App\Models\Donatur;
 use App\Models\TotalDanaDonation;
 use Livewire\Component;
 use Livewire\WithPagination;
+use PDF;
+
 
 class Donation extends Component
 {
@@ -180,6 +182,20 @@ class Donation extends Component
 
         $donations = $query->get();
 
-        dump($donations);
+        $total = $query->sum('nominal');
+
+
+        $data = [
+            'donations' => $donations,
+            'total' => $total
+        ];
+
+        // dd($data);
+
+        // return view('cetak-donasi-dana', $data);
+
+        $pdf = PDF::loadView('cetak-donasi-dana', $data);
+
+        return $pdf->download('Laporan Donasi.pdf');
     }
 }
