@@ -29,7 +29,14 @@
                         <h5>Sisa Dana Donasi: <b>{{ "Rp " . number_format($totalDana->total, 2, ',', '.'); }}</b></h5>
                     </div>
                     <div class="col-4 text-right">
-                        <button id="btnAddReport" wire:click="resetInput" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Penggunaan Dana</b></button>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <button wire:click="exportExcel" id="print" class="btn btn-warning btn-block btn-sm mb-2"><i class="fas fa-print"></i> Export</button>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <button id="btnAddReport" wire:click="resetInput" class="btn btn-primary btn-sm mb-2"><b><i class="fas fa-plus"></i> Penggunaan Dana</b></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,7 +64,6 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <button wire:click="exportExcel" id="print" class="btn btn-primary btn-block"><i class="fas fa-print"></i> Cetak</button>
                         </div>
                     </div>
                 </div>

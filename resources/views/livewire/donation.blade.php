@@ -31,10 +31,10 @@
                     <div class="col-4 text-right">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
-                                <button wire:click="exportExcel" id="print" class="btn btn-warning btn-sm btn-block"><i class="fas fa-excel-alt"></i> Export</button>
+                                <button wire:click="exportExcel" id="print" class="btn btn-warning btn-sm btn-block mb-2"><i class="fas fa-print"></i> Export</button>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <button id="btnAddMoney" wire:click="resetInput" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Donasi</b></button>
+                                <button id="btnAddMoney" wire:click="resetInput" class="btn btn-primary btn-sm btn-block mb-2"><b><i class="fas fa-plus"></i> Donasi</b></button>
                             </div>
                         </div>
                     </div>

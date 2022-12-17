@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\AnakAsuh as ModelsAnakAsuh;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use App\Exports\AnakAsuhExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Models\AnakAsuh as ModelsAnakAsuh;
 
 class AnakAsuh extends Component
 {
@@ -66,5 +68,10 @@ class AnakAsuh extends Component
         ModelsAnakAsuh::destroy($this->idAnak);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Data Anak Asuh Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new AnakAsuhExport, 'Data Anak Asuh.xlsx');
     }
 }
