@@ -117,7 +117,7 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'donasi' || $active == 'donasi-barang' ? 'menu-open' : '' }}">
+            <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'penggunaan-dana' ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-hands"></i>
                 <p>

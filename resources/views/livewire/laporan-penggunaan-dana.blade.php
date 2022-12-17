@@ -35,19 +35,19 @@
             </div>
             <div class="card-header">
                 <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
                         <div class="form-group">
                             <input type="date" wire:model.defer="date1" class="form-control" name="" id="">
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
                         <div class="form-group">
                             <input type="date" wire:model.defer="date2" class="form-control" name="" id="">
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <button wire:click="search" id="search" class="btn btn-info btn-block">Filter Data</button>
+                            <button wire:click="filter" id="filter" class="btn btn-info btn-block">Filter Data</button>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
@@ -55,9 +55,9 @@
                             <a href="{{ route('donation') }}" class="btn btn-warning btn-block">Reset Filter</a>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
+                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <a href="{{ route('cetak.donasi') }}" id="print" class="btn btn-primary btn-block"><i class="fas fa-print"></i> Cetak</a>
+                            <button wire:click="exportExcel" id="print" class="btn btn-primary btn-block"><i class="fas fa-print"></i> Cetak</button>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                                         <td data-label="#">{{ $no++ }}</td>
                                         <td data-label="Nominal">{{ "Rp " . number_format($report->nominal, 2, ',', '.'); }}</td>
                                         <td data-label="Keterangan">{{ $report->keterangan }}</td>
-                                        <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($report->tanggal_sumbangan)) }}</td>
+                                        <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($report->tanggal)) }}</td>
                                         <td data-label="Aksi">
                                             <button wire:click="show('{{ $report->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-report-fund" data-toggle="tooltip" data-placement="top" title="Ubah Data"><i class="fas fa-pencil-alt"></i></button>
                                         </td>

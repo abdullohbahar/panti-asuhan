@@ -2,17 +2,28 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\ReportFundExport;
 use App\Models\ReportFund;
 use App\Models\TotalDanaDonation;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class LaporanPenggunaanDana extends Component
 {
-    public $nominal, $keterangan, $tanggal, $idReport;
+    public $nominal, $keterangan, $tanggal, $idReport, $date1, $date2;
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
-        $reports = ReportFund::paginate(10);
+        $date1 = '';
+        $date2 = '';
+
+        $query = ReportFund::when($this->date1, function ($query) use ($date1, $date2) {
+            $query->whereBetween('tanggal', [$this->date1, $this->date2]);
+        });
+
+        $reports = $query->paginate(10);
         $totalDonation = TotalDanaDonation::first();
         $count = $reports->count();
 
@@ -50,6 +61,7 @@ class LaporanPenggunaanDana extends Component
 
     public function store()
     {
+        dd($this->tanggal);
         $this->validate();
 
         $removeChar = ['R', 'p', '.', ','];
@@ -118,6 +130,44 @@ class LaporanPenggunaanDana extends Component
         ]);
 
         $this->resetInput();
-        $this->dispatchBrowserEvent('close-modal', ['message' => 'Laporan Donasi Berhasil Ditambahkan']);
+        $this->dispatchBrowserEvent('close-modal', ['message' => 'Laporan Donasi Berhasil Diubah']);
+    }
+
+    public function filter()
+    {
+        $this->resetPage();
+    }
+
+    public function print()
+    {
+        $date1 = '';
+        $date2 = '';
+
+        $query = ReportFund::when($this->date1, function ($query) use ($date1, $date2) {
+            $query->whereBetween('tanggal', [$this->date1, $this->date2]);
+        });
+
+        $reports = $query->get();
+
+        $total = $query->sum('nominal');
+
+
+        $data = [
+            'reports' => $reports,
+            'total' => $total
+        ];
+
+        // dd($data);
+
+        // return view('cetak-donasi-dana', $data);
+
+        $pdf = PDF::loadView('cetak-donasi-dana', $data);
+
+        return $pdf->download('Laporan Donasi.pdf');
+    }
+
+    public function exportExcel()
+    {
+        return (new ReportFundExport)->download('Laporan Penggunaan Dana.xlsx');
     }
 }
