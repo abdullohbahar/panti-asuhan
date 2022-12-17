@@ -35,4 +35,13 @@ class DonationController extends Controller
 
         return view('proof-of-donation', $data);
     }
+
+    public function reportFunds()
+    {
+        $data = [
+            'active' => 'penggunaan-dana',
+        ];
+
+        return view('laporan-penggunaan-dana', $data);
+    }
 }
