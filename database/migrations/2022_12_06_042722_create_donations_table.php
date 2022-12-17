@@ -18,9 +18,8 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->uuid('id');
-            $table->foreignIdFor(Donatur::class)->onUpdate('cascade')->onDelete('set null');;
-            $table->foreignIdFor(DonationType::class)->onUpdate('cascade')->onDelete('set null');;
-            $table->foreignIdFor(BuktiSumbangan::class)->onUpdate('cascade')->onDelete('set null');;
+            $table->foreignUuid('donatur_id')->onUpdate('cascade')->onDelete('set null');;
+            $table->foreignUuid('donation_type_id')->onUpdate('cascade')->onDelete('set null');;
             $table->integer('nominal');
             $table->text('keterangan');
             $table->date('tanggal_sumbangan');

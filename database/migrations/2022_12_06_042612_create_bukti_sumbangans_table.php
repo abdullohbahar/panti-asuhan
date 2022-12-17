@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('bukti_sumbangans', function (Blueprint $table) {
             $table->uuid('id');
+            $table->foreignUuid('donation_id')->onUpdate('cascade')->onDelete('set null');;
             $table->text('file');
             $table->timestamps();
         });
