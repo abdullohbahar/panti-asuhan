@@ -24,7 +24,7 @@
                 </div>
               </div>
               <div class="col-12">
-                <button type="submit" class="btn btn-success btn-block mt-2">Upload</button>
+                <button type="submit" class="btn btn-success btn-block mt-2" wire:loading.attr="disabled">Upload</button>
               </div>
             </div>
           </div>

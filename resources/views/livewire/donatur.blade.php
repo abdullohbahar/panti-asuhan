@@ -64,9 +64,6 @@
                                         <td data-label="Nama Donatur">{{ $donatur->nama }}</td>
                                         <td data-label="Alamat">{{ $donatur->alamat }}</td>
                                         <td data-label="Aksi">
-                                            <button wire:click="show('{{ $donatur->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Lihat Riwayat Donasi">
-                                                <i class="fas fa-history"></i>
-                                            </button>
                                             <button wire:click="show('{{ $donatur->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Ubah Data Donatur"><i class="fas fa-pencil-alt"></i></button>
                                             <button wire:click="deleteConfirmation('{{ $donatur->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Donatur"><i class="fas fa-trash-alt"></i></button>
                                         </td>
