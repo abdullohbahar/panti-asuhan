@@ -180,7 +180,7 @@
                             </div>
                         </div>
                         <div class="col-12 mt-3">
-                            <button class="btn btn-success btn-block">Tambah Data Anak</button>
+                            <button class="btn btn-success btn-block" wire:loading.attr="disabled">Tambah Data Anak</button>
                         </div>
                     </div>
                 </form>
