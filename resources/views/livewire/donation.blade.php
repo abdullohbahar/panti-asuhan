@@ -29,7 +29,14 @@
                         <h5><b>Donasi Berupa Dana</b></h5>
                     </div>
                     <div class="col-4 text-right">
-                        <button id="btnAddMoney" wire:click="resetInput" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donasi</b></button>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <button wire:click="exportExcel" id="print" class="btn btn-warning btn-sm btn-block"><i class="fas fa-excel-alt"></i> Export</button>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <button id="btnAddMoney" wire:click="resetInput" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Donasi</b></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -68,11 +75,6 @@
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
                             <a href="{{ route('donation') }}" class="btn btn-warning btn-block">Reset Filter</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
-                        <div class="form-group">
-                            <a href="{{ route('cetak.donasi') }}" id="print" class="btn btn-primary btn-block"><i class="fas fa-print"></i> Cetak</a>
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\DonationExport;
 use App\Models\Donation as ModelsDonation;
 use App\Models\Donatur;
 use App\Models\TotalDanaDonation;
@@ -197,5 +198,10 @@ class Donation extends Component
         $pdf = PDF::loadView('cetak-donasi-dana', $data);
 
         return $pdf->download('Laporan Donasi.pdf');
+    }
+
+    public function exportExcel()
+    {
+        return (new DonationExport)->download('Laporan Donasi.xlsx');
     }
 }
