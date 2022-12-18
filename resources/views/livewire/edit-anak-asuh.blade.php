@@ -93,6 +93,17 @@
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
+                                    <label>Pendidikan</label>
+                                    <input type="text" wire:model="pendidikan" class="form-control @error("pendidikan") is-invalid @enderror" id="">
+                                    @error("pendidikan")
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
                                     <label>Alamat</label>
                                     <textarea wire:model="alamat" class="form-control @error("alamat") is-invalid @enderror"></textarea>
                                     @error("alamat")

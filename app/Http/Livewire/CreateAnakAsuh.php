@@ -10,7 +10,7 @@ use Livewire\WithFileUploads;
 class CreateAnakAsuh extends Component
 {
     use WithFileUploads;
-    public $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $keterangan, $status, $akta, $kartu_keluarga, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak;
+    public $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $keterangan, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak;
 
     public function render()
     {
@@ -41,6 +41,8 @@ class CreateAnakAsuh extends Component
             $fotoAnak = null;
         }
 
+        // dd($this->pendidikan);
+
         $this->tanggal_lahir = Carbon::parse($this->tanggal_lahir)->format('d-m-Y');
 
         AnakAsuh::create([
@@ -52,6 +54,7 @@ class CreateAnakAsuh extends Component
             'alamat' => $this->alamat,
             'keterangan' => $this->keterangan,
             'foto' => $fotoAnak,
+            'pendidikan' => $this->pendidikan,
             'nama_ayah_kandung' => $this->nama_ayah_kandung,
             'nama_ibu_kandung' => $this->nama_ibu_kandung,
             'nohp_ortu' => $this->nohp_ortu,

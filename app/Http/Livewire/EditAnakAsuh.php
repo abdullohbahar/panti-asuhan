@@ -9,7 +9,7 @@ use Livewire\WithFileUploads;
 
 class EditAnakAsuh extends Component
 {
-    public $idanak, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $keterangan, $status, $akta, $kartu_keluarga, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $foto;
+    public $idanak, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $keterangan, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $foto;
     use WithFileUploads;
 
 
@@ -31,9 +31,8 @@ class EditAnakAsuh extends Component
             $this->nohp_ortu = $anak->nohp_ortu;
             $this->status = $anak->status;
             $this->jenis_kelamin = $anak->jenis_kelamin;
-            $this->akta = $anak->akta;
-            $this->kartu_keluarga = $anak->kartu_keluarga;
             $this->foto = $anak->foto;
+            $this->pendidikan = $anak->pendidikan;
         }
     }
 
@@ -41,8 +40,6 @@ class EditAnakAsuh extends Component
     {
         $data = [
             'foto' => $this->foto,
-            'akta' => $this->akta,
-            'kartu_keluarga' => $this->kartu_keluarga,
             'status' => $this->status,
             'jenis_kelamin' => $this->jenis_kelamin,
             'keterangan' => $this->keterangan,
@@ -78,20 +75,6 @@ class EditAnakAsuh extends Component
             $fotoAnak = $anak->foto;
         }
 
-        if ($this->akta != $anak->akta) {
-            unlink(public_path('storage/' . $anak->akta));
-            $akta = $this->akta->store('akta', 'public');
-        } else {
-            $akta = $anak->akta;
-        }
-
-        if ($this->kartu_keluarga != $anak->kartu_keluarga) {
-            unlink(public_path('storage/' . $anak->kartu_keluarga));
-            $kk = $this->kartu_keluarga->store('kartu-keluarga', 'public');
-        } else {
-            $kk = $anak->kartu_keluarga;
-        }
-
         AnakAsuh::where('id', $this->idanak)->update([
             'nama_lengkap' => $this->nama_lengkap,
             'jenis_kelamin' => $this->jenis_kelamin,
@@ -101,8 +84,7 @@ class EditAnakAsuh extends Component
             'alamat' => $this->alamat,
             'keterangan' => $this->keterangan,
             'foto' => $fotoAnak,
-            'akta' => $akta,
-            'kartu_keluarga' => $kk,
+            'pendidikan' => $this->pendidikan,
             'nama_ayah_kandung' => $this->nama_ayah_kandung,
             'nama_ibu_kandung' => $this->nama_ibu_kandung,
             'nohp_ortu' => $this->nohp_ortu,

@@ -20,8 +20,7 @@ class AnakAsuh extends Model
         'alamat',
         'keterangan',
         'status',
-        'akta',
-        'kartu_keluarga',
+        'pendidikan',
         'nama_ayah_kandung',
         'nama_ibu_kandung',
         'nohp_ortu'
