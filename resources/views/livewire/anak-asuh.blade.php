@@ -77,8 +77,8 @@
                                         </td>
                                         <td data-label="Aksi">
                                             <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                                <a href="{{ route('edit.data.anak.asuh',$child->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data Anak Asuh"><i class="fas fa-user"></i> Profil Anak</a>
-                                                <a href="{{ route('berkas.anak.asuh',$child->id) }}" class="btn btn-info btn-sm my-2" data-toggle="tooltip" data-placement="top" title="Unggah Berkas"><i class="fas fa-upload"></i> Unggah Berkas</a>
+                                                <a href="{{ route('profile.anak.asuh',$child->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Anak Asuh"><i class="fas fa-user"></i> Profil Anak</a>
+                                                {{-- <a href="{{ route('berkas.anak.asuh',$child->id) }}" class="btn btn-info btn-sm my-2" data-toggle="tooltip" data-placement="top" title="Unggah Berkas"><i class="fas fa-upload"></i> Unggah Berkas</a> --}}
                                                 <button wire:click="deleteConfirmation('{{ $child->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Anak Asuh"><i class="fas fa-trash"></i> Hapus</button>
                                             </div>
                                         </td>

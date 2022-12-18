@@ -45,4 +45,14 @@ class AnakAsuhController extends Controller
 
         return view('child-document', $data);
     }
+
+    public function profileAnak($id)
+    {
+        $data = [
+            'active' => 'anak-asuh',
+            'id' => $id,
+        ];
+
+        return view('profil-anak', $data);
+    }
 }

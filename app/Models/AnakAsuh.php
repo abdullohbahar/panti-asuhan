@@ -25,4 +25,9 @@ class AnakAsuh extends Model
         'nama_ibu_kandung',
         'nohp_ortu'
     ];
+
+    public function documents()
+    {
+        return $this->hasMany(ChildDocument::class);
+    }
 }

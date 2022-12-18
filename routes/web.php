@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cetak-donasi', [Donation::class, 'print'])->name('cetak.donasi');
     Route::get('/laporan-penggunaan-dana', [DonationController::class, 'reportFunds'])->name('laporan.penggunaan.dana');
     Route::get('/anak-asuh', [AnakAsuhController::class, 'index'])->name('anak.asuh');
+    Route::get('/profile-anak-asuh/{id}', [AnakAsuhController::class, 'profileAnak'])->name('profile.anak.asuh');
     Route::get('/tambah-anak-asuh', [AnakAsuhController::class, 'create'])->name('tambah.anak.asuh');
     Route::get('/edit-data-anak-asuh/{id}', [AnakAsuhController::class, 'show'])->name('edit.data.anak.asuh');
     Route::get('/berkas-anak-asuh/{id}', [AnakAsuhController::class, 'childDocument'])->name('berkas.anak.asuh');

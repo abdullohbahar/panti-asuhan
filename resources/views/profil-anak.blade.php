@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Berkas Anak Asuh
+    Bukti Donasi
 @endsection
 
 @push('addons-css')
@@ -9,21 +9,15 @@
 
 @section('content')
 <div>
-  <livewire:child-document :idchild="$id">
+  <livewire:profile-anak :idchild="$id">
 </div>
 @endsection
 
 @push('addons-js')
 <script>
-  // Show modal add donatur
-  $("#btnAddProofDonation").on("click", () => {
-    $("#modal-add-proof-donation").modal("show")
-  })
-
   window.addEventListener('close-modal', event => {
     // close modal
-    $('#modal-add-proof-donation').modal('hide')
-    $('#modal-edit-donatur').modal('hide')
+    $('#unggahBerkas').modal('hide')
 
     // sweetalert success
     const Toast = Swal.mixin({
