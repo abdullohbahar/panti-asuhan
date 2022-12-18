@@ -41,8 +41,6 @@ class CreateAnakAsuh extends Component
             $fotoAnak = null;
         }
 
-        // dd($this->pendidikan);
-
         $this->tanggal_lahir = Carbon::parse($this->tanggal_lahir)->format('d-m-Y');
 
         AnakAsuh::create([

@@ -109,12 +109,12 @@
                     <p>Tipe Donasi</p>
                   </a>
                 </li> --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a href="{{ route('tabungan.anak.asuh') }}" class="nav-link {{ $active == 'tabungan' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tabungan Anak Asuh</p>
                   </a>
-                </li>
+                </li> --}}
               </ul>
             </li>
             <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'penggunaan-dana' ? 'menu-open' : '' }}">

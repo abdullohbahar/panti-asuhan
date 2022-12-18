@@ -50,7 +50,7 @@
                                     <th scope="col">Foto</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Tempat, Tanggal Lahir</th>
-                                    <th scope="col" style="width: 150px !important">Aksi</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,11 +73,14 @@
                                             {{ $child->nama_lengkap }}
                                         </td>
                                         <td data-label="Tempat, Tanggal Lahir">
-                                            {!! $child->tempat_lahir !!}, {{ $child->tanggal_lahir }}
+                                            {{ $child->tempat_lahir }}, {{ $child->tanggal_lahir }}
                                         </td>
                                         <td data-label="Aksi">
-                                            <a href="{{ route('edit.data.anak.asuh',$child->id) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data Anak Asuh"><i class="fas fa-pencil-alt"></i></a>
-                                            <button wire:click="deleteConfirmation('{{ $child->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Anak Asuh"><i class="fas fa-trash-alt"></i></button>
+                                            <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                                                <a href="{{ route('edit.data.anak.asuh',$child->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data Anak Asuh"><i class="fas fa-user"></i> Profil Anak</a>
+                                                <a href="{{ route('berkas.anak.asuh',$child->id) }}" class="btn btn-info btn-sm my-2" data-toggle="tooltip" data-placement="top" title="Unggah Berkas"><i class="fas fa-upload"></i> Unggah Berkas</a>
+                                                <button wire:click="deleteConfirmation('{{ $child->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Anak Asuh"><i class="fas fa-trash"></i> Hapus</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -35,4 +35,14 @@ class AnakAsuhController extends Controller
 
         return view('edit-anak-asuh', $data);
     }
+
+    public function childDocument($id)
+    {
+        $data = [
+            'active' => 'anak-asuh',
+            'id' => $id,
+        ];
+
+        return view('child-document', $data);
+    }
 }
