@@ -26,8 +26,6 @@ return new class extends Migration
             $table->text('keterangan')->nullable();
             $table->string('status');
             $table->text('foto')->nullable();
-            $table->text('akta')->nullable();
-            $table->text('kartu_keluarga')->nullable();
             $table->string('nama_ayah_kandung')->nullable();
             $table->string('nama_ibu_kandung')->nullable();
             $table->string('nohp_ortu')->nullable();

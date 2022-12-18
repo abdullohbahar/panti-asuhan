@@ -166,34 +166,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="form-group">
-                                    <label>Akta Anak *<i>Biarkan kosong jika tidak ingin diubah</i></label>
-                                    <input type="file" wire:model="akta" class="form-control @error("akta") is-invalid @enderror">
-                                    @error("akta")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                                @if ($akta)
-                                    <a target="_blank" class="btn btn-info btn-block" href="{{ asset('storage/'.$akta) }}">Lihat Akta Yang Telah Diupload</a>
-                                @endif
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="form-group">
-                                    <label>Kartu Keluarga *<i>Biarkan kosong jika tidak ingin diubah</i></label>
-                                    <input type="file" wire:model="kartu_keluarga" class="form-control @error("kartu_keluarga") is-invalid @enderror">
-                                    @error("kartu_keluarga")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                                @if ($kartu_keluarga)
-                                    <a target="_blank" class="btn btn-info btn-block" href="{{ asset('storage/'.$kartu_keluarga) }}">Lihat Kartu Keluarga Yang Telah Diupload</a>
-                                @endif
-                            </div>
                             <div class="col-12 mt-3">
                                 <button type="submit" class="btn btn-success btn-block">Ubah Data Anak</button>
                             </div>

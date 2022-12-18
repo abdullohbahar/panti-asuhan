@@ -41,18 +41,6 @@ class CreateAnakAsuh extends Component
             $fotoAnak = null;
         }
 
-        if ($this->akta) {
-            $akta = $this->akta->store('akta', 'public');
-        } else {
-            $akta = null;
-        }
-
-        if ($this->kartu_keluarga) {
-            $kk = $this->kartu_keluarga->store('kartu-keluarga', 'public');
-        } else {
-            $kk = null;
-        }
-
         $this->tanggal_lahir = Carbon::parse($this->tanggal_lahir)->format('d-m-Y');
 
         AnakAsuh::create([
@@ -64,8 +52,6 @@ class CreateAnakAsuh extends Component
             'alamat' => $this->alamat,
             'keterangan' => $this->keterangan,
             'foto' => $fotoAnak,
-            'akta' => $akta,
-            'kartu_keluarga' => $kk,
             'nama_ayah_kandung' => $this->nama_ayah_kandung,
             'nama_ibu_kandung' => $this->nama_ibu_kandung,
             'nohp_ortu' => $this->nohp_ortu,
