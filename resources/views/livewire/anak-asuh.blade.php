@@ -25,14 +25,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-end">
-                    <div class="col-4 text-right">
+                    <div class="col-2 text-right">
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
+                            {{-- <div class="col-sm-12 col-md-6">
                                 <button wire:click="exportExcel" class="btn btn-warning btn-sm btn-block"><b><i class="fas fa-print"></i> Export</b></button>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
+                            </div> --}}
+                            {{-- <div class="col-sm-12 col-md-6"> --}}
                                 <a href="{{ route('tambah.anak.asuh') }}" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Data Anak Asuh</b></a>
-                            </div>
+                            {{-- </div> --}}
                         </div>
                     </div>
                 </div>

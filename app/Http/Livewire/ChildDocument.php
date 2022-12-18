@@ -11,7 +11,9 @@ use Livewire\WithFileUploads;
 class ChildDocument extends Component
 {
     use WithFileUploads;
-    public $idchild, $nama_dokumen, $file, $iteration, $downloadBerkas, $namaDokumen;
+    public $idchild, $nama_dokumen, $file, $iteration, $downloadBerkas, $namaDokumen, $idBerkas, $destroyBerkas;
+    protected $listeners = ['deleteConfirmed' => 'destroy'];
+
 
     public function render()
     {
@@ -83,5 +85,20 @@ class ChildDocument extends Component
         // Get Extension
         $ext = substr(strrchr($this->downloadBerkas, '.'), 1);
         return response()->download(public_path('storage/' . $this->downloadBerkas), $namaAnak->nama_lengkap . ' - ' . $this->namaDokumen . '.' . $ext);
+    }
+
+    public function deleteConfirmation($destroyBerkas, $id)
+    {
+        $this->idBerkas = $id;
+        $this->destroyBerkas = $destroyBerkas;
+        $this->dispatchBrowserEvent('show-delete-confirmation');
+    }
+
+    public function destroy()
+    {
+        unlink(public_path('storage/' . $this->destroyBerkas));
+        ModelsChildDocument::destroy($this->idBerkas);
+
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Data Anak Asuh Berhasil Dihapus']);
     }
 }

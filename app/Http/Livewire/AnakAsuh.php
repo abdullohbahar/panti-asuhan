@@ -51,20 +51,6 @@ class AnakAsuh extends Component
 
     public function destroy()
     {
-        $anak = ModelsAnakAsuh::find($this->idAnak);
-
-        if ($anak->foto) {
-            unlink(public_path('storage/' . $anak->foto));
-        }
-
-        if ($anak->kartu_keluarga) {
-            unlink(public_path('storage/' . $anak->kartu_keluarga));
-        }
-
-        if ($anak->akta) {
-            unlink(public_path('storage/' . $anak->akta));
-        }
-
         ModelsAnakAsuh::destroy($this->idAnak);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Data Anak Asuh Berhasil Dihapus']);

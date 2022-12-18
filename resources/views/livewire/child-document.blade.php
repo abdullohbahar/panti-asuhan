@@ -69,7 +69,7 @@
           <div class="row text-center">
             <?php $no = 1 ?>
             <div class="col-12">
-              <table class="table-bordered" style="width: 80%">
+              <table class="table-bordered" style="width: 100%">
                 <thead>
                   <tr>
                     <th scope="col">No</th>
@@ -88,6 +88,7 @@
                         </td>
                         <td style="height: 50px">
                           <button wire:click="download('{{ $document->file }}','{{ $document->nama_dokumen }}')" class="btn btn-info btn-sm">Unduh Berkas</button>
+                          <button wire:click="deleteConfirmation('{{ $document->file }}','{{ $document->id }}')" class="btn btn-danger btn-sm">Hapus Berkas</button>
                         </td>
                       </tr>
                   @endforeach
