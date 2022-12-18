@@ -25,14 +25,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-end">
-                    <div class="col-4 text-right">
+                    <div class="col-2 text-right">
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
+                            {{-- <div class="col-sm-12 col-md-6">
                                 <button wire:click="exportExcel" class="btn btn-warning btn-sm btn-block"><b><i class="fas fa-print"></i> Export</b></button>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
+                            </div> --}}
+                            {{-- <div class="col-sm-12 col-md-6"> --}}
                                 <button id="btnAddDonatur" wire:click="resetInput" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Donatur</b></button>
-                            </div>
+                            {{-- </div> --}}
                         </div>
                     </div>
                 </div>
@@ -48,6 +48,7 @@
                                 <tr>
                                     <th scope="col" style="width: 50px !important">#</th>
                                     <th scope="col">Nama Donatur</th>
+                                    <th scope="col">Nomor Hp</th>
                                     <th scope="col">Alamat</th>
                                     <th scope="col" style="width: 200px !important">Aksi</th>
                                 </tr>
@@ -55,13 +56,14 @@
                             <tbody>
                                 @if ($count == 0)
                                     <tr>
-                                        <td colspan="4">Data Not Found</td>
+                                        <td colspan="5">Data Not Found</td>
                                     </tr>
                                 @endif
                                 @foreach ($donaturs as $index => $donatur)
                                     <tr>
                                         <td data-label="#">{{ $donaturs->firstItem() + $index }}</td>
                                         <td data-label="Nama Donatur">{{ $donatur->nama }}</td>
+                                        <td data-label="Nomor HP">{{ $donatur->no_hp }}</td>
                                         <td data-label="Alamat">{{ $donatur->alamat }}</td>
                                         <td data-label="Aksi">
                                             <button wire:click="show('{{ $donatur->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Ubah Data Donatur"><i class="fas fa-pencil-alt"></i></button>

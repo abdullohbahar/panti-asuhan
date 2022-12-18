@@ -24,6 +24,17 @@
             </div>
             <div class="col-12">
               <div class="form-group">
+                <label for="">Nomor HP</label>
+                <input type="text" wire:model="no_hp" class="form-control @error('no_hp') is-invalid @enderror" id="" placeholder="Nomor HP Donatur" autofocus>
+                @error('no_hp')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
                 <label>Alamat Donatur</label>
                 <textarea wire:model="alamat" class="form-control @error('alamat') is-invalid @enderror"></textarea>
                 @error('alamat')

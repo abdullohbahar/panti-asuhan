@@ -13,6 +13,7 @@ class Donatur extends Model
 
     protected $fillable = [
         'nama',
-        'alamat'
+        'alamat',
+        'no_hp',
     ];
 }

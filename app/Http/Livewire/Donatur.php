@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 class Donatur extends Component
 {
-    public $nama, $alamat, $id_donatur, $search;
+    public $nama, $alamat, $id_donatur, $search, $no_hp;
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -40,7 +40,8 @@ class Donatur extends Component
     {
         return [
             'nama' => 'required',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'no_hp' => 'required'
         ];
     }
 
@@ -62,6 +63,7 @@ class Donatur extends Component
     {
         $this->nama = '';
         $this->alamat = '';
+        $this->no_hp = '';
     }
 
     public function show($id)
@@ -70,6 +72,7 @@ class Donatur extends Component
         if ($donatur) {
             $this->id_donatur = $donatur->id;
             $this->nama = $donatur->nama;
+            $this->no_hp = $donatur->no_hp;
             $this->alamat = $donatur->alamat;
         }
     }
@@ -80,7 +83,8 @@ class Donatur extends Component
 
         ModelsDonatur::where('id', $this->id_donatur)->update([
             'nama' => $this->nama,
-            'alamat' => $this->alamat
+            'alamat' => $this->alamat,
+            'no_hp' => $this->no_hp
         ]);
 
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Donatur Berhasil Diubah']);
