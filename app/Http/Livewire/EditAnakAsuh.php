@@ -90,6 +90,6 @@ class EditAnakAsuh extends Component
             'nohp_ortu' => $this->nohp_ortu,
         ]);
 
-        return redirect()->to('anak-asuh')->with('message', 'Data anak asuh berhasil diubah');
+        return redirect()->to('profile-anak-asuh/' . $this->idanak)->with('message', 'Data anak asuh berhasil diubah');
     }
 }

@@ -21,6 +21,13 @@
   <section class="content">
     <div class="container-fluid">
       <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-12 text-right">
+              <a href="{{ route('edit.data.anak.asuh',$anak->id) }}" class="btn btn-warning">Ubah Data</a>
+            </div>
+          </div>
+        </div>
         <div class="card-body">
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 text-center">
