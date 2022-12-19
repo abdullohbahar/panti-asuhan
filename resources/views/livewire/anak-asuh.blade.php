@@ -46,7 +46,7 @@
                         <table class="table-data">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 50px !important">#</th>
+                                    <th scope="col">#</th>
                                     <th scope="col">Foto</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Tempat, Tanggal Lahir</th>

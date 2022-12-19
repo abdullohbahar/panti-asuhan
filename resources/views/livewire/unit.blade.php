@@ -39,9 +39,9 @@
                         <table class="table-data">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 50px !important">#</th>
+                                    <th scope="col">#</th>
                                     <th scope="col">Satuan</th>
-                                    <th scope="col" style="width: 200px !important">Aksi</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

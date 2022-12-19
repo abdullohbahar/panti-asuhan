@@ -88,12 +88,12 @@
                         <table class="table-data">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 50px !important">#</th>
+                                    <th scope="col">#</th>
                                     <th scope="col">Nama Donatur</th>
                                     <th scope="col">Nominal</th>
                                     <th scope="col">Keterangan</th>
                                     <th scope="col">Tanggal Donasi</th>
-                                    <th scope="col" style="width: 150px !important">Aksi</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

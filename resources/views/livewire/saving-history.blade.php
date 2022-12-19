@@ -97,7 +97,7 @@
                         <table class="table-data">
                             <thead>
                                 <tr>
-                                    <th scope="col" rowspan="2" style="width: 50px !important">#</th>
+                                    <th scope="col" rowspan="2">#</th>
                                     <th scope="col" rowspan="2">Tanggal</th>
                                     <th scope="col" colspan="2">Transaksi</th>
                                     <th scope="col" rowspan="2">Saldo</th>
