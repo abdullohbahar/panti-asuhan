@@ -160,6 +160,14 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item">
+              <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Data Pengurus
+                </p>
+              </a>
+            </li>
             <li class="nav-item {{ $active == 'satuan' ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-cog"></i>

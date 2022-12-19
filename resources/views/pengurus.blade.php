@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Tipe Donasi
+  Data Pengurus
 @endsection
 
 @push('addons-css')
@@ -42,6 +42,7 @@
     .table-data {
         border: 0;
     }
+    
     .table-data caption {
         font-size: 1.3em;
     }
@@ -100,21 +101,42 @@
 
 @section('content')
 <div>
-  <livewire:donation-type>
+  <livewire:pengurus>
 </div>
 @endsection
 
 @push('addons-js')
+@if (session()->has('message'))
+    <script>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: '{{ session('message') }}'
+      })
+    </script>
+@endif
+
 <script>
   // Show modal add donatur
-  $("#btnAdd").on("click", () => {
-    $("#modal-add-donation-type").modal("show")
+  $("#btnAddDonatur").on("click", () => {
+    $("#modal-add-donatur").modal("show")
   })
 
   window.addEventListener('close-modal', event => {
     // close modal
-    $('#modal-add-donation-type').modal('hide')
-    $('#modal-edit-donation-type').modal('hide')
+    $('#modal-add-donatur').modal('hide')
+    $('#modal-edit-donatur').modal('hide')
 
     // sweetalert success
     const Toast = Swal.mixin({

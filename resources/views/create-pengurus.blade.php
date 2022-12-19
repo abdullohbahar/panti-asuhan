@@ -1,52 +1,52 @@
 @extends('layout.app')
 
 @section('title')
-  Tambah Data Anak Asuh
+Tambah Data Pengurus
 @endsection
 
 @push('addons-css')
 <style>
   .table-data {
-      border: 1px solid #ccc;
-      border-collapse: collapse;
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      table-layout: fixed;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
   }
 
   .table-data caption {
-      font-size: 1.5em;
-      margin: .5em 0 .75em;
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
   }
 
   .table-data tr {
-      background-color: #f8f8f8;
-      border: 1px solid #ddd;
-      padding: .35em;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
   }
 
   .table-data th,
   .table-data td {
-      padding: .625em;
-      text-align: center;
+    padding: .625em;
+    text-align: center;
   }
 
   .table-data th {
-      font-size: .85em;
-      letter-spacing: .1em;
-      text-transform: uppercase;
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
   }
 
   @media screen and (max-width: 600px) {
     .table-data {
-        border: 0;
+      border: 0;
     }
-    .table-data caption {
+      .table-data caption {
         font-size: 1.3em;
-    }
-    
-    .table-data thead {
+      }
+
+      .table-data thead {
         border: none;
         clip: rect(0 0 0 0);
         height: 1px;
@@ -55,22 +55,22 @@
         padding: 0;
         position: absolute;
         width: 1px;
-    }
-    
-    .table-data tr {
+      }
+
+      .table-data tr {
         border-bottom: 3px solid #ddd;
         display: block;
         margin-bottom: .625em;
-    }
-    
-    .table-data td {
+      }
+
+      .table-data td {
         border-bottom: 1px solid #ddd;
         display: block;
         font-size: .8em;
         text-align: right;
-    }
-    
-    .table-data td::before {
+      }
+
+      .table-data td::before {
         /*
         * aria-label has no advantage, it won't be read inside a table
         content: attr(aria-label);
@@ -79,28 +79,28 @@
         float: left;
         font-weight: bold;
         text-transform: uppercase;
-    }
-    
-    .table-data td:last-child {
-        border-bottom: 0;
-    }
-  }
-  
-  .tb-width{
-      width: 198px;
-  }
-
-  @media screen and (max-width: 600px) {
-      .tb-width{
-          width: 10px;
       }
-  }
+
+      .table-data td:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    .tb-width {
+      width: 198px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .tb-width {
+        width: 10px;
+      }
+    }
 </style>
 @endpush
 
 @section('content')
 <div>
-  <livewire:create-anak-asuh>
+  <livewire:create-pengurus>
 </div>
 @endsection
 
@@ -128,7 +128,7 @@
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     })
-  
+
     Toast.fire({
       icon: 'success',
       title: event.detail.message
@@ -136,37 +136,37 @@
   })
 
   // Delete Confirmation
-    window.addEventListener('show-delete-confirmation',event =>{
-      Swal.fire({
-        title: 'Anda yakin?',
-        text: "Kamu tidak bisa mengembalikan data yang terhapus dan data yang berhubungan akan terhapus!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Hapus!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Livewire.emit('deleteConfirmed')
-        }
-      })
-
+  window.addEventListener('show-delete-confirmation', event => {
+    Swal.fire({
+      title: 'Anda yakin?',
+      text: "Kamu tidak bisa mengembalikan data yang terhapus dan data yang berhubungan akan terhapus!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, Hapus!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Livewire.emit('deleteConfirmed')
+      }
     })
 
-    window.addEventListener('deleted', event =>{
-      Swal.fire(
-        'Terhapus',
-        event.detail.message,
-        'success'
-      )
-    })
+  })
 
-    // preview image
-    imageUpload.onchange = (evt) => {
-        const [file] = imageUpload.files;
-        if (file) {
-            imagePreview.src = URL.createObjectURL(file);
-        }
-    };
+  window.addEventListener('deleted', event => {
+    Swal.fire(
+      'Terhapus',
+      event.detail.message,
+      'success'
+    )
+  })
+
+  // preview image
+  imageUpload.onchange = (evt) => {
+    const [file] = imageUpload.files;
+    if (file) {
+      imagePreview.src = URL.createObjectURL(file);
+    }
+  };
 </script>
 @endpush

@@ -3,12 +3,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Tambah Data Anak Asuh</h1>
+          <h1>Tambah Pengurus</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Tambah Data Anak Asuh</li>
+            <li class="breadcrumb-item active">Tambah Pengurus</li>
           </ol>
         </div>
       </div>
@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Foto Anak</label>
+                                <label>Foto Pengurus</label>
                                 <input type="file" wire:model="foto" class="form-control @error("foto") is-invalid @enderror" id="imageUpload">
                                 @error("foto")
                                     <div class="invalid-feedback">
@@ -42,8 +42,19 @@
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label>Nama Lengkap</label>
-                                <input type="text" wire:model="nama_lengkap" class="form-control @error("nama_lengkap") is-invalid @enderror" id="">
-                                @error("nama_lengkap")
+                                <input type="text" wire:model="nama" class="form-control @error("nama") is-invalid @enderror" id="">
+                                @error("nama")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Nomor Telepon</label>
+                                <input type="text" wire:model="no_hp" class="form-control @error("no_hp") is-invalid @enderror" id="">
+                                @error("no_hp")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -89,9 +100,9 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Pendidikan</label>
-                                <input type="text" wire:model="pendidikan" class="form-control @error("pendidikan") is-invalid @enderror" id="">
-                                @error("pendidikan")
+                                <label>Jabatan</label>
+                                <input type="text" wire:model="jabatan" class="form-control @error("jabatan") is-invalid @enderror" id="">
+                                @error("jabatan")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -109,68 +120,9 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>Keterangan</label>
-                                <textarea wire:model="keterangan" class="form-control @error("keterangan") is-invalid @enderror"></textarea>
-                                @error("keterangan")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select wire:model="status" class="form-control @error("status") is-invalid @enderror" id="">
-                                    <option value="">-- Pilih Status --</option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Non-Aktif">Non-Aktif</option>
-                                </select>
-                                @error("status")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>No Handphone Orang Tua</label>
-                                <input type="text" wire:model="nohp_ortu" class="form-control @error("nohp_ortu") is-invalid @enderror" id="">
-                                @error("nohp_ortu")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>Nama Ayah Kandung</label>
-                                <input type="text" wire:model="nama_ayah_kandung" class="form-control @error("nama_ayah_kandung") is-invalid @enderror" id="">
-                                @error("nama_ayah_kandung")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>Nama Ibu Kandung</label>
-                                <input type="text" wire:model="nama_ibu_kandung" class="form-control @error("nama_ibu_kandung") is-invalid @enderror" id="">
-                                @error("nama_ibu_kandung")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="col-12 mt-3">
                             <button class="btn btn-success btn-block" wire:loading.attr="disabled">
-                                Tambah Data Anak
+                                Tambah Data Pengurus
                             </button>
                         </div>
                     </div>

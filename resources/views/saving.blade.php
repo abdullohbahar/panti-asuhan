@@ -41,7 +41,7 @@
   @media screen and (max-width: 600px) {
     .table-data {
         border: 0;
-    
+    }
     .table-data caption {
         font-size: 1.3em;
     }
