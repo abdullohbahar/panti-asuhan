@@ -8,9 +8,11 @@ use App\Models\Pengurus as ModelsPengurus;
 
 class Pengurus extends Component
 {
-    public $search;
+    public $search, $idPengurus;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+    protected $listeners = ['deleteConfirmed' => 'destroy'];
+
 
     public function render()
     {
@@ -30,5 +32,18 @@ class Pengurus extends Component
         ];
 
         return view('livewire.pengurus', $data);
+    }
+
+    public function deleteConfirmation($id)
+    {
+        $this->idPengurus = $id;
+        $this->dispatchBrowserEvent('show-delete-confirmation');
+    }
+
+    public function destroy()
+    {
+        ModelsPengurus::destroy($this->idPengurus);
+
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Data Pengurus Berhasil Dihapus']);
     }
 }
