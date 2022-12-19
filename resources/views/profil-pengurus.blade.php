@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Profile Anak Asuh
+    Profile Pengurus
 @endsection
 
 @push('addons-css')
@@ -9,7 +9,7 @@
 
 @section('content')
 <div>
-  <livewire:profile-anak :idchild="$id">
+  <livewire:profile-pengurus :idpengurus="$id">
 </div>
 @endsection
 

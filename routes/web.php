@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pengurus', [PengurusController::class, 'index'])->name('pengurus');
     Route::get('/tambah-pengurus', [PengurusController::class, 'create'])->name('tambah.pengurus');
+    Route::get('/profile-pengurus/{id}', [PengurusController::class, 'show'])->name('profile.pengurus');
 
     Route::group(['prefix' => 'pengaturan'], function () {
         Route::get('/satuan', [SettingController::class, 'unit'])->name('satuan');

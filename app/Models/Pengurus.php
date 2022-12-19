@@ -21,4 +21,9 @@ class Pengurus extends Model
         'foto',
         'jenis_kelamin',
     ];
+
+    public function documents()
+    {
+        return $this->hasMany(DocumentPengurus::class);
+    }
 }

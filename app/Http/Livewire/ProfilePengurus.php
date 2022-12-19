@@ -2,27 +2,26 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\AnakAsuh;
-use App\Models\ChildDocument;
+use App\Models\DocumentPengurus;
+use App\Models\Pengurus;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class ProfileAnak extends Component
+class ProfilePengurus extends Component
 {
-    public $idchild, $nama_dokumen, $file, $iteration, $downloadBerkas, $namaDokumen, $idBerkas, $destroyBerkas;
     use WithFileUploads;
-
+    public $idpengurus, $iteration, $nama_dokumen, $file;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
     public function render()
     {
-        $anak = AnakAsuh::find($this->idchild);
+        $pengurus = Pengurus::find($this->idpengurus);
 
         $data = [
-            'anak' => $anak
+            'pengurus' => $pengurus
         ];
 
-        return view('livewire.profile-anak', $data);
+        return view('livewire.profile-pengurus', $data);
     }
 
     public function rules()
@@ -52,8 +51,8 @@ class ProfileAnak extends Component
 
         $file = $this->file->store('berkas', 'public');
 
-        ChildDocument::create([
-            'anak_asuh_id' => $this->idchild,
+        DocumentPengurus::create([
+            'pengurus_id' => $this->idpengurus,
             'nama_dokumen' => $this->nama_dokumen,
             'file' => $file,
         ]);
@@ -72,7 +71,7 @@ class ProfileAnak extends Component
     public function download($id, $namaDokumen)
     {
         // Nama Anak
-        $namaAnak = AnakAsuh::find($this->idchild);
+        $namaPengurus = Pengurus::find($this->idpengurus);
 
         // Nama File
         $this->downloadBerkas = $id;
@@ -82,7 +81,7 @@ class ProfileAnak extends Component
 
         // Get Extension
         $ext = substr(strrchr($this->downloadBerkas, '.'), 1);
-        return response()->download(public_path('storage/' . $this->downloadBerkas), $namaAnak->nama_lengkap . ' - ' . $this->namaDokumen . '.' . $ext);
+        return response()->download(public_path('storage/' . $this->downloadBerkas), $namaPengurus->nama . ' - ' . $this->namaDokumen . '.' . $ext);
     }
 
     public function deleteConfirmation($destroyBerkas, $id)
@@ -95,7 +94,7 @@ class ProfileAnak extends Component
     public function destroy()
     {
         unlink(public_path('storage/' . $this->destroyBerkas));
-        ChildDocument::destroy($this->idBerkas);
+        DocumentPengurus::destroy($this->idBerkas);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Berkas Berhasil Dihapus']);
     }
