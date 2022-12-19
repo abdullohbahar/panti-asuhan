@@ -31,4 +31,13 @@ class PengurusController extends Controller
         ];
         return view('profil-pengurus', $data);
     }
+
+    public function edit($id)
+    {
+        $data = [
+            'id' => $id,
+            'active' => 'pengurus'
+        ];
+        return view('edit-pengurus', $data);
+    }
 }

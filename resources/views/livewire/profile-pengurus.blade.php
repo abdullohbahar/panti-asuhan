@@ -24,7 +24,7 @@
         <div class="card-header">
           <div class="row">
             <div class="col-12 text-right">
-              {{-- <a href="{{ route('edit.data.anak.asuh',$pengurus->id) }}" class="btn btn-warning">Ubah Data</a> --}}
+              <a href="{{ route('edit.pengurus',$pengurus->id) }}" class="btn btn-warning">Ubah Data</a>
             </div>
           </div>
         </div>
