@@ -44,4 +44,22 @@ class DonationController extends Controller
 
         return view('laporan-penggunaan-dana', $data);
     }
+
+    public function pilih()
+    {
+        $data = [
+            'active' => 'donasi',
+        ];
+
+        return view('jenis-donasi', $data);
+    }
+
+    public function donasiTunai()
+    {
+        $data = [
+            'active' => 'donasi',
+        ];
+
+        return view('donasi-tunai', $data);
+    }
 }

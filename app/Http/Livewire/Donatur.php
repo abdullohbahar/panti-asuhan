@@ -41,7 +41,7 @@ class Donatur extends Component
         return [
             'nama' => 'required',
             'alamat' => 'required',
-            'no_hp' => 'required'
+            'no_hp' => 'required|unique:donaturs,no_hp'
         ];
     }
 

@@ -18,11 +18,17 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->uuid('id');
-            $table->foreignUuid('donatur_id')->onUpdate('cascade')->onDelete('set null');;
-            $table->foreignUuid('donation_type_id')->onUpdate('cascade')->onDelete('set null');;
-            $table->integer('nominal');
-            $table->text('keterangan');
-            $table->date('tanggal_sumbangan');
+            $table->foreignUuid('donatur_id')->nullable()->onUpdate('cascade')->onDelete('set null');
+            $table->string('no');
+            $table->string('jenis_donasi')->nullable();
+            $table->text('terbilang')->nullable();
+            $table->integer('pemasukan')->nullable();
+            $table->integer('pengeluaran')->nullable();
+            $table->integer('saldo');
+            $table->text('keterangan')->nullable();
+            $table->string('tipe')->nullable();
+            $table->text('hajat')->nullable();
+            $table->date('tanggal_donasi');
             $table->timestamps();
         });
     }

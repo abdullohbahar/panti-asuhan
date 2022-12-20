@@ -71,10 +71,10 @@
             <div class="inner">
               <h4>{{ "Rp " . number_format($total_tabungan, 2, ',', '.'); }}</h4>
 
-              <p>Total Tabungan Anak Asuh</p>
+              <p>Total Pengurus</p>
             </div>
             <div class="icon">
-              <i class="fas fa-database"></i>
+              <i class="fas fa-users"></i>
             </div>
             <a href="#" class="small-box-footer"></a>
           </div>

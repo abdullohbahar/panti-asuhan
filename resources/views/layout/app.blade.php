@@ -141,7 +141,7 @@
                   </a>
                 </li> --}}
                 <li class="nav-item">
-                  <a href="{{ route('donation') }}" class="nav-link {{ $active == 'donasi' ? 'active' : '' }}">
+                  <a href="{{ route('pilih.jenis.donasi') }}" class="nav-link {{ $active == 'donasi' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Donasi Dana</p>
                   </a>

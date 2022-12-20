@@ -39,11 +39,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <h5>Total Donasi Terkumpul: <b>{{ "Rp " . number_format($totalDana->total, 2, ',', '.'); }}</b></h5>
-                    </div>
-                </div>
             </div>
             <div class="card-header">
                 <div class="row">

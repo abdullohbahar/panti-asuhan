@@ -55,7 +55,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <h6>Nomor Telepom</h6>
+                        <h6>Nomor Telepon</h6>
                       </td>
                       <td>
                         <h6>: {{ $pengurus->no_hp }}</h6>
