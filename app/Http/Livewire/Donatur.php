@@ -45,6 +45,16 @@ class Donatur extends Component
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'nama.required' => 'Nama harus diisi',
+            'alamat.required' => 'Alamat harus diisi',
+            'no_hp.required' => 'Nomor HP harus diisi',
+            'no_hp.required.unique' => 'Nomor HP sudah terdaftar'
+        ];
+    }
+
     public function updated($fields)
     {
         $this->validateOnly($fields);

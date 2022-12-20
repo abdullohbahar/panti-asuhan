@@ -61,6 +61,17 @@ class DonationGoods extends Component
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'donatur_id.required' => 'Donatur harus diisi',
+            'donation_type_id.required' => 'Tipe donasi harus diisi',
+            'tanggal_sumbangan.required' => 'Tanggal harus diisi',
+            'nominal.required' => 'Nominal harus diisi',
+            'keterangan.required' => 'Keteranga harus diisi',
+        ];
+    }
+
     public function updated($fields)
     {
         $this->validateOnly($fields);

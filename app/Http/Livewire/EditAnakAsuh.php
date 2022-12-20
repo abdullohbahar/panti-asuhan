@@ -57,6 +57,15 @@ class EditAnakAsuh extends Component
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'nama_lengkap.required' => 'Nama lengkap harus diisi',
+            'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
+            'status.required' => 'Status harus diisi',
+        ];
+    }
+
     public function updated($fields)
     {
         $this->validateOnly($fields);

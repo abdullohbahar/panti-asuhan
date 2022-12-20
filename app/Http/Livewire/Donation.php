@@ -57,7 +57,6 @@ class Donation extends Component
     {
         return [
             'donatur_id' => 'required',
-            'donation_type_id' => 'required',
             'nominal' => 'required',
             'tanggal_sumbangan' => 'required',
             'keterangan' => ''
@@ -67,7 +66,9 @@ class Donation extends Component
     public function messages()
     {
         return [
-            'nominal.required' => 'Nominal harus diisi'
+            'nominal.required' => 'Nominal harus diisi',
+            'donatur_id.required' => 'Donatur harus diisi',
+            'tanggal_sumbangan' => 'Tanggal harus diisi',
         ];
     }
 

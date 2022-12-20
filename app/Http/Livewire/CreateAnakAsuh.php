@@ -26,6 +26,15 @@ class CreateAnakAsuh extends Component
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'nama_lengkap.required' => 'Nama harus diisi',
+            'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
+            'status.required' => 'Status harus diisi',
+        ];
+    }
+
     public function updated($fields)
     {
         return $this->validateOnly($fields);

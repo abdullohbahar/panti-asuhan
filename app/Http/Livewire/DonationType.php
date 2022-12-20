@@ -41,6 +41,14 @@ class DonationType extends Component
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'jenis_donasi.required' => 'Harus diisi',
+            'jenis_donasi.unique' => 'Jenis donasi sudah terdaftar'
+        ];
+    }
+
     public function updated($fields)
     {
         $this->validateOnly($fields);
