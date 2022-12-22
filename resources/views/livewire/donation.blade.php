@@ -31,10 +31,7 @@
                     <div class="col-4 text-right">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
-                                <button wire:click="exportExcel" id="print" class="btn btn-warning btn-sm btn-block mb-2"><i class="fas fa-print"></i> Export</button>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <button id="btnAddMoney" wire:click="resetInput" class="btn btn-primary btn-sm btn-block mb-2"><b><i class="fas fa-plus"></i> Donasi</b></button>
+                                <a href="{{ route('donasi.tunai') }}" class="btn btn-primary btn-sm btn-block mb-2"><b><i class="fas fa-plus"></i> Donasi</b></a>
                             </div>
                         </div>
                     </div>
@@ -83,9 +80,10 @@
                         <table class="table-data">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col" style="width: 20px">#</th>
                                     <th scope="col">Nama Donatur</th>
                                     <th scope="col">Nominal</th>
+                                    <th scope="col">Hajat</th>
                                     <th scope="col">Keterangan</th>
                                     <th scope="col">Tanggal Donasi</th>
                                     <th scope="col">Aksi</th>
@@ -94,17 +92,20 @@
                             <tbody>
                                 @if ($count == 0)
                                     <tr>
-                                        <td colspan="6">Data Not Found</td>
+                                        <td colspan="7">Data Not Found</td>
                                     </tr>
                                 @endif
                                 @foreach ($donations as $index => $donation)
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Nama Donatur">{{ $donation->donatur->nama }}</td>
-                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->nominal, 2, ',', '.'); }}</td>
+                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}</td>
+                                        <td data-label="Hajat">{{ $donation->hajat }}</td>
                                         <td data-label="Keterangan">{{ $donation->keterangan }}</td>
-                                        <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_sumbangan)) }}</td>
+                                        <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
                                         <td data-label="Aksi">
+                                            <button wire:click="show('{{ $donation->id }}')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-whatsapp"></i></button>
+                                            <button wire:click="show('{{ $donation->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-print"></i></button>
                                             <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
                                             {{-- <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button> --}}
                                         </td>

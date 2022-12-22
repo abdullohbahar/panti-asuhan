@@ -30,8 +30,8 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Nominal</label>
-                <input type="text" wire:model="nominal" class="form-control @error('nominal') is-invalid @enderror" id="nominal2" placeholder="Nominal" autofocus>
-                @error('nominal')
+                <input type="text" wire:model="pemasukan" class="form-control @error('pemasukan') is-invalid @enderror" id="nominal2" placeholder="Nominal" autofocus>
+                @error('pemasukan')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
@@ -41,12 +41,23 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Tanggal Donasi</label>
-                <input type="date" wire:model="tanggal_sumbangan" class="form-control @error('tanggal_sumbangan') is-invalid @enderror" autofocus>
-                @error('tanggal_sumbangan')
+                <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror">
+                @error('tanggal_donasi')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
                 @enderror
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                  <label>Hajat</label>
+                  <textarea wire:model="hajat" class="form-control @error('hajat') is-invalid @enderror"></textarea>
+                  @error('hajat')
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                  @enderror
               </div>
             </div>
             <div class="col-12">

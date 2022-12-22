@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/donatur', [DonaturController::class, 'index'])->name('donatur');
     Route::get('/tipe-donasi', [DonationTypeController::class, 'index'])->name('donation.type');
-    Route::get('/donasi-uang', [DonationController::class, 'index'])->name('donation');
+    Route::get('/data-donasi-dana', [DonationController::class, 'index'])->name('donation');
     Route::get('/donasi-barang', [DonationController::class, 'donationGoods'])->name('donation.goods');
     Route::get('/bukti-donasi/{id}', [DonationController::class, 'proofOfDonation'])->name('proof.of.donation');
     Route::get('/cetak-donasi', [Donation::class, 'print'])->name('cetak.donasi');
