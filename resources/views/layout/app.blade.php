@@ -162,7 +162,7 @@
             </li>
             <li class="nav-item">
               <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
-                <i class="far fa-sticky-note"></i>
+                <i class="far fa-file"></i>
                 <p>
                   Laporan Pemasukan Pengeluaran
                 </p>
@@ -176,7 +176,7 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item {{ $active == 'satuan' ? 'menu-open' : '' }}">
+            {{-- <li class="nav-item {{ $active == 'satuan' ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-cog"></i>
                 <p>
@@ -192,7 +192,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> --}}
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

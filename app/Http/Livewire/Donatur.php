@@ -51,7 +51,7 @@ class Donatur extends Component
             'nama.required' => 'Nama harus diisi',
             'alamat.required' => 'Alamat harus diisi',
             'no_hp.required' => 'Nomor HP harus diisi',
-            'no_hp.required.unique' => 'Nomor HP sudah terdaftar'
+            'no_hp.unique' => 'Nomor HP sudah terdaftar'
         ];
     }
 

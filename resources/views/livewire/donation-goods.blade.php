@@ -41,9 +41,10 @@
                         <table class="table-data">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col" style="width: 20px !important">#</th>
                                     <th scope="col">Nama Donatur</th>
-                                    <th scope="col">Jumlah</th>
+                                    <th scope="col">Hajat</th>
+                                    <th scope="col">Keterangan</th>
                                     <th scope="col">Tanggal Donasi</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -58,8 +59,9 @@
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Tipe Donasi">{{ $donation->donatur->nama }}</td>
-                                        <td data-label="Jumlah">{{ $donation->jumlah }}</td>
-                                        <td data-label="Tanggal Donasi">{{ $donation->tanggal_sumbangan }}</td>
+                                        <td data-label="Hajat">{{ $donation->hajat }}</td>
+                                        <td data-label="Keterangan">{{ $donation->keterangan }}</td>
+                                        <td data-label="Tanggal Donasi">{{ $donation->tanggal_donasi }}</td>
                                         <td data-label="Aksi">
                                             <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Bukti Donasi"><i class="fas fa-upload"></i></a>
                                             <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation-item" data-toggle="tooltip" data-placement="top" title="Edit Donasi"><i class="fas fa-pencil-alt"></i></button>

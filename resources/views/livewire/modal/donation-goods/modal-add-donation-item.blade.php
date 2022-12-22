@@ -30,15 +30,15 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Tanggal Donasi</label>
-                <input type="date" wire:model="tanggal_sumbangan" class="form-control @error('tanggal_sumbangan') is-invalid @enderror" autofocus>
-                @error('tanggal_sumbangan')
+                <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror" autofocus>
+                @error('tanggal_donasi')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
                 @enderror
               </div>
             </div>
-            <div class="col-12">
+            {{-- <div class="col-12">
               <div class="form-group">
                 <label>Jumlah</label>
                 <div class="input-group">
@@ -50,6 +50,17 @@
                     @endforeach
                   </select>
                 </div>
+              </div>
+            </div> --}}
+            <div class="col-12">
+              <div class="form-group">
+                  <label>Hajat</label>
+                  <textarea wire:model="hajat" class="form-control @error('hajat') is-invalid @enderror"></textarea>
+                  @error('hajat')
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                  @enderror
               </div>
             </div>
             <div class="col-12">

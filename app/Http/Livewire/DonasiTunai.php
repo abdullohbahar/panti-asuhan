@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Donation;
 use App\Models\Donatur;
 use Livewire\Component;
+use App\Models\Donation;
+use App\Models\GoodsDonation;
 
 class DonasiTunai extends Component
 {
@@ -56,14 +57,40 @@ class DonasiTunai extends Component
         $nominal = str_replace(' ', '', $nominal);
 
         $donation = Donation::orderBy('no', 'desc')->first();
+        $goodsDonation = GoodsDonation::orderBy('no', 'desc')->first();
 
-
+        // melakukan pengecekan apakah donasi kosong atau tidak
+        // jika donasi tidak kosong maka total saldo = saldo + nominal
+        // jika kosong maka total saldo = nominal
         if ($donation != null) {
-            $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
             $totalSaldo = $donation->saldo + $nominal;
         } else {
-            $no = '00001';
             $totalSaldo = $nominal;
+        }
+
+        // Melakukan pengecekan untuk penomoran
+        // jika donasi not null dan donasi barang null maka nomor urut diambil dari tabel donasi
+        if ($donation && $goodsDonation == null) {
+            $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
+
+            // Selain itu jika donasi barang not null dan donasi barang null maka nomor urut diambil dari tabel donasi barang
+        } elseif ($goodsDonation && $donation == null) {
+            $no = str_pad($goodsDonation->no + 1, 5, 0, STR_PAD_LEFT);
+
+            // jika donasi barang dan donasi not null
+            // maka lakukan perbandingan apakah nomor di tabel donasi lebih besar
+            // jika nomor di tabel donasi lebih besar maka menggunakan nomor dari donasi
+            // jika nomor di tabel donasi barang maka menggunakan nomor dari donasi barang
+        } elseif ($goodsDonation && $donation) {
+            if ($donation->no > $goodsDonation->no) {
+                $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
+            } else {
+                $no = str_pad($goodsDonation->no + 1, 5, 0, STR_PAD_LEFT);
+            }
+
+            // jika semua null maka nomor dimulai dari 1
+        } elseif ($donation == null && $goodsDonation == null) {
+            $no = '00001';
         }
 
         Donation::create([

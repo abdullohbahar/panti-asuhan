@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\BuktiSumbangan;
 use App\Models\Donation;
 use App\Models\Donatur;
+use App\Models\GoodsDonation;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -17,9 +18,7 @@ class DonationGoods extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $donation_id, $donatur_id, $tanggal_sumbangan, $keterangan, $search, $jumlah, $satuan;
-    public $donation_type_id = "Barang";
-    public $nominal = "0";
+    public $donation_id, $donatur_id, $tanggal_donasi, $keterangan, $search, $jumlah, $satuan, $hajat;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
 
@@ -29,9 +28,9 @@ class DonationGoods extends Component
 
         $donaturs = Donatur::orderBy('nama', 'asc')->get();
 
-        $query = Donation::where('donation_type_id', "Barang")->whereHas('donatur', function ($q) use ($search) {
+        $query = GoodsDonation::whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%')
-                ->orwhere('tanggal_sumbangan', 'like', '%' . $this->search . '%')
+                ->orwhere('tanggal_donasi', 'like', '%' . $this->search . '%')
                 ->orwhere('keterangan', 'like', '%' . $this->search . '%');
         });
 
@@ -54,9 +53,8 @@ class DonationGoods extends Component
     {
         return [
             'donatur_id' => 'required',
-            'donation_type_id' => 'required',
-            'tanggal_sumbangan' => 'required',
-            'nominal' => 'required',
+            'tanggal_donasi' => 'required',
+            'hajat' => 'required',
             'keterangan' => 'required',
         ];
     }
@@ -65,9 +63,8 @@ class DonationGoods extends Component
     {
         return [
             'donatur_id.required' => 'Donatur harus diisi',
-            'donation_type_id.required' => 'Tipe donasi harus diisi',
-            'tanggal_sumbangan.required' => 'Tanggal harus diisi',
-            'nominal.required' => 'Nominal harus diisi',
+            'tanggal_donasi.required' => 'Tanggal harus diisi',
+            'hajat.required' => 'Hajat harus diisi',
             'keterangan.required' => 'Keteranga harus diisi',
         ];
     }
@@ -81,13 +78,40 @@ class DonationGoods extends Component
     {
         $validateData = $this->validate();
 
-        Donation::create([
+        $donation = Donation::orderBy('no', 'desc')->first();
+        $goodsDonation = GoodsDonation::orderBy('no', 'desc')->first();
+
+        // Melakukan pengecekan untuk penomoran
+        // jika donasi not null dan donasi barang null maka nomor urut diambil dari tabel donasi
+        if ($donation && $goodsDonation == null) {
+            $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
+
+            // Selain itu jika donasi barang not null dan donasi barang null maka nomor urut diambil dari tabel donasi barang
+        } elseif ($goodsDonation && $donation == null) {
+            $no = str_pad($goodsDonation->no + 1, 5, 0, STR_PAD_LEFT);
+
+            // jika donasi barang dan donasi not null
+            // maka lakukan perbandingan apakah nomor di tabel donasi lebih besar
+            // jika nomor di tabel donasi lebih besar maka menggunakan nomor dari donasi
+            // jika nomor di tabel donasi barang maka menggunakan nomor dari donasi barang
+        } elseif ($goodsDonation && $donation) {
+            if ($donation->no > $goodsDonation->no) {
+                $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
+            } else {
+                $no = str_pad($goodsDonation->no + 1, 5, 0, STR_PAD_LEFT);
+            }
+
+            // jika semua null maka nomor dimulai dari 1
+        } elseif ($donation == null && $goodsDonation == null) {
+            $no = '00001';
+        }
+
+        GoodsDonation::create([
             'donatur_id' => $this->donatur_id,
-            'donation_type_id' => $this->donation_type_id,
-            'tanggal_sumbangan' => $this->tanggal_sumbangan,
-            'nominal' => $this->nominal,
+            'no' => $no,
+            'tanggal_donasi' => $this->tanggal_donasi,
+            'hajat' => $this->hajat,
             'keterangan' => $this->keterangan,
-            'jumlah' => $this->jumlah . " " . $this->satuan,
         ]);
 
         $this->resetInput();
@@ -97,7 +121,7 @@ class DonationGoods extends Component
     public function resetInput()
     {
         $this->donatur_id = '';
-        $this->tanggal_sumbangan = '';
+        $this->tanggal_donasi = '';
         $this->keterangan = '';
         $this->jumlah = '';
         $this->satuan = '';
@@ -105,17 +129,15 @@ class DonationGoods extends Component
 
     public function show($id)
     {
-        $donation = Donation::find($id);
+        $donation = GoodsDonation::find($id);
 
         if ($donation) {
-            $word = explode(" ", $donation->jumlah);
 
             $this->donation_id = $donation->id;
             $this->donatur_id = $donation->donatur_id;
-            $this->tanggal_sumbangan = $donation->tanggal_sumbangan;
+            $this->tanggal_donasi = $donation->tanggal_donasi;
             $this->keterangan = $donation->keterangan;
-            $this->jumlah = $word[0];
-            $this->satuan = $word[1];
+            $this->hajat = $donation->hajat;
         }
     }
 
@@ -123,11 +145,11 @@ class DonationGoods extends Component
     {
         $validateData = $this->validate();
 
-        Donation::where('id', $this->donation_id)->update([
+        GoodsDonation::where('id', $this->donation_id)->update([
             'donatur_id' => $this->donatur_id,
-            'tanggal_sumbangan' => $this->tanggal_sumbangan,
+            'tanggal_donasi' => $this->tanggal_donasi,
             'keterangan' => $this->keterangan,
-            'jumlah' => $this->jumlah . " " . $this->satuan,
+            'hajat' => $this->hajat,
         ]);
 
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
