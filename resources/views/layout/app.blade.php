@@ -152,13 +152,21 @@
                     <p>Donasi Barang</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a href="{{ route('laporan.penggunaan.dana') }}" class="nav-link {{ $active == 'penggunaan-dana' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Penggunaan Donasi</p>
                   </a>
-                </li>
+                </li> --}}
               </ul>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
+                <i class="far fa-sticky-note"></i>
+                <p>
+                  Laporan Pemasukan Pengeluaran
+                </p>
+              </a>
             </li>
             <li class="nav-item">
               <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">

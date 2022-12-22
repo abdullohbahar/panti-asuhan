@@ -12,7 +12,7 @@ class DonasiTunai extends Component
     public function render()
     {
         $data = [
-            'donaturs' => Donatur::get(),
+            'donaturs' => Donatur::orderBy('nama', 'asc')->get(),
         ];
 
         return view('livewire.donasi-tunai', $data);

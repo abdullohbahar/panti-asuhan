@@ -27,7 +27,7 @@ class DonationGoods extends Component
     {
         $search = '';
 
-        $donaturs = Donatur::get();
+        $donaturs = Donatur::orderBy('nama', 'asc')->get();
 
         $query = Donation::where('donation_type_id', "Barang")->whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%')
