@@ -25,7 +25,7 @@
                 <div class="row justify-content-between">
                     <div class="col-12">
                         <h5>Bukti Donasi Dari Bapak/Ibu <b class="text-uppercase">{{ $name->donatur->nama }}</b></h5>
-                        <h5>Tanggal Donasi : <b class="text-uppercase">{{ $name->tanggal_sumbangan }}</b></h5>
+                        <h5>Tanggal Donasi : <b class="text-uppercase">{{ $name->tanggal_donasi }}</b></h5>
                     </div>
                     <div class="col-12 text-right">
                         <button id="btnAddProofDonation" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Tambah Bukti Donasi</b></button>
