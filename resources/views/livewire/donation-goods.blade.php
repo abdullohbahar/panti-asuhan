@@ -52,7 +52,7 @@
                             <tbody>
                                 @if ($count == 0)
                                     <tr>
-                                        <td colspan="5">Data Not Found</td>
+                                        <td colspan="6">Data Not Found</td>
                                     </tr>
                                 @endif
                                 @foreach ($donations as $index => $donation)

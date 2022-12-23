@@ -164,6 +164,14 @@
               <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
                 <i class="far fa-file"></i>
                 <p>
+                  Input Data Pengeluaran
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
+                <i class="far fa-file"></i>
+                <p>
                   Laporan Pemasukan Pengeluaran
                 </p>
               </a>

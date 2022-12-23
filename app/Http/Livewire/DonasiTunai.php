@@ -105,5 +105,7 @@ class DonasiTunai extends Component
             'hajat' => $this->hajat,
             'tanggal_donasi' => $this->tanggal_donasi,
         ]);
+
+        return redirect()->to('data-donasi-dana')->with('message', 'Donasi berhasil ditambahkan');
     }
 }
