@@ -59,6 +59,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/pilih-jenis-donasi', [DonationController::class, 'pilih'])->name('pilih.jenis.donasi');
     Route::get('/donasi-tunai', [DonationController::class, 'donasiTunai'])->name('donasi.tunai');
 
+    Route::get('/pengeluaran', [DonationController::class, 'pengeluaran'])->name('pengeluaran');
+
     Route::group(['prefix' => 'pengaturan'], function () {
         Route::get('/satuan', [SettingController::class, 'unit'])->name('satuan');
     });

@@ -19,7 +19,7 @@ return new class extends Migration
         Schema::create('donations', function (Blueprint $table) {
             $table->uuid('id');
             $table->foreignUuid('donatur_id')->nullable()->onUpdate('cascade')->onDelete('set null');
-            $table->string('no');
+            $table->string('no')->nullable();
             $table->string('jenis_donasi')->nullable();
             $table->text('terbilang')->nullable();
             $table->integer('pemasukan')->nullable();

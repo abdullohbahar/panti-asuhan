@@ -161,7 +161,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
+              <a href="{{ route('pengeluaran') }}" class="nav-link {{ $active == 'pengeluaran' ? 'active' : '' }}">
                 <i class="far fa-file"></i>
                 <p>
                   Input Data Pengeluaran
