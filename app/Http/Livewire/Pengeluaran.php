@@ -59,6 +59,7 @@ class Pengeluaran extends Component
         Donation::create([
             'tanggal_donasi' => $this->tanggal_donasi,
             'pengeluaran' => $nominal,
+            'jenis_donasi' => 'pengeluaran',
             'keterangan' => $this->keterangan,
             'saldo' => $totalSaldo
         ]);

@@ -169,7 +169,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
+              <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="nav-link {{ $active == 'laporan' ? 'active' : '' }}">
                 <i class="far fa-file"></i>
                 <p>
                   Laporan Pemasukan Pengeluaran

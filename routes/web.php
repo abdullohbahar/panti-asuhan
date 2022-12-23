@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pengeluaran', [DonationController::class, 'pengeluaran'])->name('pengeluaran');
 
+    Route::get('/laporan-pemasukan-pengeluaran', [DonationController::class, 'laporan'])->name('laporan.pemasukan.pengeluaran');
+
     Route::group(['prefix' => 'pengaturan'], function () {
         Route::get('/satuan', [SettingController::class, 'unit'])->name('satuan');
     });
