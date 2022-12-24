@@ -28,13 +28,6 @@
                     <div class="col-8">
                         <h5><b>Laporan Pemasukan Pengeluaran</b></h5>
                     </div>
-                    <div class="col-4 text-right">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <a href="{{ route('donasi.tunai') }}" class="btn btn-primary btn-sm btn-block mb-2"><b><i class="fas fa-plus"></i> Donasi</b></a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="card-header">

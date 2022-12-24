@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('tipe')->nullable();
             $table->text('hajat')->nullable();
             $table->date('tanggal_donasi');
+            $table->integer('urutan')->autoIncrement();
             $table->timestamps();
         });
     }

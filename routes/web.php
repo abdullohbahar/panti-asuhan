@@ -10,6 +10,7 @@ use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\SettingController;
 use App\Http\Livewire\Donation;
+use App\Http\Livewire\Pengeluaran;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,6 +63,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/pengeluaran', [DonationController::class, 'pengeluaran'])->name('pengeluaran');
 
     Route::get('/laporan-pemasukan-pengeluaran', [DonationController::class, 'laporan'])->name('laporan.pemasukan.pengeluaran');
+    Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi', [Pengeluaran::class, 'print'])->name('cetak.laporan.pemasukan.pengeluaran.donasi');
+
 
     Route::group(['prefix' => 'pengaturan'], function () {
         Route::get('/satuan', [SettingController::class, 'unit'])->name('satuan');
