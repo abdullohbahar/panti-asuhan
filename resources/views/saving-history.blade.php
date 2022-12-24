@@ -137,7 +137,7 @@
   window.addEventListener('show-error', event => {
     Swal.fire({
       icon: 'error',
-      text: 'Maaf Anda Tidak Bisa Melakukan Pengambilan Karena Saldo Tidak Mencukupi!',
+      text: 'Saldo Saat Ini Tidak Mencukupi!',
     })
   })
 

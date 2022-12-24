@@ -7,12 +7,19 @@ use Livewire\Component;
 
 class Pengeluaran extends Component
 {
-    public $tanggal_donasi, $pengeluaran, $keterangan;
+    public $tanggal_donasi, $pengeluaran, $keterangan, $saldo;
 
 
     public function render()
     {
-        return view('livewire.pengeluaran');
+        $saldo = Donation::latest()->first();
+
+        $data = [
+            'saldo' => $saldo->saldo
+        ];
+
+        $this->saldo  = $saldo->saldo;
+        return view('livewire.pengeluaran', $data);
     }
 
     public function rules()
@@ -40,7 +47,7 @@ class Pengeluaran extends Component
 
     public function store()
     {
-        // $this->validate();
+        $this->validate();
 
         $removeChar = ['R', 'p', '.', ','];
 
@@ -49,6 +56,12 @@ class Pengeluaran extends Component
         $nominal = str_replace(' ', '', $nominal);
 
         $donation = Donation::latest()->first();
+
+        if ($nominal > $this->saldo) {
+            $this->dispatchBrowserEvent('show-error');
+
+            return false;
+        }
 
         if ($donation != null) {
             $totalSaldo = $donation->saldo - $nominal;

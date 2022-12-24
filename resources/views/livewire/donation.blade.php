@@ -122,7 +122,6 @@
         </div>
     </div>
   </section>
-  <!-- /.content -->
 </div>
 
 @push('component-scripts')

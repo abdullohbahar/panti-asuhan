@@ -111,6 +111,13 @@
     $("#modal-add-donatur").modal("show")
   })
 
+  window.addEventListener('show-error', event => {
+    Swal.fire({
+      icon: 'error',
+      text: 'Saldo Saat Ini Tidak Mencukupi!',
+    })
+  })
+
   window.addEventListener('close-modal', event => {
     // close modal
     $('#modal-add-donatur').modal('hide')

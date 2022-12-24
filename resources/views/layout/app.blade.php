@@ -160,21 +160,36 @@
                 </li> --}}
               </ul>
             </li>
-            <li class="nav-item">
-              <a href="{{ route('pengeluaran') }}" class="nav-link {{ $active == 'pengeluaran' ? 'active' : '' }}">
-                <i class="far fa-file"></i>
+            <li class="nav-item {{ $active == 'pengeluaran' || $active == 'laporan' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'penggunaan-dana' ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-file"></i>
                 <p>
-                  Input Data Pengeluaran
+                  Pemasukan & Pengeluaran
+                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="nav-link {{ $active == 'laporan' ? 'active' : '' }}">
-                <i class="far fa-file"></i>
-                <p>
-                  Laporan Pemasukan Pengeluaran
-                </p>
-              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('pengeluaran') }}" class="nav-link {{ $active == '/' ? 'active' : '' }}">
+                    <i class="nav-icon far fa-circle"></i>
+                    <p>
+                      Input Pemasukan
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('pengeluaran') }}" class="nav-link {{ $active == 'pengeluaran' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Input Pengeluaran</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="nav-link {{ $active == 'laporan' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Laporan</p>
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-item">
               <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
