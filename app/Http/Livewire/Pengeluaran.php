@@ -63,7 +63,7 @@ class Pengeluaran extends Component
 
         $nominal = str_replace(' ', '', $nominal);
 
-        $donation = Donation::latest()->first();
+        $donation = Donation::orderBy('urutan', 'desc')->first();
 
         if ($nominal > $this->saldo) {
             $this->dispatchBrowserEvent('show-error');

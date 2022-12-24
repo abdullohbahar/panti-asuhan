@@ -164,19 +164,11 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-file"></i>
                 <p>
-                  Pemasukan & Pengeluaran
+                  Pengeluaran
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{ route('pengeluaran') }}" class="nav-link {{ $active == '/' ? 'active' : '' }}">
-                    <i class="nav-icon far fa-circle"></i>
-                    <p>
-                      Input Pemasukan
-                    </p>
-                  </a>
-                </li>
                 <li class="nav-item">
                   <a href="{{ route('pengeluaran') }}" class="nav-link {{ $active == 'pengeluaran' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
@@ -186,7 +178,7 @@
                 <li class="nav-item">
                   <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="nav-link {{ $active == 'laporan' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Laporan</p>
+                    <p>Laporan Pemasukan & Pengeluaran</p>
                   </a>
                 </li>
               </ul>

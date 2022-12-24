@@ -59,11 +59,12 @@ class DonasiTunai extends Component
         $donation = Donation::orderBy('no', 'desc')->first();
         $goodsDonation = GoodsDonation::orderBy('no', 'desc')->first();
 
+        $donationSaldo = Donation::orderBy('urutan', 'desc')->first();
         // melakukan pengecekan apakah donasi kosong atau tidak
         // jika donasi tidak kosong maka total saldo = saldo + nominal
         // jika kosong maka total saldo = nominal
-        if ($donation != null) {
-            $totalSaldo = $donation->saldo + $nominal;
+        if ($donationSaldo != null) {
+            $totalSaldo = $donationSaldo->saldo + $nominal;
         } else {
             $totalSaldo = $nominal;
         }

@@ -29,7 +29,7 @@ Jenis Donasi
                         </a>
                     </div>
                     <div class="col-6">
-                        <a href="">
+                        <a href="{{ route('donasi.transfer') }}">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row text-center">

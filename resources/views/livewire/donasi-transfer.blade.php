@@ -51,26 +51,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-12 my-2">
-                            <h5>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" wire:model="tipe" id="Zakat" value="Zakat">
-                                    <label class="form-check-label" for="Zakat">Zakat</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" wire:model="tipe" id="Infaq" value="Infaq">
-                                    <label class="form-check-label" for="Infaq">Infaq</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" wire:model="tipe" id="Sodaqoh" value="Sodaqoh">
-                                    <label class="form-check-label" for="Sodaqoh">Sodaqoh</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" wire:model="tipe" id="Lain-lain" value="Lain-lain">
-                                    <label class="form-check-label" for="Lain-lain">Lain-lain</label>
-                                </div>
-                            </h5>
-                        </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label>Nominal</label>
@@ -93,11 +73,29 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Hajat</label>
-                                <textarea type="text" wire:model="hajat" class="form-control @error("hajat") is-invalid @enderror"></textarea>
-                                @error("hajat")
+                                <label>Bank</label>
+                                <select wire:model="bank" class="form-control" id="">
+                                    <option value="">-- Pilih Bank --</option>
+                                    <option value="BRI">BRI</option>
+                                    <option value="BPD">BPD</option>
+                                    <option value="BCA">BCA</option>
+                                    <option value="BNI">BNI</option>
+                                    <option value="MANDIRI">MANDIRI</option>
+                                </select>
+                                @error("bank")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Nomor Rekening</label>
+                                <input type="text" wire:model="norek" class="form-control @error("norek") is-invalid @enderror">
+                                @error("norek")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

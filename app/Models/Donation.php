@@ -24,6 +24,8 @@ class Donation extends Model
         'tanggal_donasi',
         'urutan',
         'no',
+        'norek',
+        'bank'
     ];
 
     public function donatur()
