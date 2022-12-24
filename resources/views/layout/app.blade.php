@@ -160,7 +160,7 @@
                 </li> --}}
               </ul>
             </li>
-            <li class="nav-item {{ $active == 'pengeluaran' || $active == 'laporan' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'penggunaan-dana' ? 'menu-open' : '' }}">
+            <li class="nav-item {{ $active == 'pengeluaran' || $active == 'laporan' ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-file"></i>
                 <p>
