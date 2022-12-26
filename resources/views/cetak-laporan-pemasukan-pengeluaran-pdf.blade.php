@@ -70,6 +70,10 @@
             margin: 5px;
         }
 
+        .font-12{
+            font-size: 13px;
+        }
+
         </style>
         <title>Laporan Keuangan</title>
 
@@ -91,7 +95,7 @@
                 </div>
             </div> --}}
             <div class="row text-center">
-                <div class="col-12">
+                <div class="col-12 font-12">
                     <h3>YAYASAN AL DZIKRO</h3>
                     <p> Manggung RT 07, Wukirsari, Imogiri, Bantul, Yogyakarta 55782, Telp: (0274)2810607</p>
                     <p> Keputusan Menteri Hukum dan HAM RI No. Nomor: AHU-4001. AH.01.02. Tahun 2008</p>
@@ -101,13 +105,13 @@
             </div>
             <div class="row justify-content-center mt-2">
                 <div class="col-12">
-                    <table border="1" style="width: 100%; margin-top: 20px">
+                    <table border="1" class="font-12" style="width: 100%; margin-top: 20px">
                         <tr>
-                            <th scope="row" style="width: 50px !important" class="text-center">NO</th>
-                            <th scope="row" class="text-center">TANGGAL</th>
-                            <th scope="row" class="text-center">URAIAN</th>
-                            <th scope="row" class="text-center">PEMASUKAN</th>
-                            <th scope="row" class="text-center">PENGELUARAN</th>
+                            <th style="width: 50px !important" class="text-center">NO</th>
+                            <th class="text-center">TANGGAL</th>
+                            <th class="text-center">URAIAN</th>
+                            <th class="text-center">PEMASUKAN</th>
+                            <th class="text-center">PENGELUARAN</th>
                         </tr>
                         <?php $no = 1; ?>
                         @foreach ($donations as $donation)
@@ -117,24 +121,22 @@
                                 <td class="p-1">{{ $donation->keterangan }}</td>
                                 <td data-label="Pemasukan" class="text-right">
                                     @if ($donation->pemasukan)
-                                        <div class="rp">
+                                        <div class="rp p-1">
                                             Rp
                                         </div>
-                                        <div class="angka">
+                                        <div class="angka p-1">
                                             {{ number_format($donation->pemasukan, 0, '', '.'); }}
                                         </div>
                                     @endif
                                 </td>
                                 <td data-label="Pengeluaran" class="text-right">
                                     @if ($donation->pengeluaran)
-                                    <div class="p-1">
-                                        <div class="rp">
+                                        <div class="rp p-1">
                                             Rp
                                         </div>
-                                        <div class="angka">
+                                        <div class="angka p-1">
                                             {{ number_format($donation->pengeluaran, 0, '', '.'); }}
                                         </div>
-                                    </div>
                                     @endif
                                 </td>
                             </tr>

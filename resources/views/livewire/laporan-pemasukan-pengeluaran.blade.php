@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <a wire:click="printPDFLaporan" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
+                            <a href="{{ route('cetak.laporan.pemasukan.pengeluaran.donasi') }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
                         </div>
                     </div>
                 </div>
