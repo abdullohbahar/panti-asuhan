@@ -58,16 +58,6 @@ class DonasiTransfer extends Component
         $donation = Donation::orderBy('no', 'desc')->first();
         $goodsDonation = GoodsDonation::orderBy('no', 'desc')->first();
 
-        $donationSaldo = Donation::orderBy('urutan', 'desc')->first();
-        // melakukan pengecekan apakah donasi kosong atau tidak
-        // jika donasi tidak kosong maka total saldo = saldo + nominal
-        // jika kosong maka total saldo = nominal
-        if ($donationSaldo != null) {
-            $totalSaldo = $donationSaldo->saldo + $nominal;
-        } else {
-            $totalSaldo = $nominal;
-        }
-
         // Melakukan pengecekan untuk penomoran
         // jika donasi not null dan donasi barang null maka nomor urut diambil dari tabel donasi
         if ($donation && $goodsDonation == null) {
@@ -98,7 +88,6 @@ class DonasiTransfer extends Component
             'jenis_donasi' => 'Transfer',
             'terbilang' => $this->terbilang,
             'pemasukan' => $nominal,
-            'saldo' => $totalSaldo,
             'keterangan' => $this->keterangan,
             'tanggal_donasi' => $this->tanggal_donasi,
             'bank' => $this->bank,

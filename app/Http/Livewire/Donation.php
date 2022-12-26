@@ -29,7 +29,7 @@ class Donation extends Component
 
         $donaturs = Donatur::orderBy('nama', 'asc')->get();
 
-        $query = ModelsDonation::where('jenis_donasi', "tunai")->whereHas('donatur', function ($q) use ($search) {
+        $query = ModelsDonation::where('jenis_donasi', "tunai")->orWhere('jenis_donasi', 'transfer')->whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%');
         })->when($this->date1, function ($query) use ($date1, $date2) {
             $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
@@ -154,46 +154,5 @@ class Donation extends Component
     public function search()
     {
         $this->resetPage();
-    }
-
-    public function print()
-    {
-        $search = '';
-        $date1 = '';
-        $date2 = '';
-        $filterDonaturId = '';
-
-        $query = ModelsDonation::where('donation_type_id', "Dana")->whereHas('donatur', function ($q) use ($search) {
-            $q->where('nama', 'like', '%' . $this->search . '%');
-        })->when($this->date1, function ($query) use ($date1, $date2) {
-            $query->whereBetween('tanggal_sumbangan', [$this->date1, $this->date2]);
-        })->when($this->filterDonaturId, function ($query) use ($filterDonaturId) {
-            $query->whereHas('donatur', function ($query) use ($filterDonaturId) {
-                $query->where('id', $this->filterDonaturId);
-            });
-        });
-
-        $donations = $query->get();
-
-        $total = $query->sum('pemasukan');
-
-
-        $data = [
-            'donations' => $donations,
-            'total' => $total
-        ];
-
-        // dd($data);
-
-        // return view('cetak-donasi-dana', $data);
-
-        $pdf = PDF::loadView('cetak-donasi-dana', $data);
-
-        return $pdf->download('Laporan Donasi.pdf');
-    }
-
-    public function exportExcel()
-    {
-        return (new DonationExport)->download('Laporan Donasi.xlsx');
     }
 }

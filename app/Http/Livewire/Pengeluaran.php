@@ -14,28 +14,22 @@ class Pengeluaran extends Component
 
     public function render()
     {
-        $date = Carbon::now();
+        $now = Carbon::now();
+        $month = $now->month;
+        $year = $now->year;
 
-        $monthName = $date->format('F');
+        $query = Donation::whereMonth('tanggal_donasi', $month)->whereYear('tanggal_donasi', $year);
 
-        $pemasukan = Donation::where('tanggal_donasi', 'desc')->first();
-        $pengeluaran = Donation::where('tanggal_donasi', 'desc')->first();
+        $pemasukan = $query->sum('pemasukan');
+        $pengeluaran = $query->sum('pengeluaran');
 
-        $saldo = $pemasukan;
+        $saldo = $pemasukan - $pengeluaran;
 
-        dd($date);
+        $this->saldo = $saldo;
 
-        if ($saldo) {
-            $data = [
-                'saldo' => $saldo->saldo
-            ];
-            $this->saldo  = $saldo->saldo;
-        } else {
-            $data = [
-                'saldo' => 0
-            ];
-            $this->saldo  = 0;
-        }
+        $data = [
+            'totalSaldo' => $saldo,
+        ];
 
         return view('livewire.pengeluaran', $data);
     }

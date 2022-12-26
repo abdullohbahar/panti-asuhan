@@ -28,13 +28,6 @@
                     <div class="col-8">
                         <h5><b>Donasi Berupa Dana</b></h5>
                     </div>
-                    <div class="col-4 text-right">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <a href="{{ route('donasi.tunai') }}" class="btn btn-primary btn-sm btn-block mb-2"><b><i class="fas fa-plus"></i> Donasi</b></a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="card-header">
@@ -82,9 +75,8 @@
                                 <tr>
                                     <th scope="col" style="width: 20px">#</th>
                                     <th scope="col">Nama Donatur</th>
+                                    <th scope="col">Jenis</th>
                                     <th scope="col">Nominal</th>
-                                    <th scope="col">Hajat</th>
-                                    <th scope="col">Keterangan</th>
                                     <th scope="col">Tanggal Donasi</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -99,14 +91,13 @@
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Nama Donatur">{{ $donation->donatur->nama }}</td>
+                                        <td data-label="JENIS">{{ $donation->jenis_donasi }}</td>
                                         <td data-label="Nominal">{{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}</td>
-                                        <td data-label="Hajat">{{ $donation->hajat }}</td>
-                                        <td data-label="Keterangan">{{ $donation->keterangan }}</td>
                                         <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
                                         <td data-label="Aksi">
                                             <button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fab fa-whatsapp"></i></button>
                                             {{-- <button wire:click="show('{{ $donation->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-print"></i></button> --}}
-                                            <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                            <button id="edit" wire:click="show('{{ $donation->id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
                                             {{-- <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button> --}}
                                         </td>
                                     </tr>
@@ -168,6 +159,13 @@
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
+
+        $("body").on("click", "#edit", function(){
+            var jenis = $(this).data("jenis");
+            if(jenis == "Transfer"){
+                
+            }
+        })
 
     </script>
 @endpush

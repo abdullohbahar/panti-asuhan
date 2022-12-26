@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile-pengurus/{id}', [PengurusController::class, 'show'])->name('profile.pengurus');
     Route::get('/edit-pengurus/{id}', [PengurusController::class, 'edit'])->name('edit.pengurus');
 
-    Route::get('/pilih-jenis-donasi', [DonationController::class, 'pilih'])->name('pilih.jenis.donasi');
+    // Route::get('/pilih-jenis-donasi', [DonationController::class, 'pilih'])->name('pilih.jenis.donasi');
     Route::get('/donasi-tunai', [DonationController::class, 'donasiTunai'])->name('donasi.tunai');
     Route::get('/donasi-transfer', [DonationController::class, 'donasiTransfer'])->name('donasi.transfer');
 

@@ -11,7 +11,7 @@ class DonationController extends Controller
     public function index()
     {
         $data = [
-            'active' => 'donasi',
+            'active' => 'data-donasi',
         ];
 
         return view('donation', $data);
@@ -66,7 +66,7 @@ class DonationController extends Controller
     public function donasiTransfer()
     {
         $data = [
-            'active' => 'donasi',
+            'active' => 'donasi-transfer',
         ];
 
         return view('donasi-transfer', $data);

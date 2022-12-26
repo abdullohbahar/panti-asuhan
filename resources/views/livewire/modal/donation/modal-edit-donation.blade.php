@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ubah Donatur</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ubah Donasi</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -14,7 +14,7 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Nama Donatur</label>
-                <select name="donatur_id" wire:model="donatur_id" style="width: 100%" class="form-control select2 @error('donatur_id') is-invalid @enderror" disabled>
+                <select name="donatur_id" wire:model="donatur_id" style="width: 100%" class="form-control select2 @error('donatur_id') is-invalid @enderror">
                   <option>-- Pilih Donatur --</option>
                   @foreach ($donaturs as $donatur)
                       <option value="{{ $donatur->id }}">{{ $donatur->nama }}</option>
@@ -30,7 +30,7 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Nominal</label>
-                <input type="text" wire:model="pemasukan" class="form-control @error('pemasukan') is-invalid @enderror" id="nominal2" placeholder="Nominal" autofocus disabled>
+                <input type="text" wire:model="pemasukan" class="form-control @error('pemasukan') is-invalid @enderror" id="nominal2" placeholder="Nominal" autofocus>
                 @error('pemasukan')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -41,7 +41,7 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Tanggal Donasi</label>
-                <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror" disabled>
+                <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror">
                 @error('tanggal_donasi')
                   <div class="invalid-feedback">
                     {{ $message }}
