@@ -24,7 +24,6 @@ return new class extends Migration
             $table->text('terbilang')->nullable();
             $table->integer('pemasukan')->nullable();
             $table->integer('pengeluaran')->nullable();
-            $table->integer('saldo');
             $table->text('keterangan')->nullable();
             $table->string('tipe')->nullable();
             $table->text('hajat')->nullable();

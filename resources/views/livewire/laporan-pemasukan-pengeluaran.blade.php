@@ -49,60 +49,76 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <a href="{{ route('donation') }}" class="btn btn-warning btn-block">Reset Filter</a>
+                            <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="btn btn-warning btn-block">Reset Filter</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                        <div class="form-group">
+                            <a href="{{ route('cetak.laporan.pemasukan.pengeluaran.donasi') }}" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                        <div class="form-group">
+                            <a wire:click="printPDFLaporan" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="row justify-content-end">
-                    <div class="col-0 mr-2">
-                        <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Nama Donatur">
-                    </div>
-                    <div class="col-12 mt-2">
-                        <table class="table-data">
-                            <thead>
-                                <tr>
-                                    <th scope="col" style="width: 20px">#</th>
-                                    <th scope="col">Tanggal</th>
-                                    <th scope="col">Uraian</th>
-                                    <th scope="col">Pemasukan</th>
-                                    <th scope="col">Pengeluaran</th>
-                                    <th scope="col">Saldo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if ($count == 0)
+            @if ($date)
+                <div class="card-body">
+                    <div class="row justify-content-end">
+                        <div class="col-12 mt-2">
+                            <table class="table-data">
+                                <thead>
                                     <tr>
-                                        <td colspan="6">Data Not Found</td>
+                                        <th scope="col" style="width: 20px">#</th>
+                                        <th scope="col">Tanggal</th>
+                                        <th scope="col">Uraian</th>
+                                        <th scope="col">Pemasukan</th>
+                                        <th scope="col">Pengeluaran</th>
                                     </tr>
-                                @endif
-                                @foreach ($donations as $index => $donation)
-                                    <tr>
-                                        <td data-label="#">{{ $donations->firstItem() + $index }}</td>
-                                        <td data-label="Tanggal">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
-                                        <td data-label="Uraian">{{ $donation->keterangan }}</td>
-                                        <td data-label="Pemasukan">
-                                            @if ($donation->pemasukan)
-                                                {{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}
-                                            @endif
+                                </thead>
+                                <tbody>
+                                    @if ($count == 0)
+                                        <tr>
+                                            <td colspan="5">Data Not Found</td>
+                                        </tr>
+                                    @endif
+                                    <?php 
+                                    $no = 1; ?>
+                                    @foreach ($donations as $index => $donation)
+                                        <tr>
+                                            <td data-label="#">{{ $no++ }}</td>
+                                            <td data-label="Tanggal">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
+                                            <td data-label="Uraian">{{ $donation->keterangan }}</td>
+                                            <td data-label="Pemasukan">
+                                                @if ($donation->pemasukan)
+                                                    {{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}
+                                                @endif
+                                            </td>
+                                            <td data-label="Pengeluaran">
+                                                @if ($donation->pengeluaran)
+                                                    {{ "Rp " . number_format($donation->pengeluaran, 2, ',', '.'); }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <tr style="background: #48cbe0">
+                                        <td colspan="3" class="text-right">
+                                            <b>Saldo Akhir</b>
                                         </td>
-                                        <td data-label="Pengeluaran">
-                                            @if ($donation->pengeluaran)
-                                                {{ "Rp " . number_format($donation->pengeluaran, 2, ',', '.'); }}
-                                            @endif
+                                        <td colspan="2">
+                                            <b>
+                                                {{ "Rp " . number_format($pemasukan - $pengeluaran, 2, ',', '.'); }}
+                                            </b>
                                         </td>
-                                        <td data-label="Saldo">{{ "Rp " . number_format($donation->saldo, 2, ',', '.'); }}</td>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                {{ $donations->links() }}
-            </div>
+            @endif
         </div>
     </div>
   </section>
@@ -116,11 +132,6 @@
 
             $("body").on("change", "select[name='donatur_id']", function(){
                 @this.donatur_id = $(this).val()
-            })
-
-            $("body").on("click","#search", () => {
-                var donatur = $("#donaturs").val();
-                @this.filterDonaturId = donatur
             })
 
             Livewire.hook('message.processed', (message, component) => {

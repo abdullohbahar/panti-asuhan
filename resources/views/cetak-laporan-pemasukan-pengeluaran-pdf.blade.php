@@ -21,12 +21,16 @@
                 color:white;
             }
 
+            .rp {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
         }
 
-        .rp {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        body{
+            font-family:Arial, Helvetica, sans-serif !important;
         }
 
         .bg-color{
@@ -37,6 +41,35 @@
         .text-center{
             text-align: center;
         }
+
+        .text-right{
+            text-align: right !important;
+        }
+
+        table{
+            border-collapse: collapse;
+        }
+
+        .p-1{
+            padding: 0.25rem!important;
+        }
+
+        .rp {
+            float: left;
+            text-align: left;
+            direction: ltr;
+        }
+
+        .angka {
+            float: right;
+            text-align: right;
+            direction: rtl;
+        }
+
+        p{
+            margin: 5px;
+        }
+
         </style>
         <title>Laporan Keuangan</title>
 
@@ -45,7 +78,7 @@
     </head>
     <body>
         <div class="container-fluid mt-3">
-            <div class="row justify-content-between">
+            {{-- <div class="row justify-content-between">
                 <div class="col-1">
                     <a href="{{ url()->previous() }}" class="btn btn-warning no-print">
                         Back
@@ -56,26 +89,25 @@
                         Cetak PDF
                     </button>
                 </div>
-            </div>
+            </div> --}}
             <div class="row text-center">
                 <div class="col-12">
                     <h3>YAYASAN AL DZIKRO</h3>
-                    <h6> Manggung RT 07, Wukirsari, Imogiri, Bantul, Yogyakarta 55782, Telp: (0274)2810607</h6>
-                    <h6> Keputusan Menteri Hukum dan HAM RI No. Nomor: AHU-4001. AH.01.02. Tahun 2008</h6>
-                    <h6> Keputusan Kepala BKPM DIY No: 223/323/GR.I/2015 Tentang Ijin Operasional</h6>
-                    <h6 class="bg-color">Kelompok Sasaran: Anak Yatim, Piatu, Yatim Piatu, Masyarakat dan Orang Jompo</h6>
+                    <p> Manggung RT 07, Wukirsari, Imogiri, Bantul, Yogyakarta 55782, Telp: (0274)2810607</p>
+                    <p> Keputusan Menteri Hukum dan HAM RI No. Nomor: AHU-4001. AH.01.02. Tahun 2008</p>
+                    <p> Keputusan Kepala BKPM DIY No: 223/323/GR.I/2015 Tentang Ijin Operasional</p>
+                    <p class="bg-color">Kelompok Sasaran: Anak Yatim, Piatu, Yatim Piatu, Masyarakat dan Orang Jompo</p>
                 </div>
             </div>
             <div class="row justify-content-center mt-2">
                 <div class="col-12">
-                    <table border="1" style="width: 100%">
+                    <table border="1" style="width: 100%; margin-top: 20px">
                         <tr>
                             <th scope="row" style="width: 50px !important" class="text-center">NO</th>
                             <th scope="row" class="text-center">TANGGAL</th>
                             <th scope="row" class="text-center">URAIAN</th>
                             <th scope="row" class="text-center">PEMASUKAN</th>
                             <th scope="row" class="text-center">PENGELUARAN</th>
-                            <th scope="row" class="text-center">SALDO</th>
                         </tr>
                         <?php $no = 1; ?>
                         @foreach ($donations as $donation)
@@ -83,73 +115,38 @@
                                 <td data-label="#" class="text-center">{{ $no++ }}</td>
                                 <td data-label="Tanggal" class="text-center">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
                                 <td class="p-1">{{ $donation->keterangan }}</td>
-                                <td data-label="Pemasukan">
+                                <td data-label="Pemasukan" class="text-right">
                                     @if ($donation->pemasukan)
-                                        <div class="rp p-1">
-                                            <div>
-                                                Rp
-                                            </div>
-                                            <div>
-                                                {{ number_format($donation->pemasukan, 0, '', '.'); }}
-                                            </div>
+                                        <div class="rp">
+                                            Rp
+                                        </div>
+                                        <div class="angka">
+                                            {{ number_format($donation->pemasukan, 0, '', '.'); }}
                                         </div>
                                     @endif
                                 </td>
-                                <td data-label="Pengeluaran">
+                                <td data-label="Pengeluaran" class="text-right">
                                     @if ($donation->pengeluaran)
-                                    <div class="rp p-1">
-                                        <div>
+                                    <div class="p-1">
+                                        <div class="rp">
                                             Rp
                                         </div>
-                                        <div>
+                                        <div class="angka">
                                             {{ number_format($donation->pengeluaran, 0, '', '.'); }}
                                         </div>
                                     </div>
                                     @endif
                                 </td>
-                                <td data-label="Saldo">
-                                    <div class="rp p-1">
-                                        <div>
-                                            Rp
-                                        </div>
-                                        <div>
-                                            {{ number_format($donation->saldo, 0, '', '.'); }}
-                                        </div>
-                                    </div>
-                                </td>
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="3" class="text-right">
-                                <b>TOTAL</b>
+                            <td colspan="3" class="text-right p-1">
+                                <b>Saldo Akhir</b>
                             </td>
-                            <td>
-                                <div class="rp p-1">
+                            <td colspan="2">
+                                <div class="p-1">
                                     <div>
-                                        Rp
-                                    </div>
-                                    <div>
-                                        {{ number_format($pemasukan, 0, '', '.'); }}
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="rp p-1">
-                                    <div>
-                                        Rp
-                                    </div>
-                                    <div>
-                                        {{ number_format($pengeluaran, 0, '', '.'); }}
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="rp p-1">
-                                    <div>
-                                        Rp
-                                    </div>
-                                    <div>
-                                        {{ number_format($saldo->saldo, 0, '', '.'); }}
+                                        Rp {{ number_format($pemasukan - $pengeluaran, 0, '', '.'); }}
                                     </div>
                                 </div>
                             </td>

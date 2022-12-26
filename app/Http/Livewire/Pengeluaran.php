@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Donation;
-use Livewire\Component;
 use PDF;
+use Carbon\Carbon;
+use Livewire\Component;
+use App\Models\Donation;
 
 class Pengeluaran extends Component
 {
@@ -13,7 +14,16 @@ class Pengeluaran extends Component
 
     public function render()
     {
-        $saldo = Donation::orderBy('urutan', 'desc')->first();
+        $date = Carbon::now();
+
+        $monthName = $date->format('F');
+
+        $pemasukan = Donation::where('tanggal_donasi', 'desc')->first();
+        $pengeluaran = Donation::where('tanggal_donasi', 'desc')->first();
+
+        $saldo = $pemasukan;
+
+        dd($date);
 
         if ($saldo) {
             $data = [
@@ -67,14 +77,7 @@ class Pengeluaran extends Component
 
         if ($nominal > $this->saldo) {
             $this->dispatchBrowserEvent('show-error');
-
             return false;
-        }
-
-        if ($donation != null) {
-            $totalSaldo = $donation->saldo - $nominal;
-        } else {
-            $totalSaldo = $nominal;
         }
 
         Donation::create([
@@ -82,7 +85,6 @@ class Pengeluaran extends Component
             'pengeluaran' => $nominal,
             'jenis_donasi' => 'pengeluaran',
             'keterangan' => $this->keterangan,
-            'saldo' => $totalSaldo
         ]);
     }
 

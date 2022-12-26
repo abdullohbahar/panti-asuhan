@@ -2,17 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\TotalDanaDonation;
-use App\Models\Donation;
 use App\Models\Donatur;
 use Livewire\Component;
+use App\Models\Donation;
+use PDF;
 use Livewire\WithPagination;
+use App\Models\TotalDanaDonation;
 
 class LaporanPemasukanPengeluaran extends Component
 {
-    public $donation_id, $donatur_id, $pemasukan, $tanggal_sumbangan, $keterangan, $search, $date1, $date2, $filterDonaturId;
-    public $donation_type_id = "Dana";
-    protected $listeners = ['deleteConfirmed' => 'destroy'];
+    public $search, $date1, $date2;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -21,25 +20,54 @@ class LaporanPemasukanPengeluaran extends Component
         $search = '';
         $date1 = '';
         $date2 = '';
-        $filterDonaturId = '';
 
-        $query = Donation::where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')
-            ->when($this->date1, function ($query) use ($date1, $date2) {
-                $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
-            })->when($this->filterDonaturId, function ($query) use ($filterDonaturId) {
-                $query->whereHas('donatur', function ($query) use ($filterDonaturId) {
-                    $query->where('id', $this->filterDonaturId);
-                });
-            });
+        $query = Donation::when($this->date1, function ($query) use ($date1, $date2) {
+            $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
+        })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer');
 
-        $donations = $query->paginate(10);
+        $donations = $query->get();
         $count = $donations->count();
 
         $data = [
             'donations' => $donations,
             'count' => $count,
+            'date' => $this->date1,
+            'pemasukan' => $query->sum('pemasukan'),
+            'pengeluaran' => $query->sum('pengeluaran'),
         ];
 
         return view('livewire.laporan-pemasukan-pengeluaran', $data);
+    }
+
+    public function search()
+    {
+        $this->resetPage();
+    }
+
+    public function printPDFLaporan()
+    {
+        $search = '';
+        $date1 = '';
+        $date2 = '';
+
+        $query = Donation::when($this->date1, function ($query) use ($date1, $date2) {
+            $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
+        })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer');
+
+        $data = [
+            'donations' => $query->get(),
+            'pemasukan' => $query->sum('pemasukan'),
+            'pengeluaran' => $query->sum('pengeluaran'),
+        ];
+
+        // dd($data);
+
+        // return view('cetak-laporan-pemasukan-pengeluaran-pdf', $data);
+
+        $pdf = PDF::loadView('cetak-laporan-pemasukan-pengeluaran-pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('LAPORAN KEUANGAN.pdf');
     }
 }
