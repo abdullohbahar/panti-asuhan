@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/laporan-pemasukan-pengeluaran', [DonationController::class, 'laporan'])->name('laporan.pemasukan.pengeluaran');
     // Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi', [Pengeluaran::class, 'print'])->name('cetak.laporan.pemasukan.pengeluaran.donasi');
 
-    Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi', [LaporanPemasukanPengeluaran::class, 'printPDFLaporan'])->name('cetak.laporan.pemasukan.pengeluaran.donasi');
+    Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'printPDFLaporan'])->name('cetak.laporan.pemasukan.pengeluaran.donasi');
 
 
     Route::group(['prefix' => 'pengaturan'], function () {

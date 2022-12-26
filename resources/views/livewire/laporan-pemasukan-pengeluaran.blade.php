@@ -54,17 +54,21 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <a href="{{ route('cetak.laporan.pemasukan.pengeluaran.donasi') }}" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
+                            <a href="#" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <a href="{{ route('cetak.laporan.pemasukan.pengeluaran.donasi') }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
+                            @if ($date1)
+                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi/'.$date1.'/'.$date2) }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
+                            @else
+                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi/0/0') }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
-            @if ($date)
+            @if ($date1)
                 <div class="card-body">
                     <div class="row justify-content-end">
                         <div class="col-12 mt-2">

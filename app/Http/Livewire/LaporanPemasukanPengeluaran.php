@@ -31,7 +31,8 @@ class LaporanPemasukanPengeluaran extends Component
         $data = [
             'donations' => $donations,
             'count' => $count,
-            'date' => $this->date1,
+            'date1' => $this->date1,
+            'date2' => $this->date2,
             'pemasukan' => $query->sum('pemasukan'),
             'pengeluaran' => $query->sum('pengeluaran'),
         ];
@@ -44,14 +45,10 @@ class LaporanPemasukanPengeluaran extends Component
         $this->resetPage();
     }
 
-    public function printPDFLaporan()
+    public function printPDFLaporan($date1, $date2)
     {
-        $search = '';
-        $date1 = '';
-        $date2 = '';
-
-        $query = Donation::when($this->date1, function ($query) use ($date1, $date2) {
-            $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
+        $query = Donation::when($date1 != 0, function ($query) use ($date1, $date2) {
+            $query->whereBetween('tanggal_donasi', [$date1, $date2]);
         })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer');
 
         $data = [
@@ -59,6 +56,7 @@ class LaporanPemasukanPengeluaran extends Component
             'pemasukan' => $query->sum('pemasukan'),
             'pengeluaran' => $query->sum('pengeluaran'),
         ];
+
 
         // dd($data);
 
