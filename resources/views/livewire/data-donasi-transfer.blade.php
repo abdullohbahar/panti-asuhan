@@ -1,5 +1,6 @@
 <div>
     {{-- Modal --}}
+    @include('livewire.modal.donation.modal-add-donation-money')
     @include('livewire.modal.donation.modal-edit-donation')
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -80,6 +81,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr wire:loading>
+                                    <td colspan="5">Loading....</td>
+                                </tr>
                                 @if ($count == 0)
                                     <tr>
                                         <td colspan="5">Data Not Found</td>
@@ -95,7 +99,7 @@
                                             <button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fab fa-whatsapp"></i></button>
                                             {{-- <button wire:click="show('{{ $donation->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-print"></i></button> --}}
                                             <button id="edit" wire:click="show('{{ $donation->id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
+                                            {{-- <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button> --}}
                                         </td>
                                     </tr>
                                 @endforeach

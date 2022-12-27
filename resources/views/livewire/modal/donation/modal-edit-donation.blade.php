@@ -27,6 +27,37 @@
                 @enderror
               </div>
             </div>
+            <div class="col-12 my-2">
+              <h5>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" wire:model="tipe" id="Zakat" value="Zakat">
+                    <label class="form-check-label" for="Zakat">Zakat</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" wire:model="tipe" id="Infaq" value="Infaq">
+                    <label class="form-check-label" for="Infaq">Infaq</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" wire:model="tipe" id="Sodaqoh" value="Sodaqoh">
+                    <label class="form-check-label" for="Sodaqoh">Sodaqoh</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" wire:model="tipe" id="Lain-lain" value="Lain-lain">
+                    <label class="form-check-label" for="Lain-lain">Lain-lain</label>
+                </div>
+              </h5>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="">Tanggal Donasi</label>
+                <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror">
+                @error('tanggal_donasi')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+            </div>
             <div class="col-12">
               <div class="form-group">
                 <label for="">Nominal</label>
@@ -40,9 +71,9 @@
             </div>
             <div class="col-12">
               <div class="form-group">
-                <label for="">Tanggal Donasi</label>
-                <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror">
-                @error('tanggal_donasi')
+                <label for="">Terbilang</label>
+                <input type="text" wire:model="terbilang" class="form-control @error('terbilang') is-invalid @enderror" id="nominal2" placeholder="Nominal" autofocus>
+                @error('terbilang')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>

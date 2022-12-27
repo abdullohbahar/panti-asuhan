@@ -11,7 +11,7 @@ class DonationController extends Controller
     public function index()
     {
         $data = [
-            'active' => 'data-donasi',
+            'active' => 'data-donasi-tunai',
         ];
 
         return view('donation', $data);

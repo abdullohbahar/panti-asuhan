@@ -13,7 +13,7 @@ use PDF;
 
 class Donation extends Component
 {
-    public $donation_id, $donatur_id, $pemasukan, $tanggal_sumbangan, $keterangan, $search, $date1, $date2, $filterDonaturId;
+    public $donation_id, $donatur_id, $pemasukan, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $tipe, $terbilang;
     public $donation_type_id = "Dana";
     protected $listeners = ['deleteConfirmed' => 'destroy'];
     use WithPagination;
@@ -29,7 +29,7 @@ class Donation extends Component
 
         $donaturs = Donatur::orderBy('nama', 'asc')->get();
 
-        $query = ModelsDonation::where('jenis_donasi', "tunai")->orWhere('jenis_donasi', 'transfer')->whereHas('donatur', function ($q) use ($search) {
+        $query = ModelsDonation::where('jenis_donasi', "tunai")->whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%');
         })->when($this->date1, function ($query) use ($date1, $date2) {
             $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
@@ -39,7 +39,7 @@ class Donation extends Component
             });
         });
 
-        $donations = $query->paginate(10);
+        $donations = $query->orderBy('tanggal_donasi', 'asc')->paginate(10);
         $count = $donations->count();
         $totalDonation = TotalDanaDonation::first();
 
@@ -58,7 +58,7 @@ class Donation extends Component
         return [
             'donatur_id' => 'required',
             'pemasukan' => 'required',
-            'tanggal_sumbangan' => 'required',
+            'tanggal_donasi' => 'required',
             'keterangan' => ''
         ];
     }
@@ -68,7 +68,7 @@ class Donation extends Component
         return [
             'pemasukan.required' => 'Nominal harus diisi',
             'donatur_id.required' => 'Donatur harus diisi',
-            'tanggal_sumbangan' => 'Tanggal harus diisi',
+            'tanggal_donasi' => 'Tanggal harus diisi',
             'hajat' => 'Hajat harus diisi',
         ];
     }
@@ -96,8 +96,10 @@ class Donation extends Component
             $this->donatur_id = $donation->donatur_id;
             $this->pemasukan = "Rp. " . number_format($donation->pemasukan, 0, '', '.');
             $this->tanggal_donasi = $donation->tanggal_donasi;
+            $this->terbilang = $donation->terbilang;
             $this->hajat = $donation->hajat;
             $this->keterangan = $donation->keterangan;
+            $this->tipe = $donation->tipe;
         }
     }
 
@@ -105,9 +107,6 @@ class Donation extends Component
     {
         // Validate Data
         $validateData = $this->validate();
-
-        // Ambil pemasukan donasi berdasarkan id
-        $pemasukanDonation = ModelsDonation::where('id', $this->donation_id)->get('pemasukan');
 
         // hapus character
         $removeChar = ['R', 'p', '.', ','];
@@ -117,24 +116,13 @@ class Donation extends Component
         ModelsDonation::where('id', $this->donation_id)->update([
             'donatur_id' => $this->donatur_id,
             'pemasukan' => $pemasukan,
-            'tanggal_sumbangan' => $this->tanggal_sumbangan,
+            'tanggal_donasi' => $this->tanggal_donasi,
             'keterangan' => $this->keterangan,
+            'hajat' => $this->hajat,
+            'tipe' => $this->tipe,
+            'terbilang' => $this->terbilang,
         ]);
 
-        // Ambil total donas
-        $queryTotal = TotalDanaDonation::where('id', 1);
-        $getTotal = $queryTotal->get();
-
-        // kurangi total donasi yang ada dengan pemasukan donasi berdasarkan id sebelum diubah
-        $countTotal = $getTotal[0]->total - $pemasukanDonation[0]->pemasukan;
-
-        // tambah total donasi dengan pemasukan donasi berdasarkan id setelah diubah 
-        $total = $countTotal + $pemasukan;
-
-        // Update total donasi
-        $updateTotal = $queryTotal->update([
-            'total' => $total
-        ]);
 
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
     }
