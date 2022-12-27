@@ -54,7 +54,11 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <a href="#" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
+                            @if ($date1)
+                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi-excel/'.$date1.'/'.$date2) }}" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
+                            @else
+                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi-excel/0/0') }}" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
+                            @endif
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
@@ -75,7 +79,7 @@
                             <table class="table-data">
                                 <thead>
                                     <tr>
-                                        <th scope="col" style="width: 20px">#</th>
+                                        <th scope="col">#</th>
                                         <th scope="col">Tanggal</th>
                                         <th scope="col">Uraian</th>
                                         <th scope="col">Pemasukan</th>

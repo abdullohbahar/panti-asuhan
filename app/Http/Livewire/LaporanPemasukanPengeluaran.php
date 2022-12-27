@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\LaporanPemasukanPengeluaranExport;
 use App\Models\Donatur;
 use Livewire\Component;
 use App\Models\Donation;
 use PDF;
 use Livewire\WithPagination;
 use App\Models\TotalDanaDonation;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class LaporanPemasukanPengeluaran extends Component
 {
@@ -23,7 +26,7 @@ class LaporanPemasukanPengeluaran extends Component
 
         $query = Donation::when($this->date1, function ($query) use ($date1, $date2) {
             $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
-        })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer');
+        })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer')->orderBy('tanggal_donasi', 'asc');
 
         $donations = $query->get();
         $count = $donations->count();
@@ -66,6 +69,12 @@ class LaporanPemasukanPengeluaran extends Component
         $pdf->setPaper('F4', 'potrait');
         $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
 
+
         return $pdf->download('LAPORAN KEUANGAN.pdf');
+    }
+
+    public function exportExcel($date1, $date2)
+    {
+        return Excel::download(new LaporanPemasukanPengeluaranExport($date1, $date2), 'Laporan Keuangan.xlsx');
     }
 }

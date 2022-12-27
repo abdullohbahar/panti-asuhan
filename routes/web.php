@@ -9,6 +9,7 @@ use App\Http\Controllers\DonaturController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\SettingController;
+use App\Http\Livewire\DonasiTunai;
 use App\Http\Livewire\Donation;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
 use App\Http\Livewire\Pengeluaran;
@@ -68,9 +69,12 @@ Route::middleware('auth')->group(function () {
     // Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi', [Pengeluaran::class, 'print'])->name('cetak.laporan.pemasukan.pengeluaran.donasi');
 
     Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'printPDFLaporan'])->name('cetak.laporan.pemasukan.pengeluaran.donasi');
+    Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-excel/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'exportExcel'])->name('export.excel.laporan');
 
 
     Route::group(['prefix' => 'pengaturan'], function () {
         Route::get('/satuan', [SettingController::class, 'unit'])->name('satuan');
     });
 });
+
+Route::get('/send', [DonasiTunai::class, 'sendWa']);
