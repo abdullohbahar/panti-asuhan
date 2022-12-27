@@ -147,16 +147,89 @@
 
                 </div>
                 <h3>TANDA TERIMA</h3>
-                <h4 style="margin: 0px">No : 00001 / Al-Dzikro /......./.......</h4>
-                <input type="checkbox" id="Zakat" checked><label for="Zakat">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" class="check" id="Infaq"><label for="Infaq">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" class="check" id="Sodaqoh"><label for="Sodaqoh">Sodaqoh</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" class="check" id="Lain-lain......"><label style="margin-top: 100px" for="Lain-lain......">Lain-lain..............</label>
+                <h4 style="margin: 0px">No : {{ $no }} / Al-Dzikro /............/............</h4>
+                <input type="checkbox" id="Zakat" @if ($tipe == 'Zakat') checked @else class="check" @endif><label for="Zakat">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="Sodaqoh" @if ($tipe == 'Sodaqoh') checked @else class="check" @endif><label for="Sodaqoh">Sodaqoh</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="Lain-lain......" @if ($tipe == 'Lain-lain') checked @else class="check" @endif><label style="margin-top: 100px" for="Lain-lain......">Lain-lain..............</label>
                 <h5 style="margin: 5px"><i>Assalamu'alaikum Wr. Wb.</i></h5>
             </div>
-            <div>
-                
+            <div style="font-size: 13px;">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 125px !important;">Telah Diterima Dari</td>
+                        <td>: Bapak/Ibu {{ $nama }}</td>
+                    </tr>
+                    <tr>
+                        <td>Uang Sejumlah</td>
+                        <td>: {{ "Rp. " . number_format($nominal, 0, '', '.'); }}</td>
+                    </tr>
+                    <tr>
+                        <td>Terbilang</td>
+                        <td>: {{ $terbilang }}<td>
+                    </tr>
+                    <tr>
+                        <td>Keterangan</td>
+                        <td>: {{ $keterangan }}</td>
+                    </tr>
+                    <tr>
+                        <td>Hajat</td>
+                        <td>: {{ $hajat }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center">
+                            <h5 style="margin: 5px"><i>Wassalamu'alaikum Wr. Wb.</i></h5>
+                        </td>
+                    </tr>
+                </table>
             </div>
+            
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 215px;">
+                        <p style="font-size: 12px">Donatur / Yang Menyerahkan</p>
+                    </td>
+                    <td style="text-align: center">
+                        <i style="font-size: 10px;">Jazakumullahu Ahsanul Jaza</i>
+                    </td>
+                    <td>
+                        <p style="font-size: 12px;">Wukirsari, {{ $tanggal }}</p>
+                        <p style="font-size: 12px">Yang Menerima</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td style="text-align: center;">
+                        <p>
+                            <i style="font-size: 10px;">
+                                Semoga Allah memberikan pahala yang berlipat
+                            </i>
+                        </p>
+                        <p style="margin: -10px">
+                            <i style="font-size: 10px;">
+                                atas apa yang telah diberikan dan menjadi
+                            </i>
+                        </p>
+                        <p>
+                            <i style="font-size: 10px;">
+                                pembersih bagimu. Aamiin ya Rabbal 'Alamin
+                            </i>
+                        </p>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        (......................................)
+                    </td>
+                    <td></td>
+                    <td>
+                        (......................................)
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

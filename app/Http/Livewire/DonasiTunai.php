@@ -6,6 +6,7 @@ use App\Models\Donatur;
 use Livewire\Component;
 use App\Models\Donation;
 use App\Models\GoodsDonation;
+use Carbon\Carbon;
 use PDF;
 
 class DonasiTunai extends Component
@@ -97,22 +98,36 @@ class DonasiTunai extends Component
             'tanggal_donasi' => $this->tanggal_donasi,
         ]);
 
-        $this->sendWa($data);
-
-        return redirect()->to('data-donasi-dana')->with('message', 'Donasi berhasil ditambahkan');
+        return redirect()->to('send/' . $data)->with('message', 'Donasi berhasil ditambahkan');
     }
 
-    public function sendWa()
+    public function sendWa($data)
     {
+        $data = json_decode($data);
+        $donatur = Donatur::where('id', $data->donatur_id)->first();
+        $date = date(now());
 
-        $pdf = PDF::loadView('invoice');
+        $no = $data->no;
+
+        $data = [
+            'nama' => $donatur->nama,
+            'no' => $data->no,
+            'nominal' => $data->pemasukan,
+            'terbilang' => $data->terbilang,
+            'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
+            'tipe' => $data->tipe,
+            'keterangan' => $data->keterangan,
+            'hajat' => $data->hajat,
+        ];
+
+        // dd($data);
+
+        $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
+
+        $pdf = PDF::loadView('invoice', $data);
         $pdf->setPaper('F4', 'potrait');
         $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
-
-        return $pdf->download('invoice.pdf');
-        // return view('invoice');
-
-
+        $pdf->save($name);
 
         $curl = curl_init();
 
@@ -127,8 +142,11 @@ class DonasiTunai extends Component
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
-                'target' => '085701223722,083143647715',
+                'target' => '085701223722',
                 'message' => 'test message',
+                'url' => 'https://demo-panti.baharudinabdulloh.site/invoice/invoice_2.pdf',
+                // 'url' => $name,
+                // 'filename' => 'my-file.pdf',
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(
@@ -139,5 +157,7 @@ class DonasiTunai extends Component
         $response = curl_exec($curl);
 
         curl_close($curl);
+
+        return redirect()->to('data-donasi-dana')->with('message', 'Donasi berhasil ditambahkan');
     }
 }

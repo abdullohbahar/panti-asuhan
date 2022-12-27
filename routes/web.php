@@ -77,4 +77,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::get('/send', [DonasiTunai::class, 'sendWa']);
+Route::get('/send/{data}', [DonasiTunai::class, 'sendWa']);
