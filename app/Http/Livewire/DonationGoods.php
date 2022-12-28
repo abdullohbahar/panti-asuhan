@@ -2,15 +2,18 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\BuktiSumbangan;
-use App\Models\Donation;
-use App\Models\Donatur;
-use App\Models\GoodsDonation;
+use PDF;
+use Carbon\Carbon;
 use App\Models\Unit;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Donatur;
+use App\Models\Invoice;
 use Livewire\Component;
-use Livewire\WithFileUploads;
+use App\Models\Donation;
 use Livewire\WithPagination;
+use App\Models\GoodsDonation;
+use Livewire\WithFileUploads;
+use App\Models\BuktiSumbangan;
+use Illuminate\Support\Facades\Storage;
 
 class DonationGoods extends Component
 {
@@ -106,7 +109,7 @@ class DonationGoods extends Component
             $no = '00001';
         }
 
-        GoodsDonation::create([
+        $data = GoodsDonation::create([
             'donatur_id' => $this->donatur_id,
             'no' => $no,
             'tanggal_donasi' => $this->tanggal_donasi,
@@ -114,8 +117,41 @@ class DonationGoods extends Component
             'keterangan' => $this->keterangan,
         ]);
 
-        $this->resetInput();
-        $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Ditambahkan']);
+        return redirect()->to('send-tanda-terima-barang/' . $data)->with('message', 'Donasi berhasil ditambahkan');
+    }
+
+    public function saveInvoice($data)
+    {
+        $data = json_decode($data);
+        $donatur = Donatur::where('id', $data->donatur_id)->first();
+        $date = date(now());
+
+        $no = $data->no;
+
+        $data = [
+            'id' => $data->id,
+            'nama' => $donatur->nama,
+            'no' => $data->no,
+            'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
+            'keterangan' => $data->keterangan,
+            'hajat' => $data->hajat,
+        ];
+
+        // dd($data);
+
+        $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
+
+        $pdf = PDF::loadView('invoice-barang', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+        $pdf->save($name);
+
+        Invoice::create([
+            'donation_id' => $data['id'],
+            'file' => $name
+        ]);
+
+        return redirect()->to('donasi-barang')->with('message', 'Donasi berhasil ditambahkan');
     }
 
     public function resetInput()

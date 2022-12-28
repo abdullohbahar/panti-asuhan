@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/donasi-barang', [DonationController::class, 'donationGoods'])->name('donation.goods');
     Route::get('/bukti-donasi/{id}', [DonationController::class, 'proofOfDonation'])->name('proof.of.donation');
-    Route::get('/send-tanda-terima-barang/{data}', [DonationGoods::class, 'sendWa']);
+    Route::get('/send-tanda-terima-barang/{data}', [DonationGoods::class, 'saveInvoice']);
 
 
     Route::get('/cetak-donasi', [Donation::class, 'print'])->name('cetak.donasi');

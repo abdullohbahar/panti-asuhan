@@ -6,6 +6,7 @@ use App\Models\Donatur;
 use Livewire\Component;
 use App\Models\Donation;
 use App\Models\GoodsDonation;
+use App\Models\Invoice;
 use Carbon\Carbon;
 use PDF;
 
@@ -110,6 +111,7 @@ class DonasiTunai extends Component
         $no = $data->no;
 
         $data = [
+            'id' => $data->id,
             'nama' => $donatur->nama,
             'no' => $data->no,
             'nominal' => $data->pemasukan,
@@ -153,6 +155,11 @@ class DonasiTunai extends Component
                 'Authorization: mfS1xFJqr4XeXm48TvjV' //change TOKEN to your actual token
             ),
         ));
+
+        Invoice::create([
+            'donation_id' => $data['id'],
+            'file' => $name
+        ]);
 
         $response = curl_exec($curl);
 
