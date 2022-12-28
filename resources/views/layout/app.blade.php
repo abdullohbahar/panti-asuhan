@@ -181,7 +181,7 @@
                 </li> --}}
               </ul>
             </li>
-            <li class="nav-item {{ $active == 'pengeluaran' ? 'menu-open' : '' }}">
+            <li class="nav-item {{ $active == 'pengeluaran' || $active == 'data-pengeluaran' ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-file"></i>
                 <p>
