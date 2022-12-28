@@ -13,22 +13,6 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-                <label for="">Nama Donatur</label>
-                <select name="donatur_id" wire:model="donatur_id" style="width: 100%" class="form-control select2 @error('donatur_id') is-invalid @enderror">
-                  <option>-- Pilih Donatur --</option>
-                  @foreach ($donaturs as $donatur)
-                      <option value="{{ $donatur->id }}">{{ $donatur->nama }}</option>
-                  @endforeach
-                </select>
-                @error('donatur_id')
-                  <div class="invalid-feedback">
-                    {{ $message }}
-                  </div>
-                @enderror
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group">
                 <label for="">Tanggal Donasi</label>
                 <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror">
                 @error('tanggal_donasi')

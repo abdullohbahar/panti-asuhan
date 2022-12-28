@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Data Donasi Transfer
+  Data Pengeluaran
 @endsection
 
 @push('addons-css')
@@ -100,7 +100,7 @@
 
 @section('content')
 <div>
-  <livewire:data-donasi-transfer>
+  <livewire:data-pengeluaran>
 </div>
 @endsection
 

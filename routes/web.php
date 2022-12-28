@@ -72,8 +72,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/data-donasi-transfer', [DonationController::class, 'dataDonasiTransfer'])->name('data.donasi.transfer');
 
 
-
     Route::get('/pengeluaran', [DonationController::class, 'pengeluaran'])->name('pengeluaran');
+    Route::get('/data-pengeluaran', [DonationController::class, 'dataPengeluaran'])->name('data.pengeluaran');
 
     Route::get('/laporan-pemasukan-pengeluaran', [DonationController::class, 'laporan'])->name('laporan.pemasukan.pengeluaran');
     // Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi', [Pengeluaran::class, 'print'])->name('cetak.laporan.pemasukan.pengeluaran.donasi');

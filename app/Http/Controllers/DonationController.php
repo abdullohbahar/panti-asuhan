@@ -98,4 +98,13 @@ class DonationController extends Controller
 
         return view('laporan-pemasukan-pengeluaran', $data);
     }
+
+    public function dataPengeluaran()
+    {
+        $data = [
+            'active' => 'data-pengeluaran',
+        ];
+
+        return view('data-pengeluaran', $data);
+    }
 }
