@@ -25,7 +25,7 @@
             <div class="card-header">
                 <div class="row justify-content-between">
                     <div class="col-8">
-                        <h5><b>Donasi Berupa Dana</b></h5>
+                        <h5><b>Donasi Berupa Tunai</b></h5>
                     </div>
                 </div>
             </div>

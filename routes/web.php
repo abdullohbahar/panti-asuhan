@@ -47,8 +47,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/donasi-barang', [DonationController::class, 'donationGoods'])->name('donation.goods');
     Route::get('/bukti-donasi/{id}', [DonationController::class, 'proofOfDonation'])->name('proof.of.donation');
+
     Route::get('/cetak-donasi', [Donation::class, 'print'])->name('cetak.donasi');
     Route::get('/laporan-penggunaan-dana', [DonationController::class, 'reportFunds'])->name('laporan.penggunaan.dana');
+
     Route::get('/anak-asuh', [AnakAsuhController::class, 'index'])->name('anak.asuh');
     Route::get('/profile-anak-asuh/{id}', [AnakAsuhController::class, 'profileAnak'])->name('profile.anak.asuh');
     Route::get('/tambah-anak-asuh', [AnakAsuhController::class, 'create'])->name('tambah.anak.asuh');
@@ -65,7 +67,11 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('/pilih-jenis-donasi', [DonationController::class, 'pilih'])->name('pilih.jenis.donasi');
     Route::get('/donasi-tunai', [DonationController::class, 'donasiTunai'])->name('donasi.tunai');
+
     Route::get('/donasi-transfer', [DonationController::class, 'donasiTransfer'])->name('donasi.transfer');
+    Route::get('/data-donasi-transfer', [DonationController::class, 'dataDonasiTransfer'])->name('data.donasi.transfer');
+
+
 
     Route::get('/pengeluaran', [DonationController::class, 'pengeluaran'])->name('pengeluaran');
 

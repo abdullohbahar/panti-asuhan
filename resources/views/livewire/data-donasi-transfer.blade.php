@@ -1,7 +1,6 @@
 <div>
     {{-- Modal --}}
-    @include('livewire.modal.donation.modal-add-donation-money')
-    @include('livewire.modal.donation.modal-edit-donation')
+    @include('livewire.modal.donation.modal-edit-donation-transfer')
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
@@ -26,7 +25,7 @@
             <div class="card-header">
                 <div class="row justify-content-between">
                     <div class="col-8">
-                        <h5><b>Donasi Berupa Dana</b></h5>
+                        <h5><b>Donasi Berupa Transfer</b></h5>
                     </div>
                 </div>
             </div>
@@ -59,7 +58,7 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <a href="{{ route('donation.tunai') }}" class="btn btn-warning btn-block">Reset Filter</a>
+                            <a href="{{ route('data.donasi.transfer') }}" class="btn btn-warning btn-block">Reset Filter</a>
                         </div>
                     </div>
                 </div>
@@ -76,17 +75,16 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Nama Donatur</th>
                                     <th scope="col">Nominal</th>
+                                    <th scope="col">No Rek</th>
+                                    <th scope="col">Bank</th>
                                     <th scope="col">Tanggal Donasi</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr wire:loading>
-                                    <td colspan="5">Loading....</td>
-                                </tr>
                                 @if ($count == 0)
                                     <tr>
-                                        <td colspan="5">Data Not Found</td>
+                                        <td colspan="7">Data Not Found</td>
                                     </tr>
                                 @endif
                                 @foreach ($donations as $index => $donation)
@@ -94,12 +92,14 @@
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Nama Donatur">{{ $donation->donatur->nama }}</td>
                                         <td data-label="Nominal">{{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}</td>
+                                        <td data-label="No Rek">{{ $donation->norek }}</td>
+                                        <td data-label="Bank">{{ $donation->bank }}</td>
                                         <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
                                         <td data-label="Aksi">
                                             <button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fab fa-whatsapp"></i></button>
                                             {{-- <button wire:click="show('{{ $donation->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-print"></i></button> --}}
                                             <button id="edit" wire:click="show('{{ $donation->id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
-                                            {{-- <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button> --}}
+                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -117,7 +117,7 @@
                 </li> --}}
               </ul>
             </li>
-            <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'donasi-transfer' || $active == 'data-donasi-tunai' ? 'menu-open' : '' }}">
+            <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'donasi-transfer' || $active == 'data-donasi-tunai' || $active == 'data-donasi-transfer' ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-hands"></i>
                 <p>
@@ -161,9 +161,9 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('donation.tunai') }}" class="nav-link {{ $active == 'data-donasi' ? 'active' : '' }}">
+                  <a href="{{ route('data.donasi.transfer') }}" class="nav-link {{ $active == 'data-donasi-transfer' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Data Donasi</p>
+                    <p>Data Donasi Transfer</p>
                   </a>
                 </li>
                 <li class="nav-header">Donasi Barang</li>

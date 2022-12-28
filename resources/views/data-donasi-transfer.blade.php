@@ -100,7 +100,7 @@
 
 @section('content')
 <div>
-  <livewire:donation>
+  <livewire:data-donasi-transfer>
 </div>
 @endsection
 

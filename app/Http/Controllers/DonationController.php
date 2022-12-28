@@ -72,6 +72,15 @@ class DonationController extends Controller
         return view('donasi-transfer', $data);
     }
 
+    public function dataDonasiTransfer()
+    {
+        $data = [
+            'active' => 'data-donasi-transfer',
+        ];
+
+        return view('data-donasi-transfer', $data);
+    }
+
     public function pengeluaran()
     {
         $data = [
