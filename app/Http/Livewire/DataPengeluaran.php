@@ -24,7 +24,7 @@ class DataPengeluaran extends Component
             $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
         });
 
-        $donations = $query->orderBy('tanggal_donasi', 'asc')->paginate(10);
+        $donations = $query->orderBy('tanggal_donasi', 'desc')->paginate(10);
         $count = $donations->count();
 
         $data = [

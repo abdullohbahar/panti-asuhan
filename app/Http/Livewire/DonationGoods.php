@@ -32,7 +32,7 @@ class DonationGoods extends Component
             $q->where('nama', 'like', '%' . $this->search . '%')
                 ->orwhere('tanggal_donasi', 'like', '%' . $this->search . '%')
                 ->orwhere('keterangan', 'like', '%' . $this->search . '%');
-        });
+        })->orderBy('tanggal_donasi', 'desc');
 
         $donations = $query->paginate(10);
         $count = $donations->count();
@@ -123,6 +123,7 @@ class DonationGoods extends Component
         $this->donatur_id = '';
         $this->tanggal_donasi = '';
         $this->keterangan = '';
+        $this->hajat = '';
         $this->jumlah = '';
         $this->satuan = '';
     }

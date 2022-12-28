@@ -26,7 +26,7 @@ class LaporanPemasukanPengeluaran extends Component
 
         $query = Donation::when($this->date1, function ($query) use ($date1, $date2) {
             $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
-        })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer')->orderBy('tanggal_donasi', 'asc');
+        })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer')->orderBy('tanggal_donasi', 'desc');
 
         $donations = $query->get();
         $count = $donations->count();

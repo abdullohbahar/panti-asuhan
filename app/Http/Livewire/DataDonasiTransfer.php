@@ -34,7 +34,7 @@ class DataDonasiTransfer extends Component
             });
         });
 
-        $donations = $query->orderBy('tanggal_donasi', 'asc')->paginate(10);
+        $donations = $query->orderBy('tanggal_donasi', 'desc')->paginate(10);
         $count = $donations->count();
 
         $data = [

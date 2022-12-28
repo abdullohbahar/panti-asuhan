@@ -37,7 +37,7 @@ class Donation extends Component
             $query->whereHas('donatur', function ($query) use ($filterDonaturId) {
                 $query->where('id', $this->filterDonaturId);
             });
-        });
+        })->orderBy('tanggal_donasi', 'desc');
 
         $donations = $query->orderBy('tanggal_donasi', 'asc')->paginate(10);
         $count = $donations->count();

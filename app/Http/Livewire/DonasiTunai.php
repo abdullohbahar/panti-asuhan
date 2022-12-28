@@ -98,7 +98,7 @@ class DonasiTunai extends Component
             'tanggal_donasi' => $this->tanggal_donasi,
         ]);
 
-        return redirect()->to('send/' . $data)->with('message', 'Donasi berhasil ditambahkan');
+        return redirect()->to('send-tanda-terima-tunai/' . $data)->with('message', 'Donasi berhasil ditambahkan');
     }
 
     public function sendWa($data)
@@ -158,6 +158,6 @@ class DonasiTunai extends Component
 
         curl_close($curl);
 
-        return redirect()->to('data-donasi-dana')->with('message', 'Donasi berhasil ditambahkan');
+        return redirect()->to('data-donasi-tunai')->with('message', 'Donasi berhasil ditambahkan');
     }
 }

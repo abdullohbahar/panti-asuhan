@@ -11,6 +11,7 @@ use App\Http\Controllers\SavingController;
 use App\Http\Controllers\SettingController;
 use App\Http\Livewire\DonasiTunai;
 use App\Http\Livewire\Donation;
+use App\Http\Livewire\DonationGoods;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
 use App\Http\Livewire\Pengeluaran;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/donasi-barang', [DonationController::class, 'donationGoods'])->name('donation.goods');
     Route::get('/bukti-donasi/{id}', [DonationController::class, 'proofOfDonation'])->name('proof.of.donation');
+    Route::get('/send-tanda-terima-barang/{data}', [DonationGoods::class, 'sendWa']);
+
 
     Route::get('/cetak-donasi', [Donation::class, 'print'])->name('cetak.donasi');
     Route::get('/laporan-penggunaan-dana', [DonationController::class, 'reportFunds'])->name('laporan.penggunaan.dana');
@@ -80,11 +83,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'printPDFLaporan'])->name('cetak.laporan.pemasukan.pengeluaran.donasi');
     Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-excel/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'exportExcel'])->name('export.excel.laporan');
+    Route::get('/send-tanda-terima-tunai/{data}', [DonasiTunai::class, 'sendWa']);
 
 
     Route::group(['prefix' => 'pengaturan'], function () {
         Route::get('/satuan', [SettingController::class, 'unit'])->name('satuan');
     });
 });
-
-Route::get('/send/{data}', [DonasiTunai::class, 'sendWa']);

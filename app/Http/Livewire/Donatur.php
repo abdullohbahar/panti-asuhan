@@ -23,7 +23,7 @@ class Donatur extends Component
         $query = ModelsDonatur::where(function ($q) use ($search) {
             $q->orwhere('nama', 'like', '%' . $this->search . '%')
                 ->orwhere('alamat', 'like', '%' . $this->search . '%');
-        });
+        })->orderBy('nama', 'asc');
 
         $donaturs = $query->paginate(10);
         $count = $donaturs->count();
