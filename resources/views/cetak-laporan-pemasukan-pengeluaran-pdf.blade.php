@@ -107,9 +107,9 @@
                 <div class="col-12">
                     <table border="1" class="font-12" style="width: 100%; margin-top: 20px">
                         <tr>
-                            <th style="width: 50px !important" class="text-center">NO</th>
-                            <th class="text-center">TANGGAL</th>
-                            <th class="text-center">URAIAN</th>
+                            <th style="width: 30px !important" class="text-center">NO</th>
+                            <th class="text-center" style="margin-right: 5px;">TANGGAL</th>
+                            <th class="text-center" style="width: 400px;">URAIAN</th>
                             <th class="text-center">PEMASUKAN</th>
                             <th class="text-center">PENGELUARAN</th>
                         </tr>
