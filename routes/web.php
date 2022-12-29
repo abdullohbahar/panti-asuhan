@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'printPDFLaporan'])->name('cetak.laporan.pemasukan.pengeluaran.donasi');
     Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-excel/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'exportExcel'])->name('export.excel.laporan');
     Route::get('/send-tanda-terima-tunai/{data}', [DonasiTunai::class, 'sendWa']);
+    Route::get('/update-tanda-terima-tunai/{data}', [Donation::class, 'updateSendWa']);
 
 
     Route::group(['prefix' => 'pengaturan'], function () {

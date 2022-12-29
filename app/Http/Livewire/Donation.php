@@ -2,20 +2,22 @@
 
 namespace App\Http\Livewire;
 
-use App\Exports\DonationExport;
-use App\Models\Donation as ModelsDonation;
+use PDF;
+use Carbon\Carbon;
 use App\Models\Donatur;
-use App\Models\TotalDanaDonation;
+use App\Models\Invoice;
 use Livewire\Component;
 use Livewire\WithPagination;
-use PDF;
-
+use App\Exports\DonationExport;
+use App\Models\TotalDanaDonation;
+use Illuminate\Support\Facades\File;
+use App\Models\Donation as ModelsDonation;
 
 class Donation extends Component
 {
     public $donation_id, $donatur_id, $pemasukan, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $tipe, $terbilang;
     public $donation_type_id = "Dana";
-    protected $listeners = ['deleteConfirmed' => 'destroy'];
+    protected $listeners = ['deleteConfirmed' => 'destroy', 'sendConfirmed' => 'send'];
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -123,8 +125,123 @@ class Donation extends Component
             'terbilang' => $this->terbilang,
         ]);
 
+        $data = [
+            'donation_id' => $this->donation_id,
+            'donatur_id' => $this->donatur_id,
+            'pemasukan' => $pemasukan,
+            'tanggal_donasi' => $this->tanggal_donasi,
+            'keterangan' => $this->keterangan,
+            'hajat' => $this->hajat,
+            'tipe' => $this->tipe,
+            'terbilang' => $this->terbilang,
+        ];
 
-        $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
+        $encode = json_encode($data);
+
+
+        // $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
+        return redirect()->to('update-tanda-terima-tunai/' . $encode)->with('message', 'Donasi berhasil ditambahkan');
+    }
+
+    public function updateSendWa($data)
+    {
+        $data = json_decode($data);
+        $donatur = Donatur::where('id', $data->donatur_id)->first();
+        $date = date(now());
+
+        $getData = ModelsDonation::find($data->donation_id);
+
+        $no = $getData->no;
+
+        $invoice = Invoice::where('donation_id', $data->donation_id)->first();
+
+        if ($invoice) {
+            if (File::exists($invoice->file)) {
+                unlink($invoice->file);
+            }
+            $invoice->delete();
+        }
+
+        $data = [
+            'id' => $data->donation_id,
+            'nama' => $donatur->nama,
+            'no' => $no,
+            'nominal' => $data->pemasukan,
+            'terbilang' => $data->terbilang,
+            'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
+            'tipe' => $data->tipe,
+            'keterangan' => $data->keterangan,
+            'hajat' => $data->hajat,
+        ];
+
+        $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
+
+        $pdf = PDF::loadView('invoice', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+        $pdf->save($name);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.fonnte.com/send',
+            CURLOPT_SSL_VERIFYPEER => FALSE,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array(
+                'target' => '085701223722',
+                'message' => 'test message',
+                'url' => 'https://demo-panti.baharudinabdulloh.site/invoice/invoice_2.pdf',
+                // 'url' => $name,
+                // 'filename' => 'my-file.pdf',
+                'countryCode' => '62', //optional
+            ),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: mfS1xFJqr4XeXm48TvjV' //change TOKEN to your actual token
+            ),
+        ));
+
+        Invoice::create([
+            'donation_id' => $data['id'],
+            'file' => $name
+        ]);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        return redirect()->to('data-donasi-tunai')->with('message', 'Berhasil');
+    }
+
+    public function sendConfirmation($id)
+    {
+        $this->donation_id = $id;
+        $this->dispatchBrowserEvent('show-send-confirmation');
+    }
+
+    public function send()
+    {
+        $data = ModelsDonation::find($this->donation_id);
+
+        $data = [
+            'donation_id' => $data->id,
+            'donatur_id' => $data->donatur_id,
+            'pemasukan' => $data->pemasukan,
+            'tanggal_donasi' => $data->tanggal_donasi,
+            'keterangan' => $data->keterangan,
+            'hajat' => $data->hajat,
+            'tipe' => $data->tipe,
+            'terbilang' => $data->terbilang,
+        ];
+
+        $encode = json_encode($data);
+
+        return redirect()->to('update-tanda-terima-tunai/' . $encode)->with('message', 'Berhasil dikirim ulang');
     }
 
     public function deleteConfirmation($id)

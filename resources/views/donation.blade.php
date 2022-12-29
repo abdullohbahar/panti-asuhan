@@ -185,6 +185,22 @@
 
     })
 
+    window.addEventListener('show-send-confirmation',event =>{
+      Swal.fire({
+        title: 'Apakah anda yakin ingin mengirim ulang bukti donasi?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Kirim!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Livewire.emit('sendConfirmed')
+        }
+      })
+
+    })
+
     window.addEventListener('deleted', event =>{
       Swal.fire(
         'Terhapus',
