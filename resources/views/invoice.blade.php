@@ -158,7 +158,7 @@
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 125px !important;">Telah Diterima Dari</td>
-                        <td>: Bapak/Ibu {{ $nama }}</td>
+                        <td>: {{ $nama }}</td>
                     </tr>
                     <tr>
                         <td>Uang Sejumlah</td>

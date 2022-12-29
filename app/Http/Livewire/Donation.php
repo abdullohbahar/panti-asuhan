@@ -244,6 +244,12 @@ class Donation extends Component
         return redirect()->to('update-tanda-terima-tunai/' . $encode)->with('message', 'Berhasil dikirim ulang');
     }
 
+    public function printInvoice($id)
+    {
+        $invoice = Invoice::where('donation_id', $id)->first();
+        return response()->download(public_path($invoice->file));
+    }
+
     public function deleteConfirmation($id)
     {
         $this->donation_id = $id;

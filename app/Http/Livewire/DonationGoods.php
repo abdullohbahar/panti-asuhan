@@ -14,6 +14,8 @@ use App\Models\GoodsDonation;
 use Livewire\WithFileUploads;
 use App\Models\BuktiSumbangan;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 
 class DonationGoods extends Component
 {
@@ -189,7 +191,67 @@ class DonationGoods extends Component
             'hajat' => $this->hajat,
         ]);
 
-        $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
+        $data = [
+            'donation_id' => $this->donation_id,
+            'donatur_id' => $this->donatur_id,
+            'tanggal_donasi' => $this->tanggal_donasi,
+            'keterangan' => $this->keterangan,
+            'hajat' => $this->hajat,
+        ];
+
+        $encode = json_encode($data);
+
+        return redirect()->to('update-tanda-terima-barang/' . $encode)->with('message', 'Donasi berhasil ditambahkan');
+    }
+
+    public function updateInvoice($data)
+    {
+        $data = json_decode($data);
+
+        $donatur = Donatur::where('id', $data->donatur_id)->first();
+        $date = date(now());
+
+        $getData = GoodsDonation::find($data->donation_id);
+
+        $no = $getData->no;
+
+        $invoice = Invoice::where('donation_id', $data->donation_id)->first();
+
+        if ($invoice) {
+            if (File::exists($invoice->file)) {
+                unlink($invoice->file);
+            }
+            $invoice->delete();
+        }
+
+        $data = [
+            'id' => $data->donation_id,
+            'nama' => $donatur->nama,
+            'no' => $no,
+            'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
+            'keterangan' => $data->keterangan,
+            'hajat' => $data->hajat,
+        ];
+
+        $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
+
+        $pdf = PDF::loadView('invoice-barang', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+        $pdf->save($name);
+
+        Invoice::create([
+            'donation_id' => $data['id'],
+            'file' => $name
+        ]);
+
+        return redirect()->to('donasi-barang')->with('message', 'Berhasil');
+    }
+
+    public function printInvoice($id)
+    {
+        $invoice = Invoice::where('donation_id', $id)->first();
+        return response()->download(public_path($invoice->file));
     }
 
     public function deleteConfirmation($id)
