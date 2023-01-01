@@ -15,7 +15,7 @@ use App\Models\Donation as ModelsDonation;
 
 class Donation extends Component
 {
-    public $donation_id, $donatur_id, $pemasukan, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $tipe, $terbilang;
+    public $donation_id, $donatur_id, $pemasukan, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $tipe, $terbilang, $nama_donatur, $no_hp, $alamat;
     public $donation_type_id = "Dana";
     protected $listeners = ['deleteConfirmed' => 'destroy', 'sendConfirmed' => 'send'];
     use WithPagination;
@@ -58,7 +58,7 @@ class Donation extends Component
     public function rules()
     {
         return [
-            'donatur_id' => 'required',
+            'nama_donatur' => 'required',
             'pemasukan' => 'required',
             'tanggal_donasi' => 'required',
             'keterangan' => ''
@@ -69,9 +69,8 @@ class Donation extends Component
     {
         return [
             'pemasukan.required' => 'Nominal harus diisi',
-            'donatur_id.required' => 'Donatur harus diisi',
+            'nama_donatur.required' => 'Donatur harus diisi',
             'tanggal_donasi' => 'Tanggal harus diisi',
-            'hajat' => 'Hajat harus diisi',
         ];
     }
 
@@ -82,26 +81,32 @@ class Donation extends Component
 
     public function resetInput()
     {
-        $this->donatur_id = '';
+        $this->nama_donatur = '';
         $this->tanggal_donasi = '';
-        $this->hajat = '';
         $this->keterangan = '';
         $this->pemasukan = '';
     }
 
-    public function show($id)
+    public function show($id, $donaturs)
     {
         $donation = ModelsDonation::find($id);
 
         if ($donation) {
             $this->donation_id = $donation->id;
-            $this->donatur_id = $donation->donatur_id;
             $this->pemasukan = "Rp. " . number_format($donation->pemasukan, 0, '', '.');
             $this->tanggal_donasi = $donation->tanggal_donasi;
             $this->terbilang = $donation->terbilang;
-            $this->hajat = $donation->hajat;
             $this->keterangan = $donation->keterangan;
             $this->tipe = $donation->tipe;
+        }
+
+        $donatur = Donatur::find($donaturs);
+
+        if ($donatur) {
+            $this->donatur_id = $donatur->id;
+            $this->nama_donatur = $donatur->nama;
+            $this->no_hp = $donatur->no_hp;
+            $this->alamat = $donatur->alamat;
         }
     }
 
@@ -120,9 +125,14 @@ class Donation extends Component
             'pemasukan' => $pemasukan,
             'tanggal_donasi' => $this->tanggal_donasi,
             'keterangan' => $this->keterangan,
-            'hajat' => $this->hajat,
             'tipe' => $this->tipe,
             'terbilang' => $this->terbilang,
+        ]);
+
+        Donatur::where('id', $this->donatur_id)->update([
+            'nama' => $this->nama_donatur,
+            'no_hp' => $this->no_hp,
+            'alamat' => $this->alamat
         ]);
 
         $data = [
@@ -131,13 +141,11 @@ class Donation extends Component
             'pemasukan' => $pemasukan,
             'tanggal_donasi' => $this->tanggal_donasi,
             'keterangan' => $this->keterangan,
-            'hajat' => $this->hajat,
             'tipe' => $this->tipe,
             'terbilang' => $this->terbilang,
         ];
 
         $encode = json_encode($data);
-
 
         // $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
         return redirect()->to('update-tanda-terima-tunai/' . $encode)->with('message', 'Donasi berhasil ditambahkan');
@@ -171,7 +179,6 @@ class Donation extends Component
             'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
             'tipe' => $data->tipe,
             'keterangan' => $data->keterangan,
-            'hajat' => $data->hajat,
         ];
 
         $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
@@ -234,7 +241,6 @@ class Donation extends Component
             'pemasukan' => $data->pemasukan,
             'tanggal_donasi' => $data->tanggal_donasi,
             'keterangan' => $data->keterangan,
-            'hajat' => $data->hajat,
             'tipe' => $data->tipe,
             'terbilang' => $data->terbilang,
         ];

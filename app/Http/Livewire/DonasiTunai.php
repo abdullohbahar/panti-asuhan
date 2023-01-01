@@ -12,7 +12,7 @@ use PDF;
 
 class DonasiTunai extends Component
 {
-    public $donatur_id, $tanggal_donasi, $nominal, $terbilang, $keterangan, $tipe;
+    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $nominal, $terbilang, $keterangan, $tipe;
     public function render()
     {
         $data = [
@@ -25,7 +25,7 @@ class DonasiTunai extends Component
     public function rules()
     {
         return [
-            'donatur_id' => 'required',
+            'nama_donatur' => 'required',
             'tanggal_donasi' => 'required',
             'nominal' => 'required',
             'terbilang' => 'required',
@@ -35,7 +35,7 @@ class DonasiTunai extends Component
     public function messages()
     {
         return [
-            'donatur_id.required' => 'Nama donatur harus diisi',
+            'nama_donatur.required' => 'Nama donatur harus diisi',
             'tanggal_donasi.required' => 'Tanggal sumbangan harus diisi',
             'nominal.required' => 'Nominal harus diisi',
             'terbilang.required' => 'Terbilang harus diisi',
@@ -85,9 +85,15 @@ class DonasiTunai extends Component
             $no = '00001';
         }
 
+        $createDoantur = Donatur::create([
+            'nama' => $this->nama_donatur,
+            'no_hp' => $this->no_hp,
+            'alamat' => $this->alamat,
+        ]);
+
         $data = Donation::create([
-            'donatur_id' => $this->donatur_id,
             'no' => $no,
+            'donatur_id' => $createDoantur->id,
             'jenis_donasi' => 'Tunai',
             'terbilang' => $this->terbilang,
             'pemasukan' => $nominal,

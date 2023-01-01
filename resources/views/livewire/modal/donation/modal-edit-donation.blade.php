@@ -13,19 +13,31 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-                <label for="">Nama Donatur</label>
-                <select name="donatur_id" wire:model="donatur_id" style="width: 100%" class="form-control select2 @error('donatur_id') is-invalid @enderror">
-                  <option>-- Pilih Donatur --</option>
-                  @foreach ($donaturs as $donatur)
-                      <option value="{{ $donatur->id }}">{{ $donatur->nama }}</option>
-                  @endforeach
-                </select>
-                @error('donatur_id')
-                  <div class="invalid-feedback">
-                    {{ $message }}
-                  </div>
-                @enderror
+                  <label for="">Nama Donatur</label>
+                  <input type="text" wire:model="nama_donatur" name="nama_donatur" class="form-control @error("nama_donatur") is-invalid @enderror" required>
+                  @error("nama_donatur")
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                  @enderror
               </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="">Nomor HP Donatur</label>
+                    <input type="text" wire:model="no_hp" name="no_hp" class="form-control">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Alamat Donatur</label>
+                    <textarea type="text" wire:model="alamat" class="form-control @error("alamat") is-invalid @enderror"></textarea>
+                    @error("alamat")
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
             </div>
             <div class="col-12 my-2">
               <h5>
