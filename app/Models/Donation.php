@@ -22,6 +22,7 @@ class Donation extends Model
         'tipe',
         'tanggal_donasi',
         'urutan',
+        'transaksi',
         'no',
         'norek',
         'bank'

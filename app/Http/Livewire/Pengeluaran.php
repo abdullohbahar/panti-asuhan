@@ -79,6 +79,7 @@ class Pengeluaran extends Component
             'pengeluaran' => $nominal,
             'jenis_donasi' => 'pengeluaran',
             'keterangan' => $this->keterangan,
+            'transaksi' => 'pengeluaran'
         ]);
 
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Berhasil']);

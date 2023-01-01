@@ -100,6 +100,7 @@ class DonasiTunai extends Component
             'keterangan' => $this->keterangan,
             'tipe' => $this->tipe,
             'tanggal_donasi' => $this->tanggal_donasi,
+            'transaksi' => 'pemasukan'
         ]);
 
         return redirect()->to('send-tanda-terima-tunai/' . $data)->with('message', 'Donasi berhasil ditambahkan');

@@ -84,6 +84,7 @@
                                         <th scope="col">Uraian</th>
                                         <th scope="col">Pemasukan</th>
                                         <th scope="col">Pengeluaran</th>
+                                        <th scope="col">Saldo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -93,8 +94,16 @@
                                         </tr>
                                     @endif
                                     <?php 
+                                    $saldo = 0;
                                     $no = 1; ?>
                                     @foreach ($donations as $index => $donation)
+                                        @php
+                                            if($donation->transaksi == "pemasukan"){
+                                                $saldo += $donation->pemasukan;
+                                            }else{
+                                                $saldo -= $donation->pengeluaran;
+                                            }
+                                        @endphp
                                         <tr>
                                             <td data-label="#">{{ $no++ }}</td>
                                             <td data-label="Tanggal">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
@@ -108,6 +117,9 @@
                                                 @if ($donation->pengeluaran)
                                                     {{ "Rp " . number_format($donation->pengeluaran, 2, ',', '.'); }}
                                                 @endif
+                                            </td>
+                                            <td data-label="Saldo">
+                                                {{ "Rp " . number_format($saldo, 2, ',', '.'); }}
                                             </td>
                                         </tr>
                                     @endforeach
