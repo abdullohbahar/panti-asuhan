@@ -23,7 +23,7 @@ class DonationGoods extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $donation_id, $donatur_id, $tanggal_donasi, $keterangan, $search, $jumlah, $satuan, $hajat;
+    public $donation_id, $donatur_id, $tanggal_donasi, $keterangan, $search, $jumlah, $satuan;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
 
@@ -59,7 +59,6 @@ class DonationGoods extends Component
         return [
             'donatur_id' => 'required',
             'tanggal_donasi' => 'required',
-            'hajat' => 'required',
             'keterangan' => 'required',
         ];
     }
@@ -69,7 +68,6 @@ class DonationGoods extends Component
         return [
             'donatur_id.required' => 'Donatur harus diisi',
             'tanggal_donasi.required' => 'Tanggal harus diisi',
-            'hajat.required' => 'Hajat harus diisi',
             'keterangan.required' => 'Keterangan harus diisi',
         ];
     }
@@ -115,7 +113,6 @@ class DonationGoods extends Component
             'donatur_id' => $this->donatur_id,
             'no' => $no,
             'tanggal_donasi' => $this->tanggal_donasi,
-            'hajat' => $this->hajat,
             'keterangan' => $this->keterangan,
         ]);
 
@@ -136,7 +133,6 @@ class DonationGoods extends Component
             'no' => $data->no,
             'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
             'keterangan' => $data->keterangan,
-            'hajat' => $data->hajat,
         ];
 
         // dd($data);
@@ -161,7 +157,6 @@ class DonationGoods extends Component
         $this->donatur_id = '';
         $this->tanggal_donasi = '';
         $this->keterangan = '';
-        $this->hajat = '';
         $this->jumlah = '';
         $this->satuan = '';
     }
@@ -176,7 +171,6 @@ class DonationGoods extends Component
             $this->donatur_id = $donation->donatur_id;
             $this->tanggal_donasi = $donation->tanggal_donasi;
             $this->keterangan = $donation->keterangan;
-            $this->hajat = $donation->hajat;
         }
     }
 
@@ -188,7 +182,6 @@ class DonationGoods extends Component
             'donatur_id' => $this->donatur_id,
             'tanggal_donasi' => $this->tanggal_donasi,
             'keterangan' => $this->keterangan,
-            'hajat' => $this->hajat,
         ]);
 
         $data = [
@@ -196,7 +189,6 @@ class DonationGoods extends Component
             'donatur_id' => $this->donatur_id,
             'tanggal_donasi' => $this->tanggal_donasi,
             'keterangan' => $this->keterangan,
-            'hajat' => $this->hajat,
         ];
 
         $encode = json_encode($data);
@@ -230,7 +222,6 @@ class DonationGoods extends Component
             'no' => $no,
             'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
             'keterangan' => $data->keterangan,
-            'hajat' => $data->hajat,
         ];
 
         $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';

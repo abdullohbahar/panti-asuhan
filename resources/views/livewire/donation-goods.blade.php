@@ -43,7 +43,6 @@
                                 <tr>
                                     <th scope="col" style="width: 20px !important">#</th>
                                     <th scope="col">Nama Donatur</th>
-                                    <th scope="col">Hajat</th>
                                     <th scope="col">Keterangan</th>
                                     <th scope="col">Tanggal Donasi</th>
                                     <th scope="col">Aksi</th>
@@ -52,14 +51,13 @@
                             <tbody>
                                 @if ($count == 0)
                                     <tr>
-                                        <td colspan="6">Data Not Found</td>
+                                        <td colspan="5">Data Not Found</td>
                                     </tr>
                                 @endif
                                 @foreach ($donations as $index => $donation)
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Tipe Donasi">{{ $donation->donatur->nama }}</td>
-                                        <td data-label="Hajat">{{ $donation->hajat }}</td>
                                         <td data-label="Keterangan">{{ $donation->keterangan }}</td>
                                         <td data-label="Tanggal Donasi">{{ $donation->tanggal_donasi }}</td>
                                         <td data-label="Aksi">
