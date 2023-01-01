@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('no');
             $table->foreignUuid('donatur_id')->onUpdate('cascade')->onDelete('set null');
             $table->text('keterangan')->nullable();
-            $table->text('hajat')->nullable();
             $table->date('tanggal_donasi')->nullable();
             $table->timestamps();
         });

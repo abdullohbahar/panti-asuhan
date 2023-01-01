@@ -12,7 +12,7 @@ use PDF;
 
 class DonasiTunai extends Component
 {
-    public $donatur_id, $tanggal_donasi, $nominal, $terbilang, $keterangan, $tipe, $hajat;
+    public $donatur_id, $tanggal_donasi, $nominal, $terbilang, $keterangan, $tipe;
     public function render()
     {
         $data = [
@@ -29,7 +29,6 @@ class DonasiTunai extends Component
             'tanggal_donasi' => 'required',
             'nominal' => 'required',
             'terbilang' => 'required',
-            'hajat' => 'required'
         ];
     }
 
@@ -40,7 +39,6 @@ class DonasiTunai extends Component
             'tanggal_donasi.required' => 'Tanggal sumbangan harus diisi',
             'nominal.required' => 'Nominal harus diisi',
             'terbilang.required' => 'Terbilang harus diisi',
-            'hajat.required' => 'Hajat harus diisi',
         ];
     }
 
@@ -95,7 +93,6 @@ class DonasiTunai extends Component
             'pemasukan' => $nominal,
             'keterangan' => $this->keterangan,
             'tipe' => $this->tipe,
-            'hajat' => $this->hajat,
             'tanggal_donasi' => $this->tanggal_donasi,
         ]);
 
@@ -119,7 +116,6 @@ class DonasiTunai extends Component
             'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
             'tipe' => $data->tipe,
             'keterangan' => $data->keterangan,
-            'hajat' => $data->hajat,
         ];
 
         // dd($data);

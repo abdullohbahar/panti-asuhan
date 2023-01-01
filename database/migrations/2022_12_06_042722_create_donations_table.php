@@ -26,7 +26,6 @@ return new class extends Migration
             $table->integer('pengeluaran')->nullable();
             $table->text('keterangan')->nullable();
             $table->string('tipe')->nullable();
-            $table->text('hajat')->nullable();
             $table->date('tanggal_donasi');
             $table->integer('urutan')->autoIncrement();
             $table->timestamps();

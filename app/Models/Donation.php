@@ -20,7 +20,6 @@ class Donation extends Model
         'saldo',
         'keterangan',
         'tipe',
-        'hajat',
         'tanggal_donasi',
         'urutan',
         'no',

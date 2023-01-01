@@ -95,17 +95,6 @@
                                 </div>
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                     <div class="form-group">
-                                        <label>Hajat</label>
-                                        <textarea type="text" wire:model="hajat" class="form-control @error("hajat") is-invalid @enderror"></textarea>
-                                        @error("hajat")
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                    <div class="form-group">
                                         <label>Keterangan</label>
                                         <textarea type="text" wire:model="keterangan" class="form-control @error("keterangan") is-invalid @enderror"></textarea>
                                         @error("keterangan")

@@ -173,10 +173,6 @@
                         <td>: {{ $keterangan }}</td>
                     </tr>
                     <tr>
-                        <td>Hajat</td>
-                        <td>: {{ $hajat }}</td>
-                    </tr>
-                    <tr>
                         <td colspan="2" style="text-align:center">
                             <h5 style="margin: 5px"><i>Wassalamu'alaikum Wr. Wb.</i></h5>
                         </td>
