@@ -70,7 +70,7 @@ class DonationGoods extends Component
             'donatur_id.required' => 'Donatur harus diisi',
             'tanggal_donasi.required' => 'Tanggal harus diisi',
             'hajat.required' => 'Hajat harus diisi',
-            'keterangan.required' => 'Keteranga harus diisi',
+            'keterangan.required' => 'Keterangan harus diisi',
         ];
     }
 

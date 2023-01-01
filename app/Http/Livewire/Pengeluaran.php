@@ -80,6 +80,8 @@ class Pengeluaran extends Component
             'jenis_donasi' => 'pengeluaran',
             'keterangan' => $this->keterangan,
         ]);
+
+        $this->dispatchBrowserEvent('close-modal', ['message' => 'Berhasil']);
     }
 
     public function print()
