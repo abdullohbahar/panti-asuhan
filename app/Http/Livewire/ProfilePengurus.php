@@ -58,7 +58,7 @@ class ProfilePengurus extends Component
         ]);
 
         $this->resetInput();
-        $this->dispatchBrowserEvent('close-modal', ['message' => 'Berhasil Upload Bukti Donasi']);
+        $this->dispatchBrowserEvent('close-modal', ['message' => 'Berhasil Upload Berkas']);
     }
 
     public function resetInput()

@@ -94,6 +94,6 @@ class DonasiTransfer extends Component
             'norek' => $this->norek,
         ]);
 
-        return redirect()->to('data-donasi-dana')->with('message', 'Donasi berhasil ditambahkan');
+        return redirect()->to('data-donasi-transfer')->with('message', 'Donasi berhasil ditambahkan');
     }
 }

@@ -121,19 +121,19 @@
                                 <td class="p-1">{{ $donation->keterangan }}</td>
                                 <td data-label="Pemasukan" class="text-right">
                                     @if ($donation->pemasukan)
-                                        <div class="rp p-1">
+                                        {{-- <div class="rp p-1">
                                             Rp
-                                        </div>
+                                        </div> --}}
                                         <div class="angka p-1">
                                             {{ number_format($donation->pemasukan, 0, '', '.'); }}
                                         </div>
                                     @endif
                                 </td>
-                                <td data-label="Pengeluaran" class="text-right">
+                                <td data-label="Pengeluaran">
                                     @if ($donation->pengeluaran)
-                                        <div class="rp p-1">
+                                        {{-- <div class="rp p-1">
                                             Rp
-                                        </div>
+                                        </div> --}}
                                         <div class="angka p-1">
                                             {{ number_format($donation->pengeluaran, 0, '', '.'); }}
                                         </div>
@@ -145,10 +145,10 @@
                             <td colspan="3" class="text-right p-1">
                                 <b>Saldo Akhir</b>
                             </td>
-                            <td colspan="2">
+                            <td colspan="2" class="text-center">
                                 <div class="p-1">
                                     <div>
-                                        Rp {{ number_format($pemasukan - $pengeluaran, 0, '', '.'); }}
+                                        {{ number_format($pemasukan - $pengeluaran, 0, '', '.'); }}
                                     </div>
                                 </div>
                             </td>
