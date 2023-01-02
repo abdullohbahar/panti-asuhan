@@ -127,7 +127,7 @@
                                         <td colspan="3" class="text-right">
                                             <b>Saldo Akhir</b>
                                         </td>
-                                        <td colspan="2">
+                                        <td colspan="3">
                                             <b>
                                                 {{ "Rp " . number_format($pemasukan - $pengeluaran, 2, ',', '.'); }}
                                             </b>
