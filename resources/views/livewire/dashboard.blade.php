@@ -69,7 +69,7 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h4>{{ "Rp " . number_format($total_tabungan, 2, ',', '.'); }}</h4>
+              <h4>{{ $pengurus }}</h4>
 
               <p>Total Pengurus</p>
             </div>
