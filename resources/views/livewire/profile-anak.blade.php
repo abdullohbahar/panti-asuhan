@@ -111,10 +111,10 @@
                     </tr>
                     <tr>
                       <td>
-                        <h6>No HP Ortu</h6>
+                        <h6>Nomor HP</h6>
                       </td>
                       <td>
-                        <h6>: {{ $anak->nohp_ortu }}</h6>
+                        <h6>: {{ $anak->nohp_ortu }} (Pemilik No HP : {{ $anak->pemilik_nohp }})</h6>
                       </td>
                     </tr>
                   </table>

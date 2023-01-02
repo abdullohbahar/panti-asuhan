@@ -10,7 +10,7 @@ use Livewire\WithFileUploads;
 class CreateAnakAsuh extends Component
 {
     use WithFileUploads;
-    public $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak;
+    public $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak, $pemilik_nohp;
 
     public function render()
     {
@@ -65,6 +65,7 @@ class CreateAnakAsuh extends Component
             'nama_ayah_kandung' => $this->nama_ayah_kandung,
             'nama_ibu_kandung' => $this->nama_ibu_kandung,
             'nohp_ortu' => $this->nohp_ortu,
+            'pemilik_nohp' => $this->pemilik_nohp,
         ]);
 
         return redirect()->to('anak-asuh')->with('message', 'Data anak asuh berhasil ditambahkan');

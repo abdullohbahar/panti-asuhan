@@ -9,7 +9,7 @@ use Livewire\WithFileUploads;
 
 class EditAnakAsuh extends Component
 {
-    public $idanak, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $foto;
+    public $idanak, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $foto, $pemilik_nohp;
     use WithFileUploads;
 
 
@@ -33,6 +33,7 @@ class EditAnakAsuh extends Component
             $this->jenis_kelamin = $anak->jenis_kelamin;
             $this->foto = $anak->foto;
             $this->pendidikan = $anak->pendidikan;
+            $this->pemilik_nohp = $anak->pemilik_nohp;
         }
     }
 
@@ -96,6 +97,7 @@ class EditAnakAsuh extends Component
             'nama_ayah_kandung' => $this->nama_ayah_kandung,
             'nama_ibu_kandung' => $this->nama_ibu_kandung,
             'nohp_ortu' => $this->nohp_ortu,
+            'pemilik_nohp' => $this->pemilik_nohp,
         ]);
 
         return redirect()->to('profile-anak-asuh/' . $this->idanak)->with('message', 'Data anak asuh berhasil diubah');

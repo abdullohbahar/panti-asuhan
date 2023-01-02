@@ -23,7 +23,8 @@ class AnakAsuh extends Model
         'pendidikan',
         'nama_ayah_kandung',
         'nama_ibu_kandung',
-        'nohp_ortu'
+        'nohp_ortu',
+        'pemilik_nohp',
     ];
 
     public function documents()

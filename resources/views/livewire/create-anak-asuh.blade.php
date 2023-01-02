@@ -142,9 +142,25 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>No Handphone Orang Tua</label>
+                                <label>No Handphone</label>
                                 <input type="text" wire:model="nohp_ortu" class="form-control @error("nohp_ortu") is-invalid @enderror" id="">
                                 @error("nohp_ortu")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Pemilik No Handphone</label>
+                                {{-- <select name="pemilik_nohp" class="form-control" id="">
+                                    <option value="Ayah">Ayah</option>
+                                    <option value="Ibu">Ibu</option>
+                                    <option value="Lain-lain">Lain-lain</option>
+                                </select> --}}
+                                <input type="text" wire:model="pemilik_nohp" class="form-control @error("pemilik_nohp") is-invalid @enderror" id="">
+                                @error("pemilik_nohp")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

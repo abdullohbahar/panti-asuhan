@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('nama_ayah_kandung')->nullable();
             $table->string('nama_ibu_kandung')->nullable();
             $table->string('nohp_ortu')->nullable();
+            $table->string('pemilik_nohp')->nullable();
             $table->string('pendidikan')->nullable();
             $table->string('tipe')->nullable();
             $table->timestamps();
