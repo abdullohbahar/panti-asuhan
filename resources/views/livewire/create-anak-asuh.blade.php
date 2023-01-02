@@ -111,9 +111,14 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Keterangan</label>
-                                <textarea wire:model="keterangan" class="form-control @error("keterangan") is-invalid @enderror"></textarea>
-                                @error("keterangan")
+                                <label>Status</label>
+                                <select wire:model="status" class="form-control @error("status") is-invalid @enderror" id="">
+                                    <option value="">-- Pilih Status --</option>
+                                    <option value="Yatim">Yatim</option>
+                                    <option value="Piatu">Piatu</option>
+                                    <option value="Yatim Piatu">Yatim Piatu</option>
+                                </select>
+                                @error("status")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -122,13 +127,13 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Status</label>
-                                <select wire:model="status" class="form-control @error("status") is-invalid @enderror" id="">
-                                    <option value="">-- Pilih Status --</option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Non-Aktif">Non-Aktif</option>
+                                <label>Tipe</label>
+                                <select wire:model="tipe" class="form-control @error("tipe") is-invalid @enderror" id="">
+                                    <option value="">-- Pilih Tipe --</option>
+                                    <option value="Santri Dalam">Santri Dalam</option>
+                                    <option value="Santri Luar">Santri Luar</option>
                                 </select>
-                                @error("status")
+                                @error("tipe")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

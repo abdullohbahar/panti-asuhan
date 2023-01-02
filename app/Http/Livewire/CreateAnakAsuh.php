@@ -10,7 +10,7 @@ use Livewire\WithFileUploads;
 class CreateAnakAsuh extends Component
 {
     use WithFileUploads;
-    public $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $keterangan, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak;
+    public $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak;
 
     public function render()
     {
@@ -59,7 +59,7 @@ class CreateAnakAsuh extends Component
             'tempat_lahir' => $this->tempat_lahir,
             'tanggal_lahir' => $this->tanggal_lahir,
             'alamat' => $this->alamat,
-            'keterangan' => $this->keterangan,
+            'tipe' => $this->tipe,
             'foto' => $fotoAnak,
             'pendidikan' => $this->pendidikan,
             'nama_ayah_kandung' => $this->nama_ayah_kandung,

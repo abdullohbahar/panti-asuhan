@@ -33,7 +33,7 @@
             <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 text-center">
               <img class="img-fluid w-75" src="{{ asset('storage/'.$anak->foto) }}" alt="">
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
               <div class="row">
                 <div class="col-12">
                   <table class="table table-borderless">
@@ -63,6 +63,14 @@
                     </tr>
                     <tr>
                       <td>
+                        <h6>Pendidikan</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $anak->pendidikan }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
                         <h6>Alamat</h6>
                       </td>
                       <td>
@@ -75,6 +83,14 @@
                       </td>
                       <td>
                         <h6>: {{ $anak->status }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Tipe</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $anak->tipe }}</h6>
                       </td>
                     </tr>
                     <tr>
@@ -99,22 +115,6 @@
                       </td>
                       <td>
                         <h6>: {{ $anak->nohp_ortu }}</h6>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h6>Pendidikan</h6>
-                      </td>
-                      <td>
-                        <h6>: {{ $anak->pendidikan }}</h6>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h6>Keterangan</h6>
-                      </td>
-                      <td>
-                        <h6>: {{ $anak->keterangan }}</h6>
                       </td>
                     </tr>
                   </table>

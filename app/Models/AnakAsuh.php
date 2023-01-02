@@ -18,7 +18,7 @@ class AnakAsuh extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'alamat',
-        'keterangan',
+        'tipe',
         'status',
         'pendidikan',
         'nama_ayah_kandung',

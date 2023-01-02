@@ -9,7 +9,7 @@ use Livewire\WithFileUploads;
 
 class EditAnakAsuh extends Component
 {
-    public $idanak, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $keterangan, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $foto;
+    public $idanak, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $foto;
     use WithFileUploads;
 
 
@@ -24,7 +24,7 @@ class EditAnakAsuh extends Component
             $this->tempat_lahir = $anak->tempat_lahir;
             $this->tanggal_lahir = Carbon::parse($anak->tanggal_lahir)->format('Y-m-d');
             $this->alamat = $anak->alamat;
-            $this->keterangan = $anak->keterangan;
+            $this->tipe = $anak->tipe;
             $this->status = $anak->status;
             $this->nama_ayah_kandung = $anak->nama_ayah_kandung;
             $this->nama_ibu_kandung = $anak->nama_ibu_kandung;
@@ -41,8 +41,7 @@ class EditAnakAsuh extends Component
         $data = [
             'foto' => $this->foto,
             'status' => $this->status,
-            'jenis_kelamin' => $this->jenis_kelamin,
-            'keterangan' => $this->keterangan,
+            'jenis_kelamin' => $this->jenis_kelamin
         ];
 
         return view('livewire.edit-anak-asuh', $data);
@@ -91,7 +90,7 @@ class EditAnakAsuh extends Component
             'tempat_lahir' => $this->tempat_lahir,
             'tanggal_lahir' => $this->tanggal_lahir,
             'alamat' => $this->alamat,
-            'keterangan' => $this->keterangan,
+            'tipe' => $this->tipe,
             'foto' => $fotoAnak,
             'pendidikan' => $this->pendidikan,
             'nama_ayah_kandung' => $this->nama_ayah_kandung,
