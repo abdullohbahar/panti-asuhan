@@ -95,6 +95,22 @@
                     </tr>
                     <tr>
                       <td>
+                        <h6>Tanggal Masuk</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ date('d-m-Y',strtotime($anak->tgl_masuk)) }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Tanggal Keluar</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ date('d-m-Y',strtotime($anak->tgl_keluar)) }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
                         <h6>Nama Ayah Kandung</h6>
                       </td>
                       <td>

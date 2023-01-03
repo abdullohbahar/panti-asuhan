@@ -31,6 +31,8 @@ return new class extends Migration
             $table->string('pemilik_nohp')->nullable();
             $table->string('pendidikan')->nullable();
             $table->string('tipe')->nullable();
+            $table->date('tgl_masuk')->nullable();
+            $table->date('tgl_keluar')->nullable();
             $table->timestamps();
         });
     }

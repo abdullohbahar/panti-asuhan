@@ -142,6 +142,18 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
+                                <label>Tanggal Masuk</label>
+                                <input type="date" class="form-control" wire:model="tgl_masuk" id="">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Tanggal Keluar</label>
+                                <input type="date" class="form-control" wire:model="tgl_keluar" id="">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
                                 <label>No Handphone</label>
                                 <input type="text" wire:model="nohp_ortu" class="form-control @error("nohp_ortu") is-invalid @enderror" id="">
                                 @error("nohp_ortu")
