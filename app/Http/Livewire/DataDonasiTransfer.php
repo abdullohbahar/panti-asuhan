@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 class DataDonasiTransfer extends Component
 {
-    public $donation_id, $donatur_id, $pemasukan, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $tipe, $terbilang, $bank, $norek;
+    public $nama_donatur, $no_hp, $alamat, $donation_id, $donatur_id, $pemasukan, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $tipe, $terbilang, $bank, $norek;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -75,19 +75,28 @@ class DataDonasiTransfer extends Component
         $this->validateOnly($fields);
     }
 
-    public function show($id)
+    public function show($id, $donaturs)
     {
         $donation = Donation::find($id);
 
         if ($donation) {
             $this->donation_id = $donation->id;
-            $this->donatur_id = $donation->donatur_id;
             $this->pemasukan = "Rp. " . number_format($donation->pemasukan, 0, '', '.');
             $this->tanggal_donasi = $donation->tanggal_donasi;
             $this->terbilang = $donation->terbilang;
             $this->keterangan = $donation->keterangan;
+            $this->tipe = $donation->tipe;
             $this->bank = $donation->bank;
             $this->norek = $donation->norek;
+        }
+
+        $donatur = Donatur::find($donaturs);
+
+        if ($donatur) {
+            $this->donatur_id = $donatur->id;
+            $this->nama_donatur = $donatur->nama;
+            $this->no_hp = $donatur->no_hp;
+            $this->alamat = $donatur->alamat;
         }
     }
 
@@ -102,7 +111,6 @@ class DataDonasiTransfer extends Component
 
         // Update data
         Donation::where('id', $this->donation_id)->update([
-            'donatur_id' => $this->donatur_id,
             'pemasukan' => $pemasukan,
             'tanggal_donasi' => $this->tanggal_donasi,
             'terbilang' => $this->terbilang,
@@ -111,6 +119,11 @@ class DataDonasiTransfer extends Component
             'norek' => $this->norek,
         ]);
 
+        Donatur::where('id', $this->donatur_id)->update([
+            'nama' => $this->nama_donatur,
+            'no_hp' => $this->no_hp,
+            'alamat' => $this->alamat
+        ]);
 
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
     }

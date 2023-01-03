@@ -13,6 +13,34 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group">
+                  <label for="">Nama Donatur</label>
+                  <input type="text" wire:model="nama_donatur" name="nama_donatur" class="form-control @error("nama_donatur") is-invalid @enderror" required>
+                  @error("nama_donatur")
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                  @enderror
+              </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="">Nomor HP Donatur</label>
+                    <input type="text" wire:model="no_hp" name="no_hp" class="form-control">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Alamat Donatur</label>
+                    <textarea type="text" wire:model="alamat" class="form-control @error("alamat") is-invalid @enderror"></textarea>
+                    @error("alamat")
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
                 <label for="">Tanggal Donasi</label>
                 <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror">
                 @error('tanggal_donasi')

@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class DonasiTransfer extends Component
 {
-    public $donatur_id, $tanggal_donasi, $nominal, $terbilang, $bank, $norek, $keterangan;
+    public $nama_donatur, $no_hp, $alamat, $donatur_id, $tanggal_donasi, $nominal, $terbilang, $bank, $norek, $keterangan;
 
     public function render()
     {
@@ -23,7 +23,7 @@ class DonasiTransfer extends Component
     public function rules()
     {
         return [
-            'donatur_id' => 'required',
+            'nama_donatur' => 'required',
             'tanggal_donasi' => 'required',
             'nominal' => 'required',
             'terbilang' => 'required',
@@ -33,7 +33,7 @@ class DonasiTransfer extends Component
     public function messages()
     {
         return [
-            'donatur_id.required' => 'Nama donatur harus diisi',
+            'nama_donatur.required' => 'Nama donatur harus diisi',
             'tanggal_donasi.required' => 'Tanggal donasi harus diisi',
             'nominal.required' => 'Nominal harus diisi',
             'terbilang.required' => 'Terbilang harus diisi',
@@ -83,8 +83,13 @@ class DonasiTransfer extends Component
             $no = '00001';
         }
 
+        $createDoantur = Donatur::create([
+            'nama' => $this->nama_donatur,
+            'no_hp' => $this->no_hp,
+            'alamat' => $this->alamat,
+        ]);
+
         Donation::create([
-            'donatur_id' => $this->donatur_id,
             'jenis_donasi' => 'Transfer',
             'terbilang' => $this->terbilang,
             'pemasukan' => $nominal,
