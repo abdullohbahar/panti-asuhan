@@ -24,20 +24,34 @@ class LaporanPemasukanPengeluaran extends Component
         $date1 = '';
         $date2 = '';
 
-        $query = Donation::when($this->date1, function ($query) use ($date1, $date2) {
-            $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
-        })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer')->orderBy('tanggal_donasi', 'desc');
+        $query = Donation::whereBetween('tanggal_donasi', [$this->date1, $this->date2])
+            ->orderBy('tanggal_donasi', 'desc');
 
         $donations = $query->get();
         $count = $donations->count();
+
+        $time = strtotime($this->date1);
+        $monthNow = date("m", $time);
+        $year = date("Y", $time);
+
+        if ($monthNow == 01) {
+            $monthBefore = 12;
+            $year = $year - 1;
+        } else {
+            $monthBefore = $monthNow - 1;
+        }
+
+        $pemasukanBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pemasukan");
+        $pengeluaranBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pengeluaran");
+
+        $saldoBulanSebelumnya = $pemasukanBulanSebelumnya - $pengeluaranBulanSebelumnya;
 
         $data = [
             'donations' => $donations,
             'count' => $count,
             'date1' => $this->date1,
             'date2' => $this->date2,
-            'pemasukan' => $query->sum('pemasukan'),
-            'pengeluaran' => $query->sum('pengeluaran'),
+            'saldoBulanSebelumnya' => $saldoBulanSebelumnya
         ];
 
         return view('livewire.laporan-pemasukan-pengeluaran', $data);

@@ -95,8 +95,15 @@
                                         </tr>
                                     @endif
                                     <?php 
-                                    $saldo = 0;
+                                    $saldo = $saldoBulanSebelumnya;
                                     $no = 1; ?>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="3">Saldo Bulan Sebelumnya</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{{ "Rp " . number_format($saldo, 2, ',', '.'); }}</td>
+                                    </tr>
                                     @foreach ($donations as $index => $donation)
                                         @php
                                             if($donation->transaksi == "pemasukan"){
@@ -137,7 +144,7 @@
                                         </td>
                                         <td colspan="3">
                                             <b>
-                                                {{ "Rp " . number_format($pemasukan - $pengeluaran, 2, ',', '.'); }}
+                                                {{ "Rp " . number_format($saldo, 2, ',', '.'); }}
                                             </b>
                                         </td>
                                     </tr>
