@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 class CreatePengurus extends Component
 {
-    public $foto, $nama, $no_hp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $jabatan, $alamat;
+    public $foto, $nama, $no_hp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $jabatan, $alamat, $pendidikan, $pekerjaan;
     use WithFileUploads;
 
     public function render()
@@ -68,6 +68,8 @@ class CreatePengurus extends Component
             'jabatan' => $this->jabatan,
             'foto' => $fotoPengurus,
             'no_hp' => $this->no_hp,
+            'pendidikan' => $this->pendidikan,
+            'pekerjaan' => $this->pekerjaan,
         ]);
 
         return redirect()->to('pengurus')->with('message', 'Data pengurus berhasil ditambahkan');

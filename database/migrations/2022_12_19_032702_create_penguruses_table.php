@@ -15,14 +15,16 @@ return new class extends Migration
     {
         Schema::create('penguruses', function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('nama');
-            $table->string('no_hp');
-            $table->string('tempat_lahir');
-            $table->string('tanggal_lahir');
-            $table->string('jabatan');
-            $table->string('foto');
-            $table->string('jenis_kelamin');
-            $table->string('alamat');
+            $table->string('nama')->nullable();
+            $table->string('no_hp')->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->string('tanggal_lahir')->nullable();
+            $table->string('jabatan')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('pendidikan')->nullable();
+            $table->string('pekerjaan')->nullable();
             $table->timestamps();
         });
     }

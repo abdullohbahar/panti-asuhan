@@ -9,7 +9,7 @@ use Livewire\WithFileUploads;
 
 class EditPengurus extends Component
 {
-    public $idpengurus, $nama, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $no_hp, $foto, $jabatan;
+    public $idpengurus, $nama, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $no_hp, $foto, $jabatan, $pendidikan, $pekerjaan;
     use WithFileUploads;
 
     public function mount()
@@ -26,6 +26,8 @@ class EditPengurus extends Component
             $this->no_hp = $pengurus->no_hp;
             $this->foto = $pengurus->foto;
             $this->jabatan = $pengurus->jabatan;
+            $this->pendidikan = $pengurus->pendidikan;
+            $this->pekerjaan = $pengurus->pekerjaan;
         }
     }
 
@@ -85,6 +87,8 @@ class EditPengurus extends Component
             'jabatan' => $this->jabatan,
             'foto' => $fotoPengurus,
             'no_hp' => $this->no_hp,
+            'pendidikan' => $this->pendidikan,
+            'pekerjaan' => $this->pekerjaan,
         ]);
 
         return redirect()->to('profile-pengurus/' . $this->idpengurus)->with('message', 'Data pengurus berhasil diubah');

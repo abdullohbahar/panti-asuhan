@@ -20,6 +20,8 @@ class Pengurus extends Model
         'jabatan',
         'foto',
         'jenis_kelamin',
+        'pendidikan',
+        'pekerjaan',
     ];
 
     public function documents()

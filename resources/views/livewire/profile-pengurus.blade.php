@@ -85,6 +85,22 @@
                         <h6>: {{ $pengurus->jabatan }}</h6>
                       </td>
                     </tr>
+                    <tr>
+                      <td>
+                        <h6>Pekerjaan</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $pengurus->pekerjaan }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Pendidikan</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $pengurus->pendidikan }}</h6>
+                      </td>
+                    </tr>
                   </table>
                 </div>
               </div>
