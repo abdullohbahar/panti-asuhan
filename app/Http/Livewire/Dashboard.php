@@ -15,11 +15,12 @@ class Dashboard extends Component
     public function render()
     {
         $data = [
-            'anak_asuh' => AnakAsuh::count(),
+            'santriDalam' => AnakAsuh::where('tipe', 'Santri Dalam')->count(),
             'total_donasi' => TotalDanaDonation::sum('total'),
             'total_donatur' => Donatur::count(),
             'total_tabungan' => Saving::sum('total_tabungan'),
             'pengurus' => Pengurus::count(),
+            'santriLuar' => AnakAsuh::where('tipe', 'Santri Luar')->count()
         ];
 
         return view('livewire.dashboard', $data);

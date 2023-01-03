@@ -24,9 +24,9 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h4>{{ $anak_asuh }}</h4>
+              <h4>{{ $santriDalam }}</h4>
 
-              <p>Jumlah Anak Asuh</p>
+              <p>Santri Dalam</p>
             </div>
             <div class="icon">
               <i class="fas fa-users"></i>
@@ -39,12 +39,12 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h4>{{ "Rp " . number_format($total_donasi, 2, ',', '.'); }}</h4>
+              <h4>{{ $santriLuar }}</h4>
 
-              <p>Total Donasi</p>
+              <p>Santri Luar</p>
             </div>
             <div class="icon">
-              <i class="fas fa-hand-holding-usd"></i>
+              <i class="fas fa-users"></i>
             </div>
             <a href="#" class="small-box-footer"></a>
           </div>
