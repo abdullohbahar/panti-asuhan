@@ -92,6 +92,7 @@ class DonasiTransfer extends Component
             'tanggal_donasi' => $this->tanggal_donasi,
             'bank' => $this->bank,
             'norek' => $this->norek,
+            'transaksi' => 'pemasukan',
         ]);
 
         return redirect()->to('data-donasi-transfer')->with('message', 'Donasi berhasil ditambahkan');
