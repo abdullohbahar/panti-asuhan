@@ -117,7 +117,9 @@
 </div>
 
 @push('component-scripts')
+    <script src="https://unpkg.com/@develoka/angka-terbilang-js/index.min.js"></script>
     <script>
+
         $(document).on("livewire:load", function(){
             $('.select2').select2();
 
@@ -132,6 +134,14 @@
 
             Livewire.hook('message.processed', (message, component) => {
                 $('.select2').select2();
+            })
+
+            $("body").on("keyup","#nominal2",() => {
+                var val = $("#nominal2").val()
+                var angka = val.replace(/,.*|[^0-9]/g, '')
+                var terbilang = angkaTerbilang(angka)
+                @this.terbilang = terbilang + ' rupiah'
+                $("#terbilang").val(terbilang)
             })
         })
 

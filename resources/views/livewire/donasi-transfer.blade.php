@@ -53,28 +53,6 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Nominal</label>
-                                <input type="text" wire:model="nominal" class="form-control @error("nominal") is-invalid @enderror" id="nominal">
-                                @error("nominal")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>Terbilang</label>
-                                <input type="text" wire:model="terbilang" class="form-control @error("terbilang") is-invalid @enderror">
-                                @error("terbilang")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
                                 <label>Bank</label>
                                 <select wire:model="bank" class="form-control" id="">
                                     <option value="">-- Pilih Bank --</option>
@@ -96,6 +74,29 @@
                                 <label>Nomor Rekening</label>
                                 <input type="text" wire:model="norek" class="form-control @error("norek") is-invalid @enderror">
                                 @error("norek")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                <label>Nominal</label>
+                                <input type="text" wire:model="nominal" class="form-control @error("nominal") is-invalid @enderror" id="nominal">
+                                @error("nominal")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                <label>Terbilang</label>
+                                <textarea class="form-control" wire:model="terbilang" id="terbilang" ></textarea>
+                                {{-- <input type="text" id="terbilang" wire:model="terbilang" class="form-control @error("terbilang") is-invalid @enderror"> --}}
+                                @error("terbilang")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -128,6 +129,8 @@
 </div>
 
 @push('component-scripts')
+    <script src="https://unpkg.com/@develoka/angka-terbilang-js/index.min.js"></script>
+
     <script>
         $(document).on("livewire:load", function(){
             $('.select2').select2();
@@ -143,6 +146,14 @@
 
             Livewire.hook('message.processed', (message, component) => {
                 $('.select2').select2();
+            })
+
+            $("body").on("keyup","#nominal",() => {
+                var val = $("#nominal").val()
+                var angka = val.replace(/,.*|[^0-9]/g, '')
+                var terbilang = angkaTerbilang(angka)
+                @this.terbilang = terbilang + ' rupiah'
+                $("#terbilang").val(terbilang)
             })
         })
 

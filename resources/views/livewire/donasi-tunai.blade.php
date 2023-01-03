@@ -52,17 +52,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                    <div class="form-group">
-                                        <label>Tanggal Donasi</label>
-                                        <input type="date" wire:model="tanggal_donasi" class="form-control @error("tanggal_donasi") is-invalid @enderror" id="">
-                                        @error("tanggal_donasi")
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
                                 <div class="col-12 my-2">
                                     <h5>
                                         <div class="form-check form-check-inline">
@@ -85,6 +74,17 @@
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
+                                        <label>Tanggal Donasi</label>
+                                        <input type="date" wire:model="tanggal_donasi" class="form-control @error("tanggal_donasi") is-invalid @enderror" id="">
+                                        @error("tanggal_donasi")
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
                                         <label>Nominal</label>
                                         <input type="text" wire:model="nominal" class="form-control @error("nominal") is-invalid @enderror" id="nominal">
                                         @error("nominal")
@@ -94,10 +94,11 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                     <div class="form-group">
                                         <label>Terbilang</label>
-                                        <input type="text" wire:model="terbilang" class="form-control @error("terbilang") is-invalid @enderror">
+                                        <textarea class="form-control" wire:model="terbilang" id="terbilang" ></textarea>
+                                        {{-- <input type="text" id="terbilang" wire:model="terbilang" class="form-control @error("terbilang") is-invalid @enderror"> --}}
                                         @error("terbilang")
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -133,6 +134,8 @@
 </div>
 
 @push('component-scripts')
+    <script src="https://unpkg.com/@develoka/angka-terbilang-js/index.min.js"></script>
+
     <script>
         $(document).on("livewire:load", function(){
             $('.select2').select2();
@@ -148,6 +151,14 @@
 
             Livewire.hook('message.processed', (message, component) => {
                 $('.select2').select2();
+            })
+
+            $("body").on("keyup","#nominal",() => {
+                var val = $("#nominal").val()
+                var angka = val.replace(/,.*|[^0-9]/g, '')
+                var terbilang = angkaTerbilang(angka)
+                @this.terbilang = terbilang + ' rupiah'
+                $("#terbilang").val(terbilang)
             })
         })
 
@@ -176,6 +187,5 @@
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
-
     </script>
 @endpush
