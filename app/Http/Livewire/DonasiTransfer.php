@@ -90,6 +90,7 @@ class DonasiTransfer extends Component
         ]);
 
         Donation::create([
+            'donatur_id' => $createDoantur->id,
             'jenis_donasi' => 'Transfer',
             'terbilang' => $this->terbilang,
             'pemasukan' => $nominal,

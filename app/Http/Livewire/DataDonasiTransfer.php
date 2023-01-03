@@ -24,7 +24,7 @@ class DataDonasiTransfer extends Component
 
         $donaturs = Donatur::orderBy('nama', 'asc')->get();
 
-        $query = Donation::where('jenis_donasi', "transfer")->whereHas('donatur', function ($q) use ($search) {
+        $query = Donation::where('jenis_donasi', "Transfer")->whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%');
         })->when($this->date1, function ($query) use ($date1, $date2) {
             $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
