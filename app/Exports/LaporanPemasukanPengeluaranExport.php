@@ -6,6 +6,7 @@ use App\Models\Donation;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
@@ -41,11 +42,29 @@ class LaporanPemasukanPengeluaranExport implements FromView, WithEvents, WithPre
             $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
         })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer')->orderBy('tanggal_donasi', 'asc')->get();
 
+        $time = strtotime($this->date1);
+        $monthNow = date("m", $time);
+        $year = date("Y", $time);
+
+        if ($monthNow == 01) {
+            $monthBefore = 12;
+            $year = $year - 1;
+        } else {
+            $monthBefore = $monthNow - 1;
+        }
+
+
+        $pemasukanBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pemasukan");
+        $pengeluaranBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pengeluaran");
+
+        $saldoBulanSebelumnya = $pemasukanBulanSebelumnya - $pengeluaranBulanSebelumnya;
+
         $this->count = $donations->count();
         return view('cetak-laporan-pemasukan-pengeluaran-excel', [
             'donations' => $donations,
             'pemasukan' => $donations->sum('pemasukan'),
             'pengeluaran' => $donations->sum('pengeluaran'),
+            'saldoBulanSebelumnya' => $saldoBulanSebelumnya,
         ]);
     }
 
@@ -94,6 +113,13 @@ class LaporanPemasukanPengeluaranExport implements FromView, WithEvents, WithPre
     //     ];
     // }
 
+    // public function columnFormats(): array
+    // {
+    //     return [
+    //         'D' => '[$Rp-421]#.##0'
+    //     ];
+    // }
+
     // public function columnWidths(): array
     // {
     //     return [
@@ -110,13 +136,14 @@ class LaporanPemasukanPengeluaranExport implements FromView, WithEvents, WithPre
             AfterSheet::class => function (AfterSheet $event) {
                 $cellRange = 'C'; // All headers
                 $event->sheet->getDelegate()->getStyle($cellRange)->getAlignment()->setWrapText(true);
-                $event->sheet->getDelegate()->getStyle('A3:E3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('D2D3D4');
+                $event->sheet->getDelegate()->getStyle('A3:F3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('D2D3D4');
                 $event->sheet->getDelegate()->getStyle('A' . ($this->count + 5))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
                 $event->sheet->getDelegate()->getStyle('D' . ($this->count + 5))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
                 $event->sheet->getDelegate()->mergeCells('A' . ($this->count + 5) . ':C' . ($this->count + 5));
                 $event->sheet->getDelegate()->mergeCells('D' . ($this->count + 5) . ':E' . ($this->count + 5));
                 $event->sheet->getDelegate()->setCellValue('A' . ($this->count + 5), 'Saldo Akhir');
-                $event->sheet->getDelegate()->setCellValue('D' . ($this->count + 5), '=SUM(D4:D' . ($this->count + 5) . ') - SUM(E4:E' . ($this->count + 5) . ')');
+                $event->sheet->getDelegate()->setCellValue('D' . ($this->count + 5), '=SUM(D5:D' . ($this->count + 5) . ') - SUM(E5:E' . ($this->count + 5) . ')');
+                // $event->sheet->getStyle('D5:D' . ($this->count))->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
                 // $event->sheet->getDefaultRowDimension()->setRowHeight(80);
                 // $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
                 // $drawing->setName('My logo');

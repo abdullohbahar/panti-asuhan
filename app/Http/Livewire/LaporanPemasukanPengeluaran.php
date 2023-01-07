@@ -25,7 +25,7 @@ class LaporanPemasukanPengeluaran extends Component
         $date2 = '';
 
         $query = Donation::whereBetween('tanggal_donasi', [$this->date1, $this->date2])
-            ->orderBy('tanggal_donasi', 'desc');
+            ->orderBy('tanggal_donasi', 'asc');
 
         $donations = $query->get();
         $count = $donations->count();

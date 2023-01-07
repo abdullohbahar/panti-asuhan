@@ -18,19 +18,40 @@
             <th style="width: 50">Uraian</th>
             <th style="width: 13">Pemasukan</th>
             <th style="width: 13">Pengeluaran</th>
+            <th style="width: 13">Saldo</th>
         </tr>
     </thead>
     <tbody>
         @php
         $no = 1;
+        $saldo = $saldoBulanSebelumnya;
+        $format = '_-[$Rp-id-ID]* #,##0_-;-[$Rp-id-ID]* #,##0_-;_-[$Rp-id-ID]* "-"_-;_-@_-';
         @endphp
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="text-align: center">Saldo Bulan Sebelumnya</td>
+            <td></td>
+            <td></td>
+            <td data-format="{{ $format }}" style="text-align: center">{{ $saldo }}</td>
+        </tr>
         @foreach ($donations as $index => $donation)
+        @php
+            if($donation->transaksi == "pemasukan"){
+                $saldo += $donation->pemasukan;
+            }else{
+                $saldo -= $donation->pengeluaran;
+            }
+        @endphp
         <tr>
             <td>{{ $no++ }}</td>
-            <td>{{ $donation->tanggal_donasi }}</td>
+            <td>{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
             <td>{{ $donation->keterangan }}</td>
-            <td>{{ $donation->pemasukan }}</td>
-            <td>{{ $donation->pengeluaran }}</td>
+            <td data-format="{{ $format }}">{{ $donation->pemasukan }}</td>
+            <td data-format="{{ $format }}">{{ $donation->pengeluaran }}</td>
+            <td data-format="{{ $format }}">
+                {{ $saldo }}
+            </td>
         </tr>
         @endforeach
         {{-- <tr>
