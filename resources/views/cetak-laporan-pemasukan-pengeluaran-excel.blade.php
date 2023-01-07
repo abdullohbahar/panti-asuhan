@@ -33,7 +33,11 @@
             <td style="text-align: center">Saldo Bulan Sebelumnya</td>
             <td></td>
             <td></td>
-            <td data-format="{{ $format }}" style="text-align: center">{{ $saldo }}</td>
+            @if ($saldo != 0)
+                <td data-format="{{ $format }}" style="text-align: center">{{ $saldo }}</td>
+            @else
+                <td style="text-align: center">{{ $saldo }}</td>
+            @endif
         </tr>
         @foreach ($donations as $index => $donation)
         @php
@@ -49,7 +53,7 @@
             <td>{{ $donation->keterangan }}</td>
             <td data-format="{{ $format }}">{{ $donation->pemasukan }}</td>
             <td data-format="{{ $format }}">{{ $donation->pengeluaran }}</td>
-            <td data-format="{{ $format }}">
+            <td data-format="{{ $saldo == 0 ? '' : $format }}">
                 {{ $saldo }}
             </td>
         </tr>
