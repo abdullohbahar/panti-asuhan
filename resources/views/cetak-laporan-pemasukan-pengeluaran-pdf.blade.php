@@ -51,7 +51,7 @@
         }
 
         .p-1{
-            padding: 0.25rem!important;
+            padding: 0.15rem!important;
         }
 
         .rp {
@@ -109,12 +109,35 @@
                         <tr>
                             <th style="width: 30px !important" class="text-center">NO</th>
                             <th class="text-center" style="margin-right: 5px;">TANGGAL</th>
-                            <th class="text-center" style="width: 400px;">URAIAN</th>
+                            <th class="text-center" style="width: 300px;">URAIAN</th>
                             <th class="text-center">PEMASUKAN</th>
                             <th class="text-center">PENGELUARAN</th>
+                            <th class="text-center">SALDO</th>
                         </tr>
-                        <?php $no = 1; ?>
+                        <?php 
+                        $no = 1; 
+                        $saldo = $saldoBulanSebelumnya;
+                        ?>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Saldo Bulan Sebelumnya</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="angka p-1">
+                                    {{ "Rp " .  number_format($saldo, 0, '', '.'); }}
+                                </div>
+                            </td>
+                        </tr>
                         @foreach ($donations as $donation)
+                        @php
+                            if($donation->transaksi == "pemasukan"){
+                                $saldo += $donation->pemasukan;
+                            }else{
+                                $saldo -= $donation->pengeluaran;
+                            }
+                        @endphp
                             <tr>
                                 <td data-label="#" class="text-center">{{ $no++ }}</td>
                                 <td data-label="Tanggal" class="text-center">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
@@ -125,7 +148,7 @@
                                             Rp
                                         </div> --}}
                                         <div class="angka p-1">
-                                            {{ number_format($donation->pemasukan, 0, '', '.'); }}
+                                            {{ "Rp " . number_format($donation->pemasukan, 0, '', '.'); }}
                                         </div>
                                     @endif
                                 </td>
@@ -135,9 +158,14 @@
                                             Rp
                                         </div> --}}
                                         <div class="angka p-1">
-                                            {{ number_format($donation->pengeluaran, 0, '', '.'); }}
+                                            {{ "Rp " . number_format($donation->pengeluaran, 0, '', '.'); }}
                                         </div>
                                     @endif
+                                </td>
+                                <td data-label="Saldo">
+                                    <div class="angka p-1">
+                                        {{ "Rp " . number_format($saldo, 0, '', '.'); }}
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -145,10 +173,10 @@
                             <td colspan="3" class="text-right p-1">
                                 <b>Saldo Akhir</b>
                             </td>
-                            <td colspan="2" class="text-center">
+                            <td colspan="3" class="text-center">
                                 <div class="p-1">
                                     <div>
-                                        {{ number_format($pemasukan - $pengeluaran, 0, '', '.'); }}
+                                        {{ "Rp " . number_format($pemasukan - $pengeluaran, 0, '', '.'); }}
                                     </div>
                                 </div>
                             </td>

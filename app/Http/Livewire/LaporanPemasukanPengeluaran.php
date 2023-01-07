@@ -66,12 +66,29 @@ class LaporanPemasukanPengeluaran extends Component
     {
         $query = Donation::when($date1 != 0, function ($query) use ($date1, $date2) {
             $query->whereBetween('tanggal_donasi', [$date1, $date2]);
-        })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer');
+        })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer')->orderBy('tanggal_donasi', 'asc');
+
+        $time = strtotime($this->date1);
+        $monthNow = date("m", $time);
+        $year = date("Y", $time);
+
+        if ($monthNow == 01) {
+            $monthBefore = 12;
+            $year = $year - 1;
+        } else {
+            $monthBefore = $monthNow - 1;
+        }
+
+        $pemasukanBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pemasukan");
+        $pengeluaranBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pengeluaran");
+
+        $saldoBulanSebelumnya = $pemasukanBulanSebelumnya - $pengeluaranBulanSebelumnya;
 
         $data = [
             'donations' => $query->get(),
             'pemasukan' => $query->sum('pemasukan'),
             'pengeluaran' => $query->sum('pengeluaran'),
+            'saldoBulanSebelumnya' => $saldoBulanSebelumnya
         ];
 
 
