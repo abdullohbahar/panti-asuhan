@@ -209,25 +209,6 @@ class Donation extends Component
         $this->dispatchBrowserEvent('show-send-confirmation');
     }
 
-    public function send()
-    {
-        $data = ModelsDonation::find($this->donation_id);
-
-        $data = [
-            'donation_id' => $data->id,
-            'donatur_id' => $data->donatur_id,
-            'pemasukan' => $data->pemasukan,
-            'tanggal_donasi' => $data->tanggal_donasi,
-            'keterangan' => $data->keterangan,
-            'tipe' => $data->tipe,
-            'terbilang' => $data->terbilang,
-        ];
-
-        $encode = json_encode($data);
-
-        return redirect()->to('update-tanda-terima-tunai/' . $encode)->with('message', 'Berhasil dikirim ulang');
-    }
-
     public function printInvoice($id)
     {
         $invoice = Invoice::where('donation_id', $id)->first();
