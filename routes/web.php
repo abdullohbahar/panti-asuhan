@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnakAsuhController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DonasiBarangController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\DonaturController;
@@ -84,6 +85,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-excel/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'exportExcel'])->name('export.excel.laporan');
     Route::get('/send-tanda-terima-tunai/{data}', [DonasiTunai::class, 'sendWa']);
     Route::get('/update-tanda-terima-tunai/{data}', [Donation::class, 'updateSendWa']);
+
+    Route::get('tambah-donasi-barang', [DonasiBarangController::class, 'create'])->name('create.donasi.barang');
+    Route::post('tambah-donasi-barang', [DonasiBarangController::class, 'store'])->name('store.donasi.barang');
 
 
     Route::group(['prefix' => 'pengaturan'], function () {

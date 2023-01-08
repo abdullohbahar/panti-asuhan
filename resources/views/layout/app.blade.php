@@ -117,7 +117,7 @@
                 </li> --}}
               </ul>
             </li>
-            <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'donasi-transfer' || $active == 'data-donasi-tunai' || $active == 'data-donasi-transfer' ? 'menu-open' : '' }}">
+            <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'create-donasi-barang' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'donasi-transfer' || $active == 'data-donasi-tunai' || $active == 'data-donasi-transfer' ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-hands"></i>
                 <p>
@@ -168,9 +168,15 @@
                 </li>
                 <li class="nav-header">Donasi Barang</li>
                 <li class="nav-item">
-                  <a href="{{ route('donation.goods') }}" class="nav-link {{ $active == 'donasi-barang' ? 'active' : '' }}">
+                  <a href="{{ route('create.donasi.barang') }}" class="nav-link {{ $active == 'create-donasi-barang' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Donasi Barang</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('donation.goods') }}" class="nav-link {{ $active == 'donasi-barang' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Data Donasi Barang</p>
                   </a>
                 </li>
                 {{-- <li class="nav-item">

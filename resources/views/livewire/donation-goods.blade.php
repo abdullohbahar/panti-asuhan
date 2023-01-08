@@ -27,9 +27,9 @@
                     <div class="col-8">
                         <h5><b>Donasi Berupa Barang</b></h5>
                     </div>
-                    <div class="col-4 text-right">
+                    {{-- <div class="col-4 text-right">
                         <button id="btnAddItem" wire:click="resetInput" class="btn btn-primary btn-sm"><b><i class="fas fa-plus"></i> Donasi</b></button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="card-body">
