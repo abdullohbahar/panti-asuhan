@@ -108,6 +108,10 @@ class DonasiTunai extends Component
 
     public function sendWa($data)
     {
+        // membuat bulan menjadi romawi
+        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
+        $bln = $array_bln[date('n')];
+
         $data = json_decode($data);
         $donatur = Donatur::where('id', $data->donatur_id)->first();
         $date = date(now());
@@ -123,9 +127,10 @@ class DonasiTunai extends Component
             'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
             'tipe' => $data->tipe,
             'keterangan' => $data->keterangan,
+            'alamat' => $donatur->alamat,
+            'no_hp' => $donatur->no_hp,
+            'bulan' => $bln,
         ];
-
-        // dd($data);
 
         $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
 
@@ -149,9 +154,6 @@ class DonasiTunai extends Component
             CURLOPT_POSTFIELDS => array(
                 'target' => '085701223722',
                 'message' => 'test message',
-                'url' => 'https://demo-panti.baharudinabdulloh.site/invoice/invoice_2.pdf',
-                // 'url' => $name,
-                // 'filename' => 'my-file.pdf',
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(

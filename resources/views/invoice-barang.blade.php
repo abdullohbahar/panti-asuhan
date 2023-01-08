@@ -147,7 +147,7 @@
 
                 </div>
                 <h3>TANDA TERIMA</h3>
-                <h4 style="margin: 0px">No : {{ $no }} / Al-Dzikro /............/............</h4>
+                <h4 style="margin: 0px">No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</h4>
                 <h5 style="margin: 5px"><i>Assalamu'alaikum Wr. Wb.</i></h5>
             </div>
             <div style="font-size: 13px;">
@@ -155,6 +155,14 @@
                     <tr>
                         <td style="width: 125px !important;">Telah Diterima Dari</td>
                         <td>: {{ $nama }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 125px !important;">Alamat</td>
+                        <td>: {{ $alamat }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 125px !important;">Nomor HP</td>
+                        <td>: {{ $no_hp }}</td>
                     </tr>
                     <tr>
                         <td>Keterangan</td>

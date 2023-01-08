@@ -147,7 +147,7 @@
 
                 </div>
                 <h3>TANDA TERIMA</h3>
-                <h4 style="margin: 0px">No : {{ $no }} / Al-Dzikro /............/............</h4>
+                <h4 style="margin: 0px">No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</h4>
                 <input type="checkbox" id="Zakat" @if ($tipe == 'Zakat') checked @else class="check" @endif><label for="Zakat">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="Sodaqoh" @if ($tipe == 'Sodaqoh') checked @else class="check" @endif><label for="Sodaqoh">Sodaqoh</label> &nbsp; &nbsp; &nbsp; &nbsp;
@@ -159,6 +159,14 @@
                     <tr>
                         <td style="width: 125px !important;">Telah Diterima Dari</td>
                         <td>: {{ $nama }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 125px !important;">Alamat</td>
+                        <td>: {{ $alamat }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 125px !important;">Nomor HP</td>
+                        <td>: {{ $no_hp }}</td>
                     </tr>
                     <tr>
                         <td>Uang Sejumlah</td>

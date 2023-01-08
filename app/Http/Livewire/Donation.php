@@ -153,6 +153,10 @@ class Donation extends Component
 
     public function updateSendWa($data)
     {
+        // membuat bulan menjadi romawi
+        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
+        $bln = $array_bln[date('n')];
+
         $data = json_decode($data);
         $donatur = Donatur::where('id', $data->donatur_id)->first();
         $date = date(now());
@@ -179,6 +183,9 @@ class Donation extends Component
             'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
             'tipe' => $data->tipe,
             'keterangan' => $data->keterangan,
+            'alamat' => $donatur->alamat,
+            'no_hp' => $donatur->no_hp,
+            'bulan' => $bln,
         ];
 
         $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
@@ -188,39 +195,10 @@ class Donation extends Component
         $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
         $pdf->save($name);
 
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.fonnte.com/send',
-            CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array(
-                'target' => '085701223722',
-                'message' => 'test message',
-                'url' => 'https://demo-panti.baharudinabdulloh.site/invoice/invoice_2.pdf',
-                // 'url' => $name,
-                // 'filename' => 'my-file.pdf',
-                'countryCode' => '62', //optional
-            ),
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: mfS1xFJqr4XeXm48TvjV' //change TOKEN to your actual token
-            ),
-        ));
-
         Invoice::create([
             'donation_id' => $data['id'],
             'file' => $name
         ]);
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
 
         return redirect()->to('data-donasi-tunai')->with('message', 'Berhasil');
     }

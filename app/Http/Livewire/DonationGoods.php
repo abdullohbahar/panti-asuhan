@@ -121,6 +121,10 @@ class DonationGoods extends Component
 
     public function saveInvoice($data)
     {
+        // membuat bulan menjadi romawi
+        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
+        $bln = $array_bln[date('n')];
+
         $data = json_decode($data);
         $donatur = Donatur::where('id', $data->donatur_id)->first();
         $date = date(now());
@@ -133,9 +137,10 @@ class DonationGoods extends Component
             'no' => $data->no,
             'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
             'keterangan' => $data->keterangan,
+            'alamat' => $donatur->alamat,
+            'no_hp' => $donatur->no_hp,
+            'bulan' => $bln,
         ];
-
-        // dd($data);
 
         $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
 
@@ -198,6 +203,10 @@ class DonationGoods extends Component
 
     public function updateInvoice($data)
     {
+        // membuat bulan menjadi romawi
+        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
+        $bln = $array_bln[date('n')];
+
         $data = json_decode($data);
 
         $donatur = Donatur::where('id', $data->donatur_id)->first();
@@ -222,6 +231,9 @@ class DonationGoods extends Component
             'no' => $no,
             'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
             'keterangan' => $data->keterangan,
+            'alamat' => $donatur->alamat,
+            'no_hp' => $donatur->no_hp,
+            'bulan' => $bln,
         ];
 
         $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
