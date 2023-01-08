@@ -14,11 +14,11 @@
         </tr>
         <tr style="background-color: #D2D3D4">
             <th>No</th>
-            <th style="width: 13">Tanggal</th>
+            <th style="width: 20">Tanggal</th>
             <th style="width: 50">Uraian</th>
-            <th style="width: 13">Pemasukan</th>
-            <th style="width: 13">Pengeluaran</th>
-            <th style="width: 13">Saldo</th>
+            <th style="width: 20">Pemasukan</th>
+            <th style="width: 20">Pengeluaran</th>
+            <th style="width: 20">Saldo</th>
         </tr>
     </thead>
     <tbody>
@@ -58,9 +58,11 @@
             </td>
         </tr>
         @endforeach
-        {{-- <tr>
+        <tr>
             <td colspan="3" style="text-align: right"><b>Saldo Akhir</b></td>
-            <td colspan="2" style="text-align: left">{{ $pemasukan - $pengeluaran }}</td>
-        </tr> --}}
+            <td></td>
+            <td></td>
+            <td data-format="{{ $format }}" style="text-align: left">{{ $saldo }}</td>
+        </tr>
     </tbody>
 </table>

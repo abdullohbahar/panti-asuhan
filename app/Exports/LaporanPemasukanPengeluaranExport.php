@@ -33,14 +33,14 @@ class LaporanPemasukanPengeluaranExport implements FromView, WithEvents, WithPre
 
     public function view(): View
     {
-        // $date1 = request()->input('date1');
-        // $date2 = request()->input('date2');
         $date1 = $this->date1;
         $date2 = $this->date2;
 
-        $donations = Donation::when($this->date1 != 0, function ($query) use ($date1, $date2) {
-            $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
-        })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer')->orderBy('tanggal_donasi', 'asc')->get();
+        // dd($date1, $date2);
+
+        $donations = Donation::when($date1 != 0, function ($query) use ($date1, $date2) {
+            $query->whereBetween('tanggal_donasi', [$date1, $date2]);
+        })->orderBy('tanggal_donasi', 'asc')->get();
 
         $time = strtotime($this->date1);
         $monthNow = date("m", $time);
@@ -140,9 +140,9 @@ class LaporanPemasukanPengeluaranExport implements FromView, WithEvents, WithPre
                 $event->sheet->getDelegate()->getStyle('A' . ($this->count + 5))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
                 $event->sheet->getDelegate()->getStyle('D' . ($this->count + 5))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
                 $event->sheet->getDelegate()->mergeCells('A' . ($this->count + 5) . ':C' . ($this->count + 5));
-                $event->sheet->getDelegate()->mergeCells('D' . ($this->count + 5) . ':E' . ($this->count + 5));
-                $event->sheet->getDelegate()->setCellValue('A' . ($this->count + 5), 'Saldo Akhir');
-                $event->sheet->getDelegate()->setCellValue('D' . ($this->count + 5), '=SUM(D5:D' . ($this->count + 5) . ') - SUM(E5:E' . ($this->count + 5) . ')');
+                // $event->sheet->getDelegate()->mergeCells('D' . ($this->count + 5) . ':F' . ($this->count + 5));
+                // $event->sheet->getDelegate()->setCellValue('A' . ($this->count + 5), 'Saldo Akhir');
+                // $event->sheet->getDelegate()->setCellValue('D' . ($this->count + 5), '=SUM(D5:D' . ($this->count + 5) . ') - SUM(E5:E' . ($this->count + 5) . ')');
                 // $event->sheet->getStyle('D5:D' . ($this->count))->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
                 // $event->sheet->getDefaultRowDimension()->setRowHeight(80);
                 // $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
