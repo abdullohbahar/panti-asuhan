@@ -23,7 +23,7 @@ class DonationGoods extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $donation_id, $donatur_id, $tanggal_donasi, $keterangan, $search, $jumlah, $satuan;
+    public $donation_id, $donatur_id, $tanggal_donasi, $keterangan, $search, $jumlah, $satuan, $nama, $no_hp, $alamat, $idDonaturs;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
 
@@ -166,12 +166,19 @@ class DonationGoods extends Component
         $this->satuan = '';
     }
 
-    public function show($id)
+    public function show($id, $idDonatur)
     {
         $donation = GoodsDonation::find($id);
+        $donatur = Donatur::find($idDonatur);
+
+        if ($donatur) {
+            $this->idDonaturs = $donatur->id;
+            $this->nama = $donatur->nama;
+            $this->no_hp = $donatur->no_hp;
+            $this->alamat = $donatur->alamat;
+        }
 
         if ($donation) {
-
             $this->donation_id = $donation->id;
             $this->donatur_id = $donation->donatur_id;
             $this->tanggal_donasi = $donation->tanggal_donasi;
@@ -187,6 +194,12 @@ class DonationGoods extends Component
             'donatur_id' => $this->donatur_id,
             'tanggal_donasi' => $this->tanggal_donasi,
             'keterangan' => $this->keterangan,
+        ]);
+
+        Donatur::where('id', $this->idDonaturs)->update([
+            'nama' => $this->nama,
+            'no_hp' => $this->no_hp,
+            'alamat' => $this->alamat,
         ]);
 
         $data = [
