@@ -8,6 +8,7 @@ use App\Models\Donation;
 use App\Models\GoodsDonation;
 use App\Models\Invoice;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class DonasiTunai extends Component
@@ -170,6 +171,9 @@ class DonasiTunai extends Component
 
         curl_close($curl);
 
-        return redirect()->to('data-donasi-tunai')->with('message', 'Donasi berhasil ditambahkan');
+        $role = Auth::user()->role;
+        if ($role == 'admin-yayasan') {
+            return redirect()->route('donation.tunai.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
+        }
     }
 }

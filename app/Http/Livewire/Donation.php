@@ -10,6 +10,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Exports\DonationExport;
 use App\Models\TotalDanaDonation;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Models\Donation as ModelsDonation;
 
@@ -200,7 +201,12 @@ class Donation extends Component
             'file' => $name
         ]);
 
-        return redirect()->to('data-donasi-tunai')->with('message', 'Berhasil');
+        $role = Auth::user()->role;
+        if (
+            $role == 'admin-yayasan'
+        ) {
+            return redirect()->route('donation.tunai.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
+        }
     }
 
     public function sendConfirmation($id)
