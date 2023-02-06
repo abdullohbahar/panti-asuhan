@@ -2,6 +2,15 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminDonasi;
+use App\Http\Middleware\AdminYayasan;
+use App\Http\Middleware\BendaharaLKSA;
+use App\Http\Middleware\BendaharaYayasan;
+use App\Http\Middleware\KetuaLKSA;
+use App\Http\Middleware\KetuaYayasan;
+use App\Http\Middleware\PembinaYayasan;
+use App\Http\Middleware\SekertariatYayasan;
+use App\Http\Middleware\SekretariatLKSA;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +72,14 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'admin-donasi' => AdminDonasi::class,
+        'admin-yayasan' => AdminYayasan::class,
+        'bendahara-lksa' => BendaharaLKSA::class,
+        'bendahara-yayasan' => BendaharaYayasan::class,
+        'ketua-lksa' => KetuaLKSA::class,
+        'ketua-yayasan' => KetuaYayasan::class,
+        'pembina-yayasan' => PembinaYayasan::class,
+        'sekretariat-yayasan' => SekertariatYayasan::class,
+        'sekreatriat-lksa' => SekretariatLKSA::class,
     ];
 }

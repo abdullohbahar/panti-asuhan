@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Livewire\Component;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Login extends Component
 {
@@ -33,8 +33,39 @@ class Login extends Component
         $validateData = $this->validate();
 
         if (Auth::attempt($validateData)) {
+            $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            switch (Auth::user()->role) {
+                case 'admin-yayasan':
+                    return redirect()->route('dashboard.admin.yayasan');
+                    break;
+                case 'admin-donasi':
+                    return redirect()->route('dashboard.admin.donasi');
+                    break;
+                case 'bendahara-lksa':
+                    return redirect()->route('dashboard.bendahara.lksa');
+                    break;
+                case 'bendahara-yayasan':
+                    return redirect()->route('dashboard.bendahara.yayasan');
+                    break;
+                case 'ketua-lksa':
+                    return redirect()->route('dashboard.ketua.lksa');
+                    break;
+                case 'ketua-yayasan':
+                    return redirect()->route('dashboard.ketua.yayasan');
+                    break;
+                case 'pembina-yayasan':
+                    return redirect()->route('dashboard.pembina.yayasan');
+                    break;
+                case 'sekretariat-yayasan':
+                    return redirect()->route('dashboard.sekretariat.yayasan');
+                    break;
+                case 'sekretariat-lksa':
+                    return redirect()->route('dashboard.sekretariat.lksa');
+                    break;
+                default:
+                    return redirect()->to('login');
+            }
         }
 
         session()->flash('message', 'Username atau password salah');
