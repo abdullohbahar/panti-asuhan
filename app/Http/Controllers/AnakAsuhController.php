@@ -10,7 +10,7 @@ class AnakAsuhController extends Controller
     public function index()
     {
         $data = [
-            'active' => 'anak-asuh'
+            'active' => 'santri-dalam'
         ];
 
         return view('anak-asuh', $data);
@@ -19,7 +19,7 @@ class AnakAsuhController extends Controller
     public function create()
     {
         $data = [
-            'active' => 'anak-asuh'
+            'active' => 'create-santri'
         ];
 
         return view('create-anak-asuh', $data);
@@ -54,5 +54,14 @@ class AnakAsuhController extends Controller
         ];
 
         return view('profil-anak', $data);
+    }
+
+    public function santriLuar()
+    {
+        $data = [
+            'active' => 'santri-luar',
+        ];
+
+        return view('data-santri-luar', $data);
     }
 }

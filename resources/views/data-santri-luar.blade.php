@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Data Santri Dalam
+  Data Santri Luar
 @endsection
 
 @push('addons-css')
@@ -101,7 +101,7 @@
 
 @section('content')
 <div>
-  <livewire:anak-asuh>
+  <livewire:santri-luar>
 </div>
 @endsection
 

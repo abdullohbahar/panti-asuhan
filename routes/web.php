@@ -37,6 +37,11 @@ Route::get('/', [AuthController::class, 'index'])->middleware('guest');
 
 Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.admin.yayasan');
+
+    // menu santri
+    Route::get('/tambah-santri', [AnakAsuhController::class, 'create'])->name('create.santri.admin.yayasan');
+    Route::get('/data-santri-dalam', [AnakAsuhController::class, 'index'])->name('santri.dalam.admin.yayasan');
+    Route::get('/data-santri-luar', [AnakAsuhController::class, 'santriLuar'])->name('santri.luar.admin.yayasan');
 });
 
 Route::middleware('auth')->group(function () {

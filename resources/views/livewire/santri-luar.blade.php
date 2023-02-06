@@ -1,18 +1,14 @@
 <div>
-    {{-- Modal --}}
-    {{-- @include('livewire.modal.donation-type.modal-add-donation-type')
-    @include('livewire.modal.donation-type.modal-edit-donation-type') --}}
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
+    <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Data Santri Dalam</h1>
+          <h1>Data Santri Luar</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Data Santri Dalam</li>
+            <li class="breadcrumb-item active">Data Santri Luar</li>
           </ol>
         </div>
       </div>
@@ -63,9 +59,9 @@
                                         </td>
                                         <td data-label="Aksi">
                                             <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                                <a href="{{ route('profile.anak.asuh',$child->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Santri Dalam"><i class="fas fa-user"></i> Profil Anak</a>
+                                                <a href="{{ route('profile.anak.asuh',$child->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Santri Luar"><i class="fas fa-user"></i> Profil Anak</a>
                                                 {{-- <a href="{{ route('berkas.anak.asuh',$child->id) }}" class="btn btn-info btn-sm my-2" data-toggle="tooltip" data-placement="top" title="Unggah Berkas"><i class="fas fa-upload"></i> Unggah Berkas</a> --}}
-                                                <button wire:click="deleteConfirmation('{{ $child->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Santri Dalam"><i class="fas fa-trash"></i> Hapus</button>
+                                                <button wire:click="deleteConfirmation('{{ $child->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Santri Luar"><i class="fas fa-trash"></i> Hapus</button>
                                             </div>
                                         </td>
                                     </tr>

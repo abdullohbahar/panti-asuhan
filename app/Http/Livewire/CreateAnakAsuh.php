@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\AnakAsuh;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -70,6 +71,16 @@ class CreateAnakAsuh extends Component
             'tgl_keluar' => $this->tgl_keluar,
         ]);
 
-        return redirect()->to('anak-asuh')->with('message', 'Data anak asuh berhasil ditambahkan');
+        $role = Auth::user()->role;
+
+        if ($this->tipe == 'Santri Dalam') {
+            if ($role == 'admin-yayasan') {
+                return redirect()->route('santri.dalam.admin.yayasan')->with('message', 'Data santri berhasil ditambahkan');
+            }
+        } else if ($this->tipe == 'Santri Luar') {
+            if ($role == 'admin-yayasan') {
+                return redirect()->route('santri.luar.admin.yayasan')->with('message', 'Data santri berhasil ditambahkan');
+            }
+        }
     }
 }

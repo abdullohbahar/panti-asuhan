@@ -9,7 +9,8 @@ use App\Exports\AnakAsuhExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\AnakAsuh as ModelsAnakAsuh;
 
-class AnakAsuh extends Component
+
+class SantriLuar extends Component
 {
     use WithFileUploads;
     public $search, $idAnak, $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $keterangan, $status, $akta, $kartu_keluarga, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu;
@@ -21,7 +22,7 @@ class AnakAsuh extends Component
     {
         $search = '';
 
-        $query = ModelsAnakAsuh::where('tipe', 'Santri Dalam')->where(function ($q) use ($search) {
+        $query = ModelsAnakAsuh::where('tipe', 'Santri Luar')->where(function ($q) use ($search) {
             $q->orwhere('nama_lengkap', 'like', '%' . $this->search . '%')
                 ->orwhere('tempat_lahir', 'like', '%' . $this->search . '%')
                 ->orwhere('tanggal_lahir', 'like', '%' . $this->search . '%');
@@ -35,7 +36,7 @@ class AnakAsuh extends Component
             'count' => $count
         ];
 
-        return view('livewire.anak-asuh', $data);
+        return view('livewire.santri-luar', $data);
     }
 
     public function searchProduct()
