@@ -47,6 +47,14 @@
                     </tr>
                     <tr>
                       <td>
+                        <h6>Umur</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ \Carbon\Carbon::parse($anak->tanggal_lahir)->age }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
                         <h6>Jenis Kelamin</h6>
                       </td>
                       <td>
