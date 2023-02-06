@@ -9,17 +9,25 @@ use Livewire\WithFileUploads;
 
 class ProfileAnak extends Component
 {
-    public $idchild, $nama_dokumen, $file, $iteration, $downloadBerkas, $namaDokumen, $idBerkas, $destroyBerkas;
+    public $idchild, $nama_dokumen, $file, $iteration, $downloadBerkas, $namaDokumen, $idBerkas, $destroyBerkas, $search;
     use WithFileUploads;
 
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
     public function render()
     {
+        $search = '';
+
         $anak = AnakAsuh::find($this->idchild);
+        $documents = ChildDocument::where('anak_asuh_id', $this->idchild)
+            ->when(!empty($this->search), function ($q) use ($search) {
+                $q->where('nama_dokumen', 'like', "%{$this->search}%");
+            })
+            ->get();
 
         $data = [
-            'anak' => $anak
+            'anak' => $anak,
+            'documents' => $documents
         ];
 
         return view('livewire.profile-anak', $data);

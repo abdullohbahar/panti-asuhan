@@ -155,8 +155,13 @@
     <div class="container-fluid">
       <div class="card">
         <div class="card-header">
-          <div class="col-12 text-right">
-            <button class="btn btn-success" data-toggle="modal" data-target="#unggahBerkas">Unggah Berkas</button>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Nama Berkas">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8 text-right">
+              <button class="btn btn-success" data-toggle="modal" data-target="#unggahBerkas">Unggah Berkas</button>
+            </div>
           </div>
         </div>
         <div class="card-body">
@@ -172,7 +177,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($anak->documents as $document)
+                  @foreach ($documents as $document)
                   <tr>
                     <th scope="row">
                       {{ $no++ }}
