@@ -53,6 +53,11 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     // donasi transfer
     Route::get('/donasi-transfer', [DonationController::class, 'donasiTransfer'])->name('donasi.transfer.admin.yayasan');
     Route::get('/data-donasi-transfer', [DonationController::class, 'dataDonasiTransfer'])->name('data.donasi.transfer.admin.yayasan');
+
+    // donasi barang
+    Route::get('/donasi-barang', [DonationController::class, 'donationGoods'])->name('donation.goods.admin.yayasan');
+    Route::get('tambah-donasi-barang', [DonasiBarangController::class, 'create'])->name('create.donasi.barang.admin.yayasan');
+    Route::post('tambah-donasi-barang', [DonasiBarangController::class, 'store'])->name('store.donasi.barang.admin.yayasan');
 });
 
 Route::middleware('auth')->group(function () {

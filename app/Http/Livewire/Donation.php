@@ -202,9 +202,7 @@ class Donation extends Component
         ]);
 
         $role = Auth::user()->role;
-        if (
-            $role == 'admin-yayasan'
-        ) {
+        if ($role == 'admin-yayasan') {
             return redirect()->route('donation.tunai.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
         }
     }

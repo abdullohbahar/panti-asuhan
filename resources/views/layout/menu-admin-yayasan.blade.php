@@ -108,13 +108,13 @@
         </li>
         <li class="nav-header">Donasi Barang</li>
         <li class="nav-item">
-          <a href="{{ route('create.donasi.barang') }}" class="nav-link {{ $active == 'create-donasi-barang' ? 'active' : '' }}">
+          <a href="{{ route('create.donasi.barang.admin.yayasan') }}" class="nav-link {{ $active == 'create-donasi-barang' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Donasi Barang</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('donation.goods') }}" class="nav-link {{ $active == 'donasi-barang' ? 'active' : '' }}">
+          <a href="{{ route('donation.goods.admin.yayasan') }}" class="nav-link {{ $active == 'donasi-barang' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Donasi Barang</p>
           </a>

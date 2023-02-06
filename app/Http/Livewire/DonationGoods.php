@@ -13,8 +13,9 @@ use Livewire\WithPagination;
 use App\Models\GoodsDonation;
 use Livewire\WithFileUploads;
 use App\Models\BuktiSumbangan;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 
 class DonationGoods extends Component
@@ -154,7 +155,10 @@ class DonationGoods extends Component
             'file' => $name
         ]);
 
-        return redirect()->to('donasi-barang')->with('message', 'Donasi berhasil ditambahkan');
+        $role = Auth::user()->role;
+        if ($role == 'admin-yayasan') {
+            return redirect()->route('donation.goods.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
+        }
     }
 
     public function resetInput()
@@ -261,7 +265,10 @@ class DonationGoods extends Component
             'file' => $name
         ]);
 
-        return redirect()->to('donasi-barang')->with('message', 'Berhasil');
+        $role = Auth::user()->role;
+        if ($role == 'admin-yayasan') {
+            return redirect()->route('donation.goods.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
+        }
     }
 
     public function printInvoice($id)
@@ -278,18 +285,16 @@ class DonationGoods extends Component
 
     public function destroy()
     {
-        $proofs = BuktiSumbangan::where('donation_id', $this->donation_id)->get();
-
-        // dd($proofs);
+        $proofs = BuktiSumbangan::where('goods_donations_id', $this->donation_id)->get();
 
         if ($proofs) {
             foreach ($proofs as $proof) {
                 unlink(public_path('storage/' . $proof->file));
             }
+            BuktiSumbangan::where('goods_donations_id', $this->donation_id)->delete();
         }
 
-        BuktiSumbangan::where('donation_id', $this->donation_id)->delete();
-        Donation::destroy($this->donation_id);
+        GoodsDonation::destroy($this->donation_id);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
     }
