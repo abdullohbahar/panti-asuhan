@@ -67,7 +67,7 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{{ route('donatur') }}" class="nav-link {{ $active == 'donatur' ? 'active' : '' }}">
+          <a href="{{ route('donatur.admin.yayasan') }}" class="nav-link {{ $active == 'donatur' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
               Donatur

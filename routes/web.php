@@ -42,6 +42,9 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/tambah-santri', [AnakAsuhController::class, 'create'])->name('create.santri.admin.yayasan');
     Route::get('/data-santri-dalam', [AnakAsuhController::class, 'index'])->name('santri.dalam.admin.yayasan');
     Route::get('/data-santri-luar', [AnakAsuhController::class, 'santriLuar'])->name('santri.luar.admin.yayasan');
+
+    // menu kedonaturan
+    Route::get('/donatur', [DonaturController::class, 'index'])->name('donatur.admin.yayasan');
 });
 
 Route::middleware('auth')->group(function () {
