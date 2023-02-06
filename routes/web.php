@@ -45,8 +45,14 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
 
     // menu kedonaturan
     Route::get('/donatur', [DonaturController::class, 'index'])->name('donatur.admin.yayasan');
+
+    // donasi tunai
     Route::get('/donasi-tunai', [DonationController::class, 'donasiTunai'])->name('donasi.tunai.admin.yayasan');
     Route::get('/data-donasi-tunai', [DonationController::class, 'index'])->name('donation.tunai.admin.yayasan');
+
+    // donasi transfer
+    Route::get('/donasi-transfer', [DonationController::class, 'donasiTransfer'])->name('donasi.transfer.admin.yayasan');
+    Route::get('/data-donasi-transfer', [DonationController::class, 'dataDonasiTransfer'])->name('data.donasi.transfer.admin.yayasan');
 });
 
 Route::middleware('auth')->group(function () {

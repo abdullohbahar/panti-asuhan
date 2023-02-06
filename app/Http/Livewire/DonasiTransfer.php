@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Donation;
 use App\Models\Donatur;
-use App\Models\GoodsDonation;
 use Livewire\Component;
+use App\Models\Donation;
+use App\Models\GoodsDonation;
+use Illuminate\Support\Facades\Auth;
 
 class DonasiTransfer extends Component
 {
@@ -101,6 +102,9 @@ class DonasiTransfer extends Component
             'transaksi' => 'pemasukan',
         ]);
 
-        return redirect()->to('data-donasi-transfer')->with('message', 'Donasi berhasil ditambahkan');
+        $role = Auth::user()->role;
+        if ($role == 'admin-yayasan') {
+            return redirect()->route('data.donasi.transfer.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
+        }
     }
 }

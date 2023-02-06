@@ -95,13 +95,13 @@
         </li>
         <li class="nav-header">Donasi Transfer</li>
         <li class="nav-item">
-          <a href="{{ route('donasi.transfer') }}" class="nav-link {{ $active == 'donasi-transfer' ? 'active' : '' }}">
+          <a href="{{ route('donasi.transfer.admin.yayasan') }}" class="nav-link {{ $active == 'donasi-transfer' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Donasi Transfer</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('data.donasi.transfer') }}" class="nav-link {{ $active == 'data-donasi-transfer' ? 'active' : '' }}">
+          <a href="{{ route('data.donasi.transfer.admin.yayasan') }}" class="nav-link {{ $active == 'data-donasi-transfer' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Donasi Transfer</p>
           </a>
