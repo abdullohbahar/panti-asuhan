@@ -63,6 +63,7 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     // Pengguna
     Route::get('/tambah-pengguna', [UserController::class, 'createUser'])->name('tambah.pengguna.admin.yayasan');
     Route::get('/data-pengguna', [UserController::class, 'dataUser'])->name('data.pengguna.admin.yayasan');
+    Route::get('/ubah-pengguna/{id}', [UserController::class, 'editUser'])->name('edit.pengguna.admin.yayasan');
 });
 
 Route::middleware('auth')->group(function () {

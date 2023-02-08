@@ -52,7 +52,7 @@
                                             <option value="bendahara-LKSA">Bendahara LKSA</option>
                                             <option value="sekretariat-LKSA">Sekertariat LKSA</option>
                                         </select>
-                                        @error("Rolrole")
+                                        @error("role")
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

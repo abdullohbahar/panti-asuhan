@@ -23,4 +23,14 @@ class UserController extends Controller
 
         return view('data-user', $data);
     }
+
+    public function editUser($id)
+    {
+        $data = [
+            'active' => 'edit-user',
+            'id' => $id,
+        ];
+
+        return view('edit-user', $data);
+    }
 }

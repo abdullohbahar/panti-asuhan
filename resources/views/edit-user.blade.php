@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-Ubah Santri
+Ubah Pengguna
 @endsection
 
 @push('addons-css')
@@ -9,7 +9,7 @@ Ubah Santri
 
 @section('content')
 <div>
-  <livewire:edit-anak-asuh :idanak="$id">
+  <livewire:edit-user :iduser="$id">
 </div>
 @endsection
 
