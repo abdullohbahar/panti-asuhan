@@ -168,7 +168,7 @@
         </p>
       </a>
     </li>
-    <li class="nav-item {{ $active == 'create-user' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'create-user' || $active == 'data-user' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-user"></i>
         <p>
@@ -186,9 +186,9 @@
       </ul>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{{ route('data.pengeluaran') }}" class="nav-link {{ $active == 'data-pengeluaran' ? 'active' : '' }}">
+          <a href="{{ route('data.pengguna.admin.yayasan') }}" class="nav-link {{ $active == 'data-user' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Data Pengeluaran</p>
+            <p>Data Pengguna</p>
           </a>
         </li>
       </ul>

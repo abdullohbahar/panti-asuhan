@@ -14,4 +14,13 @@ class UserController extends Controller
 
         return view('create-user', $data);
     }
+
+    public function dataUser()
+    {
+        $data = [
+            'active' => 'data-user',
+        ];
+
+        return view('data-user', $data);
+    }
 }

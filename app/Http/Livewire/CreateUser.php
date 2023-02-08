@@ -51,6 +51,6 @@ class CreateUser extends Component
             'foto' => 'default.jpg',
         ]);
 
-        return redirect()->route('tambah.pengguna.admin.yayasan')->with('message', 'Pengguna berhasil ditambahkan');
+        return redirect()->route('data.pengguna.admin.yayasan')->with('message', 'Pengguna berhasil ditambahkan');
     }
 }
