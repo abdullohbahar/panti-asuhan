@@ -10,6 +10,7 @@ use App\Http\Controllers\DonaturController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\DonasiTunai;
 use App\Http\Livewire\Donation;
 use App\Http\Livewire\DonationGoods;
@@ -58,6 +59,9 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/donasi-barang', [DonationController::class, 'donationGoods'])->name('donation.goods.admin.yayasan');
     Route::get('tambah-donasi-barang', [DonasiBarangController::class, 'create'])->name('create.donasi.barang.admin.yayasan');
     Route::post('tambah-donasi-barang', [DonasiBarangController::class, 'store'])->name('store.donasi.barang.admin.yayasan');
+
+    // Pengguna
+    Route::get('/tambah-pengguna', [UserController::class, 'createUser'])->name('tambah.pengguna.admin.yayasan');
 });
 
 Route::middleware('auth')->group(function () {

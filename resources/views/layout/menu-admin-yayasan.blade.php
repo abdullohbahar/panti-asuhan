@@ -168,6 +168,31 @@
         </p>
       </a>
     </li>
+    <li class="nav-item {{ $active == 'create-user' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-user"></i>
+        <p>
+          Pengguna
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{{ route('tambah.pengguna.admin.yayasan') }}" class="nav-link {{ $active == 'create-user' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Tambah Pengguna</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{{ route('data.pengeluaran') }}" class="nav-link {{ $active == 'data-pengeluaran' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Data Pengeluaran</p>
+          </a>
+        </li>
+      </ul>
+    </li>
     {{-- <li class="nav-item {{ $active == 'satuan' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-cog"></i>
