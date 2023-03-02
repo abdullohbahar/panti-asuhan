@@ -1,5 +1,5 @@
 <div>
-    {{-- @include('livewire.modal.berkas.unggah-berkas') --}}
+    @include('livewire.modal.berkas.unggah-berkas')
 
   <section class="content-header">
     <div class="container-fluid">
@@ -30,7 +30,7 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <div class="row">
                 <div class="col-12">
                   <table class="table table-borderless">
@@ -87,7 +87,7 @@
                         <h6>Nomor HP</h6>
                       </td>
                       <td>
-                        <h6>: {{ $citizen->nohp_ortu }}</h6>
+                        <h6>: {{ $citizen->no_hp }}</h6>
                       </td>
                     </tr>
                   </table>
@@ -100,7 +100,7 @@
     </div>
   </section>
 
-  {{-- <section class="content">
+  <section class="content">
     <div class="container-fluid">
       <div class="card">
         <div class="card-header">
@@ -147,6 +147,6 @@
         </div>
       </div>
     </div>
-  </section> --}}
+  </section>
   <!-- /.content -->
 </div>
