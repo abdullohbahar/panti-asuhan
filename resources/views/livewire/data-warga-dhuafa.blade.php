@@ -55,7 +55,7 @@
                                         </td>
                                         <td data-label="Aksi">
                                             <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                                <a href="{{ route('profile.anak.asuh',$citizen->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Warga Dhuafa"><i class="fas fa-user"></i> Profil Warga</a>
+                                                <a href="{{ route('profil.warga',$citizen->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Warga Dhuafa"><i class="fas fa-user"></i> Profil Warga</a>
                                                 {{-- <a href="{{ route('berkas.anak.asuh',$citizen->id) }}" class="btn btn-info btn-sm my-2" data-toggle="tooltip" data-placement="top" title="Unggah Berkas"><i class="fas fa-upload"></i> Unggah Berkas</a> --}}
                                                 <button wire:click="deleteConfirmation('{{ $citizen->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Warga Dhuafa"><i class="fas fa-trash"></i> Hapus</button>
                                             </div>
