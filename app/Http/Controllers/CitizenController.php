@@ -14,4 +14,13 @@ class CitizenController extends Controller
 
         return view('create-citizen', $data);
     }
+
+    public function dataWargaDhuafa()
+    {
+        $data = [
+            'active' => 'data-warga-dhuafa',
+        ];
+
+        return view('data-warga-dhuafa', $data);
+    }
 }

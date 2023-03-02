@@ -68,6 +68,7 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
 
     // Warga
     Route::get('/tambah-data-warga', [CitizenController::class, 'createCitizen'])->name('create.citizen');
+    Route::get('/data-warga-dhuafa', [CitizenController::class, 'dataWargaDhuafa'])->name('data.warga.dhuafa');
 });
 
 Route::middleware('auth')->group(function () {
