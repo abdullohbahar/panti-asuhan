@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
-                                <button type="submit" class="btn btn-success btn-block">Ubah Data Anak</button>
+                                <button type="submit" class="btn btn-success btn-block">Ubah Data Warga</button>
                             </div>
                         </div>
                     </form>

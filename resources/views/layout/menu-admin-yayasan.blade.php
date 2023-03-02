@@ -66,7 +66,15 @@
           <a href="{{ route('data.warga.dhuafa') }}" class="nav-link {{ $active == 'data-warga-dhuafa' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
-              Data Warga Dhuafa
+              Dhuafa
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('data.warga.fakir.miskin') }}" class="nav-link {{ $active == 'data-warga-fakir-miskin' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Fakir Miskin
             </p>
           </a>
         </li>
