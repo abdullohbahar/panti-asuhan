@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnakAsuhController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CitizenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonasiBarangController;
 use App\Http\Controllers\DonationController;
@@ -64,6 +65,9 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/tambah-pengguna', [UserController::class, 'createUser'])->name('tambah.pengguna.admin.yayasan');
     Route::get('/data-pengguna', [UserController::class, 'dataUser'])->name('data.pengguna.admin.yayasan');
     Route::get('/ubah-pengguna/{id}', [UserController::class, 'editUser'])->name('edit.pengguna.admin.yayasan');
+
+    // Warga
+    Route::get('/tambah-data-warga', [CitizenController::class, 'createCitizen'])->name('create.citizen');
 });
 
 Route::middleware('auth')->group(function () {

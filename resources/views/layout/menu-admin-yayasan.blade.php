@@ -43,18 +43,25 @@
             </p>
           </a>
         </li>
-        {{-- <li class="nav-item">
-          <a href="{{ route('donation.type') }}" class="nav-link {{ $active == 'tipe' ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Tipe Donasi</p>
+      </ul>
+    </li>
+    <li class="nav-item {{ $active == 'citizens' || $active == 'create-citizen' || $active == 'create-citizen' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-users"></i>
+        <p>
+          Warga
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{{ route('create.citizen') }}" class="nav-link {{ $active == 'create-citizen' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Tambah Warga
+            </p>
           </a>
-        </li> --}}
-        {{-- <li class="nav-item">
-          <a href="{{ route('tabungan.anak.asuh') }}" class="nav-link {{ $active == 'tabungan' ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Tabungan Anak Asuh</p>
-          </a>
-        </li> --}}
+        </li>
       </ul>
     </li>
     <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'create-donasi-barang' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'donasi-transfer' || $active == 'data-donasi-tunai' || $active == 'data-donasi-transfer' ? 'menu-open' : '' }}">
