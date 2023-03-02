@@ -32,4 +32,13 @@ class CitizenController extends Controller
         ];
         return view('profil-warga', $data);
     }
+
+    public function editCitizen($id)
+    {
+        $data = [
+            'id' => $id,
+            'active' => ''
+        ];
+        return view('edit-warga', $data);
+    }
 }
