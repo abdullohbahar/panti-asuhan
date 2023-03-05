@@ -45,7 +45,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'citizens' || $active == 'create-citizen' || $active == 'create-citizen' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'citizens' || $active == 'create-citizen' || $active == 'data-warga-dhuafa' || $active == 'data-warga-fakir-miskin' || $active == 'data-warga-jompo' || $active == 'create-citizen' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-users"></i>
         <p>
@@ -75,6 +75,14 @@
             <i class="nav-icon far fa-circle"></i>
             <p>
               Fakir Miskin
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('data.warga.jompo') }}" class="nav-link {{ $active == 'data-warga-jompo' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Jompo
             </p>
           </a>
         </li>

@@ -70,6 +70,7 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/tambah-data-warga', [CitizenController::class, 'createCitizen'])->name('create.citizen');
     Route::get('/data-warga-dhuafa', [CitizenController::class, 'dataWargaDhuafa'])->name('data.warga.dhuafa');
     Route::get('/data-warga-fakir-miskin', [CitizenController::class, 'dataWargaFakirMiskin'])->name('data.warga.fakir.miskin');
+    Route::get('/data-warga-jompo', [CitizenController::class, 'dataWargaJompo'])->name('data.warga.jompo');
     Route::get('/profil-warga/{id}', [CitizenController::class, 'profileWarga'])->name('profil.warga');
     Route::get('/edit-warga/{id}', [CitizenController::class, 'editCitizen'])->name('edit.warga');
 });

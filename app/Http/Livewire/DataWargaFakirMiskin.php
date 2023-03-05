@@ -44,7 +44,7 @@ class DataWargaFakirMiskin extends Component
     {
         Citizen::destroy($this->idWarga);
 
-        $this->dispatchBrowserEvent('deleted', ['message' => 'Data Anak Asuh Berhasil Dihapus']);
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Data Warga Berhasil Dihapus']);
     }
 
     // public function exportExcel()
