@@ -128,6 +128,7 @@
                   <tr>
                     <th scope="col">No</th>
                     <th scope="col">Nama Berkas</th>
+                    <th scope="col">Tanggal Upload</th>
                     <th scope="col">Berkas</th>
                   </tr>
                 </thead>
@@ -139,6 +140,9 @@
                     </th>
                     <td>
                       {{ $document->nama_dokumen }}
+                    </td>
+                    <td>
+                      {{ \Carbon\Carbon::parse($document->created_at)->format('Y-m-d') }}
                     </td>
                     <td style="height: 50px">
                       <button wire:click="download('{{ $document->file }}','{{ $document->nama_dokumen }}')" class="btn btn-info btn-sm">Unduh Berkas</button>
