@@ -10,15 +10,23 @@ use Livewire\WithFileUploads;
 class ProfilePengurus extends Component
 {
     use WithFileUploads;
-    public $idpengurus, $iteration, $nama_dokumen, $file;
+    public $idpengurus, $iteration, $nama_dokumen, $file, $downloadBerkas, $namaDokumen, $idBerkas, $destroyBerkas, $search;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
     public function render()
     {
+        $search = '';
+
         $pengurus = Pengurus::find($this->idpengurus);
+        $documents = DocumentPengurus::where('pengurus_id', $this->idpengurus)
+            ->when(!empty($this->search), function ($q) use ($search) {
+                $q->where('nama_dokumen', 'like', "%{$this->search}%");
+            })
+            ->get();
 
         $data = [
-            'pengurus' => $pengurus
+            'pengurus' => $pengurus,
+            'documents' => $documents
         ];
 
         return view('livewire.profile-pengurus', $data);
