@@ -54,11 +54,11 @@ class SantriLuar extends Component
     {
         ModelsAnakAsuh::destroy($this->idAnak);
 
-        $this->dispatchBrowserEvent('deleted', ['message' => 'Data Anak Asuh Berhasil Dihapus']);
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Data Santri Berhasil Dihapus']);
     }
 
     public function exportExcel()
     {
-        return Excel::download(new AnakAsuhExport, 'Data Anak Asuh.xlsx');
+        return Excel::download(new AnakAsuhExport('Santri Luar'), 'Data Santri Luar.xlsx');
     }
 }

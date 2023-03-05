@@ -23,6 +23,13 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class AnakAsuhExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithEvents, WithColumnWidths
 {
 
+    protected $tipe = '';
+
+    public function __construct($tipe)
+    {
+        $this->tipe = $tipe;
+    }
+
     protected $no = 1;
 
     public function headings(): array
@@ -73,7 +80,7 @@ class AnakAsuhExport implements FromCollection, WithHeadings, WithMapping, Shoul
 
     public function collection()
     {
-        return AnakAsuh::all();
+        return AnakAsuh::where('tipe', $this->tipe)->get();
 
         // return view('cetak-data-anak-asuh', [
         //     'anakAsuhs' => $anakAsuhs,

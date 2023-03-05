@@ -19,6 +19,11 @@
   <section class="content">
     <div class="container-fluid">
         <div class="card">
+            <div class="card-header">
+                <div class="col-sm-12 col-md-6">
+                    <button wire:click="exportExcel" class="btn btn-warning btn-sm"><b><i class="fas fa-print"></i> Export</b></button>
+                </div>
+            </div>
             <div class="card-body">
                 <div class="row justify-content-end">
                     <div class="col-0 mr-2">
