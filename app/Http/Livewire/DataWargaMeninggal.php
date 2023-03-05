@@ -6,7 +6,7 @@ use App\Models\Citizen;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class DataWargaJamaah extends Component
+class DataWargaMeninggal extends Component
 {
     public $search, $idWarga;
     use WithPagination;
@@ -17,7 +17,7 @@ class DataWargaJamaah extends Component
     {
         $search = '';
 
-        $query = Citizen::where('status', 'Jamaah')->where(function ($q) use ($search) {
+        $query = Citizen::where('status', 'Sudah Meninggal')->where(function ($q) use ($search) {
             $q->orwhere('nama_lengkap', 'like', '%' . $this->search . '%')
                 ->orwhere('tempat_lahir', 'like', '%' . $this->search . '%')
                 ->orwhere('tanggal_lahir', 'like', '%' . $this->search . '%');
@@ -31,7 +31,7 @@ class DataWargaJamaah extends Component
             'count' => $count
         ];
 
-        return view('livewire.data-warga-jamaah', $data);
+        return view('livewire.data-warga-meninggal', $data);
     }
 
     public function deleteConfirmation($id)

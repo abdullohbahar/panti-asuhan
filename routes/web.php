@@ -72,6 +72,7 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/data-warga-fakir-miskin', [CitizenController::class, 'dataWargaFakirMiskin'])->name('data.warga.fakir.miskin');
     Route::get('/data-warga-jompo', [CitizenController::class, 'dataWargaJompo'])->name('data.warga.jompo');
     Route::get('/data-warga-jamaah', [CitizenController::class, 'dataWargaJamaah'])->name('data.warga.jamaah');
+    Route::get('/data-warga-meninggal', [CitizenController::class, 'dataWargaMeninggal'])->name('data.warga.meninggal');
     Route::get('/profil-warga/{id}', [CitizenController::class, 'profileWarga'])->name('profil.warga');
     Route::get('/edit-warga/{id}', [CitizenController::class, 'editCitizen'])->name('edit.warga');
 });
