@@ -64,4 +64,16 @@ class AnakAsuhController extends Controller
 
         return view('data-santri-luar', $data);
     }
+
+    public function exportSantriPdf($tipe)
+    {
+        $santris = AnakAsuh::where('tipe', $tipe)->get();
+
+        $data = [
+            'santris' => $santris,
+            'tipe' => $tipe
+        ];
+
+        return view('export.export-santri', $data);
+    }
 }

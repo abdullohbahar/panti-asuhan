@@ -25,7 +25,8 @@
         <div class="card">
             <div class="card-header">
                 <div class="col-sm-12 col-md-6">
-                    <button wire:click="exportExcel" class="btn btn-warning btn-sm"><b><i class="fas fa-print"></i> Export</b></button>
+                    <button wire:click="exportExcel" class="btn btn-warning btn-sm"><b><i class="fas fa-print"></i> Export Excel</b></button>
+                    <a href="{{ url('export-santri/Santri Dalam') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                 </div>
             </div>
             <div class="card-body">
