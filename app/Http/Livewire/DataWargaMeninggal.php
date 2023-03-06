@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Citizen;
 use Livewire\Component;
+use App\Exports\WargaExport;
 use Livewire\WithPagination;
 
 class DataWargaMeninggal extends Component
@@ -47,8 +48,8 @@ class DataWargaMeninggal extends Component
         $this->dispatchBrowserEvent('deleted', ['message' => 'Data Warga Berhasil Dihapus']);
     }
 
-    // public function exportExcel()
-    // {
-    //     return Excel::download(new AnakAsuhExport, 'Data Anak Asuh.xlsx');
-    // }
+    public function exportExcel()
+    {
+        return (new WargaExport('Sudah Meninggal'))->download('Data Warga Sudah Meninggal.xlsx');
+    }
 }
