@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Citizen;
 use Illuminate\Http\Request;
 
 class CitizenController extends Controller
@@ -76,5 +77,16 @@ class CitizenController extends Controller
             'active' => ''
         ];
         return view('edit-warga', $data);
+    }
+
+    public function exportWargaPdf($status)
+    {
+        $wargas = Citizen::where('status', $status)->get();
+        $data = [
+            'wargas' => $wargas,
+            'status' => $status
+        ];
+
+        return view('export.export-warga-pdf', $data);
     }
 }

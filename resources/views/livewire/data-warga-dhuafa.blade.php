@@ -31,7 +31,7 @@
                                 <button wire:click="exportExcel" class="btn btn-success btn-sm btn-block mt-2"><b><i class="fas fa-print"></i> Export Excel</b></button>
                             </div>
                             <div class="col-ms-12 col-md-6">
-                                <a href="{{ route('export.donatur') }}" class="btn btn-danger btn-sm btn-block mt-2"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
+                                <a href="{{ route('export.warga','Dhuafa') }}" class="btn btn-danger btn-sm btn-block mt-2"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                             </div>
                         </div>
                     </div>
