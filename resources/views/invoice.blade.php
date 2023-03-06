@@ -151,6 +151,9 @@
                 <input type="checkbox" id="Zakat" @if ($tipe == 'Zakat') checked @else class="check" @endif><label for="Zakat">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="Sodaqoh" @if ($tipe == 'Sodaqoh') checked @else class="check" @endif><label for="Sodaqoh">Sodaqoh</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="OperasiYayasan" @if ($tipe == 'Operasi Yayasan') checked @else class="check" @endif><label for="OperasiYayasan">Operasi Yayasan</label> &nbsp; &nbsp; &nbsp; &nbsp; <br>
+                <input type="checkbox" id="BiayaPendidikan" @if ($tipe == 'Biaya Pendidikan') checked @else class="check" @endif><label for="BiayaPendidikan">Biaya Pendidikan</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="TabunganAnak" @if ($tipe == 'Tabungan Anak') checked @else class="check" @endif><label for="TabunganAnak">Tabungan Anak</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="Lain-lain......" @if ($tipe == 'Lain-lain') checked @else class="check" @endif><label style="margin-top: 100px" for="Lain-lain......">Lain-lain..............</label>
                 <h5 style="margin: 5px"><i>Assalamu'alaikum Wr. Wb.</i></h5>
             </div>

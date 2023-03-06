@@ -54,21 +54,49 @@
                                 </div>
                                 <div class="col-12 my-2">
                                     <h5>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" wire:model="tipe" id="Zakat" value="Zakat">
-                                            <label class="form-check-label" for="Zakat">Zakat</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" wire:model="tipe" id="Infaq" value="Infaq">
-                                            <label class="form-check-label" for="Infaq">Infaq</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" wire:model="tipe" id="Sodaqoh" value="Sodaqoh">
-                                            <label class="form-check-label" for="Sodaqoh">Sodaqoh</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" wire:model="tipe" id="Lain-lain" value="Lain-lain">
-                                            <label class="form-check-label" for="Lain-lain">Lain-lain</label>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="Zakat" value="Zakat">
+                                                    <label class="form-check-label" for="Zakat">Zakat</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="Infaq" value="Infaq">
+                                                    <label class="form-check-label" for="Infaq">Infaq</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="Sodaqoh" value="Sodaqoh">
+                                                    <label class="form-check-label" for="Sodaqoh">Sodaqoh</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="OperasiYayasan" value="Operasi Yayasan">
+                                                    <label class="form-check-label" for="OperasiYayasan">Operasi Yayasan</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="BiayaPendidikan" value="Biaya Pendidikan">
+                                                    <label class="form-check-label" for="BiayaPendidikan">Biaya Pendidikan</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="TabunganAnak" value="Tabungan Anak">
+                                                    <label class="form-check-label" for="TabunganAnak">Tabungan Anak</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="Lain-lain" value="Lain-lain">
+                                                    <label class="form-check-label" for="Lain-lain">Lain-lain</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </h5>
                                 </div>
