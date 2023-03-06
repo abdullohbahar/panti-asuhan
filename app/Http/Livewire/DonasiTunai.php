@@ -136,7 +136,8 @@ class DonasiTunai extends Component
         $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
 
         $pdf = PDF::loadView('invoice', $data);
-        $pdf->setPaper('F4', 'potrait');
+        // $pdf->setPaper('F4', 'potrait');
+        $pdf->setPaper([0, 0, 330, 210], 'potrait');
         $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
         $pdf->save($name);
 

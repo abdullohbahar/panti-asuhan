@@ -3,32 +3,6 @@
     <head>
         <style>
 
-            @media print
-        {    
-            body {
-                -webkit-print-color-adjust: exact;
-                font-size: 10px;
-            }
-            
-            
-            .no-print, .no-print *
-            {
-                display: none !important;
-            }
-
-            .bg-color{
-                background-color: black !important; 
-                color:white;
-            }
-
-            .rp {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-        }
-
         body{
             font-family:Arial, Helvetica, sans-serif !important;
         }
@@ -119,29 +93,12 @@
     </head>
     <body>
         <div class="container-fluid mt-3">
-            {{-- <div class="row justify-content-between">
-                <div class="col-1">
-                    <a href="{{ url()->previous() }}" class="btn btn-warning no-print">
-                        Back
-                    </a>
-                </div>
-                <div class="col-2">
-                    <button onclick="window.print();return false;" class="btn btn-success no-print">
-                        Cetak PDF
-                    </button>
-                </div>
-            </div> --}}
             <div class="row text-center">
                 <div class="col-12 font-12">
-                    <p> DINAS SOSIAL PEMBERDAYAAN PEREMPUAN DAN PERLINDUNGAN ANAK KABUPATEN BANTUL</p>
                     <h3>YAYASAN AL DZIKRO</h3>
-                    <p>KEP. MEN HUKUM DAN HAM RI NO. AHU. 4150. AH. 01.04 TAHUN 2010</p>
-                    <p>Akta Notaris Tri Diyani Kelasworo Djati, SH No. 05 Tanggal 4 Juli 2008</p>
-                    <p>Nomor Izin Operasional: 222/1028/KP2TSP/2018</p>
-                    <p>BRI Unit Imogiri Cab. Bantul a/n Turmudi/YYS Al Dzikro No. Rek: 3585-01-005042-53-7</p>
-                    <p>Alamat : Manggung RT 07, Wukirsari, Imogiri, Bantul, D.I.Yogyakarta</p>
-                    <p>Website: www.al-dzikro.org &nbsp; &nbsp; &nbsp; Telepon: (0274)2810607</p>
-                    <p>Hj. Salimah 081-7412-3945 &nbsp; &nbsp; H. Abdul Wahab 0851-0002-1572 &nbsp; &nbsp; H. Subardi 0877-3834-1388</p>
+                    <h3>IMOGIRI BANTUL YOGYAKARTA</h3>
+                    <p>Alamat : Manggung RT 07, Wukirsari, Imogiri, Bantul, D.I.Yogyakarta 55782</p>
+                    <p>Telepon: (0274)2810607 &nbsp; &nbsp; Hj. Salimah 081-7412-3945 &nbsp; &nbsp; H. Abdul Wahab 0851-0002-1572</p>
                 </div>
                 <div class="garis">
 
@@ -157,18 +114,18 @@
                 <input type="checkbox" id="Lain-lain......" @if ($tipe == 'Lain-lain') checked @else class="check" @endif><label style="margin-top: 100px" for="Lain-lain......">Lain-lain..............</label>
                 <h5 style="margin: 5px"><i>Assalamu'alaikum Wr. Wb.</i></h5>
             </div>
-            <div style="font-size: 13px;">
+            <div style="font-size: 15px;">
                 <table style="width: 100%">
                     <tr>
-                        <td style="width: 125px !important;">Telah Diterima Dari</td>
+                        <td style="width: 150px !important;">Telah Diterima Dari</td>
                         <td>: {{ $nama }}</td>
                     </tr>
                     <tr>
-                        <td style="width: 125px !important;">Alamat</td>
+                        <td style="width: 150px !important;">Alamat</td>
                         <td>: {{ $alamat }}</td>
                     </tr>
                     <tr>
-                        <td style="width: 125px !important;">Nomor HP</td>
+                        <td style="width: 150px !important;">Nomor HP</td>
                         <td>: {{ $no_hp }}</td>
                     </tr>
                     <tr>
