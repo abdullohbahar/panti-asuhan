@@ -23,6 +23,20 @@
   <section class="content">
     <div class="container-fluid">
         <div class="card">
+            <div class="card-header">
+                <div class="row justify-content-end">
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 text-right">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <button wire:click="exportExcel" class="btn btn-success btn-sm btn-block mt-2"><b><i class="fas fa-print"></i> Export Excel</b></button>
+                            </div>
+                            <div class="col-ms-12 col-md-6">
+                                <a href="{{ route('export.donatur') }}" class="btn btn-danger btn-sm btn-block mt-2"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 <div class="row justify-content-end">
                     <div class="col-0 mr-2">
