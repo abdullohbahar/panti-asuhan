@@ -25,14 +25,17 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-end">
-                    <div class="col-2 text-right">
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 text-right">
                         <div class="row">
-                            {{-- <div class="col-sm-12 col-md-6">
-                                <button wire:click="exportExcel" class="btn btn-warning btn-sm btn-block"><b><i class="fas fa-print"></i> Export</b></button>
-                            </div> --}}
-                            {{-- <div class="col-sm-12 col-md-6"> --}}
-                                <button id="btnAddDonatur" wire:click="resetInput" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Donatur</b></button>
-                            {{-- </div> --}}
+                            <div class="col-sm-12 col-md-4">
+                                <button wire:click="exportExcel" class="btn btn-success btn-sm btn-block mt-2"><b><i class="fas fa-print"></i> Export Excel</b></button>
+                            </div>
+                            <div class="col-ms-12 col-md-4">
+                                <a href="{{ route('export.donatur') }}" class="btn btn-danger btn-sm btn-block mt-2"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <button id="btnAddDonatur" wire:click="resetInput" class="btn btn-primary mt-2 btn-sm btn-block"><b><i class="fas fa-plus"></i> Donatur</b></button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AuthController::class, 'index'])->middleware('guest');
 
 Route::get('/export-santri/{tipe}', [AnakAsuhController::class, 'exportSantriPdf'])->name('export.santri');
+Route::get('/export-donatur', [DonaturController::class, 'exportDonaturPdf'])->name('export.donatur');
 
 Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.admin.yayasan');
