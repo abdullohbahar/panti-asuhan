@@ -5,6 +5,11 @@
 @endsection
 
 @push('addons-css')
+<style>
+  .small-box:hover{
+    cursor: pointer;
+  }
+</style>
 @endpush
 
 @section('content')
