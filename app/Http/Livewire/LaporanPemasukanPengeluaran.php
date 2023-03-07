@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use App\Exports\LaporanPemasukanPengeluaranExport;
+use PDF;
+use Carbon\Carbon;
 use App\Models\Donatur;
 use Livewire\Component;
 use App\Models\Donation;
-use PDF;
 use Livewire\WithPagination;
 use App\Models\TotalDanaDonation;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LaporanPemasukanPengeluaranExport;
 
 
 class LaporanPemasukanPengeluaran extends Component
@@ -30,19 +31,29 @@ class LaporanPemasukanPengeluaran extends Component
         $donations = $query->get();
         $count = $donations->count();
 
-        $time = strtotime($this->date1);
-        $monthNow = date("m", $time);
-        $year = date("Y", $time);
+        // $time = strtotime($this->date1);
+        // $monthNow = date("m", $time);
+        // $year = date("Y", $time);
 
-        if ($monthNow == 01) {
-            $monthBefore = 12;
-            $year = $year - 1;
-        } else {
-            $monthBefore = $monthNow - 1;
-        }
+        // dd($this->date1, $time);
 
-        $pemasukanBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pemasukan");
-        $pengeluaranBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pengeluaran");
+        // if ($monthNow == 01) {
+        //     $monthBefore = 12;
+        //     $year = $year - 1;
+        // } else {
+        //     $monthBefore = $monthNow - 1;
+        // }
+
+        $date = Carbon::parse($this->date1)->subMonth();
+        $monthBefore = $date->format('m');
+        $year = $date->format('Y');
+        $subMonth = $date->lastOfMonth()->format('Y-m-d');
+
+        // $pemasukanBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pemasukan");
+        // $pengeluaranBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pengeluaran");
+
+        $pemasukanBulanSebelumnya = Donation::whereBetween('tanggal_donasi', ['2000-01-01', $subMonth])->sum("pemasukan");
+        $pengeluaranBulanSebelumnya = Donation::whereBetween('tanggal_donasi', ['2000-01-01', $subMonth])->sum("pengeluaran");
 
         $saldoBulanSebelumnya = $pemasukanBulanSebelumnya - $pengeluaranBulanSebelumnya;
 
