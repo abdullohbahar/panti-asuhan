@@ -133,15 +133,7 @@
             </div> --}}
             <div class="row text-center">
                 <div class="col-12 font-12">
-                    <p> DINAS SOSIAL PEMBERDAYAAN PEREMPUAN DAN PERLINDUNGAN ANAK KABUPATEN BANTUL</p>
-                    <h3>YAYASAN AL DZIKRO</h3>
-                    <p>KEP. MEN HUKUM DAN HAM RI NO. AHU. 4150. AH. 01.04 TAHUN 2010</p>
-                    <p>Akta Notaris Tri Diyani Kelasworo Djati, SH No. 05 Tanggal 4 Juli 2008</p>
-                    <p>Nomor Izin Operasional: 222/1028/KP2TSP/2018</p>
-                    <p>BRI Unit Imogiri Cab. Bantul a/n Turmudi/YYS Al Dzikro No. Rek: 3585-01-005042-53-7</p>
-                    <p>Alamat : Manggung RT 07, Wukirsari, Imogiri, Bantul, D.I.Yogyakarta</p>
-                    <p>Website: www.al-dzikro.org &nbsp; &nbsp; &nbsp; Telepon: (0274)2810607</p>
-                    <p>Hj. Salimah 081-7412-3945 &nbsp; &nbsp; H. Abdul Wahab 0851-0002-1572 &nbsp; &nbsp; H. Subardi 0877-3834-1388</p>
+                    <img src="data:image/jpeg;base64,{{ $image }}" style="width: 100%" alt="" srcset="">
                 </div>
                 <div class="garis">
 
@@ -154,7 +146,7 @@
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 125px !important;">Telah Diterima Dari</td>
-                        <td>: {{ $nama }}</td>
+                        <td>: <b>{{ $nama }}</b></td>
                     </tr>
                     <tr>
                         <td style="width: 125px !important;">Alamat</td>

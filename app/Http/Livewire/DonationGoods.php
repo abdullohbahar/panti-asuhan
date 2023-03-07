@@ -132,6 +132,10 @@ class DonationGoods extends Component
 
         $no = $data->no;
 
+        $image_path = public_path('logo/kop.png');
+
+        $image_data = base64_encode(file_get_contents($image_path));
+
         $data = [
             'id' => $data->id,
             'nama' => $donatur->nama,
@@ -141,6 +145,7 @@ class DonationGoods extends Component
             'alamat' => $donatur->alamat,
             'no_hp' => $donatur->no_hp,
             'bulan' => $bln,
+            'image' => $image_data
         ];
 
         $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
@@ -242,6 +247,10 @@ class DonationGoods extends Component
             $invoice->delete();
         }
 
+        $image_path = public_path('logo/kop.png');
+
+        $image_data = base64_encode(file_get_contents($image_path));
+
         $data = [
             'id' => $data->donation_id,
             'nama' => $donatur->nama,
@@ -251,6 +260,7 @@ class DonationGoods extends Component
             'alamat' => $donatur->alamat,
             'no_hp' => $donatur->no_hp,
             'bulan' => $bln,
+            'image' => $image_data
         ];
 
         $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';

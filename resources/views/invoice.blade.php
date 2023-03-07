@@ -95,30 +95,27 @@
         <div class="container-fluid mt-3">
             <div class="row text-center">
                 <div class="col-12 font-12">
-                    <h3>YAYASAN AL DZIKRO</h3>
-                    <h3>IMOGIRI BANTUL YOGYAKARTA</h3>
-                    <p>Alamat : Manggung RT 07, Wukirsari, Imogiri, Bantul, D.I.Yogyakarta 55782</p>
-                    <p>Telepon: (0274)2810607 &nbsp; &nbsp; Hj. Salimah 081-7412-3945 &nbsp; &nbsp; H. Abdul Wahab 0851-0002-1572</p>
+                    <img src="data:image/jpeg;base64,{{ $image }}" style="width: 100%" alt="" srcset="">
                 </div>
                 <div class="garis">
 
                 </div>
                 <h3>TANDA TERIMA</h3>
                 <h4 style="margin: 0px">No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</h4>
-                <input type="checkbox" id="Zakat" @if ($tipe == 'Zakat') checked @else class="check" @endif><label for="Zakat">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" id="Sodaqoh" @if ($tipe == 'Sodaqoh') checked @else class="check" @endif><label for="Sodaqoh">Sodaqoh</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" id="OperasiYayasan" @if ($tipe == 'Operasi Yayasan') checked @else class="check" @endif><label for="OperasiYayasan">Operasi Yayasan</label> &nbsp; &nbsp; &nbsp; &nbsp; <br>
-                <input type="checkbox" id="BiayaPendidikan" @if ($tipe == 'Biaya Pendidikan') checked @else class="check" @endif><label for="BiayaPendidikan">Biaya Pendidikan</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" id="TabunganAnak" @if ($tipe == 'Tabungan Anak') checked @else class="check" @endif><label for="TabunganAnak">Tabungan Anak</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" id="Lain-lain......" @if ($tipe == 'Lain-lain') checked @else class="check" @endif><label style="margin-top: 100px" for="Lain-lain......">Lain-lain..............</label>
+                <input type="checkbox" id="Zakat" @if ($tipe == 'Zakat') checked @else class="check" @endif><label for="Zakat" style="font-size: 13px">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq" style="font-size: 13px">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="Sodaqoh" @if ($tipe == 'Sodaqoh') checked @else class="check" @endif><label for="Sodaqoh" style="font-size: 13px">Sodaqoh</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="OperasiYayasan" @if ($tipe == 'Operasi Yayasan') checked @else class="check" @endif><label for="OperasiYayasan" style="font-size: 13px">Operasi Yayasan</label> &nbsp; &nbsp; &nbsp; &nbsp; <br>
+                <input type="checkbox" id="BiayaPendidikan" @if ($tipe == 'Biaya Pendidikan') checked @else class="check" @endif><label for="BiayaPendidikan" style="font-size: 13px">Biaya Pendidikan</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="TabunganAnak" @if ($tipe == 'Tabungan Anak') checked @else class="check" @endif><label for="TabunganAnak" style="font-size: 13px">Tabungan Anak</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="Lain-lain......" @if ($tipe == 'Lain-lain') checked @else class="check" @endif><label style="margin-top: 100px; font-size: 13px;" for="Lain-lain......">Lain-lain..............</label>
                 <h5 style="margin: 5px"><i>Assalamu'alaikum Wr. Wb.</i></h5>
             </div>
-            <div style="font-size: 15px;">
+            <div style="font-size: 14px;">
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 150px !important;">Telah Diterima Dari</td>
-                        <td>: {{ $nama }}</td>
+                        <td>: <b>{{ $nama }}</b></td>
                     </tr>
                     <tr>
                         <td style="width: 150px !important;">Alamat</td>
