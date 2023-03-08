@@ -9,7 +9,7 @@ use Livewire\WithFileUploads;
 
 class EditAnakAsuh extends Component
 {
-    public $idanak, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $keterangan, $status, $akta, $kartu_keluarga, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $foto;
+    public $tgl_masuk, $tgl_keluar, $idanak, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $foto, $pemilik_nohp;
     use WithFileUploads;
 
 
@@ -24,16 +24,18 @@ class EditAnakAsuh extends Component
             $this->tempat_lahir = $anak->tempat_lahir;
             $this->tanggal_lahir = Carbon::parse($anak->tanggal_lahir)->format('Y-m-d');
             $this->alamat = $anak->alamat;
-            $this->keterangan = $anak->keterangan;
+            $this->tipe = $anak->tipe;
             $this->status = $anak->status;
             $this->nama_ayah_kandung = $anak->nama_ayah_kandung;
             $this->nama_ibu_kandung = $anak->nama_ibu_kandung;
             $this->nohp_ortu = $anak->nohp_ortu;
             $this->status = $anak->status;
             $this->jenis_kelamin = $anak->jenis_kelamin;
-            $this->akta = $anak->akta;
-            $this->kartu_keluarga = $anak->kartu_keluarga;
             $this->foto = $anak->foto;
+            $this->pendidikan = $anak->pendidikan;
+            $this->pemilik_nohp = $anak->pemilik_nohp;
+            $this->tgl_masuk = $anak->tgl_masuk;
+            $this->tgl_keluar = $anak->tgl_keluar;
         }
     }
 
@@ -41,11 +43,8 @@ class EditAnakAsuh extends Component
     {
         $data = [
             'foto' => $this->foto,
-            'akta' => $this->akta,
-            'kartu_keluarga' => $this->kartu_keluarga,
             'status' => $this->status,
-            'jenis_kelamin' => $this->jenis_kelamin,
-            'keterangan' => $this->keterangan,
+            'jenis_kelamin' => $this->jenis_kelamin
         ];
 
         return view('livewire.edit-anak-asuh', $data);
@@ -57,6 +56,15 @@ class EditAnakAsuh extends Component
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'status' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nama_lengkap.required' => 'Nama lengkap harus diisi',
+            'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
+            'status.required' => 'Status harus diisi',
         ];
     }
 
@@ -78,20 +86,6 @@ class EditAnakAsuh extends Component
             $fotoAnak = $anak->foto;
         }
 
-        if ($this->akta != $anak->akta) {
-            unlink(public_path('storage/' . $anak->akta));
-            $akta = $this->akta->store('akta', 'public');
-        } else {
-            $akta = $anak->akta;
-        }
-
-        if ($this->kartu_keluarga != $anak->kartu_keluarga) {
-            unlink(public_path('storage/' . $anak->kartu_keluarga));
-            $kk = $this->kartu_keluarga->store('kartu-keluarga', 'public');
-        } else {
-            $kk = $anak->kartu_keluarga;
-        }
-
         AnakAsuh::where('id', $this->idanak)->update([
             'nama_lengkap' => $this->nama_lengkap,
             'jenis_kelamin' => $this->jenis_kelamin,
@@ -99,15 +93,17 @@ class EditAnakAsuh extends Component
             'tempat_lahir' => $this->tempat_lahir,
             'tanggal_lahir' => $this->tanggal_lahir,
             'alamat' => $this->alamat,
-            'keterangan' => $this->keterangan,
+            'tipe' => $this->tipe,
             'foto' => $fotoAnak,
-            'akta' => $akta,
-            'kartu_keluarga' => $kk,
+            'pendidikan' => $this->pendidikan,
             'nama_ayah_kandung' => $this->nama_ayah_kandung,
             'nama_ibu_kandung' => $this->nama_ibu_kandung,
             'nohp_ortu' => $this->nohp_ortu,
+            'pemilik_nohp' => $this->pemilik_nohp,
+            'tgl_masuk' => $this->tgl_masuk,
+            'tgl_keluar' => $this->tgl_keluar,
         ]);
 
-        return redirect()->to('anak-asuh')->with('message', 'Data anak asuh berhasil diubah');
+        return redirect()->to('profile-anak-asuh/' . $this->idanak)->with('message', 'Data anak asuh berhasil diubah');
     }
 }

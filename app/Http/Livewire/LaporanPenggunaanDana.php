@@ -61,7 +61,6 @@ class LaporanPenggunaanDana extends Component
 
     public function store()
     {
-        dd($this->tanggal);
         $this->validate();
 
         $removeChar = ['R', 'p', '.', ','];

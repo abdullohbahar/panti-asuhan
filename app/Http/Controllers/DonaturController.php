@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donatur;
 use Illuminate\Http\Request;
 
 class DonaturController extends Controller
@@ -13,5 +14,15 @@ class DonaturController extends Controller
         ];
 
         return view('donatur', $data);
+    }
+
+    public function exportDonaturPdf()
+    {
+        $data = [
+            'active' => 'donatur',
+            'donaturs' => Donatur::get()
+        ];
+
+        return view('export.export-donatur-pdf', $data);
     }
 }

@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('donations', function (Blueprint $table) {
-            $table->string('jumlah')->nullable();
+            $table->text('bank')->nullable();
+            $table->string('norek')->nullable();
         });
     }
 

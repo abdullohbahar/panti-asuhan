@@ -10,7 +10,7 @@ class AnakAsuhController extends Controller
     public function index()
     {
         $data = [
-            'active' => 'anak-asuh'
+            'active' => 'santri-dalam'
         ];
 
         return view('anak-asuh', $data);
@@ -19,7 +19,7 @@ class AnakAsuhController extends Controller
     public function create()
     {
         $data = [
-            'active' => 'anak-asuh'
+            'active' => 'create-santri'
         ];
 
         return view('create-anak-asuh', $data);
@@ -34,5 +34,46 @@ class AnakAsuhController extends Controller
         ];
 
         return view('edit-anak-asuh', $data);
+    }
+
+    public function childDocument($id)
+    {
+        $data = [
+            'active' => 'anak-asuh',
+            'id' => $id,
+        ];
+
+        return view('child-document', $data);
+    }
+
+    public function profileAnak($id)
+    {
+        $data = [
+            'active' => 'anak-asuh',
+            'id' => $id,
+        ];
+
+        return view('profil-anak', $data);
+    }
+
+    public function santriLuar()
+    {
+        $data = [
+            'active' => 'santri-luar',
+        ];
+
+        return view('data-santri-luar', $data);
+    }
+
+    public function exportSantriPdf($tipe)
+    {
+        $santris = AnakAsuh::where('tipe', $tipe)->get();
+
+        $data = [
+            'santris' => $santris,
+            'tipe' => $tipe
+        ];
+
+        return view('export.export-santri', $data);
     }
 }

@@ -84,9 +84,11 @@
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-left">
                         <h5>Saldo Tersedia : <b>{{ "Rp " . number_format($saldo, 2, ',', '.'); }}</b></h5>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-right">
-                        <a href="{{ route('cetak.tabungan.anak.asuh',$savings[0]->saving_id) }}" class="btn btn-info">Cetak</a>
-                    </div>
+                    @if ($count > 0)
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-right">
+                            <a href="{{ route('cetak.tabungan.anak.asuh',$savings[0]->saving_id) }}" class="btn btn-info">Cetak</a>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
@@ -95,7 +97,7 @@
                         <table class="table-data">
                             <thead>
                                 <tr>
-                                    <th scope="col" rowspan="2" style="width: 50px !important">#</th>
+                                    <th scope="col" rowspan="2">#</th>
                                     <th scope="col" rowspan="2">Tanggal</th>
                                     <th scope="col" colspan="2">Transaksi</th>
                                     <th scope="col" rowspan="2">Saldo</th>

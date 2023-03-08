@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\BuktiSumbangan;
 use App\Models\Donation;
+use App\Models\GoodsDonation;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -15,8 +16,8 @@ class ProofOfDonation extends Component
 
     public function render()
     {
-        $media = BuktiSumbangan::where('donation_id', $this->idproof)->get();
-        $from = Donation::find($this->idproof);
+        $media = BuktiSumbangan::where('goods_donations_id', $this->idproof)->get();
+        $from = GoodsDonation::find($this->idproof);
 
         $data = [
             'files' => $media,
@@ -33,6 +34,13 @@ class ProofOfDonation extends Component
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'file.required' => 'Bukti harus diisi',
+        ];
+    }
+
     public function updated($fields)
     {
         $this->validateOnly($fields);
@@ -42,12 +50,11 @@ class ProofOfDonation extends Component
     {
         $validateData = $this->validate();
 
-        $photo = $this->file->store('photo', 'public');
-
+        $photo = $this->file->store('photo/donasi', 'public');
 
         BuktiSumbangan::create([
-            'donation_id' => $this->idproof,
-            'file' => $photo
+            'goods_donations_id' => $this->idproof,
+            'file' => $photo,
         ]);
 
         $this->resetInput();
@@ -76,6 +83,6 @@ class ProofOfDonation extends Component
 
         BuktiSumbangan::destroy($this->idfile);
 
-        $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Bukti Donasi Berhasil Dihapus']);
     }
 }

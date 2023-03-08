@@ -41,7 +41,7 @@
   @media screen and (max-width: 600px) {
     .table-data {
         border: 0;
-    
+    }
     .table-data caption {
         font-size: 1.3em;
     }
@@ -105,6 +105,26 @@
 @endsection
 
 @push('addons-js')
+@if (session()->has('message'))
+    <script>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: '{{ session('message') }}'
+      })
+    </script>
+@endif
 <script>
 
   // Show modal add donatur

@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Data Anak Asuh</h1>
+          <h1>Data Santri Dalam</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Data Anak Asuh</li>
+            <li class="breadcrumb-item active">Data Santri Dalam</li>
           </ol>
         </div>
       </div>
@@ -24,17 +24,9 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <div class="row justify-content-end">
-                    <div class="col-4 text-right">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <button wire:click="exportExcel" class="btn btn-warning btn-sm btn-block"><b><i class="fas fa-print"></i> Export</b></button>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <a href="{{ route('tambah.anak.asuh') }}" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Data Anak Asuh</b></a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-sm-12 col-md-6">
+                    <button wire:click="exportExcel" class="btn btn-warning btn-sm"><b><i class="fas fa-print"></i> Export Excel</b></button>
+                    <a href="{{ url('export-santri/Santri Dalam') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                 </div>
             </div>
             <div class="card-body">
@@ -46,11 +38,11 @@
                         <table class="table-data">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 50px !important">#</th>
+                                    <th scope="col">#</th>
                                     <th scope="col">Foto</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Tempat, Tanggal Lahir</th>
-                                    <th scope="col" style="width: 150px !important">Aksi</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,11 +65,14 @@
                                             {{ $child->nama_lengkap }}
                                         </td>
                                         <td data-label="Tempat, Tanggal Lahir">
-                                            {!! $child->tempat_lahir !!}, {{ $child->tanggal_lahir }}
+                                            {{ $child->tempat_lahir }}, {{ $child->tanggal_lahir }}
                                         </td>
                                         <td data-label="Aksi">
-                                            <a href="{{ route('edit.data.anak.asuh',$child->id) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data Anak Asuh"><i class="fas fa-pencil-alt"></i></a>
-                                            <button wire:click="deleteConfirmation('{{ $child->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Anak Asuh"><i class="fas fa-trash-alt"></i></button>
+                                            <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                                                <a href="{{ route('profile.anak.asuh',$child->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Santri Dalam"><i class="fas fa-user"></i> Profil Anak</a>
+                                                {{-- <a href="{{ route('berkas.anak.asuh',$child->id) }}" class="btn btn-info btn-sm my-2" data-toggle="tooltip" data-placement="top" title="Unggah Berkas"><i class="fas fa-upload"></i> Unggah Berkas</a> --}}
+                                                <button wire:click="deleteConfirmation('{{ $child->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Santri Dalam"><i class="fas fa-trash"></i> Hapus</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

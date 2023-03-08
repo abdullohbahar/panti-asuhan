@@ -4,13 +4,14 @@ namespace App\Http\Livewire;
 
 use App\Models\AnakAsuh;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class CreateAnakAsuh extends Component
 {
     use WithFileUploads;
-    public $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $keterangan, $status, $akta, $kartu_keluarga, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak;
+    public $tgl_masuk, $tgl_keluar, $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak, $pemilik_nohp;
 
     public function render()
     {
@@ -23,6 +24,15 @@ class CreateAnakAsuh extends Component
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'status' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nama_lengkap.required' => 'Nama harus diisi',
+            'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
+            'status.required' => 'Status harus diisi',
         ];
     }
 
@@ -41,18 +51,6 @@ class CreateAnakAsuh extends Component
             $fotoAnak = null;
         }
 
-        if ($this->akta) {
-            $akta = $this->akta->store('akta', 'public');
-        } else {
-            $akta = null;
-        }
-
-        if ($this->kartu_keluarga) {
-            $kk = $this->kartu_keluarga->store('kartu-keluarga', 'public');
-        } else {
-            $kk = null;
-        }
-
         $this->tanggal_lahir = Carbon::parse($this->tanggal_lahir)->format('d-m-Y');
 
         AnakAsuh::create([
@@ -62,15 +60,27 @@ class CreateAnakAsuh extends Component
             'tempat_lahir' => $this->tempat_lahir,
             'tanggal_lahir' => $this->tanggal_lahir,
             'alamat' => $this->alamat,
-            'keterangan' => $this->keterangan,
+            'tipe' => $this->tipe,
             'foto' => $fotoAnak,
-            'akta' => $akta,
-            'kartu_keluarga' => $kk,
+            'pendidikan' => $this->pendidikan,
             'nama_ayah_kandung' => $this->nama_ayah_kandung,
             'nama_ibu_kandung' => $this->nama_ibu_kandung,
             'nohp_ortu' => $this->nohp_ortu,
+            'pemilik_nohp' => $this->pemilik_nohp,
+            'tgl_masuk' => $this->tgl_masuk,
+            'tgl_keluar' => $this->tgl_keluar,
         ]);
 
-        return redirect()->to('anak-asuh')->with('message', 'Data anak asuh berhasil ditambahkan');
+        $role = Auth::user()->role;
+
+        if ($this->tipe == 'Santri Dalam') {
+            if ($role == 'admin-yayasan') {
+                return redirect()->route('santri.dalam.admin.yayasan')->with('message', 'Data santri berhasil ditambahkan');
+            }
+        } else if ($this->tipe == 'Santri Luar') {
+            if ($role == 'admin-yayasan') {
+                return redirect()->route('santri.luar.admin.yayasan')->with('message', 'Data santri berhasil ditambahkan');
+            }
+        }
     }
 }

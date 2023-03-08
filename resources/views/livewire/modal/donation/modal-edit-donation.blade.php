@@ -1,9 +1,9 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="modal-edit-donation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="modal-edit-donation" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ubah Donatur</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ubah Donasi</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,14 +13,85 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-                <label for="">Nama Donatur</label>
-                <select name="donatur_id" wire:model="donatur_id" style="width: 100%" class="form-control select2 @error('donatur_id') is-invalid @enderror">
-                  <option>-- Pilih Donatur --</option>
-                  @foreach ($donaturs as $donatur)
-                      <option value="{{ $donatur->id }}">{{ $donatur->nama }}</option>
-                  @endforeach
-                </select>
-                @error('donatur_id')
+                  <label for="">Nama Donatur</label>
+                  <input type="text" wire:model="nama_donatur" name="nama_donatur" class="form-control @error("nama_donatur") is-invalid @enderror" required>
+                  @error("nama_donatur")
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                  @enderror
+              </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="">Nomor HP Donatur</label>
+                    <input type="text" wire:model="no_hp" name="no_hp" class="form-control">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Alamat Donatur</label>
+                    <textarea type="text" wire:model="alamat" class="form-control @error("alamat") is-invalid @enderror"></textarea>
+                    @error("alamat")
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-12 my-2">
+              <h5>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" wire:model="tipe" id="Zakat" value="Zakat">
+                            <label class="form-check-label" for="Zakat">Zakat</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" wire:model="tipe" id="Infaq" value="Infaq">
+                            <label class="form-check-label" for="Infaq">Infaq</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" wire:model="tipe" id="Sodaqoh" value="Sodaqoh">
+                            <label class="form-check-label" for="Sodaqoh">Sodaqoh</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" wire:model="tipe" id="OperasiYayasan" value="Operasi Yayasan">
+                            <label class="form-check-label" for="OperasiYayasan">Operasi Yayasan</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" wire:model="tipe" id="BiayaPendidikan" value="Biaya Pendidikan">
+                            <label class="form-check-label" for="BiayaPendidikan">Biaya Pendidikan</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" wire:model="tipe" id="TabunganAnak" value="Tabungan Anak">
+                            <label class="form-check-label" for="TabunganAnak">Tabungan Anak</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" wire:model="tipe" id="Lain-lain" value="Lain-lain">
+                            <label class="form-check-label" for="Lain-lain">Lain-lain</label>
+                        </div>
+                    </div>
+                </div>
+              </h5>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="">Tanggal Donasi</label>
+                <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror">
+                @error('tanggal_donasi')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
@@ -30,8 +101,8 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Nominal</label>
-                <input type="text" wire:model="nominal" class="form-control @error('nominal') is-invalid @enderror" id="nominal2" placeholder="Nominal" autofocus>
-                @error('nominal')
+                <input type="text" wire:model="pemasukan" class="form-control @error('pemasukan') is-invalid @enderror" id="nominal2" placeholder="Nominal" autofocus>
+                @error('pemasukan')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
@@ -40,9 +111,9 @@
             </div>
             <div class="col-12">
               <div class="form-group">
-                <label for="">Tanggal Donasi</label>
-                <input type="date" wire:model="tanggal_sumbangan" class="form-control @error('tanggal_sumbangan') is-invalid @enderror" autofocus>
-                @error('tanggal_sumbangan')
+                <label for="">Terbilang</label>
+                <input type="text" wire:model="terbilang" class="form-control @error('terbilang') is-invalid @enderror" id="nominal2" placeholder="Nominal" autofocus>
+                @error('terbilang')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>

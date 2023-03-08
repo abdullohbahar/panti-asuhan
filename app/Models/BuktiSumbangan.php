@@ -12,7 +12,8 @@ class BuktiSumbangan extends Model
     use HasUuids;
 
     protected $fillable = [
-        'donation_id',
-        'file'
+        'goods_donations_id',
+        'file',
+        'keterangan'
     ];
 }

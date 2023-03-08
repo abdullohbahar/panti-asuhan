@@ -93,6 +93,17 @@
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
+                                    <label>Pendidikan</label>
+                                    <input type="text" wire:model="pendidikan" class="form-control @error("pendidikan") is-invalid @enderror" id="">
+                                    @error("pendidikan")
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
                                     <label>Alamat</label>
                                     <textarea wire:model="alamat" class="form-control @error("alamat") is-invalid @enderror"></textarea>
                                     @error("alamat")
@@ -103,44 +114,72 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="form-group">
-                                    <label>Keterangan</label>
-                                    <textarea wire:model="keterangan" class="form-control @error("keterangan") is-invalid @enderror">{!! $keterangan !!}</textarea>
-                                    @error("keterangan")
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select wire:model="status" class="form-control @error("status") is-invalid @enderror" id="">
+                                    <option value="">-- Pilih Status --</option>
+                                    <option value="Yatim">Yatim</option>
+                                    <option value="Piatu">Piatu</option>
+                                    <option value="Yatim Piatu">Yatim Piatu</option>
+                                </select>
+                                @error("status")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
-                                    @enderror
-                                </div>
+                                @enderror
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select wire:model="status" class="form-control @error("status") is-invalid @enderror" id="">
-                                        <option value="">-- Pilih Status --</option>
-                                        @if ($status == "Aktif")
-                                            <option value="Aktif" selected>Aktif</option>
-                                            <option value="Non-Aktif">Non-Aktif</option>
-                                            @else
-                                            <option value="Aktif">Aktif</option>
-                                            <option value="Non-Aktif" selected>Non-Aktif</option>
-                                        @endif
-                                    </select>
-                                    @error("status")
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Tipe</label>
+                                <select wire:model="tipe" class="form-control @error("tipe") is-invalid @enderror" id="">
+                                    <option value="">-- Pilih Tipe --</option>
+                                    <option value="Santri Dalam">Santri Dalam</option>
+                                    <option value="Santri Luar">Santri Luar</option>
+                                </select>
+                                @error("tipe")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
-                                    @enderror
-                                </div>
+                                @enderror
                             </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Tanggal Masuk</label>
+                                <input type="date" class="form-control" wire:model="tgl_masuk" id="">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Tanggal Keluar</label>
+                                <input type="date" class="form-control" wire:model="tgl_keluar" id="">
+                            </div>
+                        </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
-                                    <label>No Handphone Orang Tua</label>
+                                    <label>No Handphone</label>
                                     <input type="text" wire:model="nohp_ortu" class="form-control @error("nohp_ortu") is-invalid @enderror" id="">
                                     @error("nohp_ortu")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label>Pemilik No Handphone</label>
+                                    {{-- <select name="pemilik_nohp" class="form-control" id="">
+                                        <option value="Ayah">Ayah</option>
+                                        <option value="Ibu">Ibu</option>
+                                        <option value="Lain-lain">Lain-lain</option>
+                                    </select> --}}
+                                    <input type="text" wire:model="pemilik_nohp" class="form-control @error("pemilik_nohp") is-invalid @enderror" id="">
+                                    @error("pemilik_nohp")
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
                             </div>
@@ -165,34 +204,6 @@
                                     </div>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="form-group">
-                                    <label>Akta Anak *<i>Biarkan kosong jika tidak ingin diubah</i></label>
-                                    <input type="file" wire:model="akta" class="form-control @error("akta") is-invalid @enderror">
-                                    @error("akta")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                                @if ($akta)
-                                    <a target="_blank" class="btn btn-info btn-block" href="{{ asset('storage/'.$akta) }}">Lihat Akta Yang Telah Diupload</a>
-                                @endif
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="form-group">
-                                    <label>Kartu Keluarga *<i>Biarkan kosong jika tidak ingin diubah</i></label>
-                                    <input type="file" wire:model="kartu_keluarga" class="form-control @error("kartu_keluarga") is-invalid @enderror">
-                                    @error("kartu_keluarga")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                                @if ($kartu_keluarga)
-                                    <a target="_blank" class="btn btn-info btn-block" href="{{ asset('storage/'.$kartu_keluarga) }}">Lihat Kartu Keluarga Yang Telah Diupload</a>
-                                @endif
                             </div>
                             <div class="col-12 mt-3">
                                 <button type="submit" class="btn btn-success btn-block">Ubah Data Anak</button>

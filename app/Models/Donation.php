@@ -13,12 +13,19 @@ class Donation extends Model
 
     protected $fillable = [
         'donatur_id',
-        'donation_type_id',
-        'bukti_sumbangan_id',
-        'nominal',
+        'jenis_donasi',
+        'terbilang',
+        'pemasukan',
+        'pengeluaran',
+        'saldo',
         'keterangan',
-        'tanggal_sumbangan',
-        'jumlah',
+        'tipe',
+        'tanggal_donasi',
+        'urutan',
+        'transaksi',
+        'no',
+        'norek',
+        'bank'
     ];
 
     public function donatur()

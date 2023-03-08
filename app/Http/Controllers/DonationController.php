@@ -11,7 +11,7 @@ class DonationController extends Controller
     public function index()
     {
         $data = [
-            'active' => 'donasi',
+            'active' => 'data-donasi-tunai',
         ];
 
         return view('donation', $data);
@@ -43,5 +43,68 @@ class DonationController extends Controller
         ];
 
         return view('laporan-penggunaan-dana', $data);
+    }
+
+    public function pilih()
+    {
+        $data = [
+            'active' => 'donasi',
+        ];
+
+        return view('jenis-donasi', $data);
+    }
+
+    public function donasiTunai()
+    {
+        $data = [
+            'active' => 'donasi',
+        ];
+
+        return view('donasi-tunai', $data);
+    }
+
+    public function donasiTransfer()
+    {
+        $data = [
+            'active' => 'donasi-transfer',
+        ];
+
+        return view('donasi-transfer', $data);
+    }
+
+    public function dataDonasiTransfer()
+    {
+        $data = [
+            'active' => 'data-donasi-transfer',
+        ];
+
+        return view('data-donasi-transfer', $data);
+    }
+
+    public function pengeluaran()
+    {
+        $data = [
+            'active' => 'pengeluaran',
+        ];
+
+        return view('pengeluaran', $data);
+    }
+
+    public function laporan()
+    {
+        $data = [
+            'active' => 'laporan',
+        ];
+
+        return view('laporan-pemasukan-pengeluaran', $data);
+    }
+
+    public function dataPengeluaran()
+    {
+        $data = [
+            'active' => 'data-pengeluaran',
+        ];
+
+        return view('data-pengeluaran', $data);
     }
 }

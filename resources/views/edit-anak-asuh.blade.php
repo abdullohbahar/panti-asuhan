@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-Ubah Data Anak Asuh
+Ubah Santri
 @endsection
 
 @push('addons-css')

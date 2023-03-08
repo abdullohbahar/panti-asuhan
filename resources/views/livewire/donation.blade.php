@@ -1,6 +1,5 @@
 <div>
     {{-- Modal --}}
-    @include('livewire.modal.donation.modal-add-donation-money')
     @include('livewire.modal.donation.modal-edit-donation')
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -26,22 +25,7 @@
             <div class="card-header">
                 <div class="row justify-content-between">
                     <div class="col-8">
-                        <h5><b>Donasi Berupa Dana</b></h5>
-                    </div>
-                    <div class="col-4 text-right">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <button wire:click="exportExcel" id="print" class="btn btn-warning btn-sm btn-block mb-2"><i class="fas fa-print"></i> Export</button>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <button id="btnAddMoney" wire:click="resetInput" class="btn btn-primary btn-sm btn-block mb-2"><b><i class="fas fa-plus"></i> Donasi</b></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <h5>Total Donasi Terkumpul: <b>{{ "Rp " . number_format($totalDana->total, 2, ',', '.'); }}</b></h5>
+                        <h5><b>Donasi Berupa Tunai</b></h5>
                     </div>
                 </div>
             </div>
@@ -74,7 +58,7 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
-                            <a href="{{ route('donation') }}" class="btn btn-warning btn-block">Reset Filter</a>
+                            <a href="{{ route('donation.tunai') }}" class="btn btn-warning btn-block">Reset Filter</a>
                         </div>
                     </div>
                 </div>
@@ -88,30 +72,30 @@
                         <table class="table-data">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 50px !important">#</th>
+                                    <th scope="col">#</th>
                                     <th scope="col">Nama Donatur</th>
                                     <th scope="col">Nominal</th>
-                                    <th scope="col">Keterangan</th>
                                     <th scope="col">Tanggal Donasi</th>
-                                    <th scope="col" style="width: 150px !important">Aksi</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if ($count == 0)
                                     <tr>
-                                        <td colspan="6">Data Not Found</td>
+                                        <td colspan="5">Data Not Found</td>
                                     </tr>
                                 @endif
                                 @foreach ($donations as $index => $donation)
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Nama Donatur">{{ $donation->donatur->nama }}</td>
-                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->nominal, 2, ',', '.'); }}</td>
-                                        <td data-label="Keterangan">{{ $donation->keterangan }}</td>
-                                        <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_sumbangan)) }}</td>
+                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}</td>
+                                        <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
                                         <td data-label="Aksi">
-                                            <button wire:click="show('{{ $donation->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
-                                            {{-- <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button> --}}
+                                            {{-- <button wire:click="sendConfirmation('{{ $donation->id }}')" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fab fa-whatsapp"></i></button> --}}
+                                            <button wire:click="printInvoice('{{ $donation->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fas fa-print"></i></button>
+                                            <button id="edit" wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -126,10 +110,11 @@
         </div>
     </div>
   </section>
-  <!-- /.content -->
 </div>
 
 @push('component-scripts')
+    <script src="https://unpkg.com/@develoka/angka-terbilang-js/index.min.js"></script>
+
     <script>
         $(document).on("livewire:load", function(){
             $('.select2').select2();
@@ -145,6 +130,14 @@
 
             Livewire.hook('message.processed', (message, component) => {
                 $('.select2').select2();
+            })
+
+            $("body").on("keyup","#nominal2",() => {
+                var val = $("#nominal2").val()
+                var angka = val.replace(/,.*|[^0-9]/g, '')
+                var terbilang = angkaTerbilang(angka)
+                @this.terbilang = terbilang + ' rupiah'
+                $("#terbilang").val(terbilang)
             })
         })
 
@@ -173,6 +166,13 @@
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
+
+        $("body").on("click", "#edit", function(){
+            var jenis = $(this).data("jenis");
+            if(jenis == "Transfer"){
+                
+            }
+        })
 
     </script>
 @endpush

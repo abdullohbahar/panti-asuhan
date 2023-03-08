@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="modal-edit-report-fund" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="modal-edit-report-fund" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,7 +14,7 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Nominal</label>
-                <input type="text" wire:model="nominal" class="form-control @error('nominal') is-invalid @enderror" id="nominal3" placeholder="Nominal" autofocus>
+                <input type="text" wire:model="nominal" class="form-control @error('nominal') is-invalid @enderror" id="nominal2" placeholder="Nominal" autofocus>
                 @error('nominal')
                   <div class="invalid-feedback">
                     {{ $message }}

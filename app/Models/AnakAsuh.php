@@ -18,12 +18,19 @@ class AnakAsuh extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'alamat',
-        'keterangan',
+        'tipe',
         'status',
-        'akta',
-        'kartu_keluarga',
+        'pendidikan',
         'nama_ayah_kandung',
         'nama_ibu_kandung',
-        'nohp_ortu'
+        'nohp_ortu',
+        'pemilik_nohp',
+        'tgl_masuk',
+        'tgl_keluar',
     ];
+
+    public function documents()
+    {
+        return $this->hasMany(ChildDocument::class);
+    }
 }

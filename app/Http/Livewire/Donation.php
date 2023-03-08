@@ -2,20 +2,23 @@
 
 namespace App\Http\Livewire;
 
-use App\Exports\DonationExport;
-use App\Models\Donation as ModelsDonation;
+use PDF;
+use Carbon\Carbon;
 use App\Models\Donatur;
-use App\Models\TotalDanaDonation;
+use App\Models\Invoice;
 use Livewire\Component;
 use Livewire\WithPagination;
-use PDF;
-
+use App\Exports\DonationExport;
+use App\Models\TotalDanaDonation;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use App\Models\Donation as ModelsDonation;
 
 class Donation extends Component
 {
-    public $donation_id, $donatur_id, $nominal, $tanggal_sumbangan, $keterangan, $search, $date1, $date2, $filterDonaturId;
+    public $donation_id, $donatur_id, $pemasukan, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $tipe, $terbilang, $nama_donatur, $no_hp, $alamat;
     public $donation_type_id = "Dana";
-    protected $listeners = ['deleteConfirmed' => 'destroy'];
+    protected $listeners = ['deleteConfirmed' => 'destroy', 'sendConfirmed' => 'send'];
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -29,17 +32,17 @@ class Donation extends Component
 
         $donaturs = Donatur::orderBy('nama', 'asc')->get();
 
-        $query = ModelsDonation::where('donation_type_id', "Dana")->whereHas('donatur', function ($q) use ($search) {
+        $query = ModelsDonation::where('jenis_donasi', "tunai")->whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%');
         })->when($this->date1, function ($query) use ($date1, $date2) {
-            $query->whereBetween('tanggal_sumbangan', [$this->date1, $this->date2]);
+            $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
         })->when($this->filterDonaturId, function ($query) use ($filterDonaturId) {
             $query->whereHas('donatur', function ($query) use ($filterDonaturId) {
                 $query->where('id', $this->filterDonaturId);
             });
-        });
+        })->orderBy('tanggal_donasi', 'desc');
 
-        $donations = $query->paginate(10);
+        $donations = $query->orderBy('tanggal_donasi', 'asc')->paginate(10);
         $count = $donations->count();
         $totalDonation = TotalDanaDonation::first();
 
@@ -56,10 +59,9 @@ class Donation extends Component
     public function rules()
     {
         return [
-            'donatur_id' => 'required',
-            'donation_type_id' => 'required',
-            'nominal' => 'required',
-            'tanggal_sumbangan' => 'required',
+            'nama_donatur' => 'required',
+            'pemasukan' => 'required',
+            'tanggal_donasi' => 'required',
             'keterangan' => ''
         ];
     }
@@ -67,7 +69,9 @@ class Donation extends Component
     public function messages()
     {
         return [
-            'nominal.required' => 'Nominal harus diisi'
+            'pemasukan.required' => 'Nominal harus diisi',
+            'nama_donatur.required' => 'Donatur harus diisi',
+            'tanggal_donasi' => 'Tanggal harus diisi',
         ];
     }
 
@@ -76,36 +80,34 @@ class Donation extends Component
         $this->validateOnly($fields);
     }
 
-    public function store()
-    {
-        $validateData = $this->validate();
-
-        $removeChar = ['R', 'p', '.', ','];
-
-        $validateData['nominal'] = str_replace($removeChar, "", $validateData['nominal']);
-
-        ModelsDonation::create($validateData);
-        $this->resetInput();
-        $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Ditambahkan']);
-    }
-
     public function resetInput()
     {
-        $this->donatur_id = '';
-        $this->nominal = '';
-        $this->tanggal_sumbangan = '';
+        $this->nama_donatur = '';
+        $this->tanggal_donasi = '';
+        $this->keterangan = '';
+        $this->pemasukan = '';
     }
 
-    public function show($id)
+    public function show($id, $donaturs)
     {
         $donation = ModelsDonation::find($id);
 
         if ($donation) {
             $this->donation_id = $donation->id;
-            $this->donatur_id = $donation->donatur_id;
-            $this->nominal = "Rp " . number_format($donation->nominal, 0, '', '.');
-            $this->tanggal_sumbangan = $donation->tanggal_sumbangan;
+            $this->pemasukan = "Rp. " . number_format($donation->pemasukan, 0, '', '.');
+            $this->tanggal_donasi = $donation->tanggal_donasi;
+            $this->terbilang = $donation->terbilang;
             $this->keterangan = $donation->keterangan;
+            $this->tipe = $donation->tipe;
+        }
+
+        $donatur = Donatur::find($donaturs);
+
+        if ($donatur) {
+            $this->donatur_id = $donatur->id;
+            $this->nama_donatur = $donatur->nama;
+            $this->no_hp = $donatur->no_hp;
+            $this->alamat = $donatur->alamat;
         }
     }
 
@@ -114,37 +116,112 @@ class Donation extends Component
         // Validate Data
         $validateData = $this->validate();
 
-        // Ambil nominal donasi berdasarkan id
-        $nominalDonation = ModelsDonation::where('id', $this->donation_id)->get('nominal');
-
         // hapus character
         $removeChar = ['R', 'p', '.', ','];
-        $nominal = str_replace($removeChar, "", $this->nominal);
+        $pemasukan = str_replace($removeChar, "", $this->pemasukan);
 
         // Update data
         ModelsDonation::where('id', $this->donation_id)->update([
             'donatur_id' => $this->donatur_id,
-            'nominal' => $nominal,
-            'tanggal_sumbangan' => $this->tanggal_sumbangan,
+            'pemasukan' => $pemasukan,
+            'tanggal_donasi' => $this->tanggal_donasi,
             'keterangan' => $this->keterangan,
+            'tipe' => $this->tipe,
+            'terbilang' => $this->terbilang,
         ]);
 
-        // Ambil total donas
-        $queryTotal = TotalDanaDonation::where('id', 1);
-        $getTotal = $queryTotal->get();
-
-        // kurangi total donasi yang ada dengan nominal donasi berdasarkan id sebelum diubah
-        $countTotal = $getTotal[0]->total - $nominalDonation[0]->nominal;
-
-        // tambah total donasi dengan nominal donasi berdasarkan id setelah diubah 
-        $total = $countTotal + $nominal;
-
-        // Update total donasi
-        $updateTotal = $queryTotal->update([
-            'total' => $total
+        Donatur::where('id', $this->donatur_id)->update([
+            'nama' => $this->nama_donatur,
+            'no_hp' => $this->no_hp,
+            'alamat' => $this->alamat
         ]);
 
-        $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
+        $data = [
+            'donation_id' => $this->donation_id,
+            'donatur_id' => $this->donatur_id,
+            'pemasukan' => $pemasukan,
+            'tanggal_donasi' => $this->tanggal_donasi,
+            'keterangan' => $this->keterangan,
+            'tipe' => $this->tipe,
+            'terbilang' => $this->terbilang,
+        ];
+
+        $encode = json_encode($data);
+
+        // $this->dispatchBrowserEvent('close-modal', ['message' => 'Donasi Berhasil Diubah']);
+        return redirect()->to('update-tanda-terima-tunai/' . $encode)->with('message', 'Donasi berhasil ditambahkan');
+    }
+
+    public function updateSendWa($data)
+    {
+        // membuat bulan menjadi romawi
+        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
+        $bln = $array_bln[date('n')];
+
+        $data = json_decode($data);
+        $donatur = Donatur::where('id', $data->donatur_id)->first();
+        $date = date(now());
+
+        $getData = ModelsDonation::find($data->donation_id);
+
+        $no = $getData->no;
+
+        $invoice = Invoice::where('donation_id', $data->donation_id)->first();
+
+        if ($invoice) {
+            if (File::exists($invoice->file)) {
+                unlink($invoice->file);
+            }
+            $invoice->delete();
+        }
+
+        $image_path = public_path('logo/kop.png');
+
+        $image_data = base64_encode(file_get_contents($image_path));
+
+        $data = [
+            'id' => $data->donation_id,
+            'nama' => $donatur->nama,
+            'no' => $no,
+            'nominal' => $data->pemasukan,
+            'terbilang' => $data->terbilang,
+            'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
+            'tipe' => $data->tipe,
+            'keterangan' => $data->keterangan,
+            'alamat' => $donatur->alamat,
+            'no_hp' => $donatur->no_hp,
+            'bulan' => $bln,
+            'image' => $image_data
+        ];
+
+        $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
+
+        $pdf = PDF::loadView('invoice', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+        $pdf->save($name);
+
+        Invoice::create([
+            'donation_id' => $data['id'],
+            'file' => $name
+        ]);
+
+        $role = Auth::user()->role;
+        if ($role == 'admin-yayasan') {
+            return redirect()->route('donation.tunai.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
+        }
+    }
+
+    public function sendConfirmation($id)
+    {
+        $this->donation_id = $id;
+        $this->dispatchBrowserEvent('show-send-confirmation');
+    }
+
+    public function printInvoice($id)
+    {
+        $invoice = Invoice::where('donation_id', $id)->first();
+        return response()->download(public_path($invoice->file));
     }
 
     public function deleteConfirmation($id)
@@ -162,46 +239,5 @@ class Donation extends Component
     public function search()
     {
         $this->resetPage();
-    }
-
-    public function print()
-    {
-        $search = '';
-        $date1 = '';
-        $date2 = '';
-        $filterDonaturId = '';
-
-        $query = ModelsDonation::where('donation_type_id', "Dana")->whereHas('donatur', function ($q) use ($search) {
-            $q->where('nama', 'like', '%' . $this->search . '%');
-        })->when($this->date1, function ($query) use ($date1, $date2) {
-            $query->whereBetween('tanggal_sumbangan', [$this->date1, $this->date2]);
-        })->when($this->filterDonaturId, function ($query) use ($filterDonaturId) {
-            $query->whereHas('donatur', function ($query) use ($filterDonaturId) {
-                $query->where('id', $this->filterDonaturId);
-            });
-        });
-
-        $donations = $query->get();
-
-        $total = $query->sum('nominal');
-
-
-        $data = [
-            'donations' => $donations,
-            'total' => $total
-        ];
-
-        // dd($data);
-
-        // return view('cetak-donasi-dana', $data);
-
-        $pdf = PDF::loadView('cetak-donasi-dana', $data);
-
-        return $pdf->download('Laporan Donasi.pdf');
-    }
-
-    public function exportExcel()
-    {
-        return (new DonationExport)->download('Laporan Donasi.xlsx');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use Carbon\Carbon;
 use App\Models\AnakAsuh;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -22,6 +23,13 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class AnakAsuhExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithEvents, WithColumnWidths
 {
 
+    protected $tipe = '';
+
+    public function __construct($tipe)
+    {
+        $this->tipe = $tipe;
+    }
+
     protected $no = 1;
 
     public function headings(): array
@@ -32,11 +40,17 @@ class AnakAsuhExport implements FromCollection, WithHeadings, WithMapping, Shoul
             'Nama',
             'Jenis Kelamin',
             'Tempat, Tanggal Lahir',
+            'Usia',
+            'Pendidikan',
+            'Tipe',
             'Alamat',
             'Status',
             'Nama Ayah Kandung',
             'Nama Ibu Kandung',
-            'Nomor HP Orang Tua',
+            'Nomor HP',
+            'Pemilik Nomor HP',
+            'Tanggal Masuk',
+            'Tanggal Keluar',
             'Keterangan',
         ];
     }
@@ -49,18 +63,24 @@ class AnakAsuhExport implements FromCollection, WithHeadings, WithMapping, Shoul
             $item->nama_lengkap,
             $item->jenis_kelamin,
             $item->tempat_lahir . ', ' . $item->tanggal_lahir,
+            Carbon::parse($item->tanggal_lahir)->age,
+            $item->pendidikan,
+            $item->tipe,
             $item->alamat,
             $item->status,
             $item->nama_ayah_kandung,
             $item->nama_ibu_kandung,
             $item->nohp_ortu,
+            $item->pemilik_nohp,
+            $item->tgl_masuk,
+            $item->tgl_keluar,
             $item->keterangan,
         ];
     }
 
     public function collection()
     {
-        return AnakAsuh::all();
+        return AnakAsuh::where('tipe', $this->tipe)->get();
 
         // return view('cetak-data-anak-asuh', [
         //     'anakAsuhs' => $anakAsuhs,

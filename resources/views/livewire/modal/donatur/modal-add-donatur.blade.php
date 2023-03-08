@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="modal-add-donatur" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="modal-add-donatur" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,6 +16,17 @@
                 <label for="">Nama Donatur</label>
                 <input type="text" wire:model="nama" class="form-control @error('nama') is-invalid @enderror" id="" placeholder="Nama Donatur" autofocus>
                 @error('nama')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="">Nomor HP</label>
+                <input type="text" wire:model="no_hp" class="form-control @error('no_hp') is-invalid @enderror" id="" placeholder="Nomor HP Donatur" autofocus>
+                @error('no_hp')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>

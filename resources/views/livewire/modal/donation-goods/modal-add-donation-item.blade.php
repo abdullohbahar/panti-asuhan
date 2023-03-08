@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Donasi Berupa Dana</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Donasi</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -30,15 +30,15 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="">Tanggal Donasi</label>
-                <input type="date" wire:model="tanggal_sumbangan" class="form-control @error('tanggal_sumbangan') is-invalid @enderror" autofocus>
-                @error('tanggal_sumbangan')
+                <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror" autofocus>
+                @error('tanggal_donasi')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
                 @enderror
               </div>
             </div>
-            <div class="col-12">
+            {{-- <div class="col-12">
               <div class="form-group">
                 <label>Jumlah</label>
                 <div class="input-group">
@@ -51,7 +51,7 @@
                   </select>
                 </div>
               </div>
-            </div>
+            </div> --}}
             <div class="col-12">
               <div class="form-group">
                   <label>Keterangan</label>

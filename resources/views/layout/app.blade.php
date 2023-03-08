@@ -74,111 +74,11 @@
       <div class="sidebar">
 
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-            <li class="nav-item">
-              <a href="{{ route('dashboard') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Dashboard
-                </p>
-              </a>
-            </li>
-            <li class="nav-item {{ $active == 'anak-asuh' || $active == 'tabungan' ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                  Anak Asuh
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{ route('anak.asuh') }}" class="nav-link {{ $active == 'anak-asuh' ? 'active' : '' }}">
-                    <i class="nav-icon far fa-circle"></i>
-                    <p>
-                      Data Anak Asuh
-                    </p>
-                  </a>
-                </li>
-                {{-- <li class="nav-item">
-                  <a href="{{ route('donation.type') }}" class="nav-link {{ $active == 'tipe' ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tipe Donasi</p>
-                  </a>
-                </li> --}}
-                <li class="nav-item">
-                  <a href="{{ route('tabungan.anak.asuh') }}" class="nav-link {{ $active == 'tabungan' ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tabungan Anak Asuh</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'penggunaan-dana' ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-hands"></i>
-                <p>
-                  Kedonaturan
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{ route('donatur') }}" class="nav-link {{ $active == 'donatur' ? 'active' : '' }}">
-                    <i class="nav-icon far fa-circle"></i>
-                    <p>
-                      Donatur
-                    </p>
-                  </a>
-                </li>
-                {{-- <li class="nav-item">
-                  <a href="{{ route('donation.type') }}" class="nav-link {{ $active == 'tipe' ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tipe Donasi</p>
-                  </a>
-                </li> --}}
-                <li class="nav-item">
-                  <a href="{{ route('donation') }}" class="nav-link {{ $active == 'donasi' ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Donasi Dana</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ route('donation.goods') }}" class="nav-link {{ $active == 'donasi-barang' ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Donasi Barang</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ route('laporan.penggunaan.dana') }}" class="nav-link {{ $active == 'penggunaan-dana' ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Penggunaan Donasi</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item {{ $active == 'satuan' ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-cog"></i>
-                <p>
-                  Pengaturan
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{ route('satuan') }}" class="nav-link {{ $active == 'satuan' ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Satuan Barang</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
+        @if (Auth()->user()->role == 'admin-yayasan')
+          @include('layout.menu-admin-yayasan')
+        @else
+            
+        @endif
         <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->

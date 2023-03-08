@@ -22,11 +22,10 @@
       <div class="row">
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-info">
+          <div class="small-box bg-info" onclick="window.location='data-santri-dalam'">
             <div class="inner">
-              <h4>{{ $anak_asuh }}</h4>
-
-              <p>Jumlah Anak Asuh</p>
+              <h4>{{ $santriDalam }}</h4>
+              <p>Santri Dalam</p>
             </div>
             <div class="icon">
               <i class="fas fa-users"></i>
@@ -37,14 +36,14 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-success">
+          <div class="small-box bg-success" onclick="window.location='data-santri-luar'">
             <div class="inner">
-              <h4>{{ "Rp " . number_format($total_donasi, 2, ',', '.'); }}</h4>
+              <h4>{{ $santriLuar }}</h4>
 
-              <p>Total Donasi</p>
+              <p>Santri Luar</p>
             </div>
             <div class="icon">
-              <i class="fas fa-hand-holding-usd"></i>
+              <i class="fas fa-users"></i>
             </div>
             <a href="#" class="small-box-footer"></a>
           </div>
@@ -52,7 +51,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-warning">
+          <div class="small-box bg-warning" onclick="window.location='donatur'">
             <div class="inner">
               <h4>{{ $total_donatur }}</h4>
 
@@ -67,14 +66,53 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-danger">
+          <div class="small-box bg-danger" onclick="window.location='/pengurus'">
             <div class="inner">
-              <h4>{{ "Rp " . number_format($total_tabungan, 2, ',', '.'); }}</h4>
+              <h4>{{ $pengurus }}</h4>
 
-              <p>Total Tabungan Anak Asuh</p>
+              <p>Total Pengurus</p>
             </div>
             <div class="icon">
-              <i class="fas fa-database"></i>
+              <i class="fas fa-users"></i>
+            </div>
+            <a href="#" class="small-box-footer"></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-info" onclick="window.location='data-donasi-tunai'">
+            <div class="inner">
+              <h4>{{ "Rp " . number_format($donasiTunai, 2, ',', '.'); }}</h4>
+              <p>Total Donasi Tunai Bulan Ini</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <a href="#" class="small-box-footer"></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success" onclick="window.location='data-donasi-transfer'">
+            <div class="inner">
+              <h4>{{ "Rp " . number_format($donasiTransfer, 2, ',', '.'); }}</h4>
+              <p>Total Donasi Transfer Bulan Ini</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <a href="#" class="small-box-footer"></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning" onclick="window.location='/data-pengeluaran'">
+            <div class="inner">
+              <h4>{{ "Rp " . number_format($pengeluaran, 2, ',', '.'); }}</h4>
+              <p>Total Pengeluaran Bulan Ini</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-hand-holding-usd"></i>
             </div>
             <a href="#" class="small-box-footer"></a>
           </div>

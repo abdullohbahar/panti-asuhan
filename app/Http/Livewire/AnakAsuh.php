@@ -21,7 +21,7 @@ class AnakAsuh extends Component
     {
         $search = '';
 
-        $query = ModelsAnakAsuh::where(function ($q) use ($search) {
+        $query = ModelsAnakAsuh::where('tipe', 'Santri Dalam')->where(function ($q) use ($search) {
             $q->orwhere('nama_lengkap', 'like', '%' . $this->search . '%')
                 ->orwhere('tempat_lahir', 'like', '%' . $this->search . '%')
                 ->orwhere('tanggal_lahir', 'like', '%' . $this->search . '%');
@@ -51,27 +51,13 @@ class AnakAsuh extends Component
 
     public function destroy()
     {
-        $anak = ModelsAnakAsuh::find($this->idAnak);
-
-        if ($anak->foto) {
-            unlink(public_path('storage/' . $anak->foto));
-        }
-
-        if ($anak->kartu_keluarga) {
-            unlink(public_path('storage/' . $anak->kartu_keluarga));
-        }
-
-        if ($anak->akta) {
-            unlink(public_path('storage/' . $anak->akta));
-        }
-
         ModelsAnakAsuh::destroy($this->idAnak);
 
-        $this->dispatchBrowserEvent('deleted', ['message' => 'Data Anak Asuh Berhasil Dihapus']);
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Data Santri Berhasil Dihapus']);
     }
 
     public function exportExcel()
     {
-        return Excel::download(new AnakAsuhExport, 'Data Anak Asuh.xlsx');
+        return Excel::download(new AnakAsuhExport('Santri Dalam'), 'Data Santri Dalam.xlsx');
     }
 }

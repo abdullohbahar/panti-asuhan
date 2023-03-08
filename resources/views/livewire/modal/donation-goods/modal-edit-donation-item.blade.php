@@ -1,9 +1,9 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="modal-edit-donation-item" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="modal-edit-donation-item" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ubah Donatur</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ubah Donasi</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,32 +13,44 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-                <label for="">Nama Donatur</label>
-                <select name="donatur_id" wire:model="donatur_id" style="width: 100%" class="form-control select2 @error('donatur_id') is-invalid @enderror">
-                  <option>-- Pilih Donatur --</option>
-                  @foreach ($donaturs as $donatur)
-                      <option value="{{ $donatur->id }}">{{ $donatur->nama }}</option>
-                  @endforeach
-                </select>
-                @error('donatur_id')
-                  <div class="invalid-feedback">
-                    {{ $message }}
-                  </div>
-                @enderror
+                  <label for="">Nama Donatur</label>
+                  <input type="text" wire:model="nama" name="nama" class="form-control @error("nama") is-invalid @enderror" required>
+                  @error("nama")
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                  @enderror
               </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="">Nomor HP Donatur</label>
+                    <input type="text" wire:model="no_hp" name="no_hp" class="form-control">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Alamat Donatur</label>
+                    <textarea type="text" wire:model="alamat" class="form-control @error("alamat") is-invalid @enderror"></textarea>
+                    @error("alamat")
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
             </div>
             <div class="col-12">
               <div class="form-group">
                 <label for="">Tanggal Donasi</label>
-                <input type="date" wire:model="tanggal_sumbangan" class="form-control @error('tanggal_sumbangan') is-invalid @enderror" autofocus>
-                @error('tanggal_sumbangan')
+                <input type="date" wire:model="tanggal_donasi" class="form-control @error('tanggal_donasi') is-invalid @enderror" autofocus>
+                @error('tanggal_donasi')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
                 @enderror
               </div>
             </div>
-            <div class="col-12">
+            {{-- <div class="col-12">
               <div class="form-group">
                 <label>Jumlah</label>
                 <div class="input-group">
@@ -51,7 +63,7 @@
                   </select>
                 </div>
               </div>
-            </div>
+            </div> --}}
             <div class="col-12">
               <div class="form-group">
                   <label>Keterangan</label>

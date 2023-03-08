@@ -14,10 +14,12 @@ class SavingHistory extends Component
     {
         $query = ModelsSavingHistory::where('saving_id', $this->idsaving)->get();
         $saldo = Saving::find($this->idsaving)->total_tabungan;
+        $count = $query->count();
 
         $data = [
             'savings' => $query,
-            'saldo' => $saldo
+            'saldo' => $saldo,
+            'count' => $count,
         ];
 
         return view('livewire.saving-history', $data);
