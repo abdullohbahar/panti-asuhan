@@ -19,7 +19,7 @@ class UserTableSeeder extends Seeder
         User::create([
             'username' => 'superadmin',
             'password' => Hash::make("password"),
-            'role' => 'superadmin',
+            'role' => 'admin-yayasan',
             'foto' => 'default.jpg'
         ]);
     }
