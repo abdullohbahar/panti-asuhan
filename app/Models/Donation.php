@@ -23,7 +23,6 @@ class Donation extends Model
         'tanggal_donasi',
         'urutan',
         'transaksi',
-        'no',
         'norek',
         'bank'
     ];
@@ -36,5 +35,10 @@ class Donation extends Model
     public function bukti_sumbangan()
     {
         return $this->hasMany(BuktiSumbangan::class);
+    }
+
+    public function number()
+    {
+        return $this->hasOne(ProofOfDonationNumber::class);
     }
 }

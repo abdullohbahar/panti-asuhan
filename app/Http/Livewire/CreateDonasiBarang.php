@@ -2,29 +2,23 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Livewire\Donation as LivewireDonation;
-use PDF;
+use Exception;
 use Carbon\Carbon;
 use App\Models\Donatur;
-use App\Models\Invoice;
 use Livewire\Component;
-use App\Models\Donation;
+use PDF;
 use App\Models\GoodsDonation;
-use App\Models\ProofOfDonationNumber;
-use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use App\Models\ProofOfDonationNumber;
+use Illuminate\Romans\Support\Facades\IntToRoman;
 
-class DonasiTunai extends Component
+class CreateDonasiBarang extends Component
 {
-    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $nominal, $terbilang, $keterangan, $tipe;
+    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $keterangan;
     public function render()
     {
-        $data = [
-            'donaturs' => Donatur::orderBy('nama', 'asc')->get(),
-        ];
-
-        return view('livewire.donasi-tunai', $data);
+        return view('livewire.create-donasi-barang');
     }
 
     public function rules()
@@ -32,8 +26,6 @@ class DonasiTunai extends Component
         return [
             'nama_donatur' => 'required',
             'tanggal_donasi' => 'required',
-            'nominal' => 'required',
-            'terbilang' => 'required',
         ];
     }
 
@@ -42,8 +34,6 @@ class DonasiTunai extends Component
         return [
             'nama_donatur.required' => 'Nama donatur harus diisi',
             'tanggal_donasi.required' => 'Tanggal sumbangan harus diisi',
-            'nominal.required' => 'Nominal harus diisi',
-            'terbilang.required' => 'Terbilang harus diisi',
         ];
     }
 
@@ -55,12 +45,6 @@ class DonasiTunai extends Component
     public function store()
     {
         $this->validate();
-
-        $removeChar = ['R', 'p', '.', ','];
-
-        $nominal = str_replace($removeChar, "", $this->nominal);
-
-        $nominal = str_replace(' ', '', $nominal);
 
         // melakukan pengecekan apakh nomor null atau tidak
         $checkNomor = ProofOfDonationNumber::latest()->first();
@@ -78,21 +62,17 @@ class DonasiTunai extends Component
 
         try {
             DB::beginTransaction();
+
             $createDoantur = Donatur::create([
                 'nama' => $this->nama_donatur,
                 'no_hp' => $this->no_hp,
                 'alamat' => $this->alamat,
             ]);
 
-            $createDonation = Donation::create([
+            $createDonation = GoodsDonation::create([
                 'donatur_id' => $createDoantur->id,
-                'jenis_donasi' => 'Tunai',
-                'terbilang' => $this->terbilang,
-                'pemasukan' => $nominal,
                 'keterangan' => $this->keterangan,
-                'tipe' => $this->tipe,
                 'tanggal_donasi' => $this->tanggal_donasi,
-                'transaksi' => 'pemasukan'
             ]);
 
             ProofOfDonationNumber::create([
@@ -105,18 +85,19 @@ class DonasiTunai extends Component
             $data = [
                 'tanggal_donasi' => $this->tanggal_donasi,
                 'nama' => $this->nama_donatur,
-                'nominal' => $nominal,
                 'alamat' => $this->alamat,
+                'keterangan' => $this->keterangan
             ];
 
             $this->kirimBukti($data);
-            return redirect()->route('donation.tunai')->with([
+            return redirect()->route('donation.goods')->with([
                 'message' => 'Donasi berhasil ditambahkan',
                 'id' => $createDonation->id
             ]);
         } catch (Exception $e) {
+            Log::debug($e);
             DB::rollBack();
-            return redirect()->route('donation.tunai')->with('message', 'Oops, ada yang error');
+            return redirect()->route('donation.goods')->with('error', 'Oops, ada yang error');
         }
     }
 
@@ -124,9 +105,9 @@ class DonasiTunai extends Component
     {
         $nama = strtoupper($data['nama']);
         $tgl = Carbon::parse($data['tanggal_donasi'])->format('d-m-Y');
-        $nominal = "Rp. " . number_format($data['nominal'], 2, ',', '.');
         $waktu = Carbon::now()->format('H:i:s');
         $alamat = $data['alamat'];
+        $keterangan = $data['keterangan'];
 
         $curl = curl_init();
 
@@ -142,7 +123,7 @@ class DonasiTunai extends Component
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
                 'target' => '085701223722',
-                'message' => "DONASI TUNAI \nBERHASIL \n$tgl $waktu \n$nama \nAlamat: $alamat \n$nominal",
+                'message' => "DONASI BARANG \nBERHASIL \n$tgl $waktu \n$nama \nAlamat: $alamat \n$keterangan",
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(
@@ -153,5 +134,41 @@ class DonasiTunai extends Component
         $response = curl_exec($curl);
 
         curl_close($curl);
+    }
+
+    public function printInvoiceDonation($id)
+    {
+        $donation = GoodsDonation::with('number', 'donatur')->where('id', $id)->first();
+
+        $image_path = public_path('logo/kop.png');
+
+        $image_data = base64_encode(file_get_contents($image_path));
+
+        $now = Carbon::now()->format('m');
+        $romanMonth = IntToRoman::filter($now);
+
+        $data = [
+            'nama' => $donation->donatur->nama,
+            'no' => $donation->number->no ?? '',
+            'tanggal' => Carbon::now()->translatedFormat('d F Y'),
+            'tipe' => $donation->tipe,
+            'keterangan' => $donation->keterangan,
+            'alamat' => $donation->donatur->alamat,
+            'no_hp' => $donation->donatur->no_hp,
+            'bulan' => $romanMonth,
+            'image' => $image_data
+        ];
+
+        if ($donation->number->name) {
+            $nama = 'Revisi - ' . $donation->number->name . ' - Tanda Terima - ' . $donation->number->no . ' - ' . $donation->donatur->nama;
+        } else {
+            $nama = 'Tanda Terima - ' . $donation->number->no . ' - ' . $donation->donatur->nama;
+        }
+
+        $pdf = PDF::loadView('invoice-barang', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download($nama . '.pdf');
     }
 }

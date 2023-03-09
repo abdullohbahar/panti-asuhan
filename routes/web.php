@@ -18,6 +18,7 @@ use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonasiBarangController;
 use App\Http\Controllers\DonationTypeController;
+use App\Http\Livewire\CreateDonasiBarang;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
 
 /*
@@ -38,12 +39,7 @@ use App\Http\Livewire\LaporanPemasukanPengeluaran;
 
 Route::get('/', [AuthController::class, 'index'])->middleware('guest');
 
-Route::get('/export-santri/{tipe}', [AnakAsuhController::class, 'exportSantriPdf'])->name('export.santri');
-Route::get('/export-donatur', [DonaturController::class, 'exportDonaturPdf'])->name('export.donatur');
-Route::get('/export-warga/{status}', [CitizenController::class, 'exportWargaPdf'])->name('export.warga');
-Route::get('welcome', function () {
-    return view('invoice-dummy');
-});
+
 
 Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.admin.yayasan');
@@ -143,4 +139,15 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'pengaturan'], function () {
         Route::get('/satuan', [SettingController::class, 'unit'])->name('satuan');
     });
+
+    Route::get('/export-santri/{tipe}', [AnakAsuhController::class, 'exportSantriPdf'])->name('export.santri');
+    Route::get('/export-donatur', [DonaturController::class, 'exportDonaturPdf'])->name('export.donatur');
+    Route::get('/export-warga/{status}', [CitizenController::class, 'exportWargaPdf'])->name('export.warga');
+
+    Route::get('/data-donasi-tunai', [DonationController::class, 'index'])->name('donation.tunai');
+
+    Route::get('/print-invoice-donation/{id}', [Donation::class, 'printInvoiceDonation'])->name('print.invoice.donation');
+    Route::get('/print-invoice-donation-goods/{id}', [CreateDonasiBarang::class, 'printInvoiceDonation'])->name('print.invoice.donation.goods');
+
+    Route::get('/donasi-barang', [DonationController::class, 'donationGoods'])->name('donation.goods');
 });

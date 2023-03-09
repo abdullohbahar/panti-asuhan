@@ -13,7 +13,6 @@ class GoodsDonation extends Model
 
     protected $fillable = [
         'donatur_id',
-        'no',
         'keterangan',
         'hajat',
         'tanggal_donasi',
@@ -22,5 +21,10 @@ class GoodsDonation extends Model
     public function donatur()
     {
         return $this->belongsTo(Donatur::class);
+    }
+
+    public function number()
+    {
+        return $this->hasOne(ProofOfDonationNumber::class, 'donation_id', 'id');
     }
 }
