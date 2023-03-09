@@ -127,8 +127,11 @@
 @endif
 
 @if (session()->has('id'))
+
   <script>
-    window.location.href = 'print-invoice-donation/{{ session('id') }}';
+    document.addEventListener('DOMContentLoaded', function() {
+      window.location.href = 'print-invoice-donation/{{ session('id') }}';
+    });
   </script>
 @endif
 
