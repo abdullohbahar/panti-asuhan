@@ -39,8 +39,6 @@ use App\Http\Livewire\LaporanPemasukanPengeluaran;
 
 Route::get('/', [AuthController::class, 'index'])->middleware('guest');
 
-
-
 Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.admin.yayasan');
 
