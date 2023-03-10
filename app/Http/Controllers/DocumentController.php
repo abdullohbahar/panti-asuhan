@@ -14,4 +14,13 @@ class DocumentController extends Controller
 
         return view('lksa-document', $data);
     }
+
+    public function yayasan()
+    {
+        $data = [
+            'active' => 'yayasan-document'
+        ];
+
+        return view('yayasan-document', $data);
+    }
 }

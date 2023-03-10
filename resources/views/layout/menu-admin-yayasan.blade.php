@@ -231,14 +231,14 @@
           </a>
         </li>
       </ul>
-      {{-- <ul class="nav nav-treeview">
+      <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{{ route('data.pengguna.admin.yayasan') }}" class="nav-link {{ $active == 'data-user' ? 'active' : '' }}">
+          <a href="{{ route('yayasan.document') }}" class="nav-link {{ $active == 'yayasan-document' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Data Pengguna</p>
+            <p>Dokumen Yayasan</p>
           </a>
         </li>
-      </ul> --}}
+      </ul>
     </li>
     <li class="nav-item {{ $active == 'create-user' || $active == 'data-user' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">

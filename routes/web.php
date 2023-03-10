@@ -153,4 +153,5 @@ Route::middleware('auth')->group(function () {
 
     // LKSA DOCUMENT
     Route::get('/dokumen-lksa', [DocumentController::class, 'lksa'])->name('lksa.document');
+    Route::get('/dokumen-yayasan', [DocumentController::class, 'yayasan'])->name('yayasan.document');
 });
