@@ -19,7 +19,7 @@
         </p>
       </a>
       <ul class="nav nav-treeview">
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('create.santri.admin.yayasan') }}" class="nav-link {{ $active == 'create-santri' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
@@ -27,7 +27,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('santri.dalam.admin.yayasan') }}" class="nav-link {{ $active == 'santri-dalam' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
@@ -35,7 +35,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('santri.luar.admin.yayasan') }}" class="nav-link {{ $active == 'santri-luar' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
@@ -54,7 +54,7 @@
         </p>
       </a>
       <ul class="nav nav-treeview">
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('create.citizen') }}" class="nav-link {{ $active == 'create-citizen' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
@@ -62,7 +62,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('data.warga.dhuafa') }}" class="nav-link {{ $active == 'data-warga-dhuafa' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
@@ -70,7 +70,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('data.warga.fakir.miskin') }}" class="nav-link {{ $active == 'data-warga-fakir-miskin' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
@@ -78,7 +78,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('data.warga.jompo') }}" class="nav-link {{ $active == 'data-warga-jompo' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
@@ -86,7 +86,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('data.warga.jamaah') }}" class="nav-link {{ $active == 'data-warga-jamaah' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
@@ -94,7 +94,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('data.warga.meninggal') }}" class="nav-link {{ $active == 'data-warga-meninggal' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
@@ -113,7 +113,7 @@
         </p>
       </a>
       <ul class="nav nav-treeview">
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('donatur.admin.yayasan') }}" class="nav-link {{ $active == 'donatur' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
@@ -128,50 +128,44 @@
             <p>Tipe Donasi</p>
           </a>
         </li> --}}
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('donasi.tunai.admin.yayasan') }}" class="nav-link {{ $active == 'donasi' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Donasi Tunai</p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('donation.tunai.admin.yayasan') }}" class="nav-link {{ $active == 'data-donasi-tunai' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Donasi Tunai</p>
           </a>
         </li>
         <li class="nav-header">Donasi Transfer</li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('donasi.transfer.admin.yayasan') }}" class="nav-link {{ $active == 'donasi-transfer' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Donasi Transfer</p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('data.donasi.transfer.admin.yayasan') }}" class="nav-link {{ $active == 'data-donasi-transfer' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Donasi Transfer</p>
           </a>
         </li>
         <li class="nav-header">Donasi Barang</li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('create.donasi.barang.admin.yayasan') }}" class="nav-link {{ $active == 'create-donasi-barang' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Donasi Barang</p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('donation.goods.admin.yayasan') }}" class="nav-link {{ $active == 'donasi-barang' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Donasi Barang</p>
           </a>
         </li>
-        {{-- <li class="nav-item">
-          <a href="{{ route('laporan.penggunaan.dana') }}" class="nav-link {{ $active == 'penggunaan-dana' ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Penggunaan Donasi</p>
-          </a>
-        </li> --}}
       </ul>
     </li>
     <li class="nav-item {{ $active == 'pengeluaran' || $active == 'data-pengeluaran' ? 'menu-open' : '' }}">
@@ -183,7 +177,7 @@
         </p>
       </a>
       <ul class="nav nav-treeview">
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('pengeluaran') }}" class="nav-link {{ $active == 'pengeluaran' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Input Pengeluaran</p>
@@ -191,7 +185,7 @@
         </li>
       </ul>
       <ul class="nav nav-treeview">
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('data.pengeluaran') }}" class="nav-link {{ $active == 'data-pengeluaran' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Pengeluaran</p>
@@ -224,7 +218,7 @@
         </p>
       </a>
       <ul class="nav nav-treeview">
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('lksa.document') }}" class="nav-link {{ $active == 'lksa-document' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Dokumen LKSA</p>
@@ -232,7 +226,7 @@
         </li>
       </ul>
       <ul class="nav nav-treeview">
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('yayasan.document') }}" class="nav-link {{ $active == 'yayasan-document' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Dokumen Yayasan</p>
@@ -249,7 +243,7 @@
         </p>
       </a>
       <ul class="nav nav-treeview">
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('tambah.pengguna.admin.yayasan') }}" class="nav-link {{ $active == 'create-user' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Tambah Pengguna</p>
@@ -257,7 +251,7 @@
         </li>
       </ul>
       <ul class="nav nav-treeview">
-        <li class="nav-item">
+        <li class="nav-item ml-2">
           <a href="{{ route('data.pengguna.admin.yayasan') }}" class="nav-link {{ $active == 'data-user' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Pengguna</p>
@@ -265,22 +259,5 @@
         </li>
       </ul>
     </li>
-    {{-- <li class="nav-item {{ $active == 'satuan' ? 'menu-open' : '' }}">
-      <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-cog"></i>
-        <p>
-          Pengaturan
-          <i class="right fas fa-angle-left"></i>
-        </p>
-      </a>
-      <ul class="nav nav-treeview">
-        <li class="nav-item">
-          <a href="{{ route('satuan') }}" class="nav-link {{ $active == 'satuan' ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Satuan Barang</p>
-          </a>
-        </li>
-      </ul>
-    </li> --}}
   </ul>
 </nav>
