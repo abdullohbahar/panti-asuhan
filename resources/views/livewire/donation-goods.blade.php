@@ -45,7 +45,9 @@
                                     <th scope="col">Nama Donatur</th>
                                     <th scope="col">Keterangan</th>
                                     <th scope="col">Tanggal Donasi</th>
-                                    <th scope="col">Aksi</th>
+                                    @if (auth()->user()->role == 'admin-yayasan')
+                                        <th scope="col">Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,13 +62,15 @@
                                         <td data-label="Tipe Donasi">{{ $donation->donatur->nama }}</td>
                                         <td data-label="Keterangan">{{ $donation->keterangan }}</td>
                                         <td data-label="Tanggal Donasi">{{ $donation->tanggal_donasi }}</td>
-                                        <td data-label="Aksi">
-                                            <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Bukti Donasi"><i class="fas fa-upload"></i></a>
-                                            {{-- <button wire:click="printInvoice('{{ $donation->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak tanda donasi"><i class="fas fa-print"></i></button> --}}
-                                            <a href="{{ route('print.invoice.donation.goods',$donation->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak tanda donasi"><i class="fas fa-print"></i></a>
-                                            <button wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation-item" data-toggle="tooltip" data-placement="top" title="Edit Donasi"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"></i></button>
-                                        </td>
+                                        @if (auth()->user()->role == 'admin-yayasan')
+                                            <td data-label="Aksi">
+                                                <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Bukti Donasi"><i class="fas fa-upload"></i></a>
+                                                {{-- <button wire:click="printInvoice('{{ $donation->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak tanda donasi"><i class="fas fa-print"></i></button> --}}
+                                                <a href="{{ route('print.invoice.donation.goods',$donation->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak tanda donasi"><i class="fas fa-print"></i></a>
+                                                <button wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation-item" data-toggle="tooltip" data-placement="top" title="Edit Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                                <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"></i></button>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

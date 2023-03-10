@@ -81,6 +81,12 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/edit-warga/{id}', [CitizenController::class, 'editCitizen'])->name('edit.warga');
 });
 
+Route::prefix('pembina-yayasan')->middleware('pembina-yayasan')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.pembina.yayasan');
+    Route::get('/data-santri-dalam', [AnakAsuhController::class, 'index'])->name('santri.dalam.pembina.yayasan');
+    Route::get('/data-santri-luar', [AnakAsuhController::class, 'santriLuar'])->name('santri.luar.pembina.yayasan');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -154,4 +160,16 @@ Route::middleware('auth')->group(function () {
     // LKSA DOCUMENT
     Route::get('/dokumen-lksa', [DocumentController::class, 'lksa'])->name('lksa.document');
     Route::get('/dokumen-yayasan', [DocumentController::class, 'yayasan'])->name('yayasan.document');
+
+    // Warga
+    Route::get('/tambah-data-warga', [CitizenController::class, 'createCitizen'])->name('create.citizen');
+    Route::get('/data-warga-dhuafa', [CitizenController::class, 'dataWargaDhuafa'])->name('data.warga.dhuafa');
+    Route::get('/data-warga-fakir-miskin', [CitizenController::class, 'dataWargaFakirMiskin'])->name('data.warga.fakir.miskin');
+    Route::get('/data-warga-jompo', [CitizenController::class, 'dataWargaJompo'])->name('data.warga.jompo');
+    Route::get('/data-warga-jamaah', [CitizenController::class, 'dataWargaJamaah'])->name('data.warga.jamaah');
+    Route::get('/data-warga-meninggal', [CitizenController::class, 'dataWargaMeninggal'])->name('data.warga.meninggal');
+    Route::get('/profil-warga/{id}', [CitizenController::class, 'profileWarga'])->name('profil.warga');
+    Route::get('/edit-warga/{id}', [CitizenController::class, 'editCitizen'])->name('edit.warga');
+
+    Route::get('/data-pengguna', [UserController::class, 'dataUser'])->name('data.pengguna');
 });

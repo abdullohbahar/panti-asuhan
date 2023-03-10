@@ -59,13 +59,15 @@
                                     <th scope="col">Tanggal</th>
                                     <th scope="col">Nominal</th>
                                     <th scope="col">Uraian</th>
-                                    <th scope="col">Aksi</th>
+                                    @if (auth()->user()->role == 'admin-yayasan')
+                                        <th scope="col">Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
                                 @if ($count == 0)
                                     <tr>
-                                        <td colspan="7">Data Not Found</td>
+                                        <td colspan="5">Data Not Found</td>
                                     </tr>
                                 @endif
                                 @foreach ($donations as $index => $donation)
@@ -74,10 +76,12 @@
                                         <td data-label="Nama Donatur">{{ $donation->tanggal_donasi }}</td>
                                         <td data-label="Nominal">{{ "Rp " . number_format($donation->pengeluaran, 2, ',', '.'); }}</td>
                                         <td data-label="No Rek">{{ $donation->keterangan }}</td>
-                                        <td data-label="Aksi">
-                                            <button id="edit" wire:click="show('{{ $donation->id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
-                                        </td>
+                                        @if (auth()->user()->role == 'admin-yayasan')
+                                            <td data-label="Aksi">
+                                                <button id="edit" wire:click="show('{{ $donation->id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                                <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

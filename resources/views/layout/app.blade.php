@@ -76,8 +76,8 @@
         <!-- Sidebar Menu -->
         @if (Auth()->user()->role == 'admin-yayasan')
           @include('layout.menu-admin-yayasan')
-        @else
-            
+        @elseif(Auth()->user()->role == 'pembina-yayasan')
+          @include('layout.menu-pembina-yayasan')
         @endif
         <!-- /.sidebar-menu -->
       </div>

@@ -29,7 +29,9 @@
                                 <button wire:click="exportExcel" class="btn btn-warning btn-sm btn-block"><b><i class="fas fa-print"></i> Export</b></button>
                             </div> --}}
                             {{-- <div class="col-sm-12 col-md-6"> --}}
-                                <a href="{{ route('tambah.pengurus') }}" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Data Pengurus</b></a>
+                                @if (auth()->user()->role == 'admin-yayasan')
+                                    <a href="{{ route('tambah.pengurus') }}" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Data Pengurus</b></a>
+                                @endif
                             {{-- </div> --}}
                         </div>
                     </div>
@@ -48,7 +50,9 @@
                                     <th scope="col">Foto</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Jabatan</th>
-                                    <th scope="col">Aksi</th>
+                                    @if (auth()->user()->role == 'admin-yayasan')
+                                        <th scope="col">Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,13 +77,15 @@
                                         <td data-label="Jabatan">
                                             {{ $pengurus->jabatan }}
                                         </td>
-                                        <td data-label="Aksi">
-                                            <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                                <a href="{{ route('profile.pengurus',$pengurus->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Pengurus"><i class="fas fa-user"></i> Profil Pengurus</a>
-                                                {{-- <a href="{{ route('berkas.anak.asuh',$pengurus->id) }}" class="btn btn-info btn-sm my-2" data-toggle="tooltip" data-placement="top" title="Unggah Berkas"><i class="fas fa-upload"></i> Unggah Berkas</a> --}}
-                                                <button wire:click="deleteConfirmation('{{ $pengurus->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Pengurus"><i class="fas fa-trash"></i> Hapus</button>
-                                            </div>
-                                        </td>
+                                        @if (auth()->user()->role == 'admin-yayasan')
+                                            <td data-label="Aksi">
+                                                <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                                                    <a href="{{ route('profile.pengurus',$pengurus->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Pengurus"><i class="fas fa-user"></i> Profil Pengurus</a>
+                                                    {{-- <a href="{{ route('berkas.anak.asuh',$pengurus->id) }}" class="btn btn-info btn-sm my-2" data-toggle="tooltip" data-placement="top" title="Unggah Berkas"><i class="fas fa-upload"></i> Unggah Berkas</a> --}}
+                                                    <button wire:click="deleteConfirmation('{{ $pengurus->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Pengurus"><i class="fas fa-trash"></i> Hapus</button>
+                                                </div>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

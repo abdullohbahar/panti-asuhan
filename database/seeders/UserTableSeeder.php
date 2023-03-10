@@ -22,5 +22,12 @@ class UserTableSeeder extends Seeder
             'role' => 'admin-yayasan',
             'foto' => 'default.jpg'
         ]);
+
+        User::create([
+            'username' => 'pembina-yayasan',
+            'password' => Hash::make("password"),
+            'role' => 'pembina-yayasan',
+            'foto' => 'default.jpg'
+        ]);
     }
 }

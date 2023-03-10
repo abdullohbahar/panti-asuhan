@@ -35,7 +35,9 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Hak Akses</th>
-                                    <th scope="col">Aksi</th>
+                                    @if (auth()->user()->role == 'admin-yayasan')
+                                        <th scope="col">Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,12 +55,14 @@
                                         <td data-label="Hak Akses">
                                             {{ str_replace("-", " ",$user->role) }}
                                         </td>
-                                        <td data-label="Aksi">
-                                            <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                                <a href="{{ route('edit.pengguna.admin.yayasan',$user->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Ubah Pengguna"><i class="fas fa-pencil-alt"></i> Ubah</a>
-                                                <button wire:click="deleteConfirmation('{{ $user->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Pengguna"><i class="fas fa-trash"></i> Hapus</button>
-                                            </div>
-                                        </td>
+                                        @if (auth()->user()->role == 'admin-yayasan')
+                                            <td data-label="Aksi">
+                                                <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                                                    <a href="{{ route('edit.pengguna.admin.yayasan',$user->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Ubah Pengguna"><i class="fas fa-pencil-alt"></i> Ubah</a>
+                                                    <button wire:click="deleteConfirmation('{{ $user->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Pengguna"><i class="fas fa-trash"></i> Hapus</button>
+                                                </div>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

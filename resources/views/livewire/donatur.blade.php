@@ -33,9 +33,11 @@
                             <div class="col-ms-12 col-md-4">
                                 <a href="{{ route('export.donatur') }}" class="btn btn-danger btn-sm btn-block mt-2"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                             </div>
-                            <div class="col-sm-12 col-md-4">
-                                <button id="btnAddDonatur" wire:click="resetInput" class="btn btn-primary mt-2 btn-sm btn-block"><b><i class="fas fa-plus"></i> Donatur</b></button>
-                            </div>
+                            @if (auth()->user()->role == 'admin-yayasan')
+                                <div class="col-sm-12 col-md-4">
+                                    <button id="btnAddDonatur" wire:click="resetInput" class="btn btn-primary mt-2 btn-sm btn-block"><b><i class="fas fa-plus"></i> Donatur</b></button>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -53,7 +55,9 @@
                                     <th scope="col">Nama Donatur</th>
                                     <th scope="col">Nomor Hp</th>
                                     <th scope="col">Alamat</th>
-                                    <th scope="col">Aksi</th>
+                                    @if (auth()->user()->role == 'admin-yayasan')
+                                        <th scope="col">Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,10 +72,12 @@
                                         <td data-label="Nama Donatur">{{ $donatur->nama }}</td>
                                         <td data-label="Nomor HP">{{ $donatur->no_hp }}</td>
                                         <td data-label="Alamat">{{ $donatur->alamat }}</td>
-                                        <td data-label="Aksi">
-                                            <button wire:click="show('{{ $donatur->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Ubah Data Donatur"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $donatur->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Donatur"><i class="fas fa-trash-alt"></i></button>
-                                        </td>
+                                        @if (auth()->user()->role == 'admin-yayasan')
+                                            <td data-label="Aksi">
+                                                <button wire:click="show('{{ $donatur->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donatur" data-toggle="tooltip" data-placement="top" title="Ubah Data Donatur"><i class="fas fa-pencil-alt"></i></button>
+                                                <button wire:click="deleteConfirmation('{{ $donatur->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Donatur"><i class="fas fa-trash-alt"></i></button>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>
