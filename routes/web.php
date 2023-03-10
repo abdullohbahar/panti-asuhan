@@ -16,10 +16,12 @@ use App\Http\Controllers\AnakAsuhController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DonasiBarangController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Livewire\CreateDonasiBarang;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
+use App\Http\Livewire\LksaDocument;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,4 +150,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/print-invoice-donation-goods/{id}', [CreateDonasiBarang::class, 'printInvoiceDonation'])->name('print.invoice.donation.goods');
 
     Route::get('/donasi-barang', [DonationController::class, 'donationGoods'])->name('donation.goods');
+
+    // LKSA DOCUMENT
+    Route::get('/dokumen-lksa', [DocumentController::class, 'lksa'])->name('lksa.document');
 });

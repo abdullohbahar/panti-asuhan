@@ -215,6 +215,31 @@
         </p>
       </a>
     </li>
+    <li class="nav-item {{ $active == 'lksa-document' || $active == 'yayasan-document' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-file"></i>
+        <p>
+          Dokumen
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{{ route('lksa.document') }}" class="nav-link {{ $active == 'lksa-document' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Dokumen LKSA</p>
+          </a>
+        </li>
+      </ul>
+      {{-- <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{{ route('data.pengguna.admin.yayasan') }}" class="nav-link {{ $active == 'data-user' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Data Pengguna</p>
+          </a>
+        </li>
+      </ul> --}}
+    </li>
     <li class="nav-item {{ $active == 'create-user' || $active == 'data-user' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-user"></i>

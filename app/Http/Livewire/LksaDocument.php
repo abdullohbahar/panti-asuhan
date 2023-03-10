@@ -2,41 +2,43 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\AnakAsuh;
-use App\Models\ChildDocument;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\LksaDocument as ModelsLksaDocument;
+use Livewire\WithPagination;
 
-class ProfileAnak extends Component
+class LksaDocument extends Component
 {
-    public $idchild, $nama_dokumen, $file, $iteration, $downloadBerkas, $namaDokumen, $idBerkas, $destroyBerkas, $search;
+    public $search, $name, $file, $iteration, $downloadBerkas, $idBerkas, $destroyBerkas;
     use WithFileUploads;
-
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
     public function render()
     {
         $search = '';
 
-        $anak = AnakAsuh::find($this->idchild);
-        $documents = ChildDocument::where('anak_asuh_id', $this->idchild)
-            ->when(!empty($this->search), function ($q) use ($search) {
-                $q->where('nama_dokumen', 'like', "%{$this->search}%");
-            })
-            ->get();
+        $documents = ModelsLksaDocument::when(!empty($this->search), function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        })->paginate(15);
+
+        $count = $documents->count();
 
         $data = [
-            'anak' => $anak,
-            'documents' => $documents
+            'active' => 'lksa-document',
+            'documents' => $documents,
+            'count' => $count,
+            'iteration' => $this->iteration,
         ];
 
-        return view('livewire.profile-anak', $data);
+        return view('livewire.lksa-document', $data);
     }
 
     public function rules()
     {
         return [
-            'nama_dokumen' => 'required',
+            'name' => 'required',
             'file' => 'required',
         ];
     }
@@ -44,7 +46,7 @@ class ProfileAnak extends Component
     public function messages()
     {
         return [
-            'nama_dokumen.required' => 'Nama Berkas Harus Diisi',
+            'name.required' => 'Nama Berkas Harus Diisi',
             'file.required' => 'Berkas Harus Diisi'
         ];
     }
@@ -58,11 +60,10 @@ class ProfileAnak extends Component
     {
         $this->validate();
 
-        $file = $this->file->store('berkas', 'public');
+        $file = $this->file->store('berkas/lksa', 'public');
 
-        ChildDocument::create([
-            'anak_asuh_id' => $this->idchild,
-            'nama_dokumen' => $this->nama_dokumen,
+        ModelsLksaDocument::create([
+            'name' => $this->name,
             'file' => $file,
         ]);
 
@@ -72,25 +73,22 @@ class ProfileAnak extends Component
 
     public function resetInput()
     {
-        $this->nama_dokumen = '';
+        $this->name = '';
         $this->file = '';
         $this->iteration++;
     }
 
-    public function download($id, $namaDokumen)
+    public function download($id, $name)
     {
-        // Nama Anak
-        $namaAnak = AnakAsuh::find($this->idchild);
-
         // Nama File
         $this->downloadBerkas = $id;
 
         // Nama Dokumen
-        $this->namaDokumen = $namaDokumen;
+        $this->name = $name;
 
         // Get Extension
         $ext = substr(strrchr($this->downloadBerkas, '.'), 1);
-        return response()->download(public_path('storage/' . $this->downloadBerkas), $namaAnak->nama_lengkap . ' - ' . $this->namaDokumen . '.' . $ext);
+        return response()->download(public_path('storage/' . $this->downloadBerkas), $this->name . '.' . $ext);
     }
 
     public function deleteConfirmation($destroyBerkas, $id)
@@ -103,7 +101,8 @@ class ProfileAnak extends Component
     public function destroy()
     {
         unlink(public_path('storage/' . $this->destroyBerkas));
-        ChildDocument::destroy($this->idBerkas);
+
+        ModelsLksaDocument::destroy($this->idBerkas);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Berkas Berhasil Dihapus']);
     }
