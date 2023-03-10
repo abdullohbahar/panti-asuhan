@@ -78,7 +78,7 @@
                                     <th scope="col">No Rek</th>
                                     <th scope="col">Bank</th>
                                     <th scope="col">Tanggal Donasi</th>
-                                    @if (auth()->user()->role == 'admin-yayasan')
+                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                         <th scope="col">Aksi</th>
                                     @endif
                                 </tr>
@@ -100,7 +100,7 @@
                                         <td data-label="Aksi">
                                             {{-- <button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fab fa-whatsapp"></i></button> --}}
                                             {{-- <button wire:click="show('{{ $donation->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-print"></i></button> --}}
-                                            @if (auth()->user()->role == 'admin-yayasan')
+                                            @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                                 <button id="edit" wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
                                                 <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
                                             @endif

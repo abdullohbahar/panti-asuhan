@@ -23,7 +23,7 @@
       <div class="card">
         <div class="card-header">
           <div class="row">
-            @if (auth()->user()->role == 'admin-yayasan')
+            @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
               <div class="col-12 text-right">
                 <a href="{{ route('edit.data.anak.asuh',$anak->id) }}" class="btn btn-warning">Ubah Data</a>
               </div>
@@ -161,7 +161,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
               <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Nama Berkas">
             </div>
-            @if (auth()->user()->role == 'admin-yayasan')
+            @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
               <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8 text-right">
                 <button class="btn btn-success" data-toggle="modal" data-target="#unggahBerkas">Unggah Berkas</button>
               </div>
@@ -195,7 +195,7 @@
                     </td>
                     <td style="height: 50px">
                       <button wire:click="download('{{ $document->file }}','{{ $document->nama_dokumen }}')" class="btn btn-info btn-sm">Unduh Berkas</button>
-                      @if (auth()->user()->role == 'admin-yayasan')
+                      @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                         <button wire:click="deleteConfirmation('{{ $document->file }}','{{ $document->id }}')" class="btn btn-danger btn-sm">Hapus Berkas</button>
                       @endif
                     </td>

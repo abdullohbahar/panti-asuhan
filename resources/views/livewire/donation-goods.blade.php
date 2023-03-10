@@ -45,7 +45,7 @@
                                     <th scope="col">Nama Donatur</th>
                                     <th scope="col">Keterangan</th>
                                     <th scope="col">Tanggal Donasi</th>
-                                    @if (auth()->user()->role == 'admin-yayasan')
+                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                         <th scope="col">Aksi</th>
                                     @endif
                                 </tr>
@@ -62,7 +62,7 @@
                                         <td data-label="Tipe Donasi">{{ $donation->donatur->nama }}</td>
                                         <td data-label="Keterangan">{{ $donation->keterangan }}</td>
                                         <td data-label="Tanggal Donasi">{{ $donation->tanggal_donasi }}</td>
-                                        @if (auth()->user()->role == 'admin-yayasan')
+                                        @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                             <td data-label="Aksi">
                                                 <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Bukti Donasi"><i class="fas fa-upload"></i></a>
                                                 {{-- <button wire:click="printInvoice('{{ $donation->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak tanda donasi"><i class="fas fa-print"></i></button> --}}

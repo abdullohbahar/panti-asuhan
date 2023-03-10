@@ -3,7 +3,7 @@
     <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
     <li class="nav-item">
-      <a href="{{ route('dashboard.admin.yayasan') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
+      <a href="{{ route('dashboard') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
         <i class="nav-icon fas fa-tachometer-alt"></i>
         <p>
           Dashboard
@@ -20,7 +20,7 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
-          <a href="{{ route('create.santri.admin.yayasan') }}" class="nav-link {{ $active == 'create-santri' ? 'active' : '' }}">
+          <a href="{{ route('create.santri') }}" class="nav-link {{ $active == 'create-santri' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
               Tambah Santri
@@ -28,7 +28,7 @@
           </a>
         </li>
         <li class="nav-item ml-2">
-          <a href="{{ route('santri.dalam.admin.yayasan') }}" class="nav-link {{ $active == 'santri-dalam' ? 'active' : '' }}">
+          <a href="{{ route('santri.dalam') }}" class="nav-link {{ $active == 'santri-dalam' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
               Data Santri Dalam
@@ -36,7 +36,7 @@
           </a>
         </li>
         <li class="nav-item ml-2">
-          <a href="{{ route('santri.luar.admin.yayasan') }}" class="nav-link {{ $active == 'santri-luar' ? 'active' : '' }}">
+          <a href="{{ route('santri.luar') }}" class="nav-link {{ $active == 'santri-luar' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
               Data Santri Luar
@@ -114,7 +114,7 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
-          <a href="{{ route('donatur.admin.yayasan') }}" class="nav-link {{ $active == 'donatur' ? 'active' : '' }}">
+          <a href="{{ route('donatur') }}" class="nav-link {{ $active == 'donatur' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
               Donatur
@@ -129,39 +129,39 @@
           </a>
         </li> --}}
         <li class="nav-item ml-2">
-          <a href="{{ route('donasi.tunai.admin.yayasan') }}" class="nav-link {{ $active == 'donasi' ? 'active' : '' }}">
+          <a href="{{ route('donasi.tunai') }}" class="nav-link {{ $active == 'donasi' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Donasi Tunai</p>
           </a>
         </li>
         <li class="nav-item ml-2">
-          <a href="{{ route('donation.tunai.admin.yayasan') }}" class="nav-link {{ $active == 'data-donasi-tunai' ? 'active' : '' }}">
+          <a href="{{ route('donation.tunai') }}" class="nav-link {{ $active == 'data-donasi-tunai' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Donasi Tunai</p>
           </a>
         </li>
         <li class="nav-header">Donasi Transfer</li>
         <li class="nav-item ml-2">
-          <a href="{{ route('donasi.transfer.admin.yayasan') }}" class="nav-link {{ $active == 'donasi-transfer' ? 'active' : '' }}">
+          <a href="{{ route('donasi.transfer') }}" class="nav-link {{ $active == 'donasi-transfer' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Donasi Transfer</p>
           </a>
         </li>
         <li class="nav-item ml-2">
-          <a href="{{ route('data.donasi.transfer.admin.yayasan') }}" class="nav-link {{ $active == 'data-donasi-transfer' ? 'active' : '' }}">
+          <a href="{{ route('data.donasi.transfer') }}" class="nav-link {{ $active == 'data-donasi-transfer' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Donasi Transfer</p>
           </a>
         </li>
         <li class="nav-header">Donasi Barang</li>
         <li class="nav-item ml-2">
-          <a href="{{ route('create.donasi.barang.admin.yayasan') }}" class="nav-link {{ $active == 'create-donasi-barang' ? 'active' : '' }}">
+          <a href="{{ route('create.donasi.barang') }}" class="nav-link {{ $active == 'create-donasi-barang' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Donasi Barang</p>
           </a>
         </li>
         <li class="nav-item ml-2">
-          <a href="{{ route('donation.goods.admin.yayasan') }}" class="nav-link {{ $active == 'donasi-barang' ? 'active' : '' }}">
+          <a href="{{ route('donation.goods') }}" class="nav-link {{ $active == 'donasi-barang' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Donasi Barang</p>
           </a>
@@ -244,7 +244,7 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
-          <a href="{{ route('tambah.pengguna.admin.yayasan') }}" class="nav-link {{ $active == 'create-user' ? 'active' : '' }}">
+          <a href="{{ route('tambah.pengguna') }}" class="nav-link {{ $active == 'create-user' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Tambah Pengguna</p>
           </a>
@@ -252,7 +252,7 @@
       </ul>
       <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
-          <a href="{{ route('data.pengguna.admin.yayasan') }}" class="nav-link {{ $active == 'data-user' ? 'active' : '' }}">
+          <a href="{{ route('data.pengguna') }}" class="nav-link {{ $active == 'data-user' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Pengguna</p>
           </a>

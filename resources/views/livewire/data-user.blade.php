@@ -35,7 +35,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Hak Akses</th>
-                                    @if (auth()->user()->role == 'admin-yayasan')
+                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                         <th scope="col">Aksi</th>
                                     @endif
                                 </tr>
@@ -55,7 +55,7 @@
                                         <td data-label="Hak Akses">
                                             {{ str_replace("-", " ",$user->role) }}
                                         </td>
-                                        @if (auth()->user()->role == 'admin-yayasan')
+                                        @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                             <td data-label="Aksi">
                                                 <div class="btn-group-vertical" role="group" aria-label="Basic example">
                                                     <a href="{{ route('edit.pengguna.admin.yayasan',$user->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Ubah Pengguna"><i class="fas fa-pencil-alt"></i> Ubah</a>

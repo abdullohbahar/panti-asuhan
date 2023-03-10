@@ -87,6 +87,10 @@ Route::prefix('pembina-yayasan')->middleware('pembina-yayasan')->group(function 
     Route::get('/data-santri-luar', [AnakAsuhController::class, 'santriLuar'])->name('santri.luar.pembina.yayasan');
 });
 
+Route::prefix('ketua-yayasan')->middleware('ketua-yayasan')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.ketua.yayasan');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -172,4 +176,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-warga/{id}', [CitizenController::class, 'editCitizen'])->name('edit.warga');
 
     Route::get('/data-pengguna', [UserController::class, 'dataUser'])->name('data.pengguna');
+
+    // menu santri
+    Route::get('/tambah-santri', [AnakAsuhController::class, 'create'])->name('create.santri');
+    Route::get('/data-santri-dalam', [AnakAsuhController::class, 'index'])->name('santri.dalam');
+    Route::get('/data-santri-luar', [AnakAsuhController::class, 'santriLuar'])->name('santri.luar');
+
+    // Pengguna
+    Route::get('/tambah-pengguna', [UserController::class, 'createUser'])->name('tambah.pengguna');
+    Route::get('/data-pengguna', [UserController::class, 'dataUser'])->name('data.pengguna');
+    Route::get('/ubah-pengguna/{id}', [UserController::class, 'editUser'])->name('edit.pengguna');
 });

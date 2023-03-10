@@ -29,7 +29,7 @@
                                 <button wire:click="exportExcel" class="btn btn-warning btn-sm btn-block"><b><i class="fas fa-print"></i> Export</b></button>
                             </div> --}}
                             {{-- <div class="col-sm-12 col-md-6"> --}}
-                                @if (auth()->user()->role == 'admin-yayasan')
+                                @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                     <a href="{{ route('tambah.pengurus') }}" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Data Pengurus</b></a>
                                 @endif
                             {{-- </div> --}}
@@ -50,7 +50,7 @@
                                     <th scope="col">Foto</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Jabatan</th>
-                                    @if (auth()->user()->role == 'admin-yayasan')
+                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                         <th scope="col">Aksi</th>
                                     @endif
                                 </tr>
@@ -77,7 +77,7 @@
                                         <td data-label="Jabatan">
                                             {{ $pengurus->jabatan }}
                                         </td>
-                                        @if (auth()->user()->role == 'admin-yayasan')
+                                        @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                             <td data-label="Aksi">
                                                 <div class="btn-group-vertical" role="group" aria-label="Basic example">
                                                     <a href="{{ route('profile.pengurus',$pengurus->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Pengurus"><i class="fas fa-user"></i> Profil Pengurus</a>
