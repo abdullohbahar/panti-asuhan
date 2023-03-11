@@ -189,5 +189,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/ubah-pengguna/{id}', [UserController::class, 'editUser'])->name('edit.pengguna');
 
     // Income Lksa
-    Route::get('/tambah-pemasukan', [KeuanganLksaController::class, 'pemasukan'])->name('income.lksa');
+    Route::get('/tambah-pemasukan-lksa', [KeuanganLksaController::class, 'pemasukan'])->name('income.lksa');
+    Route::get('/data-pemasukan-lksa', [KeuanganLksaController::class, 'dataPemasukan'])->name('data.income.lksa');
 });

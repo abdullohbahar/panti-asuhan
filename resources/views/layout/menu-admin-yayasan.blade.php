@@ -216,7 +216,7 @@
       </ul>
       <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
-          <a href="{{ route('data.pengeluaran') }}" class="nav-link {{ $active == 'data-pengeluaran' ? 'active' : '' }}">
+          <a href="{{ route('data.income.lksa') }}" class="nav-link {{ $active == 'data-income-lksa' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Pemasukan</p>
           </a>

@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Input Pemasukan LKSA
+  Data Pemasukan LKSA
 @endsection
 
 @push('addons-css')
@@ -100,7 +100,7 @@
 
 @section('content')
 <div>
-  <livewire:income-lksa>
+  <livewire:data-income-lksa>
 </div>
 @endsection
 
@@ -114,7 +114,7 @@
   window.addEventListener('close-modal', event => {
     // close modal
     $('#modal-add-donatur').modal('hide')
-    $('#modal-edit-donatur').modal('hide')
+    $('#modal-edit-donation').modal('hide')
 
     // sweetalert success
     const Toast = Swal.mixin({

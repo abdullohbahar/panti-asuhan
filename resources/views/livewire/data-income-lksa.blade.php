@@ -1,17 +1,17 @@
 <div>
     {{-- Modal --}}
-    @include('livewire.modal.pengeluaran.modal-edit-pengeluaran')
+    @include('livewire.modal.keuangan-lksa.modal-edit-pemasukan')
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Data Pengeluaran</h1>
+          <h1>Data Pemasukan LKSA</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Data Pengeluaran</li>
+            <li class="breadcrumb-item active">Data Pemasukan LKSA</li>
           </ol>
         </div>
       </div>
@@ -49,7 +49,7 @@
             <div class="card-body">
                 <div class="row justify-content-end">
                     <div class="col-0 mr-2">
-                        <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Nama Donatur">
+                        <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Uraian">
                     </div>
                     <div class="col-12 mt-2">
                         <table class="table-data">
@@ -73,8 +73,8 @@
                                 @foreach ($donations as $index => $donation)
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
-                                        <td data-label="Tanggal">{{ $donation->tanggal_donasi }}</td>
-                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->pengeluaran, 2, ',', '.'); }}</td>
+                                        <td data-label="Tanggal">{{ $donation->tanggal }}</td>
+                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}</td>
                                         <td data-label="No Rek">{{ $donation->keterangan }}</td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                             <td data-label="Aksi">
@@ -98,6 +98,8 @@
 </div>
 
 @push('component-scripts')
+    <script src="https://unpkg.com/@develoka/angka-terbilang-js/index.min.js"></script>
+
     <script>
         $(document).on("livewire:load", function(){
             $('.select2').select2();
@@ -114,6 +116,15 @@
             Livewire.hook('message.processed', (message, component) => {
                 $('.select2').select2();
             })
+
+        })
+
+        $("body").on("keyup","#nominal2",() => {
+            var val = $("#nominal2").val()
+            var angka = val.replace(/,.*|[^0-9]/g, '')
+            var terbilang = angkaTerbilang(angka)
+            @this.terbilang = terbilang + ' rupiah'
+            $("#terbilang").val(terbilang)
         })
 
 

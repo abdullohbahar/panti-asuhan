@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 
 class DataPengeluaran extends Component
 {
-    public $donatur_id, $pengeluaran, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId;
+    public $donatur_id, $pengeluaran, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $donation_id;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -24,7 +24,7 @@ class DataPengeluaran extends Component
             $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
         });
 
-        $donations = $query->orderBy('tanggal_donasi', 'desc')->paginate(10);
+        $donations = $query->orderBy('tanggal_donasi', 'desc')->paginate(15);
         $count = $donations->count();
 
         $data = [
@@ -103,6 +103,6 @@ class DataPengeluaran extends Component
     public function destroy()
     {
         Donation::destroy($this->donation_id);
-        $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Pengeluaran Berhasil Dihapus']);
     }
 }
