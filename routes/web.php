@@ -191,4 +191,5 @@ Route::middleware('auth')->group(function () {
     // Income Lksa
     Route::get('/tambah-pemasukan-lksa', [KeuanganLksaController::class, 'pemasukan'])->name('income.lksa');
     Route::get('/data-pemasukan-lksa', [KeuanganLksaController::class, 'dataPemasukan'])->name('data.income.lksa');
+    Route::get('/export-data-pemasukan-lksa-pdf', [KeuanganLksaController::class, 'exportDataPemasukan'])->name('export.data.income.lksa.pdf');
 });

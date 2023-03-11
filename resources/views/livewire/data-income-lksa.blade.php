@@ -44,6 +44,16 @@
                             <a href="{{ route('data.pengeluaran') }}" class="btn btn-warning btn-block">Reset Filter</a>
                         </div>
                     </div>
+                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                        <div class="form-group">
+                            <a href="{{ route('data.pengeluaran') }}" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                        <div class="form-group">
+                            <a href="{{ route('export.data.income.lksa.pdf') }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
