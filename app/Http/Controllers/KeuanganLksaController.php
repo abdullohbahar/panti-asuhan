@@ -33,4 +33,13 @@ class KeuanganLksaController extends Controller
 
         return view('export.export-pemasukan-lksa-pdf', $data);
     }
+
+    public function pengeluaran()
+    {
+        $data = [
+            'active' => 'outcome-lksa'
+        ];
+
+        return view('outcome-lksa', $data);
+    }
 }
