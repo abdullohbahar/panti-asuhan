@@ -197,7 +197,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'pengeluaran' || $active == 'data-pengeluaran' || $active == 'income-lksa' || $active == 'laporan' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'pengeluaran' || $active == 'data-pengeluaran' || $active == 'income-lksa' || $active == 'data-income-lksa' || $active == 'laporan' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-hand-holding-usd"></i>
         <p>

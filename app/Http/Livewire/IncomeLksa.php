@@ -76,6 +76,6 @@ class IncomeLksa extends Component
             'transaksi' => 'pemasukan'
         ]);
 
-        $this->dispatchBrowserEvent('close-modal', ['message' => 'Berhasil']);
+        return redirect()->route('data.income.lksa')->with('message', 'Data berhasil ditambahkan');
     }
 }
