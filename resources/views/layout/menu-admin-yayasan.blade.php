@@ -122,12 +122,6 @@
           </a>
         </li>
         <li class="nav-header">Donasi Tunai</li>
-        {{-- <li class="nav-item">
-          <a href="{{ route('donation.type') }}" class="nav-link {{ $active == 'tipe' ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Tipe Donasi</p>
-          </a>
-        </li> --}}
         <li class="nav-item ml-2">
           <a href="{{ route('donasi.tunai') }}" class="nav-link {{ $active == 'donasi' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
@@ -168,15 +162,16 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'pengeluaran' || $active == 'data-pengeluaran' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'pengeluaran' || $active == 'data-pengeluaran' || $active == 'laporan' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-file"></i>
+        <i class="nav-icon fas fa-hand-holding-usd"></i>
         <p>
-          Pengeluaran
+          Keuangan Yayasan
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>
       <ul class="nav nav-treeview">
+        <li class="nav-header">Pengeluaran</li>
         <li class="nav-item ml-2">
           <a href="{{ route('pengeluaran') }}" class="nav-link {{ $active == 'pengeluaran' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
@@ -192,14 +187,67 @@
           </a>
         </li>
       </ul>
-    </li>
-    <li class="nav-item">
-      <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="nav-link {{ $active == 'laporan' ? 'active' : '' }}">
-        <i class="nav-icon fas fa-file"></i>
-        <p>
+      <ul class="nav nav-treeview">
+        <li class="nav-header">Laporan</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="nav-link {{ $active == 'laporan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
             <p>Laporan Pemasukan & Pengeluaran</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item {{ $active == 'pengeluaran' || $active == 'data-pengeluaran' || $active == 'income-lksa' || $active == 'laporan' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-hand-holding-usd"></i>
+        <p>
+          Keuangan LKSA
+          <i class="right fas fa-angle-left"></i>
         </p>
       </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-header">Pemasukan</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('income.lksa') }}" class="nav-link {{ $active == 'income-lksa' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Input Pemasukan</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.pengeluaran') }}" class="nav-link {{ $active == 'data-pengeluaran' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Data Pemasukan</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-header">Pengeluaran</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('pengeluaran') }}" class="nav-link {{ $active == 'pengeluaran' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Input Pengeluaran</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.pengeluaran') }}" class="nav-link {{ $active == 'data-pengeluaran' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Data Pengeluaran</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-header">Laporan</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="nav-link {{ $active == 'laporan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Laporan Pemasukan & Pengeluaran</p>
+          </a>
+        </li>
+      </ul>
     </li>
     <li class="nav-item">
       <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">

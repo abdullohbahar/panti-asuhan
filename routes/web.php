@@ -19,6 +19,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DonasiBarangController;
 use App\Http\Controllers\DonationTypeController;
+use App\Http\Controllers\KeuanganLksaController;
 use App\Http\Livewire\CreateDonasiBarang;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
 use App\Http\Livewire\LksaDocument;
@@ -186,4 +187,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tambah-pengguna', [UserController::class, 'createUser'])->name('tambah.pengguna');
     Route::get('/data-pengguna', [UserController::class, 'dataUser'])->name('data.pengguna');
     Route::get('/ubah-pengguna/{id}', [UserController::class, 'editUser'])->name('edit.pengguna');
+
+    // Income Lksa
+    Route::get('/tambah-pemasukan', [KeuanganLksaController::class, 'pemasukan'])->name('income.lksa');
 });
