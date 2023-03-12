@@ -41,16 +41,6 @@
                             <input type="date" wire:model.defer="date2" class="form-control" name="" id="">
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                        <div class="form-group">
-                            <select name="filterDonaturId" wire:model.defer="filterDonaturId" style="width: 100%" class="select2" id="donaturs">
-                                    <option value="">Semua Donatur</option>
-                                @foreach ($donaturs as $donatur)
-                                    <option value="{{ $donatur->id }}">{{ $donatur->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
                             <button wire:click="search" id="search" class="btn btn-info btn-block">Filter Data</button>

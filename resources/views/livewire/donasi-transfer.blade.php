@@ -66,19 +66,21 @@
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label>Bank</label>
-                                <select wire:model="bank" class="form-control" id="">
+                                <select wire:model="bank" name="bank" class="form-control select2" id="bank">
                                     <option value="">-- Pilih Bank --</option>
-                                    <option value="BRI">BRI</option>
-                                    <option value="BPD">BPD</option>
-                                    <option value="BCA">BCA</option>
-                                    <option value="BNI">BNI</option>
-                                    <option value="MANDIRI">MANDIRI</option>
+                                    @foreach ($banks as $bank)
+                                        <option value="{{ $bank->name }}">{{ $bank->name }}</option>
+                                    @endforeach
+                                    <option value="lainnya">Lainnya</option>
                                 </select>
                                 @error("bank")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" wire:model="other_bank" name="other_bank" placeholder="masukkan nama bank" hidden id="other_bank" wire:ignore>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -147,8 +149,8 @@
         $(document).on("livewire:load", function(){
             $('.select2').select2();
 
-            $("body").on("change", "select[name='donatur_id']", function(){
-                @this.donatur_id = $(this).val()
+            $("body").on("change", "select[name='bank']", function(){
+                @this.bank = $(this).val()
             })
 
             $("body").on("click","#search", () => {
@@ -167,6 +169,16 @@
                 @this.terbilang = terbilang + ' rupiah'
                 $("#terbilang").val(terbilang)
             })
+        })
+
+        $("#bank").on("change", function(){
+            var val = $(this).val();
+            console.log(val)
+            if(val == "lainnya"){
+                $("#other_bank").prop("hidden",false);
+            }else{
+                $("#other_bank").prop("hidden",true);
+            }
         })
 
 
