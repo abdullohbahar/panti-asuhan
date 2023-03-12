@@ -67,11 +67,6 @@ class OutcomeLksa extends Component
 
         $donation = LksaFinance::orderBy('urutan', 'desc')->first();
 
-        if ($nominal > $this->saldo) {
-            $this->dispatchBrowserEvent('show-error');
-            return false;
-        }
-
         LksaFinance::create([
             'tanggal' => $this->tanggal,
             'pengeluaran' => $nominal,
@@ -81,6 +76,6 @@ class OutcomeLksa extends Component
             'transaksi' => 'pengeluaran'
         ]);
 
-        return redirect()->route('data.income.lksa')->with('message', 'Data berhasil ditambahkan');
+        return redirect()->route('data.outcome.lksa')->with('message', 'Data berhasil ditambahkan');
     }
 }
