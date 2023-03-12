@@ -25,37 +25,23 @@ class LaporanPemasukanPengeluaran extends Component
         $date1 = '';
         $date2 = '';
 
-        $query = Donation::whereBetween('tanggal_donasi', [$this->date1, $this->date2])
+        $query = Donation::with('donaturName')->whereBetween('tanggal_donasi', [$this->date1, $this->date2])
             ->orderBy('tanggal_donasi', 'asc');
 
         $donations = $query->get();
         $count = $donations->count();
-
-        // $time = strtotime($this->date1);
-        // $monthNow = date("m", $time);
-        // $year = date("Y", $time);
-
-        // dd($this->date1, $time);
-
-        // if ($monthNow == 01) {
-        //     $monthBefore = 12;
-        //     $year = $year - 1;
-        // } else {
-        //     $monthBefore = $monthNow - 1;
-        // }
 
         $date = Carbon::parse($this->date1)->subMonth();
         $monthBefore = $date->format('m');
         $year = $date->format('Y');
         $subMonth = $date->lastOfMonth()->format('Y-m-d');
 
-        // $pemasukanBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pemasukan");
-        // $pengeluaranBulanSebelumnya = Donation::whereMonth('tanggal_donasi', $monthBefore)->whereYear("tanggal_donasi", $year)->sum("pengeluaran");
-
         $pemasukanBulanSebelumnya = Donation::whereBetween('tanggal_donasi', ['2000-01-01', $subMonth])->sum("pemasukan");
         $pengeluaranBulanSebelumnya = Donation::whereBetween('tanggal_donasi', ['2000-01-01', $subMonth])->sum("pengeluaran");
 
         $saldoBulanSebelumnya = $pemasukanBulanSebelumnya - $pengeluaranBulanSebelumnya;
+
+        // dd($donations);
 
         $data = [
             'donations' => $donations,

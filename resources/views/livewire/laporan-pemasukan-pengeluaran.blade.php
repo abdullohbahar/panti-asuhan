@@ -80,6 +80,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Donatur</th>
                                         <th scope="col">Tanggal</th>
                                         <th scope="col">Uraian</th>
                                         <th scope="col">Jenis Donasi</th>
@@ -99,7 +100,7 @@
                                     $no = 1; ?>
                                     <tr>
                                         <td></td>
-                                        <td colspan="3">Saldo Bulan Sebelumnya</td>
+                                        <td colspan="4">Saldo Bulan Sebelumnya</td>
                                         <td></td>
                                         <td></td>
                                         <td>{{ "Rp " . number_format($saldo, 2, ',', '.'); }}</td>
@@ -114,6 +115,7 @@
                                         @endphp
                                         <tr>
                                             <td data-label="#">{{ $no++ }}</td>
+                                            <td data-label="Donatur">{{ $donation->donaturName != null ? $donation->donaturName->nama : '' }}</td>
                                             <td data-label="Tanggal">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
                                             <td data-label="Uraian">{{ $donation->keterangan }}</td>
                                             <td data-label="Jenis Donasi">
@@ -142,7 +144,7 @@
                                         <td colspan="4" class="text-right">
                                             <b>Saldo Akhir</b>
                                         </td>
-                                        <td colspan="3">
+                                        <td colspan="4">
                                             <b>
                                                 {{ "Rp " . number_format($saldo, 2, ',', '.'); }}
                                             </b>

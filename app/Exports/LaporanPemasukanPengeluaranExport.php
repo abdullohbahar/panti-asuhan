@@ -38,7 +38,7 @@ class LaporanPemasukanPengeluaranExport implements FromView, WithEvents, WithPre
 
         // dd($date1, $date2);
 
-        $donations = Donation::when($date1 != 0, function ($query) use ($date1, $date2) {
+        $donations = Donation::with('donaturName')->when($date1 != 0, function ($query) use ($date1, $date2) {
             $query->whereBetween('tanggal_donasi', [$date1, $date2]);
         })->orderBy('tanggal_donasi', 'asc')->get();
 
@@ -134,12 +134,13 @@ class LaporanPemasukanPengeluaranExport implements FromView, WithEvents, WithPre
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
-                $cellRange = 'C'; // All headers
-                $event->sheet->getDelegate()->getStyle($cellRange)->getAlignment()->setWrapText(true);
-                $event->sheet->getDelegate()->getStyle('A3:F3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('D2D3D4');
-                $event->sheet->getDelegate()->getStyle('A' . ($this->count + 5))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                $event->sheet->getDelegate()->getStyle('D' . ($this->count + 5))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
-                $event->sheet->getDelegate()->mergeCells('A' . ($this->count + 5) . ':C' . ($this->count + 5));
+                $event->sheet->getDelegate()->getStyle('A1:G1')->getAlignment()->setWrapText(true);
+                // kolom header
+                $event->sheet->getDelegate()->getStyle('A3:G3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('D2D3D4');
+
+                $event->sheet->getDelegate()->getStyle('A' . ($this->count + 6))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                $event->sheet->getDelegate()->getStyle('D' . ($this->count + 6))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                $event->sheet->getDelegate()->mergeCells('A' . ($this->count + 6) . ':C' . ($this->count + 6));
                 // $event->sheet->getDelegate()->mergeCells('D' . ($this->count + 5) . ':F' . ($this->count + 5));
                 // $event->sheet->getDelegate()->setCellValue('A' . ($this->count + 5), 'Saldo Akhir');
                 // $event->sheet->getDelegate()->setCellValue('D' . ($this->count + 5), '=SUM(D5:D' . ($this->count + 5) . ') - SUM(E5:E' . ($this->count + 5) . ')');

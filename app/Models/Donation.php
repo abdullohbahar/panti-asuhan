@@ -43,4 +43,9 @@ class Donation extends Model
     {
         return $this->hasOne(ProofOfDonationNumber::class);
     }
+
+    public function donaturName()
+    {
+        return $this->hasOne(Donatur::class, 'id', 'donatur_id');
+    }
 }

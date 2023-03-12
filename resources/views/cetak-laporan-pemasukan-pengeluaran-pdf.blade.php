@@ -108,8 +108,9 @@
                     <table border="1" class="font-12" style="width: 100%; margin-top: 20px">
                         <tr>
                             <th style="width: 30px !important" class="text-center">NO</th>
+                            <th class="text-center">DONATUR</th>
                             <th class="text-center" style="margin-right: 5px;">TANGGAL</th>
-                            <th class="text-center" style="width: 300px;">URAIAN</th>
+                            <th class="text-center">URAIAN</th>
                             <th class="text-center">PEMASUKAN</th>
                             <th class="text-center">PENGELUARAN</th>
                             <th class="text-center">SALDO</th>
@@ -119,6 +120,7 @@
                         $saldo = $saldoBulanSebelumnya;
                         ?>
                         <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td>Saldo Bulan Sebelumnya</td>
@@ -140,6 +142,7 @@
                         @endphp
                             <tr>
                                 <td data-label="#" class="text-center">{{ $no++ }}</td>
+                                <td>{{ $donation->donaturName != null ? $donation->donaturName->nama : '' }}</td>
                                 <td data-label="Tanggal" class="text-center">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
                                 <td class="p-1">{{ $donation->keterangan }}</td>
                                 <td data-label="Pemasukan" class="text-right">
@@ -173,7 +176,7 @@
                             <td colspan="3" class="text-right p-1">
                                 <b>Saldo Akhir</b>
                             </td>
-                            <td colspan="3" class="text-center">
+                            <td colspan="4" class="text-center">
                                 <div class="p-1">
                                     <div>
                                         {{ "Rp " . number_format($pemasukan - $pengeluaran, 0, '', '.'); }}
