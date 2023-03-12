@@ -21,6 +21,7 @@ class CreatePengurus extends Component
     public function rules()
     {
         return [
+            'foto' => 'image|max:2048',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
@@ -33,6 +34,8 @@ class CreatePengurus extends Component
     public function messages()
     {
         return [
+            'foto.image' => 'Foto harus berupa JPG atau PNG',
+            'foto.max' => 'Foto max 2 MB',
             'nama.required' => 'Nama harus diisi',
             'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
             'tempat_lahir.required' => 'Tempat lahir harus diisi',

@@ -45,12 +45,15 @@ class EditPengurus extends Component
             'tanggal_lahir' => 'required',
             'jabatan' => 'required',
             'alamat' => 'required',
+            'foto' => 'image|max:2048',
         ];
     }
 
     public function messages()
     {
         return [
+            'foto.image' => 'Foto harus berupa JPG atau PNG',
+            'foto.max' => 'Foto max 2 MB',
             'nama.required' => 'Nama harus diisi',
             'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
             'tempat_lahir.required' => 'Tempat lahir harus diisi',

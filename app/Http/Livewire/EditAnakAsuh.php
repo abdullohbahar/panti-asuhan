@@ -57,12 +57,16 @@ class EditAnakAsuh extends Component
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'status' => 'required',
+            'foto' => 'image|max:2048',
+
         ];
     }
 
     public function messages()
     {
         return [
+            'foto.image' => 'Foto harus berupa JPG atau PNG',
+            'foto.max' => 'Foto max 2 MB',
             'nama_lengkap.required' => 'Nama lengkap harus diisi',
             'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
             'status.required' => 'Status harus diisi',

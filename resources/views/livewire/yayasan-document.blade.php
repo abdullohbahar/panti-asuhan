@@ -35,6 +35,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Nama Berkas</th>
+                                        <th scope="col">Waktu Upload</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -49,6 +50,9 @@
                                             <td data-label="#">{{ $documents->firstItem() + $index }}</td>
                                             <td data-label="Nama Berkas">
                                                 {{ $document->name }}
+                                            </td>
+                                            <td data-label="Waktu Upload">
+                                                {{ \Carbon\Carbon::parse($document->created_at)->format('d-m-Y H:i:s') }}
                                             </td>
                                             <td data-label="Aksi">
                                                 <button wire:click="download('{{ $document->file }}','{{ $document->name }}')" class="btn btn-info btn-sm">Unduh Berkas</button>
