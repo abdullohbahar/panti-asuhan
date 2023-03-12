@@ -205,7 +205,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'outcome-lksa' || $active == 'income-lksa' || $active == 'data-income-lksa' || $active == 'data-outcome-lksa' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'outcome-lksa' || $active == 'income-and-expense-report' || $active == 'income-lksa' || $active == 'data-income-lksa' || $active == 'data-outcome-lksa' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-hand-holding-usd"></i>
         <p>
@@ -250,7 +250,7 @@
       <ul class="nav nav-treeview">
         <li class="nav-header">Laporan</li>
         <li class="nav-item ml-2">
-          <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="nav-link {{ $active == 'laporan' ? 'active' : '' }}">
+          <a href="{{ route('data.income.outcome.lksa') }}" class="nav-link {{ $active == 'income-and-expense-report' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Laporan Pemasukan & Pengeluaran</p>
           </a>

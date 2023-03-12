@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Laporan Pemasukan dan Pengeluaran Yayasan
+  Laporan Pemasukan dan Pengeluaran LKSA
 @endsection
 
 @push('addons-css')
@@ -100,7 +100,7 @@
 
 @section('content')
 <div>
-  <livewire:laporan-pemasukan-pengeluaran>
+  <livewire:income-and-expense-report>
 </div>
 @endsection
 

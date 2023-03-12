@@ -51,4 +51,13 @@ class KeuanganLksaController extends Controller
 
         return view('data-outcome-lksa', $data);
     }
+
+    public function laporan()
+    {
+        $data = [
+            'active' => 'income-and-expense-report'
+        ];
+
+        return view('income-and-expense-report', $data);
+    }
 }

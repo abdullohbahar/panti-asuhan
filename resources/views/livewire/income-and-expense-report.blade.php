@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Laporan Pemasukan Pengeluaran Yayasan</h1>
+          <h1>Laporan Pemasukan Pengeluaran LKSA</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Laporan Pemasukan Pengeluaran Yayasan</li>
+            <li class="breadcrumb-item active">Laporan Pemasukan Pengeluaran LKSA</li>
           </ol>
         </div>
       </div>
@@ -80,10 +80,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Donatur</th>
                                         <th scope="col">Tanggal</th>
                                         <th scope="col">Uraian</th>
-                                        <th scope="col">Jenis Donasi</th>
                                         <th scope="col">Pemasukan</th>
                                         <th scope="col">Pengeluaran</th>
                                         <th scope="col">Saldo</th>
@@ -92,7 +90,7 @@
                                 <tbody>
                                     @if ($count == 0)
                                         <tr>
-                                            <td colspan="5">Data Not Found</td>
+                                            <td colspan="3">Data Not Found</td>
                                         </tr>
                                     @endif
                                     <?php 
@@ -100,7 +98,7 @@
                                     $no = 1; ?>
                                     <tr>
                                         <td></td>
-                                        <td colspan="4">Saldo Bulan Sebelumnya</td>
+                                        <td colspan="2">Saldo Bulan Sebelumnya</td>
                                         <td></td>
                                         <td></td>
                                         <td>{{ "Rp " . number_format($saldo, 2, ',', '.'); }}</td>
@@ -115,16 +113,8 @@
                                         @endphp
                                         <tr>
                                             <td data-label="#">{{ $no++ }}</td>
-                                            <td data-label="Donatur">{{ $donation->donaturName != null ? $donation->donaturName->nama : '' }}</td>
                                             <td data-label="Tanggal">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
                                             <td data-label="Uraian">{{ $donation->keterangan }}</td>
-                                            <td data-label="Jenis Donasi">
-                                                @if ($donation->jenis_donasi == 'pengeluaran')
-                                                    
-                                                @else
-                                                    {{ $donation->jenis_donasi }}
-                                                @endif
-                                            </td>
                                             <td data-label="Pemasukan">
                                                 @if ($donation->pemasukan)
                                                     {{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}
@@ -141,7 +131,7 @@
                                         </tr>
                                     @endforeach
                                     <tr style="background: #48cbe0">
-                                        <td colspan="4" class="text-right">
+                                        <td colspan="2" class="text-right">
                                             <b>Saldo Akhir</b>
                                         </td>
                                         <td colspan="4">
