@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(UserTableSeeder::class);
+        $this->call(MasterDataBankSeeder::class);
         // $this->call(AnakAsuhsTableSeeder::class);
         // $this->call(DonaturTableSeeder::class);
         // $this->call(DonationTableSeeder::class);
