@@ -74,35 +74,26 @@
             font-size: 13px;
         }
 
+        .garis {
+            border-top: 5px solid black;
+            border-bottom: 1px solid black;
+            padding: 1px 0;
+        }
+
         </style>
-        <title>Laporan Keuangan</title>
+        <title>Laporan Pemasukan Pengeluaran Yayasan</title>
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" integrity="sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
     </head>
     <body>
+        <div class="col-12 font-12">
+            <img src="data:image/jpeg;base64,{{ $image }}" style="width: 100%" alt="" srcset="">
+        </div>
+        <div class="garis">
+
+        </div>
         <div class="container-fluid mt-3">
-            {{-- <div class="row justify-content-between">
-                <div class="col-1">
-                    <a href="{{ url()->previous() }}" class="btn btn-warning no-print">
-                        Back
-                    </a>
-                </div>
-                <div class="col-2">
-                    <button onclick="window.print();return false;" class="btn btn-success no-print">
-                        Cetak PDF
-                    </button>
-                </div>
-            </div> --}}
-            <div class="row text-center">
-                <div class="col-12 font-12">
-                    <h3>YAYASAN AL DZIKRO</h3>
-                    <p> Manggung RT 07, Wukirsari, Imogiri, Bantul, Yogyakarta 55782, Telp: (0274)2810607</p>
-                    <p> Keputusan Menteri Hukum dan HAM RI No. Nomor: AHU-4001. AH.01.02. Tahun 2008</p>
-                    <p> Keputusan Kepala BKPM DIY No: 223/323/GR.I/2015 Tentang Ijin Operasional</p>
-                    <p class="bg-color">Kelompok Sasaran: Anak Yatim, Piatu, Yatim Piatu, Masyarakat dan Orang Jompo</p>
-                </div>
-            </div>
             <div class="row justify-content-center mt-2">
                 <div class="col-12">
                     <table border="1" class="font-12" style="width: 100%; margin-top: 20px">

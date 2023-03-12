@@ -61,6 +61,10 @@ class LaporanPemasukanPengeluaran extends Component
 
     public function printPDFLaporan($date1, $date2)
     {
+        $image_path = public_path('logo/kop.png');
+
+        $image_data = base64_encode(file_get_contents($image_path));
+
         $query = Donation::when($date1 != 0, function ($query) use ($date1, $date2) {
             $query->whereBetween('tanggal_donasi', [$date1, $date2]);
         })->where('jenis_donasi', '=', "Tunai")->orWhere('jenis_donasi', '=', 'pengeluaran')->orWhere('jenis_donasi', '=', 'transfer')->orderBy('tanggal_donasi', 'asc');
@@ -85,7 +89,8 @@ class LaporanPemasukanPengeluaran extends Component
             'donations' => $query->get(),
             'pemasukan' => $query->sum('pemasukan'),
             'pengeluaran' => $query->sum('pengeluaran'),
-            'saldoBulanSebelumnya' => $saldoBulanSebelumnya
+            'saldoBulanSebelumnya' => $saldoBulanSebelumnya,
+            'image' => $image_data,
         ];
 
 
