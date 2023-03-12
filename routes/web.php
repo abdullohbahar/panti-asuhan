@@ -195,4 +195,5 @@ Route::middleware('auth')->group(function () {
 
     // Outcome LKSA
     Route::get('tambah-pengeluaran-lksa', [KeuanganLksaController::class, 'pengeluaran'])->name('outcome.lksa');
+    Route::get('data-pengeluaran-lksa', [KeuanganLksaController::class, 'dataPengeluaran'])->name('data.outcome.lksa');
 });

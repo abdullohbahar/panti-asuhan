@@ -42,4 +42,13 @@ class KeuanganLksaController extends Controller
 
         return view('outcome-lksa', $data);
     }
+
+    public function dataPengeluaran()
+    {
+        $data = [
+            'active' => 'data-outcome-lksa'
+        ];
+
+        return view('data-outcome-lksa', $data);
+    }
 }

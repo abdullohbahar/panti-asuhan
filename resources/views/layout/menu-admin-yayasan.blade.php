@@ -197,7 +197,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'pengeluaran' || $active == 'data-pengeluaran' || $active == 'outcome-lksa' || $active == 'income-lksa' || $active == 'data-income-lksa' || $active == 'laporan' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'outcome-lksa' || $active == 'income-lksa' || $active == 'data-income-lksa' || $active == 'data-outcome-lksa' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-hand-holding-usd"></i>
         <p>
@@ -233,7 +233,7 @@
       </ul>
       <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
-          <a href="{{ route('data.pengeluaran') }}" class="nav-link {{ $active == 'data-pengeluaran' ? 'active' : '' }}">
+          <a href="{{ route('data.outcome.lksa') }}" class="nav-link {{ $active == 'data-outcome-lksa' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Pengeluaran</p>
           </a>
