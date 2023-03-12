@@ -6,6 +6,7 @@
         body{
             font-family:Arial, Helvetica, sans-serif !important;
         }
+        @page { margin-top: 0px; }
 
         .bg-color{
             background-color: black; 
@@ -95,13 +96,13 @@
         <div class="container-fluid mt-3">
             <div class="row text-center">
                 <div class="col-12 font-12">
-                    <img src="data:image/jpeg;base64,{{ $image }}" style="width: 100%" alt="" srcset="">
+                    <img src="data:image/jpeg;base64,{{ $image }}" style="width: 85%" alt="" srcset="">
                 </div>
                 <div class="garis">
 
                 </div>
-                <h3>TANDA TERIMA</h3>
-                <h4 style="margin: 0px">No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</h4>
+                <h4 style="margin: 2px">TANDA TERIMA</h4>
+                <h5 style="margin: 0px">No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</h5>
                 <input type="checkbox" id="Zakat" @if ($tipe == 'Zakat') checked @else class="check" @endif><label for="Zakat" style="font-size: 13px">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq" style="font-size: 13px">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="Sodaqoh" @if ($tipe == 'Sodaqoh') checked @else class="check" @endif><label for="Sodaqoh" style="font-size: 13px">Sodaqoh</label> &nbsp; &nbsp; &nbsp; &nbsp;
@@ -195,6 +196,7 @@
                     </td>
                 </tr>
             </table>
+            <p style="font-size: 10px; margin-top:20px; text-align:center">{{ $created_at }}</p>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
