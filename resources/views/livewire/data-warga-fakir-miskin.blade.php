@@ -62,7 +62,7 @@
                                 @foreach ($citizens as $index => $citizen)
                                     <tr>
                                         <td data-label="#">{{ $citizens->firstItem() + $index }}</td>
-                                        <td data-label="Nama Lengkap">
+                                        <td data-label="Nama">
                                             {{ $citizen->nama_lengkap }}
                                         </td>
                                         <td data-label="Alamat">

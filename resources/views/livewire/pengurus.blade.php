@@ -71,7 +71,7 @@
                                                 <img src="{{ asset('./template/dist/img/default-picture.png') }}" class="img-fluid img-thumbnail w-50" alt="{{ $pengurus->nama_lengkap }}" srcset="">
                                             @endif
                                         </td>
-                                        <td data-label="Nama Lengkap">
+                                        <td data-label="Nama">
                                             {{ $pengurus->nama }}
                                         </td>
                                         <td data-label="Jabatan">

@@ -84,7 +84,7 @@
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Tanggal">{{ $donation->tanggal }}</td>
-                                        <td data-label="No Rek">{{ $donation->keterangan }}</td>
+                                        <td data-label="Uraian">{{ $donation->keterangan }}</td>
                                         <td data-label="Nominal">{{ "Rp " . number_format($donation->pengeluaran, 2, ',', '.'); }}</td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                             <td data-label="Aksi">
