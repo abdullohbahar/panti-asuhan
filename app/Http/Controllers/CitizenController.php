@@ -61,6 +61,15 @@ class CitizenController extends Controller
         return view('data-warga-meninggal', $data);
     }
 
+    public function dataWargaDusun()
+    {
+        $data = [
+            'active' => 'data-warga-dusun',
+        ];
+
+        return view('data-warga-dusun', $data);
+    }
+
     public function profileWarga($id)
     {
         $data = [

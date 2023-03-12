@@ -93,6 +93,7 @@
                                     <option value="Jompo">Jompo</option>
                                     <option value="Jamaah">Jamaah</option>
                                     <option value="Sudah Meninggal">Sudah Meninggal</option>
+                                    <option value="Warga Dusun">Warga Dusun</option>
                                 </select>
                                 @error("status")
                                     <div class="invalid-feedback">

@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Tambah Data Warga
+  Data Warga Dusun
 @endsection
 
 @push('addons-css')
@@ -42,6 +42,7 @@
     .table-data {
         border: 0;
     }
+    
     .table-data caption {
         font-size: 1.3em;
     }
@@ -100,7 +101,7 @@
 
 @section('content')
 <div>
-  <livewire:create-citizen>
+  <livewire:data-warga-dusun>
 </div>
 @endsection
 
@@ -181,13 +182,5 @@
         'success'
       )
     })
-
-    // preview image
-    imageUpload.onchange = (evt) => {
-        const [file] = imageUpload.files;
-        if (file) {
-            imagePreview.src = URL.createObjectURL(file);
-        }
-    };
 </script>
 @endpush

@@ -45,7 +45,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'citizens' || $active == 'create-citizen' || $active == 'data-warga-meninggal' || $active == 'data-warga-dhuafa' || $active == 'data-warga-jamaah' || $active == 'data-warga-fakir-miskin' || $active == 'data-warga-jompo' || $active == 'create-citizen' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'data-warga-dusun' || $active == 'citizens' || $active == 'create-citizen' || $active == 'data-warga-meninggal' || $active == 'data-warga-dhuafa' || $active == 'data-warga-jamaah' || $active == 'data-warga-fakir-miskin' || $active == 'data-warga-jompo' || $active == 'create-citizen' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-users"></i>
         <p>
@@ -99,6 +99,14 @@
             <i class="nav-icon far fa-circle"></i>
             <p>
               Meninggal
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.warga.dusun') }}" class="nav-link {{ $active == 'data-warga-dusun' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Dusun
             </p>
           </a>
         </li>
