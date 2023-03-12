@@ -48,6 +48,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nama</th>
+                                    <th scope="col">Alamat</th>
                                     <th scope="col">Tempat, Tanggal Lahir</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -63,6 +64,9 @@
                                         <td data-label="#">{{ $citizens->firstItem() + $index }}</td>
                                         <td data-label="Nama Lengkap">
                                             {{ $citizen->nama_lengkap }}
+                                        </td>
+                                        <td data-label="Alamat">
+                                            {{ $citizen->alamat }}
                                         </td>
                                         <td data-label="Tempat, Tanggal Lahir">
                                             {{ $citizen->tempat_lahir }}, {{ $citizen->tanggal_lahir }}
