@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\IncomeAndExpenseExport;
 use App\Models\LksaFinance;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 
 class IncomeAndExpenseReport extends Component
@@ -77,7 +80,6 @@ class IncomeAndExpenseReport extends Component
             'pengeluaran' => $query->sum('pengeluaran'),
             'saldoBulanSebelumnya' => $saldoBulanSebelumnya,
             'image' => $image_data,
-
         ];
 
         $pdf = PDF::loadView('cetak-laporan-pemasukan-pengeluaran-pdf-lksa', $data);
@@ -86,5 +88,10 @@ class IncomeAndExpenseReport extends Component
 
 
         return $pdf->download('Laporan pemasukan pengeluaran LKSA.pdf');
+    }
+
+    public function exportExcel($date1, $date2)
+    {
+        return Excel::download(new IncomeAndExpenseExport($date1, $date2), 'Laporan pemasukan pengeluaran LKSA.xlsx');
     }
 }

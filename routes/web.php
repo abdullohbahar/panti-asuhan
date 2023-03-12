@@ -145,7 +145,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/update-tanda-terima-tunai/{data}', [Donation::class, 'updateSendWa']);
 
     Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-lksa/{date1}/{date2}', [IncomeAndExpenseReport::class, 'printPDFLaporan'])->name('cetak.laporan.pemasukan.pengeluaran.lksa');
-    Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-excel-lksa/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'exportExcel'])->name('export.excel.laporan');
+    Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-excel-lksa/{date1}/{date2}', [IncomeAndExpenseReport::class, 'exportExcel'])->name('export.excel.laporan');
 
     Route::get('tambah-donasi-barang', [DonasiBarangController::class, 'create'])->name('create.donasi.barang');
     Route::post('tambah-donasi-barang', [DonasiBarangController::class, 'store'])->name('store.donasi.barang');

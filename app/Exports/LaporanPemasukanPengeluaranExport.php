@@ -60,7 +60,7 @@ class LaporanPemasukanPengeluaranExport implements FromView, WithEvents, WithPre
 
         $saldoBulanSebelumnya = $pemasukanBulanSebelumnya - $pengeluaranBulanSebelumnya;
 
-        $image_path = public_path('logo/kop-with-line.png');
+        $image_path = public_path('logo/kop.png');
 
         $image_data = base64_encode(file_get_contents($image_path));
 

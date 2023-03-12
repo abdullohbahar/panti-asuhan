@@ -108,6 +108,6 @@ class LaporanPemasukanPengeluaran extends Component
 
     public function exportExcel($date1, $date2)
     {
-        return Excel::download(new LaporanPemasukanPengeluaranExport($date1, $date2), 'Laporan Keuangan.xlsx');
+        return Excel::download(new LaporanPemasukanPengeluaranExport($date1, $date2), 'Laporan pemasukan pengeluaran Yayasan.xlsx');
     }
 }
