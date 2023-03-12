@@ -11,7 +11,7 @@ use Livewire\WithFileUploads;
 class CreateAnakAsuh extends Component
 {
     use WithFileUploads;
-    public $tgl_masuk, $tgl_keluar, $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak, $pemilik_nohp;
+    public $wali_anak, $tgl_masuk, $tgl_keluar, $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak, $pemilik_nohp;
 
     public function render()
     {
@@ -21,21 +21,27 @@ class CreateAnakAsuh extends Component
     public function rules()
     {
         return [
-            'foto' => 'mimes:jpg,png|max:2048',
+            'foto' => 'image|max:2048',
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'status' => 'required',
+            'nohp_ortu' => 'required',
+            'pemilik_nohp' => 'required',
+            'wali_anak' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'foto.mimes' => 'Foto harus berupa JPG atau PNG',
+            'foto.image' => 'Foto harus berupa JPG atau PNG',
             'foto.max' => 'Foto max 2 MB',
             'nama_lengkap.required' => 'Nama harus diisi',
             'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
             'status.required' => 'Status harus diisi',
+            'pemilik_nohp.required' => 'Nama wali harus diisi',
+            'nohp_ortu.required' => 'Nomor handphone wali harus diisi',
+            'wali_anak.required' => 'Wali anak harus diisi',
         ];
     }
 
@@ -70,6 +76,7 @@ class CreateAnakAsuh extends Component
             'nama_ibu_kandung' => $this->nama_ibu_kandung,
             'nohp_ortu' => $this->nohp_ortu,
             'pemilik_nohp' => $this->pemilik_nohp,
+            'wali_anak' => $this->wali_anak,
             'tgl_masuk' => $this->tgl_masuk,
             'tgl_keluar' => $this->tgl_keluar,
         ]);

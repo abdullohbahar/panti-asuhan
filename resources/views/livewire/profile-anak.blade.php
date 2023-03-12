@@ -137,10 +137,26 @@
                     </tr>
                     <tr>
                       <td>
-                        <h6>Nomor HP</h6>
+                        <h6>Nama Wali</h6>
                       </td>
                       <td>
-                        <h6>: {{ $anak->nohp_ortu }} (Pemilik No HP : {{ $anak->pemilik_nohp }})</h6>
+                        <h6>: {{ $anak->pemilik_nohp }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Nomor HP Wali</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $anak->nohp_ortu }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Wali Anak</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $anak->wali_anak }}</h6>
                       </td>
                     </tr>
                   </table>

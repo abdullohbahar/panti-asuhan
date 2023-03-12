@@ -27,6 +27,7 @@ class AnakAsuh extends Model
         'pemilik_nohp',
         'tgl_masuk',
         'tgl_keluar',
+        'wali_anak',
     ];
 
     public function documents()
