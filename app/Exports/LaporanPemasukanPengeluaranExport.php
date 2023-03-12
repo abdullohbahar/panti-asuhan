@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithEvents;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -59,12 +60,19 @@ class LaporanPemasukanPengeluaranExport implements FromView, WithEvents, WithPre
 
         $saldoBulanSebelumnya = $pemasukanBulanSebelumnya - $pengeluaranBulanSebelumnya;
 
+        $image_path = public_path('logo/kop-with-line.png');
+
+        $image_data = base64_encode(file_get_contents($image_path));
+
         $this->count = $donations->count();
+
+
         return view('cetak-laporan-pemasukan-pengeluaran-excel', [
             'donations' => $donations,
             'pemasukan' => $donations->sum('pemasukan'),
             'pengeluaran' => $donations->sum('pengeluaran'),
             'saldoBulanSebelumnya' => $saldoBulanSebelumnya,
+            'image' => $image_data,
         ]);
     }
 
@@ -146,15 +154,16 @@ class LaporanPemasukanPengeluaranExport implements FromView, WithEvents, WithPre
                 // $event->sheet->getDelegate()->setCellValue('D' . ($this->count + 5), '=SUM(D5:D' . ($this->count + 5) . ') - SUM(E5:E' . ($this->count + 5) . ')');
                 // $event->sheet->getStyle('D5:D' . ($this->count))->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
                 // $event->sheet->getDefaultRowDimension()->setRowHeight(80);
-                // $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-                // $drawing->setName('My logo');
-                // $drawing->setDescription('My logo');
-                // $drawing->setPath(public_path('storage/akta/1.png'));
-                // $drawing->setHeight(90);
-                // $drawing->setCoordinates('A1');
-                // $drawing->setOffsetX(10);
-                // $drawing->setOffsetY(5);
-                // $drawing->setWorksheet($event->sheet->getDelegate());
+                $event->sheet->getStyle('A2:G2')->getBorders()->getTop()
+                    ->setBorderStyle(Border::BORDER_DOUBLE)
+                    ->setColor(new \PhpOffice\PhpSpreadsheet\Style\Color('000000'));
+                $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+                $drawing->setName('My logo');
+                $drawing->setDescription('My logo');
+                $drawing->setPath(public_path('logo/kop.png'));
+                $drawing->setWidth(707);
+                $drawing->setCoordinates('C1');
+                $drawing->setWorksheet($event->sheet->getDelegate());
             },
         ];
     }

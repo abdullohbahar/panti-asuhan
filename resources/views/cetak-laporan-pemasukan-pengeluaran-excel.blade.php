@@ -1,13 +1,17 @@
 <table class="table-data">
     <thead>
-        <tr>
+        {{-- <tr>
             <th colspan="7" style="height: 80; text-align:center;">
                 <p style="font-size: 200px">YAYASAN AL DZIKRO</p>
                 <p> Manggung RT 07, Wukirsari, Imogiri, Bantul, Yogyakarta 55782, Telp: (0274)2810607</p>
                 <p> Keputusan Menteri Hukum dan HAM RI No. Nomor: AHU-4001. AH.01.02. Tahun 2008</p>
                 <p> Keputusan Kepala BKPM DIY No: 223/323/GR.I/2015 Tentang Ijin Operasional</p>
                 <p>Kelompok Sasaran: Anak Yatim, Piatu, Yatim Piatu, Masyarakat dan Orang Jompo</p>
+                <img src="data:image/jpeg;base64,{{ $image }}" style="width: 100%" alt="" srcset="">
             </th>
+        </tr> --}}
+        <tr>
+            <th colspan="7" style="height:100;"></th>
         </tr>
         <tr>
             <th colspan="7"></th>
