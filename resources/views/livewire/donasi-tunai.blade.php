@@ -122,6 +122,17 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label>Penerima</label>
+                                        <input type="text" wire:model="penerima" class="form-control @error("penerima") is-invalid @enderror" id="penerima">
+                                        @error("penerima")
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                     <div class="form-group">
                                         <label>Terbilang</label>

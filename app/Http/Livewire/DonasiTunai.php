@@ -14,10 +14,11 @@ use App\Models\ProofOfDonationNumber;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class DonasiTunai extends Component
 {
-    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $nominal, $terbilang, $keterangan, $tipe;
+    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $nominal, $terbilang, $keterangan, $tipe, $penerima;
     public function render()
     {
         $data = [
@@ -34,6 +35,7 @@ class DonasiTunai extends Component
             'tanggal_donasi' => 'required',
             'nominal' => 'required',
             'terbilang' => 'required',
+            'penerima' => 'required',
         ];
     }
 
@@ -44,6 +46,7 @@ class DonasiTunai extends Component
             'tanggal_donasi.required' => 'Tanggal sumbangan harus diisi',
             'nominal.required' => 'Nominal harus diisi',
             'terbilang.required' => 'Terbilang harus diisi',
+            'penerima.required' => 'Penerima harus diisi',
         ];
     }
 
@@ -92,7 +95,8 @@ class DonasiTunai extends Component
                 'keterangan' => $this->keterangan,
                 'tipe' => $this->tipe,
                 'tanggal_donasi' => $this->tanggal_donasi,
-                'transaksi' => 'pemasukan'
+                'transaksi' => 'pemasukan',
+                'penerima' => $this->penerima,
             ]);
 
             ProofOfDonationNumber::create([
@@ -107,6 +111,7 @@ class DonasiTunai extends Component
                 'nama' => $this->nama_donatur,
                 'nominal' => $nominal,
                 'alamat' => $this->alamat,
+                'penerima' => $this->penerima,
             ];
 
             $this->kirimBukti($data);
@@ -116,7 +121,8 @@ class DonasiTunai extends Component
             ]);
         } catch (Exception $e) {
             DB::rollBack();
-            return redirect()->route('donation.tunai')->with('message', 'Oops, ada yang error');
+            Log::debug($e);
+            return redirect()->route('donasi.tunai')->with('message', 'Oops, ada yang error');
         }
     }
 
@@ -127,6 +133,7 @@ class DonasiTunai extends Component
         $nominal = "Rp. " . number_format($data['nominal'], 2, ',', '.');
         $waktu = Carbon::now()->format('H:i:s');
         $alamat = $data['alamat'];
+        $penerima = $data['penerima'];
 
         $curl = curl_init();
 
@@ -142,7 +149,7 @@ class DonasiTunai extends Component
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
                 'target' => '085701223722',
-                'message' => "DONASI TUNAI \nBERHASIL \n$tgl $waktu \n$nama \nAlamat: $alamat \n$nominal",
+                'message' => "DONASI TUNAI \nBERHASIL \n$tgl $waktu \n$nama \nAlamat: $alamat \n$nominal \nPenerima: $penerima",
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(

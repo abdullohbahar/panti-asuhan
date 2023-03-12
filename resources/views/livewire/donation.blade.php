@@ -80,7 +80,7 @@
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Nama Donatur">{{ $donation->donatur->nama }}</td>
                                         <td data-label="Nominal">{{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}</td>
-                                        <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
+                                        <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }} {{ \Carbon\Carbon::parse($donation->created_at)->format('H:i:s') }}</td>
                                         <td data-label="Aksi">
                                             {{-- <button wire:click="sendConfirmation('{{ $donation->id }}')" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fab fa-whatsapp"></i></button> --}}
                                             {{-- <button wire:click="printInvoiceDonation('{{ $donation->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="download bukti"><i class="fas fa-print"></i></button> --}}

@@ -235,7 +235,8 @@ class Donation extends Component
             'alamat' => $donation->donatur->alamat,
             'no_hp' => $donation->donatur->no_hp,
             'bulan' => $romanMonth,
-            'image' => $image_data
+            'image' => $image_data,
+            'penerima' => $donation->penerima
         ];
 
         if ($donation->number->name) {
