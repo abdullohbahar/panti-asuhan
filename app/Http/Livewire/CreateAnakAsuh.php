@@ -21,6 +21,7 @@ class CreateAnakAsuh extends Component
     public function rules()
     {
         return [
+            'foto' => 'mimes:jpg,png|max:2048',
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'status' => 'required',
@@ -30,6 +31,8 @@ class CreateAnakAsuh extends Component
     public function messages()
     {
         return [
+            'foto.mimes' => 'Foto harus berupa JPG atau PNG',
+            'foto.max' => 'Foto max 2 MB',
             'nama_lengkap.required' => 'Nama harus diisi',
             'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
             'status.required' => 'Status harus diisi',
