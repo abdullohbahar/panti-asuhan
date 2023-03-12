@@ -94,6 +94,17 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Nomor Transaksi</label>
+                                <input type="text" wire:model="nomor_transaksi" class="form-control @error("nomor_transaksi") is-invalid @enderror">
+                                @error("nomor_transaksi")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <div class="form-group">
                                 <label>Nominal</label>

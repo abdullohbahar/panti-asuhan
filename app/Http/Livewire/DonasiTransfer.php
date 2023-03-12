@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Log;
 
 class DonasiTransfer extends Component
 {
-    public $nama_donatur, $no_hp, $alamat, $donatur_id, $tanggal_donasi, $nominal, $terbilang, $bank, $norek, $keterangan, $other_bank;
+    public $nama_donatur, $no_hp, $alamat, $donatur_id, $tanggal_donasi, $nominal, $terbilang, $bank, $norek, $keterangan, $other_bank, $nomor_transaksi;
 
     public function showOtherBank()
     {
@@ -29,7 +29,7 @@ class DonasiTransfer extends Component
 
     public function render()
     {
-        $banks = MasterDataBank::get();
+        $banks = MasterDataBank::orderBy('name', 'asc')->get();
 
         $data = [
             'donaturs' => Donatur::orderBy('nama', 'asc')->get(),
@@ -82,6 +82,7 @@ class DonasiTransfer extends Component
 
         try {
             DB::beginTransaction();
+
             $createDoantur = Donatur::create([
                 'nama' => $this->nama_donatur,
                 'no_hp' => $this->no_hp,
@@ -98,19 +99,16 @@ class DonasiTransfer extends Component
                 'bank' => $bank,
                 'norek' => $this->norek,
                 'transaksi' => 'pemasukan',
-                'penerima' => $this->bank,
+                'penerima' => $bank,
+                'nomor_transaksi' => $this->nomor_transaksi,
             ]);
 
             DB::commit();
+            return redirect()->route('data.donasi.transfer')->with('message', 'Donasi berhasil ditambahkan');
         } catch (Exception $e) {
             Log::debug($e);
             DB::rollBack();
-            dd($e);
-        }
-
-        $role = Auth::user()->role;
-        if ($role == 'admin-yayasan') {
-            return redirect()->route('data.donasi.transfer.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
+            return redirect()->route('donasi.transfer')->with('error', 'Gagal, Harap coba input lagi atau hubungi developer');
         }
     }
 }

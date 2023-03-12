@@ -139,6 +139,16 @@
             })
         })
 
+        $("#bank").on("change", function(){
+            var val = $(this).val();
+            console.log(val)
+            if(val == "lainnya"){
+                $("#other_bank").prop("hidden",false);
+            }else{
+                $("#other_bank").prop("hidden",true);
+            }
+        })
+
 
         var rupiah = document.getElementById("nominal2");
         rupiah.addEventListener("keyup", function (e) {
