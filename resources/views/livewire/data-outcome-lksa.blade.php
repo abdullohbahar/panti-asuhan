@@ -67,8 +67,8 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Tanggal</th>
-                                    <th scope="col">Nominal</th>
                                     <th scope="col">Uraian</th>
+                                    <th scope="col">Nominal</th>
                                     @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                         <th scope="col">Aksi</th>
                                     @endif
@@ -84,8 +84,8 @@
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Tanggal">{{ $donation->tanggal }}</td>
-                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->pengeluaran, 2, ',', '.'); }}</td>
                                         <td data-label="No Rek">{{ $donation->keterangan }}</td>
+                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->pengeluaran, 2, ',', '.'); }}</td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                             <td data-label="Aksi">
                                                 <button id="edit" wire:click="show('{{ $donation->id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
