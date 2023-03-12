@@ -21,6 +21,7 @@ use App\Http\Controllers\DonasiBarangController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\KeuanganLksaController;
 use App\Http\Livewire\CreateDonasiBarang;
+use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
 use App\Http\Livewire\LksaDocument;
 
@@ -142,6 +143,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-excel/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'exportExcel'])->name('export.excel.laporan');
     Route::get('/send-tanda-terima-tunai/{data}', [DonasiTunai::class, 'sendWa']);
     Route::get('/update-tanda-terima-tunai/{data}', [Donation::class, 'updateSendWa']);
+
+    Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-lksa/{date1}/{date2}', [IncomeAndExpenseReport::class, 'printPDFLaporan'])->name('cetak.laporan.pemasukan.pengeluaran.lksa');
+    Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-excel-lksa/{date1}/{date2}', [LaporanPemasukanPengeluaran::class, 'exportExcel'])->name('export.excel.laporan');
 
     Route::get('tambah-donasi-barang', [DonasiBarangController::class, 'create'])->name('create.donasi.barang');
     Route::post('tambah-donasi-barang', [DonasiBarangController::class, 'store'])->name('store.donasi.barang');

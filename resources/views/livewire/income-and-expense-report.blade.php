@@ -55,18 +55,18 @@
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
                             @if ($date1)
-                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi-excel/'.$date1.'/'.$date2) }}" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
+                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi-excel-lksa/'.$date1.'/'.$date2) }}" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
                             @else
-                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi-excel/0/0') }}" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
+                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi-excel-lksa/0/0') }}" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</a>
                             @endif
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
                             @if ($date1)
-                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi/'.$date1.'/'.$date2) }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
+                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi-lksa/'.$date1.'/'.$date2) }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
                             @else
-                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi/0/0') }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
+                                <a href="{{ url('cetak-laporan-pemasukan-pengeluaran-donasi-lksa/0/0') }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
                             @endif
                         </div>
                     </div>

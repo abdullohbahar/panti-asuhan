@@ -103,7 +103,7 @@ class LaporanPemasukanPengeluaran extends Component
         $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
 
 
-        return $pdf->download('LAPORAN KEUANGAN.pdf');
+        return $pdf->download('Laporan pemasukan pengeluaran Yayasan.pdf');
     }
 
     public function exportExcel($date1, $date2)

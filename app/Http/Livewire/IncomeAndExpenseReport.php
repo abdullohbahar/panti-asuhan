@@ -6,6 +6,8 @@ use App\Models\LksaFinance;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
+use PDF;
+
 
 class IncomeAndExpenseReport extends Component
 {
@@ -26,8 +28,6 @@ class IncomeAndExpenseReport extends Component
         $count = $donations->count();
 
         $date = Carbon::parse($this->date1)->subMonth();
-        $monthBefore = $date->format('m');
-        $year = $date->format('Y');
         $subMonth = $date->lastOfMonth()->format('Y-m-d');
 
         $pemasukanBulanSebelumnya = LksaFinance::whereBetween('tanggal', ['2000-01-01', $subMonth])->sum("pemasukan");
@@ -57,41 +57,34 @@ class IncomeAndExpenseReport extends Component
     {
         $query = LksaFinance::when($date1 != 0, function ($query) use ($date1, $date2) {
             $query->whereBetween('tanggal', [$date1, $date2]);
-        })->where('transaksi', ['pemasukan', 'pengeluaran'])->orderBy('tanggal', 'asc');
+        })->orderBy('tanggal', 'asc');
 
-        $time = strtotime($this->date1);
-        $monthNow = date("m", $time);
-        $year = date("Y", $time);
+        $date = Carbon::parse($date1)->subMonth();
+        $subMonth = $date->lastOfMonth()->format('Y-m-d');
 
-        if ($monthNow == 01) {
-            $monthBefore = 12;
-            $year = $year - 1;
-        } else {
-            $monthBefore = $monthNow - 1;
-        }
-
-        $pemasukanBulanSebelumnya = LksaFinance::whereMonth('tanggal', $monthBefore)->whereYear("tanggal", $year)->sum("pemasukan");
-        $pengeluaranBulanSebelumnya = LksaFinance::whereMonth('tanggal', $monthBefore)->whereYear("tanggal", $year)->sum("pengeluaran");
+        $pemasukanBulanSebelumnya = LksaFinance::whereBetween('tanggal', ['2000-01-01', $subMonth])->sum("pemasukan");
+        $pengeluaranBulanSebelumnya = LksaFinance::whereBetween('tanggal', ['2000-01-01', $subMonth])->sum("pengeluaran");
 
         $saldoBulanSebelumnya = $pemasukanBulanSebelumnya - $pengeluaranBulanSebelumnya;
+
+        $image_path = public_path('logo/kop.png');
+
+        $image_data = base64_encode(file_get_contents($image_path));
 
         $data = [
             'donations' => $query->get(),
             'pemasukan' => $query->sum('pemasukan'),
             'pengeluaran' => $query->sum('pengeluaran'),
-            'saldoBulanSebelumnya' => $saldoBulanSebelumnya
+            'saldoBulanSebelumnya' => $saldoBulanSebelumnya,
+            'image' => $image_data,
+
         ];
 
-
-        // dd($data);
-
-        // return view('cetak-laporan-pemasukan-pengeluaran-pdf', $data);
-
-        $pdf = PDF::loadView('cetak-laporan-pemasukan-pengeluaran-pdf', $data);
+        $pdf = PDF::loadView('cetak-laporan-pemasukan-pengeluaran-pdf-lksa', $data);
         $pdf->setPaper('F4', 'potrait');
         $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
 
 
-        return $pdf->download('LAPORAN KEUANGAN.pdf');
+        return $pdf->download('Laporan pemasukan pengeluaran LKSA.pdf');
     }
 }
