@@ -129,7 +129,9 @@
 @if (session()->has('id'))
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      window.location.href = 'print-invoice-donation-goods/{{ session('id') }}';
+      setTimeout(() => {
+        window.location.href = 'print-invoice-donation-goods/{{ session('id') }}';
+      }, 1500);
     });
   </script>
 @endif
