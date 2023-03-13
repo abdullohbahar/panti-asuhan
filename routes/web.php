@@ -20,6 +20,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DonasiBarangController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\KeuanganLksaController;
+use App\Http\Controllers\MasterDataController;
 use App\Http\Livewire\CreateDonasiBarang;
 use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
@@ -204,4 +205,7 @@ Route::middleware('auth')->group(function () {
 
     // income and expense report
     Route::get('data-pemasukan-pengeluaran-lksa', [KeuanganLksaController::class, 'laporan'])->name('data.income.outcome.lksa');
+
+    // Master data pendidikan
+    Route::get('master-data-pendidikan', [MasterDataController::class, 'pendidikan'])->name('master.data.pendidikan');
 });

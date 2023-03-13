@@ -315,5 +315,30 @@
         </li>
       </ul>
     </li>
+    <li class="nav-item {{ $active == 'master-data-pendidikan' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-server"></i>
+        <p>
+          Master Data
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('master.data.pendidikan') }}" class="nav-link {{ $active == 'master-data-pendidikan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Pendidikan</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.pengguna') }}" class="nav-link {{ $active == 'data-user' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Data Pengguna</p>
+          </a>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav>
