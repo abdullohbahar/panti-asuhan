@@ -97,6 +97,14 @@
 
     })
 
+    window.addEventListener('show-error', event => {
+      Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: event.detail.message
+      })
+    })
+
     window.addEventListener('deleted', event =>{
       Swal.fire(
         'Terhapus',

@@ -167,6 +167,14 @@
     })
   })
 
+  window.addEventListener('show-error', event => {
+      Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: event.detail.message
+      })
+  })
+
   // Delete Confirmation
     window.addEventListener('show-delete-confirmation',event =>{
       Swal.fire({

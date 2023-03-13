@@ -102,7 +102,7 @@ class CreateDonasiBarang extends Component
         } catch (Exception $e) {
             Log::debug($e);
             DB::rollBack();
-            return redirect()->route('donation.goods')->with('error', 'Error, Coba untuk input data lagi atau hubungi developer');
+            $this->dispatchBrowserEvent('show-error', ['message' => 'Error, Coba untuk input data lagi atau hubungi developer']);
         }
     }
 

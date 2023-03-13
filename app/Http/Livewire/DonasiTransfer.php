@@ -108,7 +108,7 @@ class DonasiTransfer extends Component
         } catch (Exception $e) {
             Log::debug($e);
             DB::rollBack();
-            return redirect()->route('donasi.transfer')->with('error', 'Gagal, Harap coba input lagi atau hubungi developer');
+            $this->dispatchBrowserEvent('show-error', ['message' => 'Error, Coba untuk input data lagi atau hubungi developer']);
         }
     }
 }

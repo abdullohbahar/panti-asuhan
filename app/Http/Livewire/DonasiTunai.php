@@ -122,7 +122,7 @@ class DonasiTunai extends Component
         } catch (Exception $e) {
             DB::rollBack();
             Log::debug($e);
-            return redirect()->route('donasi.tunai')->with('message', 'Oops, ada yang error');
+            $this->dispatchBrowserEvent('show-error', ['message' => 'Error, Coba untuk input data lagi atau hubungi developer']);
         }
     }
 
