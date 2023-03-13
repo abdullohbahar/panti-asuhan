@@ -149,6 +149,7 @@ class DonationGoods extends Component
             GoodsDonation::where('id', $this->donation_id)->update([
                 'donatur_id' => $this->donatur_id,
                 'tanggal_donasi' => $this->tanggal_donasi,
+                'penerima' => $this->penerima
             ]);
 
             Donatur::where('id', $this->idDonaturs)->update([
