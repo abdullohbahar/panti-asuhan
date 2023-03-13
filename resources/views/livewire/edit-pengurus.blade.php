@@ -112,7 +112,13 @@
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label>Pendidikan</label>
-                                <input type="text" wire:model="pendidikan" class="form-control @error("pendidikan") is-invalid @enderror" id="">
+                                <select wire:model="pendidikan" class="form-control @error("pendidikan") is-invalid @enderror" id="">
+                                    <option value="">-- Pilih Pendidikan --</option>
+                                    @foreach ($pendidikans as $pendidikan)
+                                        <option value="{{ $pendidikan->name }}">{{ $pendidikan->name }}</option>
+                                    @endforeach
+                                </select>
+                                {{-- <input type="text" wire:model="pendidikan" class="form-control @error("pendidikan") is-invalid @enderror" id=""> --}}
                                 @error("pendidikan")
                                     <div class="invalid-feedback">
                                         {{ $message }}

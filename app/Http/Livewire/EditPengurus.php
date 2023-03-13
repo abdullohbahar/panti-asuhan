@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Pengurus;
 use Livewire\WithFileUploads;
+use App\Models\MasterDataPendidikan;
 
 class EditPengurus extends Component
 {
@@ -33,7 +34,13 @@ class EditPengurus extends Component
 
     public function render()
     {
-        return view('livewire.edit-pengurus');
+        $pendidikans = MasterDataPendidikan::get();
+
+        $data = [
+            'pendidikans' => $pendidikans
+        ];
+
+        return view('livewire.edit-pengurus', $data);
     }
 
     public function rules()
