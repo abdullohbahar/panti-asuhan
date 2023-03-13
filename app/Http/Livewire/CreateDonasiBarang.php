@@ -207,6 +207,7 @@ class CreateDonasiBarang extends Component
             'bulan' => $romanMonth,
             'image' => $image_data,
             'penerima' => $donation->penerima,
+            'created_at' => $donation->created_at
         ];
 
         if ($donation->number->name) {

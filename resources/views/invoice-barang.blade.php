@@ -29,6 +29,8 @@
 
         }
 
+        @page { margin-top: 0px; }
+
         body{
             font-family:Arial, Helvetica, sans-serif !important;
         }
@@ -249,6 +251,7 @@
                     </td>
                 </tr>
             </table>
+            <p style="font-size: 10px; margin-top:20px; text-align:center">{{ $created_at }}</p>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

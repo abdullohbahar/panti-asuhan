@@ -14,12 +14,15 @@ use Livewire\WithPagination;
 use App\Models\GoodsDonation;
 use Livewire\WithFileUploads;
 use App\Models\BuktiSumbangan;
+use App\Models\DetailGoodsDonation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Models\ProofOfDonationNumber;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Collection;
+
 
 
 class DonationGoods extends Component
@@ -28,9 +31,19 @@ class DonationGoods extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $donation_id, $donatur_id, $tanggal_donasi, $keterangan, $search, $jumlah, $satuan, $nama, $no_hp, $alamat, $idDonaturs;
+    public $donation_id, $donatur_id, $tanggal_donasi, $search, $jumlah, $satuan, $nama, $no_hp, $alamat, $idDonaturs, $penerima;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
+    public Collection $inputs;
 
+    public function mount()
+    {
+        $this->fill([
+            'inputs' => collect([[
+                'nama_barang' => '',
+                'jumlah' => ''
+            ]]),
+        ]);
+    }
 
     public function render()
     {
@@ -40,8 +53,7 @@ class DonationGoods extends Component
 
         $query = GoodsDonation::whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%')
-                ->orwhere('tanggal_donasi', 'like', '%' . $this->search . '%')
-                ->orwhere('keterangan', 'like', '%' . $this->search . '%');
+                ->orwhere('tanggal_donasi', 'like', '%' . $this->search . '%');
         })->orderBy('tanggal_donasi', 'desc');
 
         $donations = $query->paginate(10);
@@ -59,12 +71,25 @@ class DonationGoods extends Component
         return view('livewire.donation-goods', $data);
     }
 
+    public function addInput()
+    {
+        $this->inputs->push([
+            'nama_barang' => '',
+            'jumlah' => ''
+        ]);
+    }
+
+    public function removeInput($key)
+    {
+        $this->inputs->pull($key);
+    }
+
     public function rules()
     {
         return [
             'donatur_id' => 'required',
             'tanggal_donasi' => 'required',
-            'keterangan' => 'required',
+            'penerima' => 'required',
         ];
     }
 
@@ -73,7 +98,7 @@ class DonationGoods extends Component
         return [
             'donatur_id.required' => 'Donatur harus diisi',
             'tanggal_donasi.required' => 'Tanggal harus diisi',
-            'keterangan.required' => 'Keterangan harus diisi',
+            'penerima.required' => 'Penerima harus diisi',
         ];
     }
 
@@ -84,6 +109,8 @@ class DonationGoods extends Component
 
     public function show($id, $idDonatur)
     {
+        $this->inputs = collect()->make();
+
         $donation = GoodsDonation::find($id);
         $donatur = Donatur::find($idDonatur);
 
@@ -98,7 +125,17 @@ class DonationGoods extends Component
             $this->donation_id = $donation->id;
             $this->donatur_id = $donation->donatur_id;
             $this->tanggal_donasi = $donation->tanggal_donasi;
-            $this->keterangan = $donation->keterangan;
+            $this->penerima = $donation->penerima;
+        }
+
+        $details = DetailGoodsDonation::where('goods_donations_id', $this->donation_id)->get();
+
+        foreach ($details as $detail) {
+            $pushData = [
+                'nama_barang' => $detail->nama_barang,
+                'jumlah' => $detail->jumlah,
+            ];
+            $this->inputs->push($pushData);
         }
     }
 
@@ -112,7 +149,6 @@ class DonationGoods extends Component
             GoodsDonation::where('id', $this->donation_id)->update([
                 'donatur_id' => $this->donatur_id,
                 'tanggal_donasi' => $this->tanggal_donasi,
-                'keterangan' => $this->keterangan,
             ]);
 
             Donatur::where('id', $this->idDonaturs)->update([
@@ -131,11 +167,33 @@ class DonationGoods extends Component
                 ]);
             }
 
+            // cek apakah detail sudah ada
+            $checkDetail = DetailGoodsDonation::where('goods_donations_id', $this->donation_id)->get();
+
+            // jika ada maka hapus terlebih dahulu
+            if ($checkDetail) {
+                DetailGoodsDonation::where('goods_donations_id', $this->donation_id)->delete();
+            }
+
+            $results = '';
+            foreach ($this->inputs as $key => $value) {
+                DetailGoodsDonation::create([
+                    'nama_barang' => $this->inputs[$key]['nama_barang'],
+                    'jumlah' => $this->inputs[$key]['jumlah'],
+                    'goods_donations_id' => $this->donation_id
+                ]);
+
+                $results .= $this->inputs[$key]['nama_barang'] . ' ' . $this->inputs[$key]['jumlah'] . ', ';
+            }
+
+            $results = rtrim($results, ', ');
+
             $data = [
                 'tanggal_donasi' => $this->tanggal_donasi,
                 'nama' => $this->nama,
                 'alamat' => $this->alamat,
-                'keterangan' => $this->keterangan
+                'keterangan' => $results,
+                'penerima' => $this->penerima,
             ];
 
             DB::commit();
@@ -143,7 +201,7 @@ class DonationGoods extends Component
             $this->kirimBukti($data);
 
             return redirect()->route('donation.goods')->with([
-                'message' => 'Donasi berhasil ditambahkan',
+                'message' => 'Donasi berhasil diubah',
                 'id' => $this->donation_id
             ]);
         } catch (Exception $e) {
@@ -162,6 +220,7 @@ class DonationGoods extends Component
         $waktu = Carbon::now()->format('H:i:s');
         $alamat = $data['alamat'];
         $keterangan = $data['keterangan'];
+        $penerima = $data['penerima'];
 
         $curl = curl_init();
 
@@ -177,7 +236,7 @@ class DonationGoods extends Component
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
                 'target' => '085701223722',
-                'message' => "DONASI BARANG \nDIUBAH \n$tgl $waktu \n$nama \nAlamat: $alamat \n$keterangan",
+                'message' => "DONASI BARANG \nDIUBAH \n$tgl $waktu \n$nama \nAlamat: $alamat \nKeterangan Barang: $keterangan \nPenerima: $penerima",
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(
