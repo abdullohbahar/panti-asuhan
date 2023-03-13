@@ -44,6 +44,7 @@
                                     <th scope="col" style="width: 20px !important">#</th>
                                     <th scope="col">Nama Donatur</th>
                                     <th scope="col">Keterangan</th>
+                                    <th scope="col">Penerima</th>
                                     <th scope="col">Tanggal Donasi</th>
                                     @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                         <th scope="col">Aksi</th>
@@ -60,7 +61,8 @@
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Tipe Donasi">{{ $donation->donatur->nama }}</td>
-                                        <td data-label="Keterangan">{{ $donation->keterangan }}</td>
+                                        <td data-label="Keterangan"><button class="btn btn-info btn-sm">Lihat detail barang</button></td>
+                                        <td data-label="Penerima">{{ $donation->penerima }}</td>
                                         <td data-label="Tanggal Donasi">{{ $donation->tanggal_donasi }}</td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                             <td data-label="Aksi">

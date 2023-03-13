@@ -15,7 +15,7 @@ use Illuminate\Romans\Support\Facades\IntToRoman;
 
 class CreateDonasiBarang extends Component
 {
-    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $keterangan;
+    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $keterangan, $penerima;
     public function render()
     {
         return view('livewire.create-donasi-barang');
@@ -26,6 +26,7 @@ class CreateDonasiBarang extends Component
         return [
             'nama_donatur' => 'required',
             'tanggal_donasi' => 'required',
+            'penerima' => 'required',
         ];
     }
 
@@ -34,6 +35,7 @@ class CreateDonasiBarang extends Component
         return [
             'nama_donatur.required' => 'Nama donatur harus diisi',
             'tanggal_donasi.required' => 'Tanggal sumbangan harus diisi',
+            'penerima.required' => 'Penerima harus diisi'
         ];
     }
 
@@ -73,6 +75,7 @@ class CreateDonasiBarang extends Component
                 'donatur_id' => $createDoantur->id,
                 'keterangan' => $this->keterangan,
                 'tanggal_donasi' => $this->tanggal_donasi,
+                'penerima' => $this->penerima,
             ]);
 
             ProofOfDonationNumber::create([
@@ -80,16 +83,18 @@ class CreateDonasiBarang extends Component
                 'no' => $no,
             ]);
 
-            DB::commit();
 
             $data = [
                 'tanggal_donasi' => $this->tanggal_donasi,
                 'nama' => $this->nama_donatur,
                 'alamat' => $this->alamat,
-                'keterangan' => $this->keterangan
+                'keterangan' => $this->keterangan,
+                'penerima' => $this->penerima,
             ];
 
             $this->kirimBukti($data);
+            DB::commit();
+
             return redirect()->route('donation.goods')->with([
                 'message' => 'Donasi berhasil ditambahkan',
                 'id' => $createDonation->id
@@ -97,7 +102,7 @@ class CreateDonasiBarang extends Component
         } catch (Exception $e) {
             Log::debug($e);
             DB::rollBack();
-            return redirect()->route('donation.goods')->with('error', 'Oops, ada yang error');
+            return redirect()->route('donation.goods')->with('error', 'Error, Coba untuk input data lagi atau hubungi developer');
         }
     }
 
@@ -108,6 +113,7 @@ class CreateDonasiBarang extends Component
         $waktu = Carbon::now()->format('H:i:s');
         $alamat = $data['alamat'];
         $keterangan = $data['keterangan'];
+        $penerima = $data['penerima'];
 
         $curl = curl_init();
 
@@ -123,7 +129,7 @@ class CreateDonasiBarang extends Component
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
                 'target' => '085701223722',
-                'message' => "DONASI BARANG \nBERHASIL \n$tgl $waktu \n$nama \nAlamat: $alamat \n$keterangan",
+                'message' => "DONASI BARANG \nBERHASIL \n$tgl $waktu \n$nama \nAlamat: $alamat \n$keterangan \nPenerima: $penerima",
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(
@@ -156,7 +162,8 @@ class CreateDonasiBarang extends Component
             'alamat' => $donation->donatur->alamat,
             'no_hp' => $donation->donatur->no_hp,
             'bulan' => $romanMonth,
-            'image' => $image_data
+            'image' => $image_data,
+            'penerima' => $donation->penerima,
         ];
 
         if ($donation->number->name) {

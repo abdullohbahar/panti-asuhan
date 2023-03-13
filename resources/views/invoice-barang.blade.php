@@ -210,7 +210,9 @@
                     </td>
                     <td></td>
                     <td>
-                        (......................................)
+                        <p style="font-size: 12px;">
+                            (&nbsp; {{ $penerima }} &nbsp;)
+                        </p>
                     </td>
                 </tr>
             </table>

@@ -16,6 +16,7 @@ class GoodsDonation extends Model
         'keterangan',
         'hajat',
         'tanggal_donasi',
+        'penerima',
     ];
 
     public function donatur()
