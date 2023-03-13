@@ -28,4 +28,9 @@ class GoodsDonation extends Model
     {
         return $this->hasOne(ProofOfDonationNumber::class, 'donation_id', 'id');
     }
+
+    public function details()
+    {
+        return $this->hasMany(DetailGoodsDonation::class, 'goods_donations_id', 'id')->select('nama_barang', 'jumlah');
+    }
 }

@@ -43,7 +43,7 @@
                                 <tr>
                                     <th scope="col" style="width: 20px !important">#</th>
                                     <th scope="col">Nama Donatur</th>
-                                    <th scope="col">Keterangan</th>
+                                    <th scope="col">Keterangan Barang</th>
                                     <th scope="col">Penerima</th>
                                     <th scope="col">Tanggal Donasi</th>
                                     @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
@@ -61,7 +61,18 @@
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Tipe Donasi">{{ $donation->donatur->nama }}</td>
-                                        <td data-label="Keterangan"><button class="btn btn-info btn-sm">Lihat detail barang</button></td>
+                                        <td data-label="Keterangan Barang">
+                                            @php
+                                                $results = '';
+
+                                                foreach ($donation->details as $value) {
+                                                    $results .= $value->nama_barang . ' ' . $value->jumlah . ', ';
+                                                }
+
+                                                $results = rtrim($results, ', ');
+                                            @endphp
+                                            {{ $results }}
+                                        </td>
                                         <td data-label="Penerima">{{ $donation->penerima }}</td>
                                         <td data-label="Tanggal Donasi">{{ $donation->tanggal_donasi }}</td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
