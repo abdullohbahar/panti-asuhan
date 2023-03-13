@@ -46,9 +46,9 @@
             text-align: right !important;
         }
 
-        table{
+        /* table{
             border-collapse: collapse;
-        }
+        } */
 
         .p-1{
             padding: 0.25rem!important;
@@ -110,6 +110,15 @@
             color: black;
         }
 
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #dee2e6;
+        }
+
 
         </style>
         <title>Laporan Keuangan</title>
@@ -157,18 +166,42 @@
                         <td>: {{ $no_hp }}</td>
                     </tr>
                     <tr>
-                        <td>Keterangan</td>
-                        <td>: {{ $keterangan }}</td>
+                        <td>Keterangan Barang</td>
+                        <td>:</td>
                     </tr>
+                </table>
+                <table class="table table-bordered" style="width: 100%">
                     <tr>
-                        <td colspan="2" style="text-align:center">
-                            <h5 style="margin: 5px"><i>Wassalamu'alaikum Wr. Wb.</i></h5>
+                        <td>
+                            <b>Nama</b>
+                        </td>
+                        <td>
+                            <b>Jumlah</b>
                         </td>
                     </tr>
+                    @foreach ($keterangans as $keterangan)
+                        <tr>
+                            <td>
+                                <p style="margin:1px">
+                                    {{ $keterangan->nama_barang }}
+                                </p>
+                            </td>
+                            <td>
+                                <p style="margin:1px">
+                                    {{ $keterangan->jumlah }}
+                                </p>
+                            </td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
             
             <table style="width: 100%">
+                <tr>
+                    <td colspan="3" style="text-align:center; font-size: 13px;">
+                        <h5 style="margin: 5px"><i>Wassalamu'alaikum Wr. Wb.</i></h5>
+                    </td>
+                </tr>
                 <tr>
                     <td style="width: 215px;">
                         <p style="font-size: 12px">Donatur / Yang Menyerahkan</p>

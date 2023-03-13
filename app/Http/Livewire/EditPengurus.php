@@ -25,7 +25,6 @@ class EditPengurus extends Component
             $this->tanggal_lahir = Carbon::parse($pengurus->tanggal_lahir)->format('Y-m-d');
             $this->alamat = $pengurus->alamat;
             $this->no_hp = $pengurus->no_hp;
-            $this->foto = $pengurus->foto;
             $this->jabatan = $pengurus->jabatan;
             $this->pendidikan = $pengurus->pendidikan;
             $this->pekerjaan = $pengurus->pekerjaan;
@@ -36,8 +35,11 @@ class EditPengurus extends Component
     {
         $pendidikans = MasterDataPendidikan::get();
 
+        $pengurus = Pengurus::findorfail($this->idpengurus);
+
         $data = [
-            'pendidikans' => $pendidikans
+            'pendidikans' => $pendidikans,
+            'fotos' => $pengurus->foto,
         ];
 
         return view('livewire.edit-pengurus', $data);

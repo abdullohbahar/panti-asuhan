@@ -19,7 +19,7 @@
   <section class="content">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-10">
+            <div class="col-sm-12 col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <form wire:submit.prevent="store">
@@ -74,7 +74,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                {{-- <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                     <div class="form-group">
                                         <label>Keterangan Barang</label>
                                         <textarea type="text" wire:model="keterangan" class="form-control @error("keterangan") is-invalid @enderror"></textarea>
@@ -84,6 +84,39 @@
                                             </div>
                                         @enderror
                                     </div>
+                                </div> --}}
+                                @foreach ($inputs as $key => $input)
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="">Nama Barang</label>
+                                            <input type="text" class="form-control @error('inputs.'.$key.'.nama_barang') is-invalid @enderror" wire:model="inputs.{{ $key }}.nama_barang" id="">
+                                            @error('inputs.'.$key.'.nama_barang')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="">Jumlah Barang</label>
+                                            <input type="text" class="form-control @error('inputs.'.$key.'.jumlah') is-invalid @enderror" wire:model="inputs.{{ $key }}.jumlah" id="">
+                                            @error('inputs.'.$key.'.jumlah')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="" style="color:white">hapus</label><br>
+                                            <a href="javascript:void(0)" wire:click="removeInput({{ $key }})" class="btn btn-danger">Hapus</a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <div class="col-12 text-right">
+                                    <a href="javascript:void(0)" wire:click="addInput" class="btn btn-warning">Tambah barang</a>
                                 </div>
                                 <div class="col-12 mt-3">
                                     <button class="btn btn-success btn-block" wire:loading.attr="disabled">

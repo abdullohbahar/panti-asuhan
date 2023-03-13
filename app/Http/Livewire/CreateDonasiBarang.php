@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\DetailGoodsDonation;
+use PDF;
 use Exception;
 use Carbon\Carbon;
 use App\Models\Donatur;
 use Livewire\Component;
-use PDF;
 use App\Models\GoodsDonation;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\ProofOfDonationNumber;
@@ -15,10 +17,36 @@ use Illuminate\Romans\Support\Facades\IntToRoman;
 
 class CreateDonasiBarang extends Component
 {
-    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $keterangan, $penerima;
+    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $keterangan, $nama_barang, $jumlah, $penerima;
+
+    public Collection $inputs;
+
+    public function mount()
+    {
+        $this->fill([
+            'inputs' => collect([[
+                'nama_barang' => '',
+                'jumlah' => ''
+            ]]),
+        ]);
+    }
+
     public function render()
     {
         return view('livewire.create-donasi-barang');
+    }
+
+    public function addInput()
+    {
+        $this->inputs->push([
+            'nama_barang' => '',
+            'jumlah' => ''
+        ]);
+    }
+
+    public function removeInput($key)
+    {
+        $this->inputs->pull($key);
     }
 
     public function rules()
@@ -27,6 +55,7 @@ class CreateDonasiBarang extends Component
             'nama_donatur' => 'required',
             'tanggal_donasi' => 'required',
             'penerima' => 'required',
+            'inputs.*.nama_barang' => 'required',
         ];
     }
 
@@ -35,7 +64,8 @@ class CreateDonasiBarang extends Component
         return [
             'nama_donatur.required' => 'Nama donatur harus diisi',
             'tanggal_donasi.required' => 'Tanggal sumbangan harus diisi',
-            'penerima.required' => 'Penerima harus diisi'
+            'penerima.required' => 'Penerima harus diisi',
+            'inputs.*.nama_barang.required' => 'Nama barang harus diisi',
         ];
     }
 
@@ -73,7 +103,6 @@ class CreateDonasiBarang extends Component
 
             $createDonation = GoodsDonation::create([
                 'donatur_id' => $createDoantur->id,
-                'keterangan' => $this->keterangan,
                 'tanggal_donasi' => $this->tanggal_donasi,
                 'penerima' => $this->penerima,
             ]);
@@ -83,12 +112,24 @@ class CreateDonasiBarang extends Component
                 'no' => $no,
             ]);
 
+            $results = '';
+            foreach ($this->inputs as $key => $value) {
+                DetailGoodsDonation::create([
+                    'nama_barang' => $this->inputs[$key]['nama_barang'],
+                    'jumlah' => $this->inputs[$key]['jumlah'],
+                    'goods_donations_id' => $createDonation->id
+                ]);
+
+                $results .= $this->inputs[$key]['nama_barang'] . ' ' . $this->inputs[$key]['jumlah'] . ', ';
+            }
+
+            $results = rtrim($results, ', ');
 
             $data = [
                 'tanggal_donasi' => $this->tanggal_donasi,
                 'nama' => $this->nama_donatur,
                 'alamat' => $this->alamat,
-                'keterangan' => $this->keterangan,
+                'keterangan' => $results,
                 'penerima' => $this->penerima,
             ];
 
@@ -129,7 +170,7 @@ class CreateDonasiBarang extends Component
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
                 'target' => '085701223722',
-                'message' => "DONASI BARANG \nBERHASIL \n$tgl $waktu \n$nama \nAlamat: $alamat \n$keterangan \nPenerima: $penerima",
+                'message' => "DONASI BARANG \nBERHASIL \n$tgl $waktu \n$nama \nAlamat: $alamat \nKeterangan Barang: $keterangan \nPenerima: $penerima",
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(
@@ -153,12 +194,14 @@ class CreateDonasiBarang extends Component
         $now = Carbon::now()->format('m');
         $romanMonth = IntToRoman::filter($now);
 
+        $keterangans = DetailGoodsDonation::where('goods_donations_id', $id)->get();
+
         $data = [
             'nama' => $donation->donatur->nama,
             'no' => $donation->number->no ?? '',
             'tanggal' => Carbon::now()->translatedFormat('d F Y'),
             'tipe' => $donation->tipe,
-            'keterangan' => $donation->keterangan,
+            'keterangans' => $keterangans,
             'alamat' => $donation->donatur->alamat,
             'no_hp' => $donation->donatur->no_hp,
             'bulan' => $romanMonth,
