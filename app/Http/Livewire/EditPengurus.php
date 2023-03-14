@@ -11,7 +11,7 @@ use App\Models\MasterDataPendidikan;
 
 class EditPengurus extends Component
 {
-    public $idpengurus, $nama, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $no_hp, $foto, $jabatan, $pendidikan, $pekerjaan;
+    public $idpengurus, $oldPhoto, $nama, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $no_hp, $foto, $jabatan, $pendidikan, $pekerjaan;
     use WithFileUploads;
 
     public function mount()
@@ -29,6 +29,7 @@ class EditPengurus extends Component
             $this->jabatan = $pengurus->jabatan;
             $this->pendidikan = $pengurus->pendidikan;
             $this->pekerjaan = $pengurus->pekerjaan;
+            $this->oldPhoto = $pengurus->foto;
         }
     }
 
@@ -50,15 +51,20 @@ class EditPengurus extends Component
 
     public function rules()
     {
-        return [
+        $validation = [
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'jabatan' => 'required',
             'alamat' => 'required',
-            'foto' => 'image|max:2048',
         ];
+
+        if ($this->foto) {
+            $validation['foto'] = 'image|max:2048';
+        }
+
+        return $validation;
     }
 
     public function messages()
@@ -86,11 +92,19 @@ class EditPengurus extends Component
 
         $anak = Pengurus::findorfail($this->idpengurus);
 
-        if ($this->foto != $anak->foto) {
-            unlink(public_path('storage/' . $anak->foto));
-            $fotoPengurus = $this->foto->store('foto-pengurus', 'public');
+        // dd($anak->foto);
+
+        if ($this->foto) {
+            if ($this->foto != $anak->foto) {
+                if ($anak->foto) {
+                    unlink(public_path('storage/' . $anak->foto));
+                }
+                $fotoPengurus = $this->foto->store('foto-pengurus', 'public');
+            } else {
+                $fotoPengurus = $anak->foto;
+            }
         } else {
-            $fotoPengurus = $anak->foto;
+            $fotoPengurus = $this->oldPhoto;
         }
 
         Pengurus::where('id', $this->idpengurus)->update([

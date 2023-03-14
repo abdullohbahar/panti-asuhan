@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
                                 {{-- preview image --}}
-                                <img wire:ignore.self src="{{ asset('storage/'.$foto) }}" class="image-fluid w-50 mb-2" id="imagePreview">
+                                <img wire:ignore.self src="{{ asset('storage/'.$fotos) }}" class="image-fluid w-50 mb-2" id="imagePreview">
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">

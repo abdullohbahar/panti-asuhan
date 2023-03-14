@@ -20,8 +20,7 @@ class CreateAnakAsuh extends Component
 
     public function rules()
     {
-        return [
-            'foto' => 'image|max:2048',
+        $validation = [
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'status' => 'required',
@@ -29,6 +28,12 @@ class CreateAnakAsuh extends Component
             'pemilik_nohp' => 'required',
             'wali_anak' => 'required',
         ];
+
+        if ($this->foto) {
+            $validation['foto'] = 'image|max:2048';
+        }
+
+        return $validation;
     }
 
     public function messages()

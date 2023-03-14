@@ -9,7 +9,7 @@ use Livewire\WithFileUploads;
 
 class EditAnakAsuh extends Component
 {
-    public $tgl_masuk, $wali_anak, $tgl_keluar, $idanak, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $foto, $pemilik_nohp;
+    public $tgl_masuk, $oldPhoto, $wali_anak, $tgl_keluar, $idanak, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $foto, $pemilik_nohp;
     use WithFileUploads;
 
 
@@ -31,7 +31,7 @@ class EditAnakAsuh extends Component
             $this->nohp_ortu = $anak->nohp_ortu;
             $this->status = $anak->status;
             $this->jenis_kelamin = $anak->jenis_kelamin;
-            $this->foto = $anak->foto;
+            $this->oldPhoto = $anak->foto;
             $this->pendidikan = $anak->pendidikan;
             $this->pemilik_nohp = $anak->pemilik_nohp;
             $this->tgl_masuk = $anak->tgl_masuk;
@@ -42,8 +42,10 @@ class EditAnakAsuh extends Component
 
     public function render()
     {
+        $anakasuh = AnakAsuh::findorfail($this->idanak);
+
         $data = [
-            'foto' => $this->foto,
+            'fotos' => $anakasuh->foto,
             'status' => $this->status,
             'jenis_kelamin' => $this->jenis_kelamin
         ];
@@ -53,13 +55,17 @@ class EditAnakAsuh extends Component
 
     public function rules()
     {
-        return [
+        $validation = [
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'status' => 'required',
-            'foto' => 'image|max:2048',
-
         ];
+
+        if ($this->foto) {
+            $validation['foto'] = 'image|max:2048';
+        }
+
+        return $validation;
     }
 
     public function messages()
@@ -84,11 +90,17 @@ class EditAnakAsuh extends Component
 
         $anak = AnakAsuh::findorfail($this->idanak);
 
-        if ($this->foto != $anak->foto) {
-            unlink(public_path('storage/' . $anak->foto));
-            $fotoAnak = $this->foto->store('foto-anak', 'public');
+        if ($this->foto) {
+            if ($this->foto != $anak->foto) {
+                if ($anak->foto) {
+                    unlink(public_path('storage/' . $anak->foto));
+                }
+                $fotoAnak = $this->foto->store('foto-anak', 'public');
+            } else {
+                $fotoAnak = $anak->foto;
+            }
         } else {
-            $fotoAnak = $anak->foto;
+            $fotoAnak = $this->oldPhoto;
         }
 
         AnakAsuh::where('id', $this->idanak)->update([

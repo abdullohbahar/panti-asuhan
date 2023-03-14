@@ -29,8 +29,7 @@ class CreatePengurus extends Component
 
     public function rules()
     {
-        return [
-            'foto' => 'image|max:2048',
+        $validation = [
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
@@ -38,6 +37,12 @@ class CreatePengurus extends Component
             'jabatan' => 'required',
             'alamat' => 'required',
         ];
+
+        if ($this->foto) {
+            $validation['foto'] = 'image|max:2048';
+        }
+
+        return $validation;
     }
 
     public function messages()
