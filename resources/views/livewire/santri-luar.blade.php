@@ -19,9 +19,9 @@
   <section class="content">
     <div class="container-fluid">
         <div class="card">
-            <div class="card-header">
-                <div class="col-sm-12 col-md-6">
-                    <button wire:click="exportExcel" class="btn btn-warning btn-sm"><b><i class="fas fa-print"></i> Export</b></button>
+            <div class="card-header text-right">
+                <div class="col-sm-12 col-md-12">
+                    <button wire:click="exportExcel" class="btn btn-success btn-sm"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
                     <a href="{{ url('export-santri/Santri Luar') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                 </div>
             </div>
