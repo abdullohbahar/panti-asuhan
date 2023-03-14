@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\DonasiTunaiExport;
 use PDF;
 use Exception;
 use Carbon\Carbon;
@@ -15,9 +16,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\ProofOfDonationNumber;
-use App\Models\Donation as ModelsDonation;
 use Illuminate\Database\QueryException;
+use App\Models\Donation as ModelsDonation;
 use Illuminate\Romans\Support\Facades\IntToRoman;
 
 class Donation extends Component
@@ -268,5 +270,25 @@ class Donation extends Component
     public function search()
     {
         $this->resetPage();
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new DonasiTunaiExport, 'Donasi Tunai.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $donations = ModelsDonation::with('donaturName')->where('jenis_donasi', 'Tunai')->get();
+
+        $data = [
+            'donations' => $donations
+        ];
+
+        $pdf = PDF::loadView('export.donasi-tunai.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Donasi Tunai.pdf');
     }
 }

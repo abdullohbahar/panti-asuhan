@@ -209,4 +209,7 @@ Route::middleware('auth')->group(function () {
     // Master data pendidikan
     Route::get('master-data-pendidikan', [MasterDataController::class, 'pendidikan'])->name('master.data.pendidikan');
     Route::get('master-data-position', [MasterDataController::class, 'position'])->name('master.data.position');
+
+    // Export Donasi Tunai PDF
+    Route::get('export-donasi-tunai-pdf', [Donation::class, 'exportPdf'])->name('export.donasi.tunai.pdf');
 });
