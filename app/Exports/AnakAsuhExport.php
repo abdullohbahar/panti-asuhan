@@ -45,13 +45,13 @@ class AnakAsuhExport implements FromCollection, WithHeadings, WithMapping, Shoul
             'Tipe',
             'Alamat',
             'Status',
-            'Nama Ayah Kandung',
-            'Nama Ibu Kandung',
-            'Nomor HP',
-            'Pemilik Nomor HP',
             'Tanggal Masuk',
             'Tanggal Keluar',
-            'Keterangan',
+            'Nama Ayah Kandung',
+            'Nama Ibu Kandung',
+            'Nomor HP Wali',
+            'Nama Wali',
+            'Wali Anak',
         ];
     }
 
@@ -68,13 +68,13 @@ class AnakAsuhExport implements FromCollection, WithHeadings, WithMapping, Shoul
             $item->tipe,
             $item->alamat,
             $item->status,
+            $item->tgl_masuk,
+            $item->tgl_keluar,
             $item->nama_ayah_kandung,
             $item->nama_ibu_kandung,
             $item->nohp_ortu,
             $item->pemilik_nohp,
-            $item->tgl_masuk,
-            $item->tgl_keluar,
-            $item->keterangan,
+            $item->wali_anak,
         ];
     }
 

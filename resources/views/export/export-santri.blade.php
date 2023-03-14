@@ -65,25 +65,25 @@
                                 Status
                             </td>
                             <td>
-                                Nama Ayah Kandung
-                            </td>
-                            <td>
-                                Nama Ibu Kandung
-                            </td>
-                            <td>
-                                Nomor HP
-                            </td>
-                            <td>
-                                Pemilik Nomor HP
-                            </td>
-                            <td>
                                 Tanggal masuk
                             </td>
                             <td>
                                 Tanggal Keluar
                             </td>
                             <td>
-                                Keterangan
+                                Nama Ayah Kandung
+                            </td>
+                            <td>
+                                Nama Ibu Kandung
+                            </td>
+                            <td>
+                                Nomor HP Wali
+                            </td>
+                            <td>
+                                Nama Wali
+                            </td>
+                            <td>
+                                Wali Anak
                             </td>
                         </tr>
                     </thead>
@@ -121,6 +121,12 @@
                                     {{ $santri->status }}
                                 </td>
                                 <td>
+                                    {{ $santri->tgl_masuk }}
+                                </td>
+                                <td>
+                                    {{ $santri->tgl_keluar }}
+                                </td>
+                                <td>
                                     {{ $santri->nama_ayah_kandung }}
                                 </td>
                                 <td>
@@ -133,13 +139,7 @@
                                     {{ $santri->pemilik_nohp }}
                                 </td>
                                 <td>
-                                    {{ $santri->tgl_masuk }}
-                                </td>
-                                <td>
-                                    {{ $santri->tgl_keluar }}
-                                </td>
-                                <td>
-                                    {{ $santri->keterangan }}
+                                    {{ $santri->wali_anak }}
                                 </td>
                             </tr>
                         @endforeach
