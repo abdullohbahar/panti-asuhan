@@ -23,6 +23,7 @@ use App\Http\Controllers\KeuanganLksaController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Livewire\CreateDonasiBarang;
 use App\Http\Livewire\DataDonasiTransfer;
+use App\Http\Livewire\DataIncomeLksa;
 use App\Http\Livewire\DataPengeluaran;
 use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
@@ -223,4 +224,7 @@ Route::middleware('auth')->group(function () {
 
     // Export Pengeluaran Yayasan
     Route::get('export-pengeluaran-yayasan', [DataPengeluaran::class, 'exportPdf'])->name('export.pengeluaran.yayasan.pdf');
+
+    // Export Pemasukan Yayasan
+    Route::get('export-pemasukan-lksa', [DataIncomeLksa::class, 'exportPdf'])->name('export.pemasukan.lksa.pdf');
 });

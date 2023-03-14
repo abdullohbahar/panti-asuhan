@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\LksaFinance;
 use Livewire\Component;
+use App\Models\LksaFinance;
 use Livewire\WithPagination;
+use App\Exports\IncomeLksaExport;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class DataIncomeLksa extends Component
 {
@@ -108,5 +111,25 @@ class DataIncomeLksa extends Component
     {
         LksaFinance::destroy($this->donation_id);
         $this->dispatchBrowserEvent('deleted', ['message' => 'Pemasukan Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new IncomeLksaExport, 'Pemasukan LKSA.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $lksas = LksaFinance::where('transaksi', 'pemasukan')->get();
+
+        $data = [
+            'lksas' => $lksas
+        ];
+
+        $pdf = PDF::loadView('export.pemasukan-lksa.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Pemasukan LKSA.pdf');
     }
 }
