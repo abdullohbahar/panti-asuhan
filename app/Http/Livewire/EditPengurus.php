@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Pengurus;
 use Livewire\WithFileUploads;
+use App\Models\MasterDataPosition;
 use App\Models\MasterDataPendidikan;
 
 class EditPengurus extends Component
@@ -34,12 +35,14 @@ class EditPengurus extends Component
     public function render()
     {
         $pendidikans = MasterDataPendidikan::get();
+        $positions = MasterDataPosition::get();
 
         $pengurus = Pengurus::findorfail($this->idpengurus);
 
         $data = [
             'pendidikans' => $pendidikans,
             'fotos' => $pengurus->foto,
+            'positions' => $positions,
         ];
 
         return view('livewire.edit-pengurus', $data);

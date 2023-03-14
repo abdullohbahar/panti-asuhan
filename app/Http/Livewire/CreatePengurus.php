@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\MasterDataPendidikan;
+use App\Models\MasterDataPosition;
 use App\Models\Pengurus;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -17,9 +18,11 @@ class CreatePengurus extends Component
     public function render()
     {
         $pendidikans = MasterDataPendidikan::get();
+        $positions = MasterDataPosition::get();
 
         $data = [
-            'pendidikans' => $pendidikans
+            'pendidikans' => $pendidikans,
+            'positions' => $positions,
         ];
         return view('livewire.create-pengurus', $data);
     }

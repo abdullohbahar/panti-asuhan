@@ -101,7 +101,12 @@
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label>Jabatan</label>
-                                <input type="text" wire:model="jabatan" class="form-control @error("jabatan") is-invalid @enderror" id="">
+                                <select wire:model="jabatan" class="form-control @error("jabatan") is-invalid @enderror" id="">
+                                    <option value="">-- Pilih Jabatan --</option>
+                                    @foreach ($positions as $position)
+                                        <option value="{{ $position->name }}">{{ $position->name }}</option>
+                                    @endforeach
+                                </select>
                                 @error("jabatan")
                                     <div class="invalid-feedback">
                                         {{ $message }}
