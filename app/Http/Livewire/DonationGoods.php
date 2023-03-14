@@ -14,14 +14,16 @@ use Livewire\WithPagination;
 use App\Models\GoodsDonation;
 use Livewire\WithFileUploads;
 use App\Models\BuktiSumbangan;
-use App\Models\DetailGoodsDonation;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\Exports\DonasiBarangExport;
+use App\Models\DetailGoodsDonation;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\ProofOfDonationNumber;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Collection;
 
 
 
@@ -270,5 +272,25 @@ class DonationGoods extends Component
         GoodsDonation::destroy($this->donation_id);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new DonasiBarangExport, 'Donasi Barang.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $donations = GoodsDonation::with('donatur', 'detail')->get();
+
+        $data = [
+            'donations' => $donations
+        ];
+
+        $pdf = PDF::loadView('export.donasi-barang.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Donasi Barang.pdf');
     }
 }

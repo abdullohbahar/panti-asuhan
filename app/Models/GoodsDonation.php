@@ -33,4 +33,9 @@ class GoodsDonation extends Model
     {
         return $this->hasMany(DetailGoodsDonation::class, 'goods_donations_id', 'id')->select('nama_barang', 'jumlah');
     }
+
+    public function detail()
+    {
+        return $this->hasMany(DetailGoodsDonation::class, 'goods_donations_id', 'id');
+    }
 }

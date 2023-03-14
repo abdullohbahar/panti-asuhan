@@ -216,4 +216,7 @@ Route::middleware('auth')->group(function () {
 
     // Export Donasi Transfer PDF
     Route::get('export-donasi-transfer-pdf', [DataDonasiTransfer::class, 'exportPdf'])->name('export.donasi.transfer.pdf');
+
+    // Export Donasi Barang PDF
+    Route::get('export-donasi-barang-pdf', [DonationGoods::class, 'exportPdf'])->name('export.donasi.barang.pdf');
 });
