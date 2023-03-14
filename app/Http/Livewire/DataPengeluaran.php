@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Donation;
+use App\Exports\ExportPengeluaranYayasan;
 use Livewire\Component;
+use App\Models\Donation;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class DataPengeluaran extends Component
 {
@@ -104,5 +107,25 @@ class DataPengeluaran extends Component
     {
         Donation::destroy($this->donation_id);
         $this->dispatchBrowserEvent('deleted', ['message' => 'Pengeluaran Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new ExportPengeluaranYayasan, 'Pengeluaran Yayasan.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $donations = Donation::where('jenis_donasi', 'pengeluaran')->where('transaksi', 'pengeluaran')->get();
+
+        $data = [
+            'donations' => $donations
+        ];
+
+        $pdf = PDF::loadView('export.pengeluaran-yayasan.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Pengeluaran Yayasan.pdf');
     }
 }
