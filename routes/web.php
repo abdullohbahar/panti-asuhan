@@ -29,6 +29,7 @@ use App\Http\Livewire\DataPengeluaran;
 use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
 use App\Http\Livewire\LksaDocument;
+use App\Http\Livewire\Pengurus;
 
 /*
 |--------------------------------------------------------------------------
@@ -231,4 +232,7 @@ Route::middleware('auth')->group(function () {
 
     // Export Pemasukan Yayasan
     Route::get('export-pengeluaran-lksa', [DataOutcomeLksa::class, 'exportPdf'])->name('export.pengeluaran.lksa.pdf');
+
+    // Export Pengurus
+    Route::get('export-pengurus-pdf', [Pengurus::class, 'exportPdf'])->name('export.pengurus.pdf');
 });
