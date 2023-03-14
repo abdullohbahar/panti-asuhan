@@ -22,6 +22,7 @@ use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\KeuanganLksaController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Livewire\CreateDonasiBarang;
+use App\Http\Livewire\DataDonasiTransfer;
 use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
 use App\Http\Livewire\LksaDocument;
@@ -212,4 +213,7 @@ Route::middleware('auth')->group(function () {
 
     // Export Donasi Tunai PDF
     Route::get('export-donasi-tunai-pdf', [Donation::class, 'exportPdf'])->name('export.donasi.tunai.pdf');
+
+    // Export Donasi Transfer PDF
+    Route::get('export-donasi-transfer-pdf', [DataDonasiTransfer::class, 'exportPdf'])->name('export.donasi.transfer.pdf');
 });

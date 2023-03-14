@@ -6,12 +6,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Donasi</h1>
+          <h1>Donasi Transfer</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Donasi</li>
+            <li class="breadcrumb-item active">Donasi Transfer</li>
           </ol>
         </div>
       </div>
@@ -24,8 +24,12 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-between">
-                    <div class="col-8">
-                        <h5><b>Donasi Berupa Transfer</b></h5>
+                    <div class="col-sm-12 col-md-8">
+                        <h5><b>Donasi Transfer</b></h5>
+                    </div>
+                    <div class="col-sm-12 col-md-4 text-right">
+                        <button wire:click="exportExcel" class="btn btn-success btn-sm"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
+                        <a href="{{ route('export.donasi.transfer.pdf') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                     </div>
                 </div>
             </div>

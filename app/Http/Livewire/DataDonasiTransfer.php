@@ -7,6 +7,9 @@ use Livewire\Component;
 use App\Models\Donation;
 use Livewire\WithPagination;
 use App\Models\MasterDataBank;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DonasiTransferExport;
+use PDF;
 
 class DataDonasiTransfer extends Component
 {
@@ -159,5 +162,25 @@ class DataDonasiTransfer extends Component
     {
         Donation::destroy($this->donation_id);
         $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new DonasiTransferExport, 'Donasi Transfer.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $donations = Donation::with('donaturName')->where('jenis_donasi', 'Transfer')->get();
+
+        $data = [
+            'donations' => $donations
+        ];
+
+        $pdf = PDF::loadView('export.donasi-transfer.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Donasi Transfer.pdf');
     }
 }
