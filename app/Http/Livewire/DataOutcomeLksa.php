@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use PDF;
 use Livewire\Component;
 use App\Models\LksaFinance;
 use Livewire\WithPagination;
+use App\Exports\ExpenseLksaExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataOutcomeLksa extends Component
 {
@@ -70,7 +73,7 @@ class DataOutcomeLksa extends Component
 
         if ($donation) {
             $this->donation_id = $donation->id;
-            $this->pemasukan = "Rp. " . number_format($donation->pemasukan, 0, '', '.');
+            $this->pemasukan = "Rp. " . number_format($donation->pengeluaran, 0, '', '.');
             $this->tanggal = $donation->tanggal;
             $this->terbilang = $donation->terbilang;
             $this->keterangan = $donation->keterangan;
@@ -88,14 +91,14 @@ class DataOutcomeLksa extends Component
 
         // Update data
         LksaFinance::where('id', $this->donation_id)->update([
-            'pemasukan' => $pemasukan,
+            'pengeluaran' => $pemasukan,
             'tanggal' => $this->tanggal,
             'keterangan' => $this->keterangan,
             'terbilang' => $this->terbilang,
         ]);
 
 
-        $this->dispatchBrowserEvent('close-modal', ['message' => 'Pemasukan Berhasil Diubah']);
+        $this->dispatchBrowserEvent('close-modal', ['message' => 'Pengeluaran Berhasil Diubah']);
     }
 
     public function deleteConfirmation($id)
@@ -107,6 +110,26 @@ class DataOutcomeLksa extends Component
     public function destroy()
     {
         LksaFinance::destroy($this->donation_id);
-        $this->dispatchBrowserEvent('deleted', ['message' => 'Pemasukan Berhasil Dihapus']);
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Pengeluaran Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new ExpenseLksaExport, 'Pengeluaran LKSA.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $lksas = LksaFinance::where('transaksi', 'pengeluaran')->get();
+
+        $data = [
+            'lksas' => $lksas
+        ];
+
+        $pdf = PDF::loadView('export.pengeluaran-lksa.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Pengeluaran LKSA.pdf');
     }
 }
