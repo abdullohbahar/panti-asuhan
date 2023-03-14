@@ -14,4 +14,13 @@ class MasterDataController extends Controller
 
         return view('master-data-pendidikan', $data);
     }
+
+    public function position()
+    {
+        $data = [
+            'active' => 'master-data-positions'
+        ];
+
+        return view('master-data-positions', $data);
+    }
 }

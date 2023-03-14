@@ -333,9 +333,9 @@
       </ul>
       <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
-          <a href="{{ route('data.pengguna') }}" class="nav-link {{ $active == 'data-user' ? 'active' : '' }}">
+          <a href="{{ route('master.data.position') }}" class="nav-link {{ $active == 'master-data-position' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Data Pengguna</p>
+            <p>Jabatan</p>
           </a>
         </li>
       </ul>
