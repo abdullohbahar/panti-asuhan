@@ -34,4 +34,14 @@ class LetterController extends Controller
 
         return view('data-outcome-letter-yayasan', $data);
     }
+
+    public function createLetterLksa()
+    {
+
+        $data = [
+            'active' => 'create-letter-lksa'
+        ];
+
+        return view('create-letter-lksa', $data);
+    }
 }

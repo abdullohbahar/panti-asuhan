@@ -237,7 +237,13 @@ Route::middleware('auth')->group(function () {
     // Export Pengurus
     Route::get('export-pengurus-pdf', [Pengurus::class, 'exportPdf'])->name('export.pengurus.pdf');
 
+    // Surat masuk keluar yayasan
     Route::get('tambah-surat-yayasan', [LetterController::class, 'createLetterYayasan'])->name('create.letter.yayasan');
     Route::get('data-surat-masuk-yayasan', [LetterController::class, 'dataIncomingLetterYayasan'])->name('data.incoming.letter.yayasan');
     Route::get('data-surat-keluar-yayasan', [LetterController::class, 'dataOutcomeLetterYayasan'])->name('data.outcome.letter.yayasan');
+
+    // Surat masuk keluar lksa
+    Route::get('tambah-surat-lksa', [LetterController::class, 'createLetterLksa'])->name('create.letter.lksa');
+    Route::get('data-surat-masuk-lksa', [LetterController::class, 'dataIncomingLetterLksa'])->name('data.incoming.letter.lksa');
+    Route::get('data-surat-keluar-lksa', [LetterController::class, 'dataOutcomeLetterLksa'])->name('data.outcome.letter.lksa');
 });
