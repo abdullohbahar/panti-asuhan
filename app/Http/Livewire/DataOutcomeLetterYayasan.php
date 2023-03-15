@@ -8,6 +8,12 @@ use App\Models\LetterYayasan;
 class DataOutcomeLetterYayasan extends Component
 {
     public $search;
+    public $file;
+    public $nomor_surat;
+    public $nama_surat;
+    public $tipe;
+    public $keterangan;
+    public $idLetter;
 
     public function render()
     {
