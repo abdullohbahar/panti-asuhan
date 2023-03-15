@@ -62,7 +62,7 @@
                                     $no = 1;
                                 @endphp
                                 @foreach ($penguruses as $index => $pengurus)
-                                    <tr wire:sortable.item="{{ $pengurus->id }}" wire:key="pengurus-{{ $pengurus->id }}">
+                                    <tr wire:sortable.item="{{ $pengurus->id }}" wire:key="pengurus-{{ $pengurus->id }}" class="sortable-item">
                                         <td data-label="Foto">
                                             @if ($pengurus->foto)
                                                 <img src="{{ asset('storage/'.$pengurus->foto) }}" class="img-fluid img-thumbnail w-25" alt="{{ $pengurus->nama_lengkap }}" srcset="">

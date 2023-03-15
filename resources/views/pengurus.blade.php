@@ -96,6 +96,23 @@
           width: 10px;
       }
   }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+      background-color: #ddd;
+      cursor: grab;
+  }
+
+  .sortable-item {
+      cursor: grab;
+  }
+
+  .sortable-item:active {
+      cursor: grabbing;
+  }
 </style>
 @endpush
 
