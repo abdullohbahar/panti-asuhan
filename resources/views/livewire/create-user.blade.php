@@ -62,7 +62,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" wire:model="password" class="form-control @error("password") is-invalid @enderror" id="">
+                                        <input type="password" autocomplete="new-password" wire:model="password" class="form-control @error("password") is-invalid @enderror" id="">
                                         @error("password")
                                             <div class="invalid-feedback">
                                                 {{ $message }}
