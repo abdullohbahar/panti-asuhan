@@ -97,7 +97,6 @@ class DataIncomeLksa extends Component
             'terbilang' => $this->terbilang,
         ]);
 
-
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Pemasukan Berhasil Diubah']);
     }
 

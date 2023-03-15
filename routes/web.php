@@ -20,6 +20,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DonasiBarangController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\KeuanganLksaController;
+use App\Http\Controllers\LetterController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Livewire\CreateDonasiBarang;
 use App\Http\Livewire\DataDonasiTransfer;
@@ -235,4 +236,6 @@ Route::middleware('auth')->group(function () {
 
     // Export Pengurus
     Route::get('export-pengurus-pdf', [Pengurus::class, 'exportPdf'])->name('export.pengurus.pdf');
+
+    Route::get('tambah-surat-yayasan', [LetterController::class, 'createLetterYayasan'])->name('create.letter.yayasan');
 });

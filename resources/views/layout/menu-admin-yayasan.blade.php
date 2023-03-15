@@ -290,6 +290,39 @@
         </li>
       </ul>
     </li>
+    <li class="nav-item {{ $active == 'create-letter-yayasan' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-envelope"></i>
+        <p>
+          Surat Masuk & Keluar Yayasan
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('create.letter.yayasan') }}" class="nav-link {{ $active == 'create-letter-yayasan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Tambah Surat</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('lksa.document') }}" class="nav-link {{ $active == 'lksa-document' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Surat Masuk</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('yayasan.document') }}" class="nav-link {{ $active == 'yayasan-document' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Surat Keluar</p>
+          </a>
+        </li>
+      </ul>
+    </li>
     <li class="nav-item {{ $active == 'create-user' || $active == 'data-user' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-user"></i>
