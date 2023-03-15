@@ -16,6 +16,7 @@ class CreateLetterYayasan extends Component
 
     public $file;
     public $nomor_surat;
+    public $nama_surat;
     public $tipe;
     public $keterangan;
 
@@ -28,6 +29,7 @@ class CreateLetterYayasan extends Component
     {
         return [
             'file' => 'required',
+            'nama_surat' => 'required',
             'nomor_surat' => 'required',
             'tipe' => 'required',
             'keterangan' => 'required',
@@ -38,6 +40,7 @@ class CreateLetterYayasan extends Component
     {
         return [
             'file.required' => 'Surat harus diisi',
+            'nama_surat.required' => 'Nama Surat harus diisi',
             'nomor_surat.required' => 'Nomor Surat harus diisi',
             'tipe.required' => 'Tipe harus diisi',
             'keterangan.required' => 'Keterangan harus diisi',
@@ -63,9 +66,15 @@ class CreateLetterYayasan extends Component
                 'nomor_surat' => $this->nomor_surat,
                 'tipe' => $this->tipe,
                 'keterangan' => $this->keterangan,
+                'nama_surat' => $this->nama_surat,
             ]);
 
             DB::commit();
+
+            if ($this->tipe == "Surat Masuk") {
+                return redirect()->route('data.incoming.letter.yayasan')->with('message', 'Surat Masuk Berhasil Ditambahkan');
+            } else {
+            }
         } catch (Exception $e) {
             Log::debug($e);
             DB::rollBack();

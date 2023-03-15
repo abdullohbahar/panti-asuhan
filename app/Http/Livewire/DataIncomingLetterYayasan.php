@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\LetterYayasan;
 use Livewire\Component;
+use App\Models\LetterYayasan;
+use Illuminate\Support\Facades\Storage;
 
 class DataIncomingLetterYayasan extends Component
 {
@@ -22,5 +23,11 @@ class DataIncomingLetterYayasan extends Component
         ];
 
         return view('livewire.data-incoming-letter-yayasan', $data);
+    }
+
+    public function download($downloadFile, $nama)
+    {
+        $ext = substr(strrchr($downloadFile, '.'), 1);
+        return response()->download(public_path('storage/' . $downloadFile), $nama . '.' . $ext);
     }
 }

@@ -22,40 +22,6 @@
   <section class="content">
     <div class="container-fluid">
         <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
-                        <div class="form-group">
-                            <input type="date" wire:model.defer="date1" class="form-control" name="" id="">
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
-                        <div class="form-group">
-                            <input type="date" wire:model.defer="date2" class="form-control" name="" id="">
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
-                        <div class="form-group">
-                            <button wire:click="search" id="search" class="btn btn-info btn-block">Filter Data</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
-                        <div class="form-group">
-                            <a href="{{ route('data.pengeluaran') }}" class="btn btn-warning btn-block">Reset Filter</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
-                        <div class="form-group">
-                            <button wire:click="exportExcel" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
-                        <div class="form-group">
-                            <a href="{{ route('export.pemasukan.lksa.pdf') }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="card-body">
                 <div class="row justify-content-end">
                     <div class="col-0 mr-2">
@@ -82,7 +48,7 @@
                                         <td data-label="Nama Surat">{{ $letter->nama_surat }}</td>
                                         <td data-label="Nomor Surat">{{ $letter->nomor_surat }}</td>
                                         <td data-label="Keterangan">{{ $letter->keterangan }}</td>
-                                        <td data-label="File">{{ $letter->file }}</td>
+                                        <td data-label="File"><button wire:click="download('{{ $letter->file }}','{{ $letter->nama_surat }}')" class="btn btn-sm btn-success">Unduh Surat</button></td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                             <td data-label="Aksi">
                                                 <button id="edit" wire:click="show('{{ $letter->id }}')" data-jenis="{{ $letter->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-letter" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>

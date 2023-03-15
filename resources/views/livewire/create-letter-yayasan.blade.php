@@ -37,6 +37,17 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
+                                <label>Nama Surat</label>
+                                <input type="text" wire:model="nama_surat" class="form-control @error("nama_surat") is-invalid @enderror" id="">
+                                @error("nama_surat")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
                                 <label>Nomor Surat</label>
                                 <input type="text" wire:model="nomor_surat" class="form-control @error("nomor_surat") is-invalid @enderror" id="">
                                 @error("nomor_surat")
@@ -74,7 +85,7 @@
                         </div>
                         <div class="col-12 mt-3">
                             <button class="btn btn-success btn-block" wire:loading.attr="disabled">
-                                Tambah Data Anak
+                                Tambah Surat
                             </button>
                         </div>
                     </div>

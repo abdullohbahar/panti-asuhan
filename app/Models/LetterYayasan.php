@@ -14,5 +14,6 @@ class LetterYayasan extends Model
         'keterangan',
         'tipe',
         'file',
+        'nama_surat',
     ];
 }
