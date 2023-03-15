@@ -248,8 +248,10 @@ class Donation extends Component
             $nama = 'Tanda Terima - ' . $donation->number->no . ' - ' . $donation->donatur->nama;
         }
 
+        // $customPaper = array(0, 0, 614.173, 473.667);
         $pdf = PDF::loadView('invoice', $data);
-        $pdf->setPaper('F4', 'potrait');
+        // $pdf->set_paper('potrait');
+        // $pdf->setPaper($customPaper);
         $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
 
         return $pdf->download($nama . '.pdf');

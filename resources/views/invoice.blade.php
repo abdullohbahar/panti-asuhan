@@ -6,7 +6,12 @@
         body{
             font-family:Arial, Helvetica, sans-serif !important;
         }
-        @page { margin-top: 0px; }
+        
+        @page { 
+            size: 20.7cm potrait;
+            margin-bottom: 0px;
+            margin-left: 0px;
+        }
 
         .bg-color{
             background-color: black; 
@@ -57,6 +62,8 @@
             border-top: 5px solid black;
             border-bottom: 1px solid black;
             padding: 1px 0;
+            margin-right: -100px;
+            margin-left: -100px;
         }
 
         .check {
@@ -96,13 +103,13 @@
         <div class="container-fluid mt-3">
             <div class="row text-center">
                 <div class="col-12 font-12">
-                    <img src="data:image/jpeg;base64,{{ $image }}" style="width: 85%" alt="" srcset="">
+                    <img src="data:image/jpeg;base64,{{ $image }}" style="width: 85%;" alt="" srcset="">
                 </div>
                 <div class="garis">
 
                 </div>
-                <h4 style="margin: 2px">TANDA TERIMA</h4>
-                <h5 style="margin: 0px">No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</h5>
+                <p style="margin: 2px; font-size: 14px"><b>TANDA TERIMA</b></p>
+                <p style="margin: 0px; font-size: 13px"><b>No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</b></p>
                 <input type="checkbox" id="Zakat" @if ($tipe == 'Zakat') checked @else class="check" @endif><label for="Zakat" style="font-size: 13px">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq" style="font-size: 13px">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="Sodaqoh" @if ($tipe == 'Sodaqoh') checked @else class="check" @endif><label for="Sodaqoh" style="font-size: 13px">Sodaqoh</label> &nbsp; &nbsp; &nbsp; &nbsp;
@@ -110,9 +117,9 @@
                 <input type="checkbox" id="BiayaPendidikan" @if ($tipe == 'Biaya Pendidikan') checked @else class="check" @endif><label for="BiayaPendidikan" style="font-size: 13px">Biaya Pendidikan</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="TabunganAnak" @if ($tipe == 'Tabungan Anak') checked @else class="check" @endif><label for="TabunganAnak" style="font-size: 13px">Tabungan Anak</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="checkbox" id="Lain-lain......" @if ($tipe == 'Lain-lain') checked @else class="check" @endif><label style="margin-top: 100px; font-size: 13px;" for="Lain-lain......">Lain-lain..............</label>
-                <h5 style="margin: 5px"><i>Assalamu'alaikum Wr. Wb.</i></h5>
+                <p style="margin: 5px font-size: 14px"><b><i>Assalamu'alaikum Wr. Wb.</i></b></p>
             </div>
-            <div style="font-size: 14px;">
+            <div style="font-size: 12px;">
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 150px !important;">Telah Diterima Dari</td>

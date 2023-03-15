@@ -35,6 +35,15 @@
     </script>
 @endif
 
+@if (session()->has('id'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        window.location.href = 'print-invoice-donation/{{ session('id') }}';
+      }, 1500);
+    });
+  </script>
+@endif
 
 @if (session()->has('error'))
     <script>
