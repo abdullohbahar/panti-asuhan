@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Input Surat Yayasan
+  Data Surat Keluar Yayasan
 @endsection
 
 @push('addons-css')
@@ -42,6 +42,7 @@
     .table-data {
         border: 0;
     }
+    
     .table-data caption {
         font-size: 1.3em;
     }
@@ -100,17 +101,37 @@
 
 @section('content')
 <div>
-  <livewire:create-letter-yayasan>
+  <livewire:data-outcome-letter-yayasan>
 </div>
 @endsection
 
 @push('addons-js')
+@if (session()->has('message'))
+    <script>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: '{{ session('message') }}'
+      })
+    </script>
+@endif
+
 <script>
   // Show modal add donatur
   $("#btnAddDonatur").on("click", () => {
     $("#modal-add-donatur").modal("show")
   })
-  
 
   window.addEventListener('close-modal', event => {
     // close modal
@@ -160,23 +181,6 @@
         event.detail.message,
         'success'
       )
-    })
-
-    // preview image
-    imageUpload.onchange = (evt) => {
-        const [file] = imageUpload.files;
-        if (file) {
-            imagePreview.src = URL.createObjectURL(file);
-        }
-    };
-</script>
-<script>
-    window.addEventListener('show-error', event => {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: event.detail.message
-        })
     })
 </script>
 @endpush

@@ -239,4 +239,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('tambah-surat-yayasan', [LetterController::class, 'createLetterYayasan'])->name('create.letter.yayasan');
     Route::get('data-surat-masuk-yayasan', [LetterController::class, 'dataIncomingLetterYayasan'])->name('data.incoming.letter.yayasan');
+    Route::get('data-surat-keluar-yayasan', [LetterController::class, 'dataOutcomeLetterYayasan'])->name('data.outcome.letter.yayasan');
 });

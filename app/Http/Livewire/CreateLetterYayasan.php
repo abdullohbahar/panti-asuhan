@@ -74,11 +74,12 @@ class CreateLetterYayasan extends Component
             if ($this->tipe == "Surat Masuk") {
                 return redirect()->route('data.incoming.letter.yayasan')->with('message', 'Surat Masuk Berhasil Ditambahkan');
             } else {
+                return redirect()->route('data.outcome.letter.yayasan')->with('message', 'Surat Keluar Berhasil Ditambahkan');
             }
         } catch (Exception $e) {
             Log::debug($e);
             DB::rollBack();
-            dd($e);
+            $this->dispatchBrowserEvent('show-error', ['message' => 'Error, Coba untuk input data lagi atau hubungi developer']);
         }
     }
 }

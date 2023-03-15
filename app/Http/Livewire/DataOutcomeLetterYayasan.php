@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\LetterYayasan;
 
-class DataIncomingLetterYayasan extends Component
+class DataOutcomeLetterYayasan extends Component
 {
     public $search;
 
@@ -13,7 +13,7 @@ class DataIncomingLetterYayasan extends Component
     {
         $search = '';
 
-        $letters = LetterYayasan::where('tipe', 'Surat Masuk')->when(!empty($this->search), function ($query) {
+        $letters = LetterYayasan::where('tipe', 'Surat Keluar')->when(!empty($this->search), function ($query) {
             $query->where('nama_surat', 'like', "%$this->search%");
         })->paginate(20);
 
@@ -21,7 +21,7 @@ class DataIncomingLetterYayasan extends Component
             'letters' => $letters
         ];
 
-        return view('livewire.data-incoming-letter-yayasan', $data);
+        return view('livewire.data-outcome-letter-yayasan', $data);
     }
 
     public function download($downloadFile, $nama)
