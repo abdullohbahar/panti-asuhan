@@ -16,4 +16,13 @@ class LetterController extends Controller
 
         return view('create-letter-yayasan', $data);
     }
+
+    public function dataIncomingLetterYayasan()
+    {
+        $data = [
+            'active' => 'data-letter-yayasan'
+        ];
+
+        return view('data-incoming-letter-yayasan', $data);
+    }
 }
