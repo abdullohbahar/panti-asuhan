@@ -53,4 +53,13 @@ class LetterController extends Controller
 
         return view('data-income-letter-lksa', $data);
     }
+
+    public function dataOutcomeLetterLksa()
+    {
+        $data = [
+            'active' => 'data-outcome-letter-lksa'
+        ];
+
+        return view('data-outcome-letter-lksa', $data);
+    }
 }
