@@ -44,4 +44,13 @@ class LetterController extends Controller
 
         return view('create-letter-lksa', $data);
     }
+
+    public function dataIncomingLetterLksa()
+    {
+        $data = [
+            'active' => 'data-letter-lksa'
+        ];
+
+        return view('data-income-letter-lksa', $data);
+    }
 }

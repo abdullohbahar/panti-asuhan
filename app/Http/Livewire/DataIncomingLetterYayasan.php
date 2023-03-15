@@ -132,6 +132,6 @@ class DataIncomingLetterYayasan extends Component
         unlink(public_path('storage/' . $this->destroyBerkas));
         LetterYayasan::destroy($this->idLetter);
 
-        $this->dispatchBrowserEvent('deleted', ['message' => 'Data Anak Asuh Berhasil Dihapus']);
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Data Berhasil Dihapus']);
     }
 }

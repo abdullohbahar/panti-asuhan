@@ -3,13 +3,13 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\LetterYayasan;
+use App\Models\LetterLksa;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
-use Livewire\WithFileUploads;
 
-class DataOutcomeLetterYayasan extends Component
+class DataIncomeLetterLksa extends Component
 {
     public $search;
     public $file;
@@ -17,18 +17,19 @@ class DataOutcomeLetterYayasan extends Component
     public $nama_surat;
     public $tipe;
     public $keterangan;
-    public $idLetter;
     public $oldSurat;
+    public $idLetter;
     public $iteration;
     public $destroyBerkas;
     use WithFileUploads;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
+
     public function render()
     {
         $search = '';
 
-        $letters = LetterYayasan::where('tipe', 'Surat Keluar')->when(!empty($this->search), function ($query) {
+        $letters = LetterLksa::where('tipe', 'Surat Masuk')->when(!empty($this->search), function ($query) {
             $query->where('nama_surat', 'like', "%$this->search%");
         })->paginate(20);
 
@@ -36,7 +37,7 @@ class DataOutcomeLetterYayasan extends Component
             'letters' => $letters
         ];
 
-        return view('livewire.data-outcome-letter-yayasan', $data);
+        return view('livewire.data-income-letter-lksa', $data);
     }
 
     public function download($downloadFile, $nama)
@@ -48,7 +49,7 @@ class DataOutcomeLetterYayasan extends Component
     public function show($id)
     {
         $this->iteration++;
-        $letter = LetterYayasan::find($id);
+        $letter = LetterLksa::find($id);
 
         if ($letter) {
             $this->idLetter = $letter->id;
@@ -102,12 +103,12 @@ class DataOutcomeLetterYayasan extends Component
 
             if ($this->file) {
                 unlink(public_path('storage/' . $this->oldSurat));
-                $file = $this->file->store('yayasan/surat-masuk', 'public');
+                $file = $this->file->store('lksa/surat-masuk', 'public');
                 $data['file'] = $file;
             }
 
             // Update data
-            LetterYayasan::where('id', $this->idLetter)->update($data);
+            LetterLksa::where('id', $this->idLetter)->update($data);
 
             DB::commit();
 
@@ -129,7 +130,7 @@ class DataOutcomeLetterYayasan extends Component
     public function destroy()
     {
         unlink(public_path('storage/' . $this->destroyBerkas));
-        LetterYayasan::destroy($this->idLetter);
+        LetterLksa::destroy($this->idLetter);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Data Berhasil Dihapus']);
     }
