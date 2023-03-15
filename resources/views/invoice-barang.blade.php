@@ -112,6 +112,34 @@
             color: black;
         }
 
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.3rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .table-sm th,
+        .table-sm td {
+            padding: 0.3rem;
+        }
+
         .table-bordered {
             border: 1px solid #dee2e6;
         }
@@ -119,6 +147,11 @@
         .table-bordered th,
         .table-bordered td {
             border: 1px solid #dee2e6;
+        }
+
+        .table-bordered thead th,
+        .table-bordered thead td {
+            border-bottom-width: 2px;
         }
 
 
@@ -172,10 +205,10 @@
                         <td>:</td>
                     </tr>
                 </table>
-                <table class="table table-bordered" style="width: 100%">
+                <table class="table table-bordered" style="width: 100%; margin-top: 5px;">
                     <tr>
                         <td>
-                            <b>Nama</b>
+                            <b>Nama Barang</b>
                         </td>
                         <td>
                             <b>Jumlah</b>
@@ -241,7 +274,9 @@
                 </tr>
                 <tr>
                     <td>
-                        (......................................)
+                        <p style="font-size: 12px;">
+                            (&nbsp; {{ $nama }} &nbsp;)
+                        </p>
                     </td>
                     <td></td>
                     <td>
