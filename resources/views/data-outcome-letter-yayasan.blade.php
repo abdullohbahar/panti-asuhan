@@ -182,5 +182,35 @@
         'success'
       )
     })
+
+    window.addEventListener('show-success', event => {
+        $('#modal-edit-letter').modal('hide')
+
+        // sweetalert success
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+      
+        Toast.fire({
+          icon: 'success',
+          title: event.detail.message
+        })
+    })
+
+    window.addEventListener('show-error', event => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: event.detail.message
+        })
+    })
 </script>
 @endpush
