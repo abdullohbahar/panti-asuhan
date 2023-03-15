@@ -2,13 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\MasterDataPendidikan;
-use App\Models\MasterDataPosition;
-use App\Models\Pengurus;
-use Livewire\Component;
-use Livewire\WithFileUploads;
+use Exception;
 use Carbon\Carbon;
-
+use Livewire\Component;
+use App\Models\Pengurus;
+use Livewire\WithFileUploads;
+use App\Models\MasterDataPosition;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Models\MasterDataPendidikan;
 
 class CreatePengurus extends Component
 {
@@ -76,19 +78,29 @@ class CreatePengurus extends Component
 
         $this->tanggal_lahir = Carbon::parse($this->tanggal_lahir)->format('d-m-Y');
 
-        Pengurus::create([
-            'nama' => $this->nama,
-            'jenis_kelamin' => $this->jenis_kelamin,
-            'tempat_lahir' => $this->tempat_lahir,
-            'tanggal_lahir' => $this->tanggal_lahir,
-            'alamat' => $this->alamat,
-            'jabatan' => $this->jabatan,
-            'foto' => $fotoPengurus,
-            'no_hp' => $this->no_hp,
-            'pendidikan' => $this->pendidikan,
-            'pekerjaan' => $this->pekerjaan,
-        ]);
+        try {
+            DB::beginTransaction();
 
-        return redirect()->to('pengurus')->with('message', 'Data pengurus berhasil ditambahkan');
+            Pengurus::create([
+                'nama' => $this->nama,
+                'jenis_kelamin' => $this->jenis_kelamin,
+                'tempat_lahir' => $this->tempat_lahir,
+                'tanggal_lahir' => $this->tanggal_lahir,
+                'alamat' => $this->alamat,
+                'jabatan' => $this->jabatan,
+                'foto' => $fotoPengurus,
+                'no_hp' => $this->no_hp,
+                'pendidikan' => $this->pendidikan,
+                'pekerjaan' => $this->pekerjaan,
+                'order' => Pengurus::max('order') + 1
+            ]);
+
+            DB::commit();
+            return redirect()->to('pengurus')->with('message', 'Data pengurus berhasil ditambahkan');
+        } catch (Exception $e) {
+            Log::debug($e);
+            DB::rollBack();
+            $this->dispatchBrowserEvent('show-error', ['message' => 'Error, Coba untuk input data lagi atau hubungi developer']);
+        }
     }
 }

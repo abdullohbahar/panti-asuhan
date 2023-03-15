@@ -123,8 +123,8 @@
   <script src="{{ asset('./js/rupiah.js') }}"></script>
 
   @stack('addons-js')
-  @stack('component-scripts')
   @livewireScripts
+  @stack('component-scripts')
   {{-- <script>
       $('.select2').select2();
   </script> --}}

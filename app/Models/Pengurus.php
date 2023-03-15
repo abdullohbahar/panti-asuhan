@@ -22,6 +22,7 @@ class Pengurus extends Model
         'jenis_kelamin',
         'pendidikan',
         'pekerjaan',
+        'order',
     ];
 
     public function documents()

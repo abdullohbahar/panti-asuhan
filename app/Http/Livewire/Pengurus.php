@@ -21,20 +21,23 @@ class Pengurus extends Component
     {
         $search = '';
 
-        $query = ModelsPengurus::where(function ($q) use ($search) {
+        $penguruses = ModelsPengurus::where(function ($q) use ($search) {
             $q->orwhere('nama', 'like', '%' . $this->search . '%')
                 ->orwhere('jabatan', 'like', '%' . $this->search . '%');
-        });
-
-        $penguruses = $query->orderBy('nama', 'asc')->paginate(10);
-        $count = $penguruses->count();
+        })->orderBy('order', 'asc')->get();
 
         $data =  [
             'penguruses' => $penguruses,
-            'count' => $count
         ];
 
         return view('livewire.pengurus', $data);
+    }
+
+    public function updatePengurusOrder($list)
+    {
+        foreach ($list as $item) {
+            ModelsPengurus::find($item['value'])->update(['order' => $item['order']]);
+        }
     }
 
     public function deleteConfirmation($id)

@@ -169,4 +169,13 @@ Tambah Data Pengurus
     }
   };
 </script>
+<script>
+    window.addEventListener('show-error', event => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: event.detail.message
+        })
+    })
+</script>
 @endpush
