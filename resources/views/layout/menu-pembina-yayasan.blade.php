@@ -128,11 +128,11 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'pengeluaran' || $active == 'data-pengeluaran' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'pengeluaran' || $active == 'data-pengeluaran' || $active == 'laporan' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-file"></i>
+        <i class="nav-icon fas fa-hand-holding-usd"></i>
         <p>
-          Pengeluaran
+          Keuangan Yayasan
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>
@@ -144,14 +144,52 @@
           </a>
         </li>
       </ul>
-    </li>
-    <li class="nav-item">
-      <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="nav-link {{ $active == 'laporan' ? 'active' : '' }}">
-        <i class="nav-icon fas fa-file"></i>
-        <p>
+      <ul class="nav nav-treeview">
+        <li class="nav-header">Laporan</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('laporan.pemasukan.pengeluaran') }}" class="nav-link {{ $active == 'laporan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
             <p>Laporan Pemasukan & Pengeluaran</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item {{ $active == 'outcome-lksa' || $active == 'income-and-expense-report' || $active == 'income-lksa' || $active == 'data-income-lksa' || $active == 'data-outcome-lksa' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-hand-holding-usd"></i>
+        <p>
+          Keuangan LKSA
+          <i class="right fas fa-angle-left"></i>
         </p>
       </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-header">Pemasukan</li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.income.lksa') }}" class="nav-link {{ $active == 'data-income-lksa' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Data Pemasukan</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.outcome.lksa') }}" class="nav-link {{ $active == 'data-outcome-lksa' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Data Pengeluaran</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-header">Laporan</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.income.outcome.lksa') }}" class="nav-link {{ $active == 'income-and-expense-report' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Laporan Pemasukan & Pengeluaran</p>
+          </a>
+        </li>
+      </ul>
     </li>
     <li class="nav-item">
       <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
@@ -186,6 +224,56 @@
         </li>
       </ul>
     </li>
+    <li class="nav-item {{ $active == 'create-letter-yayasan' || $active == 'data-letter-yayasan' || $active == 'data-outcome-letter-yayasan' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-envelope"></i>
+        <p>
+          Surat Masuk & Keluar Yayasan
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.incoming.letter.yayasan') }}" class="nav-link {{ $active == 'data-letter-yayasan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Surat Masuk</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.outcome.letter.yayasan') }}" class="nav-link {{ $active == 'data-outcome-letter-yayasan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Surat Keluar</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item {{ $active == 'create-letter-lksa' || $active == 'data-letter-lksa' || $active == 'data-outcome-letter-lksa' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-envelope"></i>
+        <p>
+          Surat Masuk & Keluar LKSA
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.incoming.letter.lksa') }}" class="nav-link {{ $active == 'data-letter-lksa' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Surat Masuk</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.outcome.letter.lksa') }}" class="nav-link {{ $active == 'data-outcome-letter-lksa' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Surat Keluar</p>
+          </a>
+        </li>
+      </ul>
+    </li>
     <li class="nav-item {{ $active == 'create-user' || $active == 'data-user' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-user"></i>
@@ -199,6 +287,31 @@
           <a href="{{ route('data.pengguna') }}" class="nav-link {{ $active == 'data-user' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Pengguna</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item {{ $active == 'master-data-pendidikan' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-server"></i>
+        <p>
+          Master Data
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('master.data.pendidikan') }}" class="nav-link {{ $active == 'master-data-pendidikan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Pendidikan</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('master.data.position') }}" class="nav-link {{ $active == 'master-data-position' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Jabatan</p>
           </a>
         </li>
       </ul>

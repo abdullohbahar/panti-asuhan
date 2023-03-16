@@ -18,32 +18,34 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-12 col-lg-8">
-                <div class="card">
-                    <div class="card-body">
-                        <form wire:submit.prevent="store">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label>Pendidikan</label>
-                                        <input type="text" wire:model="name" class="form-control @error("name") is-invalid @enderror" id="">
-                                        @error("name")
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+        @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form wire:submit.prevent="store">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Pendidikan</label>
+                                            <input type="text" wire:model="name" class="form-control @error("name") is-invalid @enderror" id="">
+                                            @error("name")
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-success btn-block">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-success btn-block">Submit</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-10">
                 <div class="card">
