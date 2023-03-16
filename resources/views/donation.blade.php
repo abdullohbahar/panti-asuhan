@@ -127,12 +127,10 @@
 @endif
 
 @if (session()->has('id'))
-
   <script>
     setTimeout(() => {
-      document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'print-invoice-donation/{{ session('id') }}';
-      });
+      console.log("hello");
     }, 1500);
   </script>
 @endif
