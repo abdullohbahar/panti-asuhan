@@ -3,13 +3,14 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class DataUser extends Component
 {
     public $search, $idUser;
-    protected $listeners = ['deleteConfirmed' => 'destroy'];
+    protected $listeners = ['deleteConfirmed' => 'destroy', 'resetConfirmed' => 'resetPassword'];
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -43,5 +44,20 @@ class DataUser extends Component
         User::destroy($this->idUser);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Pengguna Berhasil Dihapus']);
+    }
+
+    public function resetConfirmation($id)
+    {
+        $this->idUser = $id;
+        $this->dispatchBrowserEvent('show-reset-confirmation');
+    }
+
+    public function resetPassword()
+    {
+        User::where('id', $this->idUser)->update([
+            'password' => Hash::make('password')
+        ]);
+
+        $this->dispatchBrowserEvent('reseted', ['message' => 'Berhasil mereset password']);
     }
 }

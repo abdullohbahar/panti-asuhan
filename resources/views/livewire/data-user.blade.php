@@ -57,8 +57,9 @@
                                         </td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                             <td data-label="Aksi">
-                                                <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                                    <a href="{{ route('edit.pengguna.admin.yayasan',$user->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Ubah Pengguna"><i class="fas fa-pencil-alt"></i> Ubah</a>
+                                                <div class="btn-group-horizontal" role="group" aria-label="Basic example">
+                                                    <a href="{{ route('edit.pengguna.admin.yayasan',$user->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Ubah Pengguna"><i class="fas fa-pencil-alt"></i> Ubah</a>
+                                                    <button wire:click="resetConfirmation('{{ $user->id }}')" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Reset passwor"><i class="fas fa-key"></i> Reset Password</button>
                                                     <button wire:click="deleteConfirmation('{{ $user->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Pengguna"><i class="fas fa-trash"></i> Hapus</button>
                                                 </div>
                                             </td>
