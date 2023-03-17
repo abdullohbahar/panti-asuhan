@@ -217,7 +217,7 @@ class CreateDonasiBarang extends Component
         }
 
         $pdf = PDF::loadView('invoice-barang', $data);
-        $pdf->setPaper('F4', 'potrait');
+        // $pdf->setPaper('F4', 'potrait');
         $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
 
         return $pdf->download($nama . '.pdf');
