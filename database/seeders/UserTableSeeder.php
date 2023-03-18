@@ -36,5 +36,12 @@ class UserTableSeeder extends Seeder
             'role' => 'ketua-yayasan',
             'foto' => 'default.jpg'
         ]);
+
+        User::create([
+            'username' => 'bendahara-yayasan',
+            'password' => Hash::make("password"),
+            'role' => 'bendahara-yayasan',
+            'foto' => 'default.jpg'
+        ]);
     }
 }

@@ -47,7 +47,7 @@
                                     <th scope="col">Keterangan Barang</th>
                                     <th scope="col">Penerima</th>
                                     <th scope="col">Tanggal Donasi</th>
-                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan')
                                         <th scope="col">Aksi</th>
                                     @endif
                                 </tr>
@@ -76,7 +76,7 @@
                                         </td>
                                         <td data-label="Penerima">{{ $donation->penerima }}</td>
                                         <td data-label="Tanggal Donasi">{{ $donation->tanggal_donasi }}</td>
-                                        @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+                                        @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan')
                                             <td data-label="Aksi">
                                                 <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Bukti Donasi"><i class="fas fa-upload"></i></a>
                                                 {{-- <button wire:click="printInvoice('{{ $donation->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak tanda donasi"><i class="fas fa-print"></i></button> --}}

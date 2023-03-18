@@ -69,7 +69,7 @@
                                     <th scope="col">Tanggal</th>
                                     <th scope="col">Uraian</th>
                                     <th scope="col">Nominal</th>
-                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan')
                                         <th scope="col">Aksi</th>
                                     @endif
                                 </tr>
@@ -86,7 +86,7 @@
                                         <td data-label="Tanggal">{{ $donation->tanggal_donasi }}</td>
                                         <td data-label="Uraian">{{ $donation->keterangan }}</td>
                                         <td data-label="Nominal">{{ "Rp " . number_format($donation->pengeluaran, 2, ',', '.'); }}</td>
-                                        @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+                                        @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan')
                                             <td data-label="Aksi">
                                                 <button id="edit" wire:click="show('{{ $donation->id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
                                                 <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>

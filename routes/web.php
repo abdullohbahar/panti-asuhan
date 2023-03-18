@@ -101,6 +101,10 @@ Route::prefix('ketua-yayasan')->middleware('ketua-yayasan')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.ketua.yayasan');
 });
 
+Route::prefix('bendahara-yayasan')->middleware('bendahara-yayasan')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.bendahara.yayasan');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
