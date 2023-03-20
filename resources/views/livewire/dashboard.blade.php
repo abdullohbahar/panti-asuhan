@@ -19,7 +19,7 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      @if (Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'admin-yayasan')
+      @if (Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'pembina-yayasan')
         @include('livewire.dashboard-component.ketua-yayasan')
       @elseif(Auth()->user()->role == 'bendahara-yayasan')
         @include('livewire.dashboard-component.bendahara-yayasan')

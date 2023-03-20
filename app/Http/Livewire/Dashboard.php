@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\AnakAsuh;
+use App\Models\Citizen;
 use App\Models\Donation;
 use App\Models\Donatur;
 use App\Models\GoodsDonation;
@@ -32,6 +33,12 @@ class Dashboard extends Component
             'donasiBarang' => GoodsDonation::count(),
             'pemaskuanLKSA' => LksaFinance::whereMonth('tanggal', $monthNow)->whereYear('tanggal', $yearNow)->sum('pemasukan'),
             'pengeluaranLKSA' => LksaFinance::whereMonth('tanggal', $monthNow)->whereYear('tanggal', $yearNow)->sum('pengeluaran'),
+            'wargaDhuafa' => Citizen::where('status', 'Dhuafa')->count(),
+            'wargaFakirMiskin' => Citizen::where('status', 'Fakir Miskin')->count(),
+            'wargaJompo' => Citizen::where('status', 'Jompo')->count(),
+            'wargaJamaah' => Citizen::where('status', 'Jamaah')->count(),
+            'wargaMeninggal' => Citizen::where('status', 'Meninggal')->count(),
+            'wargaDusun' => Citizen::where('status', 'Warga Dusun')->count(),
         ];
 
         return view('livewire.dashboard', $data);
