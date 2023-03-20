@@ -53,7 +53,7 @@ class SekretariatLKSA
             return redirect()->route('dashboard.bendahara.lksa');
         }
 
-        if (Auth::user()->role == 'sekretariat-lksa') {
+        if (Auth::user()->role == 'sekertariat-lksa') {
             return $next($request);
         }
     }

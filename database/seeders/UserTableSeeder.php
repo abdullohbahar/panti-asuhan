@@ -71,5 +71,12 @@ class UserTableSeeder extends Seeder
             'role' => 'bendahara-lksa',
             'foto' => 'default.jpg'
         ]);
+
+        User::create([
+            'username' => 'sekertariat-lksa',
+            'password' => Hash::make("password"),
+            'role' => 'sekertariat-lksa',
+            'foto' => 'default.jpg'
+        ]);
     }
 }

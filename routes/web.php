@@ -121,6 +121,10 @@ Route::prefix('bendahara-lksa')->middleware('bendahara-lksa')->group(function ()
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.bendahara.lksa');
 });
 
+Route::prefix('sekertariat-lksa')->middleware('sekertariat-lksa')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.sekertariat.lksa');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

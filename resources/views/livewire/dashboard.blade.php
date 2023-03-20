@@ -31,6 +31,8 @@
         @include('livewire.dashboard-component.ketua-lksa')
       @elseif(Auth()->user()->role == 'bendahara-lksa')
         @include('livewire.dashboard-component.bendahara-lksa')
+      @elseif(Auth()->user()->role == 'sekertariat-lksa')
+        @include('livewire.dashboard-component.sekertariat-lksa')
       @endif
     </div>
   </section>

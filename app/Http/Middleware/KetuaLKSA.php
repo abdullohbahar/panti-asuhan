@@ -53,8 +53,8 @@ class KetuaLKSA
             return redirect()->route('dashboard.bendahara.lksa');
         }
 
-        if (Auth::user()->role == 'sekretariat-lksa') {
-            return redirect()->route('dashboard.sekretariat.lksa');
+        if (Auth::user()->role == 'sekertariat-lksa') {
+            return redirect()->route('dashboard.sekertariat.lksa');
         }
     }
 }
