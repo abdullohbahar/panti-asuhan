@@ -80,6 +80,8 @@
           @include('layout.menu-pembina-yayasan')
         @elseif(Auth()->user()->role == 'bendahara-yayasan')
           @include('layout.menu-bendahara-yayasan')
+        @elseif(Auth()->user()->role == 'admin-donasi')
+          @include('layout.menu-admin-donasi')
         @endif
         <!-- /.sidebar-menu -->
       </div>

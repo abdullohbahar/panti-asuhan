@@ -105,6 +105,10 @@ Route::prefix('bendahara-yayasan')->middleware('bendahara-yayasan')->group(funct
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.bendahara.yayasan');
 });
 
+Route::prefix('admin-donasi')->middleware('admin-donasi')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.admin.donasi');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
