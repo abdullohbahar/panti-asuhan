@@ -64,5 +64,12 @@ class UserTableSeeder extends Seeder
             'role' => 'ketua-lksa',
             'foto' => 'default.jpg'
         ]);
+
+        User::create([
+            'username' => 'bendahara-lksa',
+            'password' => Hash::make("password"),
+            'role' => 'bendahara-lksa',
+            'foto' => 'default.jpg'
+        ]);
     }
 }

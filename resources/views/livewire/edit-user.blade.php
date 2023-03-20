@@ -47,9 +47,9 @@
                                                 <option value="bendahara-yayasan">Bendahara Yayasan</option>
                                                 <option value="admin-donasi">Admin Donasi</option>
                                                 <option value="sekretariat-yayasan">Sekertariat Yayasan</option>
-                                                <option value="ketua-LKSA">Ketua LKSA</option>
-                                                <option value="bendahara-LKSA">Bendahara LKSA</option>
-                                                <option value="sekretariat-LKSA">Sekertariat LKSA</option>
+                                                <option value="ketua-lksa">Ketua LKSA</option>
+                                                <option value="bendahara-lksa">Bendahara LKSA</option>
+                                                <option value="sekretariat-lksa">Sekertariat LKSA</option>
                                             </select>
                                             @error("role")
                                                 <div class="invalid-feedback">

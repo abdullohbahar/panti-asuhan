@@ -117,6 +117,10 @@ Route::prefix('ketua-lksa')->middleware('ketua-lksa')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.ketua.lksa');
 });
 
+Route::prefix('bendahara-lksa')->middleware('bendahara-lksa')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.bendahara.lksa');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -204,8 +208,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/data-warga-dusun', [CitizenController::class, 'dataWargaDusun'])->name('data.warga.dusun');
     Route::get('/profil-warga/{id}', [CitizenController::class, 'profileWarga'])->name('profil.warga');
     Route::get('/edit-warga/{id}', [CitizenController::class, 'editCitizen'])->name('edit.warga');
-
-    Route::get('/data-pengguna', [UserController::class, 'dataUser'])->name('data.pengguna');
 
     // menu santri
     Route::get('/tambah-santri', [AnakAsuhController::class, 'create'])->name('create.santri');
