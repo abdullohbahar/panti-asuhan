@@ -57,11 +57,11 @@ class Login extends Component
                 case 'pembina-yayasan':
                     return redirect()->route('dashboard.pembina.yayasan');
                     break;
-                case 'sekretariat-yayasan':
-                    return redirect()->route('dashboard.sekretariat.yayasan');
+                case 'sekertariat-yayasan':
+                    return redirect()->route('dashboard.sekertariat.yayasan');
                     break;
-                case 'sekretariat-lksa':
-                    return redirect()->route('dashboard.sekretariat.lksa');
+                case 'sekertariat-lksa':
+                    return redirect()->route('dashboard.sekertariat.lksa');
                     break;
                 default:
                     return redirect()->to('login');

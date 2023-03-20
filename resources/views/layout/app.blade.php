@@ -82,6 +82,8 @@
           @include('layout.menu-bendahara-yayasan')
         @elseif(Auth()->user()->role == 'admin-donasi')
           @include('layout.menu-admin-donasi')
+        @elseif(Auth()->user()->role == 'sekertariat-yayasan')
+          @include('layout.menu-sekertariat-yayasan')
         @endif
         <!-- /.sidebar-menu -->
       </div>

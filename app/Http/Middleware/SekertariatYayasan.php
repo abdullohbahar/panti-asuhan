@@ -41,8 +41,8 @@ class SekertariatYayasan
             return redirect()->route('dashboard.admin.donasi');
         }
 
-        if (Auth::user()->role == 'sekretariat-yayasan') {
-            return redirect()->route('dashboard.sekretariat.yayasan');
+        if (Auth::user()->role == 'sekertariat-yayasan') {
+            return $next($request);
         }
 
         if (Auth::user()->role == 'ketua-LKSA') {
@@ -53,8 +53,8 @@ class SekertariatYayasan
             return redirect()->route('dashboard.bendahara.lksa');
         }
 
-        if (Auth::user()->role == 'sekretariat-LKSA') {
-            return redirect()->route('dashboard.sekretariat.lksa');
+        if (Auth::user()->role == 'sekertariat-LKSA') {
+            return redirect()->route('dashboard.sekertariat.lksa');
         }
     }
 }

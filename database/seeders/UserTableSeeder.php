@@ -50,5 +50,12 @@ class UserTableSeeder extends Seeder
             'role' => 'admin-donasi',
             'foto' => 'default.jpg'
         ]);
+
+        User::create([
+            'username' => 'sekertariat-yayasan',
+            'password' => Hash::make("password"),
+            'role' => 'sekertariat-yayasan',
+            'foto' => 'default.jpg'
+        ]);
     }
 }

@@ -109,6 +109,10 @@ Route::prefix('admin-donasi')->middleware('admin-donasi')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.admin.donasi');
 });
 
+Route::prefix('sekertariat-yayasan')->middleware('sekertariat-yayasan')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.sekertariat.yayasan');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

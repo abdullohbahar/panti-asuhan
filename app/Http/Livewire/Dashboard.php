@@ -7,10 +7,14 @@ use App\Models\Citizen;
 use App\Models\Donation;
 use App\Models\Donatur;
 use App\Models\GoodsDonation;
+use App\Models\LetterLksa;
+use App\Models\LetterYayasan;
+use App\Models\LksaDocument;
 use App\Models\LksaFinance;
 use App\Models\Pengurus;
 use App\Models\Saving;
 use App\Models\TotalDanaDonation;
+use App\Models\YayasanDocument;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -39,6 +43,12 @@ class Dashboard extends Component
             'wargaJamaah' => Citizen::where('status', 'Jamaah')->count(),
             'wargaMeninggal' => Citizen::where('status', 'Meninggal')->count(),
             'wargaDusun' => Citizen::where('status', 'Warga Dusun')->count(),
+            'yayasanDocument' => YayasanDocument::count(),
+            'lksaDocument' => LksaDocument::count(),
+            'suratMasukYayasan' => LetterYayasan::where('tipe', 'Surat Masuk')->count(),
+            'suratKeluarYayasan' => LetterYayasan::where('tipe', 'Surat Keluar')->count(),
+            'suratMasukLksa' => LetterLksa::where('tipe', 'Surat Masuk')->count(),
+            'suratKeluarLksa' => LetterLksa::where('tipe', 'Surat Keluar')->count(),
         ];
 
         return view('livewire.dashboard', $data);
