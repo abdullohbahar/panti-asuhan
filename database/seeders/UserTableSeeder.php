@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'username' => 'superadmin',
+            'username' => 'admin-yayasan',
             'password' => Hash::make("password"),
             'role' => 'admin-yayasan',
             'foto' => 'default.jpg'
