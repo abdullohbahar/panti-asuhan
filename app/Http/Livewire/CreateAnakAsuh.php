@@ -89,13 +89,9 @@ class CreateAnakAsuh extends Component
         $role = Auth::user()->role;
 
         if ($this->tipe == 'Santri Dalam') {
-            if ($role == 'admin-yayasan') {
-                return redirect()->route('santri.dalam.admin.yayasan')->with('message', 'Data santri berhasil ditambahkan');
-            }
+            return redirect()->route('santri.dalam')->with('message', 'Data santri berhasil ditambahkan');
         } else if ($this->tipe == 'Santri Luar') {
-            if ($role == 'admin-yayasan') {
-                return redirect()->route('santri.luar.admin.yayasan')->with('message', 'Data santri berhasil ditambahkan');
-            }
+            return redirect()->route('santri.luar')->with('message', 'Data santri berhasil ditambahkan');
         }
     }
 }
