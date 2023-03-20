@@ -27,6 +27,8 @@
         @include('livewire.dashboard-component.admin-donasi')
       @elseif(Auth()->user()->role == 'sekertariat-yayasan')
         @include('livewire.dashboard-component.sekertariat-yayasan')
+      @elseif(Auth()->user()->role == 'ketua-lksa')
+        @include('livewire.dashboard-component.ketua-lksa')
       @endif
     </div>
   </section>

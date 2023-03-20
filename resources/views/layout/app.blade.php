@@ -84,6 +84,8 @@
           @include('layout.menu-admin-donasi')
         @elseif(Auth()->user()->role == 'sekertariat-yayasan')
           @include('layout.menu-sekertariat-yayasan')
+        @elseif(Auth()->user()->role == 'ketua-lksa')
+          @include('layout.menu-ketua-lksa')
         @endif
         <!-- /.sidebar-menu -->
       </div>

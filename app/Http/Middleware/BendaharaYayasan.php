@@ -45,15 +45,15 @@ class BendaharaYayasan
             return redirect()->route('dashboard.sekretariat.yayasan');
         }
 
-        if (Auth::user()->role == 'ketua-LKSA') {
+        if (Auth::user()->role == 'ketua-lksa') {
             return redirect()->route('dashboard.ketua.lksa');
         }
 
-        if (Auth::user()->role == 'bendahara-LKSA') {
+        if (Auth::user()->role == 'bendahara-lksa') {
             return redirect()->route('dashboard.bendahara.lksa');
         }
 
-        if (Auth::user()->role == 'sekretariat-LKSA') {
+        if (Auth::user()->role == 'sekretariat-lksa') {
             return redirect()->route('dashboard.sekretariat.lksa');
         }
     }

@@ -57,5 +57,12 @@ class UserTableSeeder extends Seeder
             'role' => 'sekertariat-yayasan',
             'foto' => 'default.jpg'
         ]);
+
+        User::create([
+            'username' => 'ketua-lksa',
+            'password' => Hash::make("password"),
+            'role' => 'ketua-lksa',
+            'foto' => 'default.jpg'
+        ]);
     }
 }

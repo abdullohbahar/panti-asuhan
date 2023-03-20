@@ -113,6 +113,10 @@ Route::prefix('sekertariat-yayasan')->middleware('sekertariat-yayasan')->group(f
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.sekertariat.yayasan');
 });
 
+Route::prefix('ketua-lksa')->middleware('ketua-lksa')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.ketua.lksa');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
