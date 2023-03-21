@@ -134,6 +134,18 @@
   {{-- format idr --}}
   <script src="{{ asset('./js/rupiah.js') }}"></script>
 
+  <script>
+    function openWindowPopup(url, lebar, tinggi) {
+      var left = (screen.width / 2) - (lebar / 2);
+      var top = (screen.height / 2) - (tinggi / 2);
+
+      console.log(screen.width);
+      console.log(screen.height);
+      
+      window.open(url, '', 'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=' + lebar + ',height=' + tinggi + ',top=' + top + ',left=' + left);
+    }
+  </script>
+
   @stack('addons-js')
   @stack('component-scripts')
   @livewireScripts

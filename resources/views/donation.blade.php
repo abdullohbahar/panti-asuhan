@@ -129,9 +129,8 @@
 @if (session()->has('id'))
   <script>
     setTimeout(() => {
-        window.location.href = 'print-invoice-donation/{{ session('id') }}';
-      console.log("hello");
-    }, 1500);
+      openWindowPopup('print-invoice-donation/{{ session('id') }}', 1200, 800)
+    }, 800);
   </script>
 @endif
 

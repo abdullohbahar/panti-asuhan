@@ -48,9 +48,9 @@ class Donation extends Component
             $query->whereHas('donatur', function ($query) use ($filterDonaturId) {
                 $query->where('id', $this->filterDonaturId);
             });
-        })->orderBy('tanggal_donasi', 'desc');
+        });
 
-        $donations = $query->orderBy('tanggal_donasi', 'asc')->paginate(15);
+        $donations = $query->orderBy('created_at', 'asc')->paginate(15);
         $count = $donations->count();
         $totalDonation = TotalDanaDonation::first();
 
@@ -254,7 +254,9 @@ class Donation extends Component
         // $pdf->setPaper($customPaper);
         $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
 
-        return $pdf->download($nama . '.pdf');
+        return $pdf->stream($nama . '.pdf');
+
+        // return $pdf->download($nama . '.pdf');
     }
 
     public function deleteConfirmation($id)

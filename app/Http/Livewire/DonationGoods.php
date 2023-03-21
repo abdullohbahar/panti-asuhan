@@ -56,7 +56,7 @@ class DonationGoods extends Component
         $query = GoodsDonation::whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%')
                 ->orwhere('tanggal_donasi', 'like', '%' . $this->search . '%');
-        })->orderBy('tanggal_donasi', 'desc');
+        })->orderBy('created_at', 'desc');
 
         $donations = $query->paginate(10);
         $count = $donations->count();
