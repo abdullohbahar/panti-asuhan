@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('lksa_finances', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id');
             $table->text('terbilang')->nullable();
             $table->integer('pemasukan')->nullable();
             $table->integer('pengeluaran')->nullable();
