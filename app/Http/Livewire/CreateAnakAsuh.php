@@ -27,6 +27,7 @@ class CreateAnakAsuh extends Component
             'nohp_ortu' => 'required',
             'pemilik_nohp' => 'required',
             'wali_anak' => 'required',
+            'tipe' => 'required',
         ];
 
         if ($this->foto) {
@@ -47,6 +48,7 @@ class CreateAnakAsuh extends Component
             'pemilik_nohp.required' => 'Nama wali harus diisi',
             'nohp_ortu.required' => 'Nomor handphone wali harus diisi',
             'wali_anak.required' => 'Wali anak harus diisi',
+            'tipe.required' => 'Tipe harus diisi',
         ];
     }
 
