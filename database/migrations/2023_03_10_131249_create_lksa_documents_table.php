@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('lksa_documents', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('file');
             $table->timestamps();

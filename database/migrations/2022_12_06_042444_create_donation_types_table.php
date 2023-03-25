@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('donation_types', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('jenis_donasi');
             $table->timestamps();
         });

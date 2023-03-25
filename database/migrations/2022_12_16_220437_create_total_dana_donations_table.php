@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('total_dana_donations', function (Blueprint $table) {
-            $table->id();
+            $table->id()->primary();
             $table->bigInteger('total');
             $table->timestamps();
         });

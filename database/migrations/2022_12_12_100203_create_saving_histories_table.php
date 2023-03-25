@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('saving_histories', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignUuid('anak_asuh_id')->onUpdate('cascade')->onDelete('set null');
             $table->foreignUuid('saving_id')->onUpdate('cascade')->onDelete('set null');
             $table->date('tanggal');

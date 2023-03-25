@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tabungans', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignIdFor(AnakAsuh::class)->onUpdate('cascade')->onDelete('set null');;
             $table->integer('nominal');
             $table->date('tanggal_menabung');

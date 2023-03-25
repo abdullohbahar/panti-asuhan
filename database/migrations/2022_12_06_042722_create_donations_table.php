@@ -17,7 +17,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('donations', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignUuid('donatur_id')->nullable()->onUpdate('cascade')->onDelete('set null');
             $table->string('jenis_donasi')->nullable();
             $table->text('terbilang')->nullable();

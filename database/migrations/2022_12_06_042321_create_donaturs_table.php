@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('donaturs', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('nama');
             $table->string('no_hp');
             $table->text('alamat');
