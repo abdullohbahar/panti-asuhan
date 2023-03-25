@@ -65,7 +65,7 @@
                         <h6>Tempat, Tanggal lahir</h6>
                       </td>
                       <td>
-                        <h6>: {{ $citizen->tempat_lahir }}, {{ $citizen->tanggal_lahir }}</h6>
+                        <h6>: {{ $citizen->tempat_lahir }}, {{ $citizen->tanggal_lahir != null ? \Carbon\Carbon::parse($citizen->tanggal_lahir)->format('d-m-Y') : '-' }}</h6>
                       </td>
                     </tr>
                     <tr>

@@ -68,7 +68,7 @@
                         <h6>Tempat, Tanggal lahir</h6>
                       </td>
                       <td>
-                        <h6>: {{ $anak->tempat_lahir }}, {{ $anak->tanggal_lahir }}</h6>
+                        <h6>: {{ $anak->tempat_lahir }}, {{ $anak->tanggal_lahir != null ? \Carbon\Carbon::parse($anak->tanggal_lahir)->format('d-m-Y') : '-' }}</h6>
                       </td>
                     </tr>
                     <tr>
@@ -108,7 +108,7 @@
                         <h6>Tanggal Masuk</h6>
                       </td>
                       <td>
-                        <h6>: {{ date('d-m-Y',strtotime($anak->tgl_masuk)) }}</h6>
+                        <h6>: {{ $anak->tgl_masuk != null ? \Carbon\Carbon::parse($anak->tgl_masuk)->format('d-m-Y') : '-' }}</h6>
                       </td>
                     </tr>
                     <tr>
@@ -116,7 +116,7 @@
                         <h6>Tanggal Keluar</h6>
                       </td>
                       <td>
-                        <h6>: {{ date('d-m-Y',strtotime($anak->tgl_keluar)) }}</h6>
+                        <h6>: {{ $anak->tgl_keluar != null ? \Carbon\Carbon::parse($anak->tgl_keluar)->format('d-m-Y') : '-' }}</h6>
                       </td>
                     </tr>
                     <tr>
