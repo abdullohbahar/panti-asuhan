@@ -198,8 +198,8 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Wali Anak</label>
-                                <input type="text" wire:model="wali_anak" class="form-control @error("wali_anak") is-invalid @enderror" id="" placeholder="misal: keluarga, pengurus, dan lain lain">
+                                <label>Rekomendasi / Penanggung Jawab</label>
+                                <input type="text" wire:model="wali_anak" class="form-control @error("wali_anak") is-invalid @enderror" id="">
                                 @error("wali_anak")
                                     <div class="invalid-feedback">
                                         {{ $message }}

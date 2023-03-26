@@ -153,7 +153,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <h6>Wali Anak</h6>
+                        <h6>Rekomendasi / Penanggung Jawab</h6>
                       </td>
                       <td>
                         <h6>: {{ $anak->wali_anak }}</h6>

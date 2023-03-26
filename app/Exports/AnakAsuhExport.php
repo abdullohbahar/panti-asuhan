@@ -51,7 +51,7 @@ class AnakAsuhExport implements FromCollection, WithHeadings, WithMapping, Shoul
             'Nama Ibu Kandung',
             'Nomor HP Wali',
             'Nama Wali',
-            'Wali Anak',
+            'Rekomendasi / Penanggung Jawab',
         ];
     }
 
