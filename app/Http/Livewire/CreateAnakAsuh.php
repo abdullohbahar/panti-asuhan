@@ -11,7 +11,7 @@ use Livewire\WithFileUploads;
 class CreateAnakAsuh extends Component
 {
     use WithFileUploads;
-    public $wali_anak, $tgl_masuk, $tgl_keluar, $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak, $pemilik_nohp;
+    public $nis, $nik, $wali_anak, $tgl_masuk, $tgl_keluar, $foto, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $tipe, $status, $pendidikan, $nama_ayah_kandung, $nama_ibu_kandung, $nohp_ortu, $idAnak, $pemilik_nohp;
 
     public function render()
     {
@@ -28,6 +28,8 @@ class CreateAnakAsuh extends Component
             'pemilik_nohp' => 'required',
             'wali_anak' => 'required',
             'tipe' => 'required',
+            'nis' => 'unique:anak_asuhs,nis',
+            'nik' => 'unique:anak_asuhs,nik',
         ];
 
         if ($this->foto) {
@@ -49,6 +51,8 @@ class CreateAnakAsuh extends Component
             'nohp_ortu.required' => 'Nomor handphone wali harus diisi',
             'wali_anak.required' => 'Wali anak harus diisi',
             'tipe.required' => 'Tipe harus diisi',
+            'nis.unique' => 'Nomor Induk Siswa sudah digunakan',
+            'nik.unique' => 'Nomor Induk Keluarga sudah digunakan',
         ];
     }
 
@@ -86,6 +90,8 @@ class CreateAnakAsuh extends Component
             'wali_anak' => $this->wali_anak,
             'tgl_masuk' => $this->tgl_masuk,
             'tgl_keluar' => $this->tgl_keluar,
+            'nis' => $this->nis,
+            'nik' => $this->nik,
         ]);
 
         $role = Auth::user()->role;

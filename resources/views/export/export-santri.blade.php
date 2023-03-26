@@ -44,7 +44,16 @@
                                 Foto
                             </td>
                             <td>
+                                Nomor Induk Santri
+                            </td>
+                            <td>
+                                Nomor Induk Keluarga
+                            </td>
+                            <td>
                                 Nama
+                            </td>
+                            <td>
+                                Jenis Kelamin
                             </td>
                             <td>
                                 Tempat, Tanggal Lahir
@@ -83,7 +92,7 @@
                                 Nama Wali
                             </td>
                             <td>
-                                Wali Anak
+                                Rekomendasi / Penanggung Jawab
                             </td>
                         </tr>
                     </thead>
@@ -100,7 +109,16 @@
                                     <img src="{{ asset('storage/'.$santri->foto) }}" class="w-100" alt="" srcset="">
                                 </td>
                                 <td>
+                                    {{ $santri->nik }}
+                                </td>
+                                <td>
+                                    {{ $santri->nis }}
+                                </td>
+                                <td>
                                     {{ $santri->nama_lengkap }}
+                                </td>
+                                <td>
+                                    {{ $santri->jenis_kelamin }}
                                 </td>
                                 <td>
                                     {{ $santri->tempat_lahir }}, {{ $santri->tanggal_lahir }}

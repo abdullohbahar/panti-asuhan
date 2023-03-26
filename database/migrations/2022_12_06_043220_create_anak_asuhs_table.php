@@ -18,6 +18,8 @@ return new class extends Migration
     {
         Schema::create('anak_asuhs', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('nis')->nullable();
+            $table->string('nik')->nullable();
             $table->string('nama_lengkap');
             $table->string('jenis_kelamin');
             $table->string('tempat_lahir')->nullable();

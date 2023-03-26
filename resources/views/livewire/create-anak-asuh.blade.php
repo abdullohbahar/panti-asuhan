@@ -41,6 +41,28 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
+                                <label>Nomor Induk Santri</label>
+                                <input type="text" wire:model="nis" class="form-control @error("nis") is-invalid @enderror" id="">
+                                @error("nis")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>NIK</label>
+                                <input type="text" wire:model="nik" class="form-control @error("nik") is-invalid @enderror" id="">
+                                @error("nik")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
                                 <label>Nama Lengkap</label>
                                 <input type="text" wire:model="nama_lengkap" class="form-control @error("nama_lengkap") is-invalid @enderror" id="">
                                 @error("nama_lengkap")

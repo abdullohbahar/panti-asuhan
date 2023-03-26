@@ -28,6 +28,8 @@ class AnakAsuh extends Model
         'tgl_masuk',
         'tgl_keluar',
         'wali_anak',
+        'nis',
+        'nik',
     ];
 
     public function documents()

@@ -37,6 +37,8 @@ class AnakAsuhExport implements FromCollection, WithHeadings, WithMapping, Shoul
         return [
             'No',
             'Foto',
+            'Nomor Induk Santri',
+            'Nomor Induk Keluarga',
             'Nama',
             'Jenis Kelamin',
             'Tempat, Tanggal Lahir',
@@ -60,6 +62,8 @@ class AnakAsuhExport implements FromCollection, WithHeadings, WithMapping, Shoul
         return [
             $this->no++,
             '',
+            $item->nis,
+            $item->nik,
             $item->nama_lengkap,
             $item->jenis_kelamin,
             $item->tempat_lahir . ', ' . $item->tanggal_lahir,

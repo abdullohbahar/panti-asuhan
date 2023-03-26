@@ -41,6 +41,22 @@
                   <table class="table table-borderless">
                     <tr>
                       <td>
+                        <h6>Nomor Induk Santri</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $anak->nis }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Nomor Induk Keluarga</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $anak->nik }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
                         <h6>Nama</h6>
                       </td>
                       <td>
