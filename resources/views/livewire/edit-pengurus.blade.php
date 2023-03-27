@@ -63,6 +63,17 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
+                                <label>Masa Bakti</label>
+                                <input type="text" wire:model="masa_bakti" class="form-control @error("masa_bakti") is-invalid @enderror" id="">
+                                @error("masa_bakti")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
                                 <label>Nomor Telepon</label>
                                 <input type="text" wire:model="no_hp" class="form-control @error("no_hp") is-invalid @enderror" id="">
                                 @error("no_hp")

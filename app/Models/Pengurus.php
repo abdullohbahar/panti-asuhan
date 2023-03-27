@@ -23,6 +23,7 @@ class Pengurus extends Model
         'jenis_kelamin',
         'pendidikan',
         'pekerjaan',
+        'masa_bakti',
         'order',
     ];
 

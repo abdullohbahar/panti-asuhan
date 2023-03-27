@@ -14,7 +14,7 @@ use App\Models\MasterDataPendidikan;
 
 class CreatePengurus extends Component
 {
-    public $foto, $nama, $no_hp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $jabatan, $alamat, $pendidikan, $pekerjaan, $nik;
+    public $foto, $nama, $no_hp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $jabatan, $alamat, $pendidikan, $pekerjaan, $nik, $masa_bakti;
     use WithFileUploads;
 
     public function render()
@@ -95,6 +95,7 @@ class CreatePengurus extends Component
                 'pendidikan' => $this->pendidikan,
                 'pekerjaan' => $this->pekerjaan,
                 'nik' => $this->nik,
+                'masa_bakti' => $this->masa_bakti,
                 'order' => Pengurus::max('order') + 1
             ]);
 

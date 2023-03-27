@@ -55,6 +55,14 @@
                     </tr>
                     <tr>
                       <td>
+                        <h6>Masa Bakti</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $pengurus->masa_bakti }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
                         <h6>Jenis Kelamin</h6>
                       </td>
                       <td>
