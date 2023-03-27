@@ -12,6 +12,7 @@ class Pengurus extends Model
     use HasUuids;
 
     protected $fillable = [
+        'nik',
         'nama',
         'alamat',
         'no_hp',

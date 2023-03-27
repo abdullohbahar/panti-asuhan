@@ -58,6 +58,7 @@
             <tr>
                 <th>No</th>
                 <th style="width: 100px">Foto</th>
+                <th>NIK</th>
                 <th>Nama</th>
                 <th>Jenis Kelamin</th>
                 <th>Tempat, Tanggal Lahir</th>
@@ -86,6 +87,7 @@
             <tr>
                 <td>{{ $no++ }}</td>
                 <td><img src="data:image/jpeg;base64,{{ $image_data }}" style="width: 100%" alt="" srcset=""></td>
+                <td>{{ $pengurus->nik }}</td>
                 <td>{{ $pengurus->nama }}</td>
                 <td>{{ $pengurus->jenis_kelamin }}</td>
                 <td>{{ $pengurus->tempat_lahir }}, {{ \Carbon\Carbon::parse($pengurus->tanggal_lahir)->format('d-m-Y') }}</td>

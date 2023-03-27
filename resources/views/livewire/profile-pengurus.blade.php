@@ -39,6 +39,14 @@
                   <table class="table table-borderless">
                     <tr>
                       <td>
+                        <h6>NIK</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $pengurus->nik }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
                         <h6>Nama</h6>
                       </td>
                       <td>

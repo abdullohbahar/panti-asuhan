@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('penguruses', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('nik')->nullable();
             $table->string('nama')->nullable();
             $table->string('no_hp')->nullable();
             $table->string('tempat_lahir')->nullable();

@@ -11,7 +11,7 @@ use App\Models\MasterDataPendidikan;
 
 class EditPengurus extends Component
 {
-    public $idpengurus, $oldPhoto, $nama, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $no_hp, $foto, $jabatan, $pendidikan, $pekerjaan;
+    public $idpengurus, $oldPhoto, $nama, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $no_hp, $foto, $jabatan, $pendidikan, $pekerjaan, $nik;
     use WithFileUploads;
 
     public function mount()
@@ -29,6 +29,7 @@ class EditPengurus extends Component
             $this->jabatan = $pengurus->jabatan;
             $this->pendidikan = $pengurus->pendidikan;
             $this->pekerjaan = $pengurus->pekerjaan;
+            $this->nik = $pengurus->nik;
             $this->oldPhoto = $pengurus->foto;
         }
     }
@@ -118,6 +119,7 @@ class EditPengurus extends Component
             'no_hp' => $this->no_hp,
             'pendidikan' => $this->pendidikan,
             'pekerjaan' => $this->pekerjaan,
+            'nik' => $this->nik,
         ]);
 
         return redirect()->to('profile-pengurus/' . $this->idpengurus)->with('message', 'Data pengurus berhasil diubah');

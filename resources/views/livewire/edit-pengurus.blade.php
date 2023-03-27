@@ -3,12 +3,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Tambah Pengurus</h1>
+          <h1>Edit Pengurus</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Tambah Pengurus</li>
+            <li class="breadcrumb-item active">Edit Pengurus</li>
           </ol>
         </div>
       </div>
@@ -38,6 +38,17 @@
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
                             {{-- preview image --}}
                             <img wire:ignore.self src="{{ asset('storage/'.$fotos) }}" class="image-fluid w-50 mb-2" id="imagePreview">
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>NIK</label>
+                                <input type="text" wire:model="nik" class="form-control @error("nik") is-invalid @enderror" id="">
+                                @error("nik")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">

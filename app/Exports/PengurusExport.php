@@ -24,6 +24,7 @@ class PengurusExport implements FromCollection, WithHeadings, WithMapping, Shoul
         return [
             'No',
             'Foto',
+            'NIK',
             'Nama',
             'Jenis Kelamin',
             'Tempat, Tanggal Lahir',
@@ -41,6 +42,7 @@ class PengurusExport implements FromCollection, WithHeadings, WithMapping, Shoul
         return [
             $this->no++,
             '',
+            $item->nik,
             $item->nama,
             $item->jenis_kelamin,
             $item->tempat_lahir . ', ' . $item->tanggal_lahir,
