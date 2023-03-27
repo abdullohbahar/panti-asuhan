@@ -9,7 +9,7 @@ use Livewire\WithFileUploads;
 
 class EditCitizen extends Component
 {
-    public $idwarga, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $status, $no_hp;
+    public $idwarga, $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $status, $no_hp, $nik;
 
     public function mount()
     {
@@ -26,6 +26,7 @@ class EditCitizen extends Component
             $this->status = $anak->status;
             $this->jenis_kelamin = $anak->jenis_kelamin;
             $this->no_hp = $anak->no_hp;
+            $this->nik = $anak->nik;
         }
     }
 
@@ -75,6 +76,7 @@ class EditCitizen extends Component
             'tanggal_lahir' => $this->tanggal_lahir,
             'alamat' => $this->alamat,
             'no_hp' => $this->no_hp,
+            'nik' => $this->nik,
         ]);
 
         return redirect()->to('admin-yayasan/profil-warga/' . $this->idwarga)->with('message', 'Data warga berhasil diubah');

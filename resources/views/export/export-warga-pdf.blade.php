@@ -41,6 +41,9 @@
                                 No
                             </td>
                             <td>
+                                NIK
+                            </td>
+                            <td>
                                 Nama Lengkap
                             </td>
                             <td>
@@ -71,6 +74,9 @@
                             <tr>
                                 <td>
                                     {{ $no++ }}
+                                </td>
+                                <td>
+                                    {{ $warga->nik }}
                                 </td>
                                 <td>
                                     {{ $warga->nama_lengkap }}
