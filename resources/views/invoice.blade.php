@@ -94,7 +94,7 @@
 
 
         </style>
-        <title>Laporan Keuangan</title>
+        <title>Tanda Terima Donasi Tunai</title>
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" integrity="sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
@@ -111,13 +111,13 @@
                 <p style="margin: 2px; font-size: 14px"><b>TANDA TERIMA</b></p>
                 <p style="margin: 0px; font-size: 13px"><b>No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</b></p>
                 <input type="checkbox" id="Zakat" @if ($tipe == 'Zakat') checked @else class="check" @endif><label for="Zakat" style="font-size: 13px">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq" style="font-size: 13px">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" id="Sodaqoh" @if ($tipe == 'Sodaqoh') checked @else class="check" @endif><label for="Sodaqoh" style="font-size: 13px">Sodaqoh</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" id="OperasiYayasan" @if ($tipe == 'Operasi Yayasan') checked @else class="check" @endif><label for="OperasiYayasan" style="font-size: 13px">Operasi Yayasan</label> &nbsp; &nbsp; &nbsp; &nbsp; <br>
-                <input type="checkbox" id="BiayaPendidikan" @if ($tipe == 'Biaya Pendidikan') checked @else class="check" @endif><label for="BiayaPendidikan" style="font-size: 13px">Biaya Pendidikan</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" id="TabunganAnak" @if ($tipe == 'Tabungan Anak') checked @else class="check" @endif><label for="TabunganAnak" style="font-size: 13px">Tabungan Anak</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                {{-- <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq" style="font-size: 13px">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp; --}}
+                <input type="checkbox" id="Sodaqoh" @if ($tipe == 'Sodaqoh' || $tipe == 'Sodaqoh / Infaq') checked @else class="check" @endif><label for="Sodaqoh" style="font-size: 13px">Sodaqoh / Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="OperasiYayasan" @if ($tipe == 'Operasional Yayasan') checked @else class="check" @endif><label for="OperasiYayasan" style="font-size: 13px">Operasional Yayasan</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                {{-- <input type="checkbox" id="BiayaPendidikan" @if ($tipe == 'Biaya Pendidikan') checked @else class="check" @endif><label for="BiayaPendidikan" style="font-size: 13px">Biaya Pendidikan</label> &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" id="TabunganAnak" @if ($tipe == 'Tabungan Anak') checked @else class="check" @endif><label for="TabunganAnak" style="font-size: 13px">Tabungan Anak</label> &nbsp; &nbsp; &nbsp; &nbsp; --}}
                 <input type="checkbox" id="Lain-lain......" @if ($tipe == 'Lain-lain') checked @else class="check" @endif><label style="margin-top: 100px; font-size: 13px;" for="Lain-lain......">Lain-lain..............</label>
-                <p style="margin: 5px font-size: 14px"><b><i>Assalamu'alaikum Wr. Wb.</i></b></p>
+                <p style="margin: 5px; font-size: 12px"><b><i>Assalamu'alaikum Wr. Wb.</i></b></p>
             </div>
             <div style="font-size: 12px;">
                 <table style="width: 100%">
@@ -147,7 +147,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align:center">
-                            <h5 style="margin: 5px"><i>Wassalamu'alaikum Wr. Wb.</i></h5>
+                            <h5 style="margin: 5px; font-size: 12px"><i>Wassalamu'alaikum Wr. Wb.</i></h5>
                         </td>
                     </tr>
                 </table>
