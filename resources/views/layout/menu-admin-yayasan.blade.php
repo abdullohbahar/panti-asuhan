@@ -381,7 +381,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'master-data-pendidikan' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'master-data-pendidikan' || $active == 'master-data-position' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-server"></i>
         <p>

@@ -18,7 +18,7 @@ class MasterDataController extends Controller
     public function position()
     {
         $data = [
-            'active' => 'master-data-positions'
+            'active' => 'master-data-position'
         ];
 
         return view('master-data-positions', $data);

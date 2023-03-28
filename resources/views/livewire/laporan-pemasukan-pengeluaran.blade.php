@@ -73,7 +73,7 @@
                 </div>
             </div>
             @if ($date1)
-                <div class="card-body">
+                <div class="card-body p-0">
                     <div class="row justify-content-end">
                         <div class="col-12 mt-2">
                             <table class="table-data">
