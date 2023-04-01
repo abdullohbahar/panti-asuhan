@@ -13,9 +13,27 @@ class DonasiTunaiExport implements FromView, WithColumnWidths
 {
     use Exportable;
 
+    public $date1;
+    public $date2;
+    public $type;
+
+    public function __construct($date1, $date2, $type)
+    {
+        $this->date1 = $date1;
+        $this->date2 = $date2;
+        $this->type = $type;
+    }
+
     public function view(): View
     {
-        $donations = Donation::with('donaturName')->where('jenis_donasi', 'Tunai')->get();
+        $donations = Donation::with('donaturName')
+            ->where('jenis_donasi', 'Tunai')
+            ->whereBetween('tanggal_donasi', [$this->date1, $this->date2])
+            ->when($this->type != 'all', function ($query) {
+                $query->where('tipe', $this->type);
+            })
+            ->orderBy('tanggal_donasi', 'desc')
+            ->get();
 
         return view('export.donasi-tunai.excel', [
             'donations' => $donations,

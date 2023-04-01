@@ -1,5 +1,6 @@
 <div>
     {{-- Modal --}}
+      <livewire:export.export-donation>
     @include('livewire.modal.donation.modal-edit-donation')
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -28,7 +29,8 @@
                         <h5><b>Donasi Berupa Tunai</b></h5>
                     </div>
                     <div class="col-sm-12 col-md-4 text-right">
-                        <button wire:click="exportExcel" class="btn btn-success btn-sm"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
+                        {{-- <button wire:click="exportExcel" class="btn btn-success btn-sm"><b><i class="fas fa-file-excel"></i> Export Excel</b></button> --}}
+                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-export-excel"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
                         <a href="{{ route('export.donasi.tunai.pdf') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                     </div>
                 </div>
