@@ -25,7 +25,7 @@
             <div class="card-body p-0">
                 <div class="row justify-content-end">
                     <div class="col-0 mr-3 mt-2">
-                        <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Uraian">
+                        <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari perihal">
                     </div>
                     <div class="col-12 mt-2">
                         <table class="table-data">

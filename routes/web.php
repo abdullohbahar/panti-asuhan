@@ -24,6 +24,7 @@ use App\Http\Controllers\LetterController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\ProfileUserController;
 use App\Http\Livewire\CreateDonasiBarang;
+use App\Http\Livewire\CreateOutgoingLetterLksa;
 use App\Http\Livewire\DataDonasiTransfer;
 use App\Http\Livewire\DataIncomeLksa;
 use App\Http\Livewire\DataOutcomeLksa;
@@ -269,6 +270,7 @@ Route::middleware('auth')->group(function () {
     // Surat masuk keluar lksa
     Route::get('tambah-surat-lksa', [LetterController::class, 'createLetterLksa'])->name('create.letter.lksa');
     Route::get('data-surat-masuk-lksa', [LetterController::class, 'dataIncomingLetterLksa'])->name('data.incoming.letter.lksa');
+    Route::get('tambah-surat-keluar-lksa', CreateOutgoingLetterLksa::class)->name('create.outgoing.letter.lksa');
     Route::get('data-surat-keluar-lksa', [LetterController::class, 'dataOutcomeLetterLksa'])->name('data.outcome.letter.lksa');
 
     Route::get('profile-user', [ProfileUserController::class, 'index'])->name('profile.user');

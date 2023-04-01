@@ -1,6 +1,6 @@
 <div>
     {{-- Modal --}}
-    @include('livewire.modal.surat.modal-edit')
+    @include('livewire.modal.surat.modal-edit-keluar')
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
@@ -25,16 +25,17 @@
             <div class="card-body p-0">
                 <div class="row justify-content-end">
                     <div class="col-0 mr-3 mt-2">
-                        <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Uraian">
+                        <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Perihal">
                     </div>
                     <div class="col-12 mt-2">
                         <table class="table-data">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nama Surat</th>
                                     <th scope="col">Nomor Surat</th>
-                                    <th scope="col">Keterangan</th>
+                                    <th scope="col">Perihal</th>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Tujuan</th>
                                     <th scope="col">File</th>
                                     @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'sekertariat-yayasan')
                                         <th scope="col">Aksi</th>
@@ -45,10 +46,11 @@
                                 @foreach ($letters as $index => $letter)
                                     <tr>
                                         <td data-label="#">{{ $letters->firstItem() + $index }}</td>
-                                        <td data-label="Nama Surat">{{ $letter->nama_surat }}</td>
                                         <td data-label="Nomor Surat">{{ $letter->nomor_surat }}</td>
-                                        <td data-label="Keterangan">{{ $letter->keterangan }}</td>
-                                        <td data-label="File"><button wire:click="download('{{ $letter->file }}','{{ $letter->nama_surat }}')" class="btn btn-sm btn-success">Unduh Surat</button></td>
+                                        <td data-label="Perihal">{{ $letter->perihal }}</td>
+                                        <td data-label="Tanggal">{{ $letter->tanggal }}</td>
+                                        <td data-label="Tujuan">{{ $letter->tujuan }}</td>
+                                        <td data-label="File"><button wire:click="download('{{ $letter->file }}','{{ $letter->nomor_surat }}')" class="btn btn-sm btn-success">Unduh Surat</button></td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'sekertariat-yayasan')
                                             <td data-label="Aksi">
                                                 <button id="edit" wire:click="show('{{ $letter->id }}')" data-jenis="{{ $letter->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-letter" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>

@@ -31,7 +31,7 @@ class DataIncomeLetterLksa extends Component
         $search = '';
 
         $letters = LetterLksa::where('tipe', 'Surat Masuk')->when(!empty($this->search), function ($query) {
-            $query->where('nama_surat', 'like', "%$this->search%");
+            $query->where('perihal', 'like', "%$this->search%");
         })->paginate(20);
 
         $data = [
