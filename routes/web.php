@@ -28,6 +28,7 @@ use App\Http\Livewire\DataDonasiTransfer;
 use App\Http\Livewire\DataIncomeLksa;
 use App\Http\Livewire\DataOutcomeLksa;
 use App\Http\Livewire\DataPengeluaran;
+use App\Http\Livewire\Export\ExportDonationPdf;
 use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
 use App\Http\Livewire\LksaDocument;
@@ -271,4 +272,6 @@ Route::middleware('auth')->group(function () {
     Route::get('data-surat-keluar-lksa', [LetterController::class, 'dataOutcomeLetterLksa'])->name('data.outcome.letter.lksa');
 
     Route::get('profile-user', [ProfileUserController::class, 'index'])->name('profile.user');
+
+    Route::get('export-donasi-pdf/{date1}/{date2}/{type}', [ExportDonationPdf::class, 'export'])->name('export.donasi.pdf');
 });
