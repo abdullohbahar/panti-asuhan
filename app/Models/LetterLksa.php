@@ -10,10 +10,12 @@ class LetterLksa extends Model
     use HasFactory;
 
     protected $fillable = [
+        'nama_pengirim',
+        'perihal_surat',
         'nomor_surat',
-        'keterangan',
-        'tipe',
+        'isi_surat',
+        'tanggal',
         'file',
-        'nama_surat',
+        'tipe',
     ];
 }

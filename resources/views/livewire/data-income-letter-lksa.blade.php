@@ -32,9 +32,10 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nama Surat</th>
+                                    <th scope="col">Nama Pengirim</th>
                                     <th scope="col">Nomor Surat</th>
-                                    <th scope="col">Keterangan</th>
+                                    <th scope="col">Perihal Surat</th>
+                                    <th scope="col">Tanggal Surat</th>
                                     <th scope="col">File</th>
                                     @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                         <th scope="col">Aksi</th>
@@ -45,10 +46,11 @@
                                 @foreach ($letters as $index => $letter)
                                     <tr>
                                         <td data-label="#">{{ $letters->firstItem() + $index }}</td>
-                                        <td data-label="Nama Surat">{{ $letter->nama_surat }}</td>
+                                        <td data-label="Nama Pengirim">{{ $letter->nama_pengirim }}</td>
                                         <td data-label="Nomor Surat">{{ $letter->nomor_surat }}</td>
-                                        <td data-label="Keterangan">{{ $letter->keterangan }}</td>
-                                        <td data-label="File"><button wire:click="download('{{ $letter->file }}','{{ $letter->nama_surat }}')" class="btn btn-sm btn-success">Unduh Surat</button></td>
+                                        <td data-label="Perihal Surat">{{ $letter->perihal_surat }}</td>
+                                        <td data-label="Tanggal Surat">{{ $letter->tanggal }}</td>
+                                        <td data-label="File"><button wire:click="download('{{ $letter->file }}','{{ $letter->perihal_surat }}')" class="btn btn-sm btn-success">Unduh Surat</button></td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'sekertariat-yayasan')
                                             <td data-label="Aksi">
                                                 <button id="edit" wire:click="show('{{ $letter->id }}')" data-jenis="{{ $letter->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-letter" data-toggle="tooltip" data-placement="top" title="Ubah Surat"><i class="fas fa-pencil-alt"></i></button>

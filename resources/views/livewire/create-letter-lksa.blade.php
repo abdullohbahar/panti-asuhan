@@ -37,9 +37,20 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Nama Surat</label>
-                                <input type="text" wire:model="nama_surat" class="form-control @error("nama_surat") is-invalid @enderror" id="">
-                                @error("nama_surat")
+                                <label>Nama Pengirim</label>
+                                <input type="text" wire:model="nama_pengirim" class="form-control @error("nama_pengirim") is-invalid @enderror" id="">
+                                @error("nama_pengirim")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Perihal Surat</label>
+                                <input type="text" wire:model="perihal_surat" class="form-control @error("perihal_surat") is-invalid @enderror" id="">
+                                @error("perihal_surat")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -59,24 +70,20 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Tipe</label>
-                                <select wire:model="tipe" class="form-control @error("tipe") is-invalid @enderror" id="">
-                                    <option value="">Tipe</option>
-                                    <option value="Surat Masuk">Surat Masuk</option>
-                                    <option value="Surat Keluar">Surat Keluar</option>
-                                </select>
-                                @error("tipe")
+                                <label>Tanggal Surat</label>
+                                <input type="date" wire:model="tanggal" class="form-control @error("tanggal") is-invalid @enderror" id="">
+                                @error("tanggal")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <div class="form-group">
-                                <label for="">Keterangan / Uraian</label>
-                                <textarea wire:model="keterangan" class="form-control @error("keterangan") is-invalid @enderror" cols="30" rows="10"></textarea>
-                                @error("keterangan")
+                                <label for="">Isi Surat</label>
+                                <textarea wire:model="isi_surat" class="form-control @error("isi_surat") is-invalid @enderror" cols="30" rows="10"></textarea>
+                                @error("isi_surat")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

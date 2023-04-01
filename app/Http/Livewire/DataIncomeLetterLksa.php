@@ -14,9 +14,10 @@ class DataIncomeLetterLksa extends Component
     public $search;
     public $file;
     public $nomor_surat;
-    public $nama_surat;
-    public $tipe;
-    public $keterangan;
+    public $nama_pengirim;
+    public $perihal_surat;
+    public $tanggal;
+    public $isi_surat;
     public $oldSurat;
     public $idLetter;
     public $iteration;
@@ -54,9 +55,10 @@ class DataIncomeLetterLksa extends Component
         if ($letter) {
             $this->idLetter = $letter->id;
             $this->nomor_surat = $letter->nomor_surat;
-            $this->nama_surat = $letter->nama_surat;
-            $this->tipe = $letter->tipe;
-            $this->keterangan = $letter->keterangan;
+            $this->nama_pengirim = $letter->nama_pengirim;
+            $this->isi_surat = $letter->isi_surat;
+            $this->tanggal = $letter->tanggal;
+            $this->perihal_surat = $letter->perihal_surat;
             $this->oldSurat = $letter->file;
         }
     }
@@ -64,20 +66,22 @@ class DataIncomeLetterLksa extends Component
     public function rules()
     {
         return [
-            'nama_surat' => 'required',
+            'nama_pengirim' => 'required',
             'nomor_surat' => 'required',
-            'tipe' => 'required',
-            'keterangan' => 'required',
+            'perihal_surat' => 'required',
+            'tanggal' => 'required',
+            'isi_surat' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'nama_surat.required' => 'Nama Surat harus diisi',
+            'nama_pengirim.required' => 'Nama pengirim harus diisi',
             'nomor_surat.required' => 'Nomor Surat harus diisi',
-            'tipe.required' => 'Tipe harus diisi',
-            'keterangan.required' => 'Keterangan harus diisi',
+            'perihal_surat.required' => 'Perihal Surat harus diisi',
+            'tanggal.required' => 'Tanggal surat harus diisi',
+            'isi_surat.required' => 'Isi Surat harus diisi',
         ];
     }
 
@@ -95,10 +99,12 @@ class DataIncomeLetterLksa extends Component
             DB::beginTransaction();
 
             $data = [
-                'nama_surat' => $this->nama_surat,
+                'nama_pengirim' => $this->nama_pengirim,
                 'nomor_surat' => $this->nomor_surat,
-                'tipe' => $this->tipe,
-                'keterangan' => $this->keterangan,
+                'perihal_surat' => $this->perihal_surat,
+                'tanggal' => $this->tanggal,
+                'tipe' => 'Surat Masuk',
+                'isi_surat' => $this->isi_surat,
             ];
 
             if ($this->file) {

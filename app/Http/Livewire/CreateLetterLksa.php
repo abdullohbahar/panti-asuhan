@@ -15,9 +15,10 @@ class CreateLetterLksa extends Component
 
     public $file;
     public $nomor_surat;
-    public $nama_surat;
-    public $tipe;
-    public $keterangan;
+    public $nama_pengirim;
+    public $perihal_surat;
+    public $tanggal;
+    public $isi_surat;
 
     public function render()
     {
@@ -28,10 +29,11 @@ class CreateLetterLksa extends Component
     {
         return [
             'file' => 'required',
-            'nama_surat' => 'required',
+            'nama_pengirim' => 'required',
             'nomor_surat' => 'required',
-            'tipe' => 'required',
-            'keterangan' => 'required',
+            'perihal_surat' => 'required',
+            'tanggal' => 'required',
+            'isi_surat' => 'required',
         ];
     }
 
@@ -39,10 +41,11 @@ class CreateLetterLksa extends Component
     {
         return [
             'file.required' => 'Surat harus diisi',
-            'nama_surat.required' => 'Nama Surat harus diisi',
+            'nama_pengirim.required' => 'Nama pengirim harus diisi',
             'nomor_surat.required' => 'Nomor Surat harus diisi',
-            'tipe.required' => 'Tipe harus diisi',
-            'keterangan.required' => 'Keterangan harus diisi',
+            'perihal_surat.required' => 'Perihal Surat harus diisi',
+            'tanggal.required' => 'Tanggal surat harus diisi',
+            'isi_surat.required' => 'Isi Surat harus diisi',
         ];
     }
 
@@ -53,7 +56,7 @@ class CreateLetterLksa extends Component
 
     public function store()
     {
-        $validateData = $this->validate();
+        $this->validate();
 
         try {
             DB::beginTransaction();
@@ -62,19 +65,17 @@ class CreateLetterLksa extends Component
 
             LetterLksa::create([
                 'file' => $file,
+                'nama_pengirim' => $this->nama_pengirim,
                 'nomor_surat' => $this->nomor_surat,
-                'tipe' => $this->tipe,
-                'keterangan' => $this->keterangan,
-                'nama_surat' => $this->nama_surat,
+                'perihal_surat' => $this->perihal_surat,
+                'tanggal' => $this->tanggal,
+                'tipe' => 'Surat Masuk',
+                'isi_surat' => $this->isi_surat,
             ]);
 
             DB::commit();
 
-            if ($this->tipe == "Surat Masuk") {
-                return redirect()->route('data.incoming.letter.lksa')->with('message', 'Surat Masuk Berhasil Ditambahkan');
-            } else {
-                return redirect()->route('data.outcome.letter.lksa')->with('message', 'Surat Keluar Berhasil Ditambahkan');
-            }
+            return redirect()->route('data.incoming.letter.lksa')->with('message', 'Surat Masuk Berhasil Ditambahkan');
         } catch (Exception $e) {
             Log::debug($e);
             DB::rollBack();
