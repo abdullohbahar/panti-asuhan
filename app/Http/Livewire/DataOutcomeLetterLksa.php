@@ -116,8 +116,10 @@ class DataOutcomeLetterLksa extends Component
             ];
 
             if ($this->file) {
-                unlink(public_path('storage/' . $this->oldSurat));
-                $file = $this->file->store('lksa/surat-masuk', 'public');
+                if (file_exists(public_path('storage/' . $this->oldSurat))) {
+                    unlink(public_path('storage/' . $this->oldSurat));
+                }
+                $file = $this->file->store('lksa/surat-keluar', 'public');
                 $data['file'] = $file;
             }
 
