@@ -50,7 +50,7 @@
                                         <td data-label="Perihal">{{ $letter->perihal }}</td>
                                         <td data-label="Tanggal">{{ $letter->tanggal }}</td>
                                         <td data-label="Tujuan">{{ $letter->tujuan }}</td>
-                                        <td data-label="File"><button wire:click="download('{{ $letter->file }}','{{ $letter->nomor_surat }}')" class="btn btn-sm btn-success">Unduh Surat</button></td>
+                                        <td data-label="File"><button wire:click="download('{{ $letter->file }}','{{ $letter->perihal }}')" class="btn btn-sm btn-success">Unduh Surat</button></td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'sekertariat-yayasan')
                                             <td data-label="Aksi">
                                                 <button id="edit" wire:click="show('{{ $letter->id }}')" data-jenis="{{ $letter->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-letter" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>

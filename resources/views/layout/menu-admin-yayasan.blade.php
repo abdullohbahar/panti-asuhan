@@ -290,7 +290,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'create-letter-yayasan' || $active == 'data-letter-yayasan' || $active == 'data-outcome-letter-yayasan' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'create-letter-yayasan' || $active == 'data-letter-yayasan' || $active == 'create-outgoing-letter-yayasan' || $active == 'data-outcome-letter-yayasan' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-envelope"></i>
         <p>
@@ -317,6 +317,12 @@
       </ul>
       <ul class="nav nav-treeview">
         <li class="nav-header">Surat Keluar</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('create.outgoing.letter.yayasan') }}" class="nav-link {{ $active == 'create-outgoing-letter-yayasan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Tambah Surat Keluar</p>
+          </a>
+        </li>
         <li class="nav-item ml-2">
           <a href="{{ route('data.outcome.letter.yayasan') }}" class="nav-link {{ $active == 'data-outcome-letter-yayasan' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>

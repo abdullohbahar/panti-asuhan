@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                        <label>Surat</label>
+                        <label>Surat <i>*Kosongkan jika tidak ingin menghapus</i></label>
                         <input type="file" wire:model="file" class="form-control @error("file") is-invalid @enderror" id="">
                         @error("file")
                             <div class="invalid-feedback">
@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
-                        <label for="">Isi Surat</label>
+                        <label for="">Isi Surat <i>*Kosongkan jika tidak ingin menghapus</i></label>
                         <textarea wire:model="isi_surat" class="form-control @error("isi_surat") is-invalid @enderror" cols="30" rows="10"></textarea>
                         @error("isi_surat")
                             <div class="invalid-feedback">

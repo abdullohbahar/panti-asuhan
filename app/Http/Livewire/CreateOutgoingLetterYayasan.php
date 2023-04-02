@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use Exception;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\OutgoingLetterLksa;
-use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Models\OutgoingLetterYayasan;
 
-class CreateOutgoingLetterLksa extends Component
+class CreateOutgoingLetterYayasan extends Component
 {
     public $nomor_surat;
     public $nomor_urutan;
@@ -26,10 +26,10 @@ class CreateOutgoingLetterLksa extends Component
     public function render()
     {
         $data = [
-            'active' => 'create-outgoing-letter-lksa'
+            'active' => 'create-outgoing-letter-yayasan'
         ];
 
-        return view('livewire.create-outgoing-letter-lksa')->layout('create-outgoing-letter-lksa', $data);
+        return view('livewire.create-outgoing-letter-yayasan')->layout('create-outgoing-letter-yayasan', $data);
     }
 
     public function rules()
@@ -68,15 +68,15 @@ class CreateOutgoingLetterLksa extends Component
         try {
             DB::beginTransaction();
 
-            $file = $this->file->store('lksa/surat-keluar', 'public');
+            $file = $this->file->store('yayasan/surat-keluar', 'public');
 
             if ($this->file_dokumentasi) {
-                $fileDokumentasi = $this->file_dokumentasi->store('lksa/dokumentasi', 'public');
+                $fileDokumentasi = $this->file_dokumentasi->store('yayasan/dokumentasi', 'public');
             } else {
                 $fileDokumentasi = "";
             }
 
-            OutgoingLetterLksa::create([
+            OutgoingLetterYayasan::create([
                 'nomor_surat' => $this->nomor_surat,
                 'nomor_urutan' => $this->nomor_urutan,
                 'tanggal' => $this->tanggal,
@@ -89,7 +89,7 @@ class CreateOutgoingLetterLksa extends Component
             ]);
 
             DB::commit();
-            return redirect()->route('data.outcome.letter.lksa')->with('message', 'Surat Keluar Berhasil Ditambahkan');
+            return redirect()->route('data.outcome.letter.yayasan')->with('message', 'Surat Keluar Berhasil Ditambahkan');
         } catch (Exception $e) {
             Log::critical($e);
             DB::rollBack();

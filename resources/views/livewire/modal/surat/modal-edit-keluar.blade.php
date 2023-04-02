@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                        <label>Surat</label>
+                        <label>Surat <i>*Kosongkan jika tidak ingin menghapus</i></label>
                         <input type="file" wire:model="file" class="form-control @error("file") is-invalid @enderror" id="">
                         @error("file")
                             <div class="invalid-feedback">
@@ -96,7 +96,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                        <label>Dokumentasi</label>
+                        <label>Dokumentasi <i>*Kosongkan jika tidak ingin menghapus</i></label>
                         <input type="file" wire:model="file_dokumentasi" class="form-control @error("file_dokumentasi") is-invalid @enderror" id="">
                         @error("file_dokumentasi")
                             <div class="invalid-feedback">

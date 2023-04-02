@@ -25,6 +25,7 @@ use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\ProfileUserController;
 use App\Http\Livewire\CreateDonasiBarang;
 use App\Http\Livewire\CreateOutgoingLetterLksa;
+use App\Http\Livewire\CreateOutgoingLetterYayasan;
 use App\Http\Livewire\DataDonasiTransfer;
 use App\Http\Livewire\DataIncomeLksa;
 use App\Http\Livewire\DataOutcomeLksa;
@@ -265,6 +266,7 @@ Route::middleware('auth')->group(function () {
     // Surat masuk keluar yayasan
     Route::get('tambah-surat-yayasan', [LetterController::class, 'createLetterYayasan'])->name('create.letter.yayasan');
     Route::get('data-surat-masuk-yayasan', [LetterController::class, 'dataIncomingLetterYayasan'])->name('data.incoming.letter.yayasan');
+    Route::get('tambah-surat-keluar-yayasan', CreateOutgoingLetterYayasan::class)->name('create.outgoing.letter.yayasan');
     Route::get('data-surat-keluar-yayasan', [LetterController::class, 'dataOutcomeLetterYayasan'])->name('data.outcome.letter.yayasan');
 
     // Surat masuk keluar lksa

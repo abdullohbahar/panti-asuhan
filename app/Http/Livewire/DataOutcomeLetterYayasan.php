@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\LetterYayasan;
+use App\Models\OutgoingLetterYayasan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
@@ -12,12 +13,17 @@ use Livewire\WithFileUploads;
 class DataOutcomeLetterYayasan extends Component
 {
     public $search;
-    public $file;
     public $nomor_surat;
-    public $nama_surat;
-    public $tipe;
-    public $keterangan;
+    public $nomor_urutan;
+    public $tanggal;
+    public $perihal;
+    public $tujuan;
+    public $file;
+    public $tanggal_diterima;
+    public $disposisi_penugasan;
+    public $file_dokumentasi;
     public $idLetter;
+    public $old_file_dokumentasi;
     public $oldSurat;
     public $iteration;
     public $destroyBerkas;
@@ -28,8 +34,8 @@ class DataOutcomeLetterYayasan extends Component
     {
         $search = '';
 
-        $letters = LetterYayasan::where('tipe', 'Surat Keluar')->when(!empty($this->search), function ($query) {
-            $query->where('nama_surat', 'like', "%$this->search%");
+        $letters = OutgoingLetterYayasan::when(!empty($this->search), function ($query) {
+            $query->where('perihal', 'like', "%$this->search%");
         })->paginate(20);
 
         $data = [
@@ -48,14 +54,18 @@ class DataOutcomeLetterYayasan extends Component
     public function show($id)
     {
         $this->iteration++;
-        $letter = LetterYayasan::find($id);
+        $letter = OutgoingLetterYayasan::find($id);
 
         if ($letter) {
             $this->idLetter = $letter->id;
             $this->nomor_surat = $letter->nomor_surat;
-            $this->nama_surat = $letter->nama_surat;
-            $this->tipe = $letter->tipe;
-            $this->keterangan = $letter->keterangan;
+            $this->nomor_urutan = $letter->nomor_urutan;
+            $this->tanggal = $letter->tanggal;
+            $this->perihal = $letter->perihal;
+            $this->tujuan = $letter->tujuan;
+            $this->tanggal_diterima = $letter->tanggal_diterima;
+            $this->disposisi_penugasan = $letter->disposisi_penugasan;
+            $this->old_file_dokumentasi = $letter->file_dokumentasi;
             $this->oldSurat = $letter->file;
         }
     }
@@ -63,20 +73,22 @@ class DataOutcomeLetterYayasan extends Component
     public function rules()
     {
         return [
-            'nama_surat' => 'required',
             'nomor_surat' => 'required',
-            'tipe' => 'required',
-            'keterangan' => 'required',
+            'nomor_urutan' => 'required',
+            'tanggal' => 'required',
+            'perihal' => 'required',
+            'tujuan' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'nama_surat.required' => 'Nama Surat harus diisi',
-            'nomor_surat.required' => 'Nomor Surat harus diisi',
-            'tipe.required' => 'Tipe harus diisi',
-            'keterangan.required' => 'Keterangan harus diisi',
+            'nomor_surat.required' => 'Nomor surat harus diisi',
+            'nomor_urutan.required' => 'Nomor ururtan harus diisi',
+            'tanggal.required' => 'Tanggal harus diisi',
+            'perihal.required' => 'Perihal harus diisi',
+            'tujuan.required' => 'Tujuan harus diisi',
         ];
     }
 
@@ -94,20 +106,38 @@ class DataOutcomeLetterYayasan extends Component
             DB::beginTransaction();
 
             $data = [
-                'nama_surat' => $this->nama_surat,
                 'nomor_surat' => $this->nomor_surat,
-                'tipe' => $this->tipe,
-                'keterangan' => $this->keterangan,
+                'nomor_urutan' => $this->nomor_urutan,
+                'tanggal' => $this->tanggal,
+                'perihal' => $this->perihal,
+                'tujuan' => $this->tujuan,
+                'tanggal_diterima' => $this->tanggal_diterima,
+                'disposisi_penugasan' => $this->disposisi_penugasan,
             ];
 
             if ($this->file) {
-                unlink(public_path('storage/' . $this->oldSurat));
-                $file = $this->file->store('yayasan/surat-masuk', 'public');
+                if (file_exists(public_path('storage/' . $this->oldSurat))) {
+                    if ($this->old_file_dokumentasi) {
+                        unlink(public_path('storage/' . $this->oldSurat));
+                    }
+                }
+                $file = $this->file->store('yayasan/surat-keluar', 'public');
                 $data['file'] = $file;
             }
 
+            if ($this->file_dokumentasi) {
+                if (file_exists(public_path('storage/' . $this->old_file_dokumentasi))) {
+                    if ($this->old_file_dokumentasi) {
+                        unlink(public_path('storage/' . $this->old_file_dokumentasi));
+                    }
+                }
+
+                $fileDokumentasi = $this->file_dokumentasi->store('yayasan/dokumentasi', 'public');
+                $data['file_dokumentasi'] = $fileDokumentasi;
+            }
+
             // Update data
-            LetterYayasan::where('id', $this->idLetter)->update($data);
+            OutgoingLetterYayasan::where('id', $this->idLetter)->update($data);
 
             DB::commit();
 
@@ -128,8 +158,10 @@ class DataOutcomeLetterYayasan extends Component
 
     public function destroy()
     {
-        unlink(public_path('storage/' . $this->destroyBerkas));
-        LetterYayasan::destroy($this->idLetter);
+        if (file_exists(public_path('storage/' . $this->destroyBerkas))) {
+            unlink(public_path('storage/' . $this->destroyBerkas));
+        }
+        OutgoingLetterYayasan::destroy($this->idLetter);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Data Berhasil Dihapus']);
     }
