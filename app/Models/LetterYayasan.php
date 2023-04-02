@@ -10,10 +10,12 @@ class LetterYayasan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nomor_surat',
-        'keterangan',
-        'tipe',
         'file',
-        'nama_surat',
+        'nama_pengirim',
+        'nomor_surat',
+        'perihal_surat',
+        'tanggal',
+        'isi_surat',
+        'tipe',
     ];
 }

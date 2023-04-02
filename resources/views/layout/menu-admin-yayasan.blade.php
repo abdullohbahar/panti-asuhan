@@ -299,10 +299,11 @@
         </p>
       </a>
       <ul class="nav nav-treeview">
+        <li class="nav-header">Surat Masuk</li>
         <li class="nav-item ml-2">
           <a href="{{ route('create.letter.yayasan') }}" class="nav-link {{ $active == 'create-letter-yayasan' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Tambah Surat</p>
+            <p>Tambah Surat Masuk</p>
           </a>
         </li>
       </ul>
@@ -315,6 +316,7 @@
         </li>
       </ul>
       <ul class="nav nav-treeview">
+        <li class="nav-header">Surat Keluar</li>
         <li class="nav-item ml-2">
           <a href="{{ route('data.outcome.letter.yayasan') }}" class="nav-link {{ $active == 'data-outcome-letter-yayasan' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>

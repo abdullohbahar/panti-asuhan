@@ -15,10 +15,13 @@ return new class extends Migration
     {
         Schema::create('letter_yayasans', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_pengirim');
+            $table->text('perihal_surat');
             $table->text('nomor_surat');
-            $table->text('keterangan')->nullable();
-            $table->text('tipe');
+            $table->text('isi_surat');
+            $table->date('tanggal');
             $table->text('file');
+            $table->string('tipe');
             $table->timestamps();
         });
     }

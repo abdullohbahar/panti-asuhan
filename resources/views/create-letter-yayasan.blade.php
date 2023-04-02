@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Input Surat Yayasan
+  Input Surat Masuk Yayasan
 @endsection
 
 @push('addons-css')
