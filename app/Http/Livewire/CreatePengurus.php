@@ -103,7 +103,13 @@ class CreatePengurus extends Component
             ]);
 
             DB::commit();
-            return redirect()->to('pengurus')->with('message', 'Data pengurus berhasil ditambahkan');
+
+            if ($this->status == 'Pengurus Aktif') {
+                return redirect()->to('pengurus')->with('message', 'Data pengurus berhasil ditambahkan');
+            } else if ($this->status == 'Pengurus Mengundurkan Diri') {
+                return redirect()->to('data-pengurus-mengundurkan-diri')->with('message', 'Data pengurus berhasil ditambahkan');
+            } else if ($this->status == 'Pengurus Meninggal') {
+            }
         } catch (Exception $e) {
             Log::debug($e);
             DB::rollBack();

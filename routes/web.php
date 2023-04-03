@@ -30,6 +30,7 @@ use App\Http\Livewire\DataDonasiTransfer;
 use App\Http\Livewire\DataIncomeLksa;
 use App\Http\Livewire\DataOutcomeLksa;
 use App\Http\Livewire\DataPengeluaran;
+use App\Http\Livewire\DataPengurusMengundurkanDiri;
 use App\Http\Livewire\Export\ExportDonationPdf;
 use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
@@ -278,4 +279,7 @@ Route::middleware('auth')->group(function () {
     Route::get('profile-user', [ProfileUserController::class, 'index'])->name('profile.user');
 
     Route::get('export-donasi-pdf/{date1}/{date2}/{type}', [ExportDonationPdf::class, 'export'])->name('export.donasi.pdf');
+
+    // Pengurus
+    Route::get('data-pengurus-mengundurkan-diri', DataPengurusMengundurkanDiri::class)->name('data.pengurus.mengundurkan.diri');
 });

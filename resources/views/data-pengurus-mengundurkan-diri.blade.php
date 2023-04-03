@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Data Pengurus Aktif
+  Data Pengurus Mengundurkan Diri
 @endsection
 
 @push('addons-css')
@@ -96,29 +96,12 @@
           width: 10px;
       }
   }
-
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
-  tr:hover {
-      background-color: #ddd;
-      cursor: grab;
-  }
-
-  .sortable-item {
-      cursor: grab;
-  }
-
-  .sortable-item:active {
-      cursor: grabbing;
-  }
 </style>
 @endpush
 
 @section('content')
 <div>
-  <livewire:pengurus>
+  <livewire:data-pengurus-mengundurkan-diri>
 </div>
 @endsection
 

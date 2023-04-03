@@ -5,12 +5,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Data Pengurus Aktif</h1>
+          <h1>Data Pengurus Mengundurkan Diri</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Data Pengurus Aktif</li>
+            <li class="breadcrumb-item active">Data Pengurus Mengundurkan Diri</li>
           </ol>
         </div>
       </div>
@@ -57,12 +57,12 @@
                                     @endif
                                 </tr>
                             </thead>
-                            <tbody wire:sortable="updatePengurusOrder">
+                            <tbody>
                                 @php
                                     $no = 1;
                                 @endphp
                                 @foreach ($penguruses as $index => $pengurus)
-                                    <tr wire:sortable.item="{{ $pengurus->id }}" wire:key="pengurus-{{ $pengurus->id }}" class="sortable-item">
+                                    <tr>
                                         <td data-label="Foto">
                                             @if ($pengurus->foto)
                                                 <img src="{{ asset('storage/'.$pengurus->foto) }}" class="img-fluid img-thumbnail w-25" alt="{{ $pengurus->nama_lengkap }}" srcset="">
@@ -98,5 +98,5 @@
 </div>
 
 @push('sortable-scripts')
-    <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js"></script> --}}
 @endpush

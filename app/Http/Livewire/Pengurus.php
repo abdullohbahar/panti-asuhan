@@ -16,12 +16,11 @@ class Pengurus extends Component
     protected $paginationTheme = 'bootstrap';
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
-
     public function render()
     {
         $search = '';
 
-        $penguruses = ModelsPengurus::where(function ($q) use ($search) {
+        $penguruses = ModelsPengurus::where('status', 'Pengurus Aktif')->where(function ($q) use ($search) {
             $q->orwhere('nama', 'like', '%' . $this->search . '%')
                 ->orwhere('jabatan', 'like', '%' . $this->search . '%');
         })->orderBy('order', 'asc')->get();
