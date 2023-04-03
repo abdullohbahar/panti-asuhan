@@ -112,7 +112,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'pengurus' || $active == 'create-pengurus' || $active == 'data-pengurus-mengundurkan-diri' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'pengurus' || $active == 'create-pengurus' || $active == 'data-pengurus-meninggal' || $active == 'data-pengurus-mengundurkan-diri' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-users"></i>
         <p>
@@ -146,7 +146,7 @@
           </a>
         </li>
         <li class="nav-item ml-2">
-          <a href="{{ route('santri.luar') }}" class="nav-link {{ $active == 'santri-luar' ? 'active' : '' }}">
+          <a href="{{ route('data.pengurus.meninggal') }}" class="nav-link {{ $active == 'data-pengurus-meninggal' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
               Pengurus Meninggal

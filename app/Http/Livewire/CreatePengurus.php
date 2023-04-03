@@ -109,6 +109,7 @@ class CreatePengurus extends Component
             } else if ($this->status == 'Pengurus Mengundurkan Diri') {
                 return redirect()->to('data-pengurus-mengundurkan-diri')->with('message', 'Data pengurus berhasil ditambahkan');
             } else if ($this->status == 'Pengurus Meninggal') {
+                return redirect()->to('data-pengurus-meninggal')->with('message', 'Data pengurus berhasil ditambahkan');
             }
         } catch (Exception $e) {
             Log::debug($e);

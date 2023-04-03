@@ -31,6 +31,7 @@ use App\Http\Livewire\DataIncomeLksa;
 use App\Http\Livewire\DataOutcomeLksa;
 use App\Http\Livewire\DataPengeluaran;
 use App\Http\Livewire\DataPengurusMengundurkanDiri;
+use App\Http\Livewire\DataPengurusMeninggal;
 use App\Http\Livewire\Export\ExportDonationPdf;
 use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
@@ -282,4 +283,5 @@ Route::middleware('auth')->group(function () {
 
     // Pengurus
     Route::get('data-pengurus-mengundurkan-diri', DataPengurusMengundurkanDiri::class)->name('data.pengurus.mengundurkan.diri');
+    Route::get('data-pengurus-meninggal', DataPengurusMeninggal::class)->name('data.pengurus.meninggal');
 });
