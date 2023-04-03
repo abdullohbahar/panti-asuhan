@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('pendidikan')->nullable();
             $table->string('pekerjaan')->nullable();
             $table->string('masa_bakti')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ use App\Models\MasterDataPendidikan;
 
 class CreatePengurus extends Component
 {
-    public $foto, $nama, $no_hp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $jabatan, $alamat, $pendidikan, $pekerjaan, $nik, $masa_bakti;
+    public $foto, $nama, $no_hp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $jabatan, $alamat, $pendidikan, $pekerjaan, $nik, $masa_bakti, $status;
     use WithFileUploads;
 
     public function render()
@@ -38,6 +38,7 @@ class CreatePengurus extends Component
             'tanggal_lahir' => 'required',
             'jabatan' => 'required',
             'alamat' => 'required',
+            'status' => 'required',
             'nik' => 'unique:penguruses,nik',
         ];
 
@@ -54,6 +55,7 @@ class CreatePengurus extends Component
             'foto.image' => 'Foto harus berupa JPG atau PNG',
             'foto.max' => 'Foto max 2 MB',
             'nama.required' => 'Nama harus diisi',
+            'status.required' => 'Status harus diisi',
             'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
             'tempat_lahir.required' => 'Tempat lahir harus diisi',
             'tanggal_lahir.required' => 'Tanggal lahir harus diisi',
@@ -96,7 +98,8 @@ class CreatePengurus extends Component
                 'pekerjaan' => $this->pekerjaan,
                 'nik' => $this->nik,
                 'masa_bakti' => $this->masa_bakti,
-                'order' => Pengurus::max('order') + 1
+                'order' => Pengurus::max('order') + 1,
+                'status' => $this->status
             ]);
 
             DB::commit();
