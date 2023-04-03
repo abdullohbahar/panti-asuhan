@@ -23,19 +23,19 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-end">
-                    <div class="col-5 text-right">
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 text-right">
                         <div class="row">
-                            <div class="col-sm-12 col-md-4">
+                            <div class="col-sm-12 col-md-6 mt-2">
                                 <button wire:click="exportExcel" class="btn btn-success btn-sm btn-block"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
                             </div>
-                            <div class="col-sm-12 col-md-4">
+                            <div class="col-sm-12 col-md-6 mt-2">
                                 <a href="{{ route('export.pengurus.pdf') }}" class="btn btn-danger btn-sm btn-block"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                             </div>
-                            <div class="col-sm-12 col-md-4">
+                            {{-- <div class="col-sm-12 col-md-4">
                                 @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
                                     <a href="{{ route('tambah.pengurus') }}" class="btn btn-primary btn-sm btn-block"><b><i class="fas fa-plus"></i> Data Pengurus</b></a>
                                 @endif
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

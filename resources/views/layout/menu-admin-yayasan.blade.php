@@ -112,6 +112,49 @@
         </li>
       </ul>
     </li>
+    <li class="nav-item {{ $active == 'pengurus' || $active == 'create-pengurus' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-users"></i>
+        <p>
+          Pengurus
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('tambah.pengurus') }}" class="nav-link {{ $active == 'create-pengurus' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Tambah Pengurus
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Pengurus Aktif
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('santri.luar') }}" class="nav-link {{ $active == 'santri-luar' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Mengundurkan Diri
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('santri.luar') }}" class="nav-link {{ $active == 'santri-luar' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Pengurus Meninggal
+            </p>
+          </a>
+        </li>
+      </ul>
+    </li>
     <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'create-donasi-barang' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'donasi-transfer' || $active == 'data-donasi-tunai' || $active == 'data-donasi-transfer' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-hands"></i>
@@ -256,14 +299,6 @@
           </a>
         </li>
       </ul>
-    </li>
-    <li class="nav-item">
-      <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
-        <i class="nav-icon fas fa-users"></i>
-        <p>
-          Data Pengurus
-        </p>
-      </a>
     </li>
     <li class="nav-item {{ $active == 'lksa-document' || $active == 'yayasan-document' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
