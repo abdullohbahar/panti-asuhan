@@ -101,7 +101,8 @@ class CreatePengurus extends Component
                 'pendidikan' => $this->pendidikan,
                 'pekerjaan' => $this->pekerjaan,
                 'nik' => $this->nik,
-                'masa_bakti' => $this->from . ' Sampai ' . $this->to,
+                'from' => $this->from,
+                'to' => $this->to,
                 'order' => Pengurus::max('order') + 1,
                 'status' => $this->status
             ]);

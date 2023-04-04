@@ -11,7 +11,7 @@ use App\Models\MasterDataPendidikan;
 
 class EditPengurus extends Component
 {
-    public $idpengurus, $oldPhoto, $nama, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $no_hp, $foto, $jabatan, $pendidikan, $pekerjaan, $nik, $masa_bakti;
+    public $idpengurus, $to, $from, $status, $oldPhoto, $nama, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $no_hp, $foto, $jabatan, $pendidikan, $pekerjaan, $nik, $masa_bakti;
     use WithFileUploads;
 
     public function mount()
@@ -30,8 +30,10 @@ class EditPengurus extends Component
             $this->pendidikan = $pengurus->pendidikan;
             $this->pekerjaan = $pengurus->pekerjaan;
             $this->nik = $pengurus->nik;
-            $this->masa_bakti = $pengurus->masa_bakti;
             $this->oldPhoto = $pengurus->foto;
+            $this->status = $pengurus->status;
+            $this->from = $pengurus->from;
+            $this->to = $pengurus->to;
         }
     }
 
@@ -60,6 +62,9 @@ class EditPengurus extends Component
             'tanggal_lahir' => 'required',
             'jabatan' => 'required',
             'alamat' => 'required',
+            'status' => 'required',
+            'from' => 'required',
+            'to' => 'required',
         ];
 
         if ($this->foto) {
@@ -80,6 +85,9 @@ class EditPengurus extends Component
             'tanggal_lahir.required' => 'Tanggal lahir harus diisi',
             'jabatan.required' => 'Jabatan harus diisi',
             'alamat.required' => 'Alamat harus diisi',
+            'status.required' => 'Status harus diisi',
+            'from.required' => 'Harus diisi',
+            'to.required' => 'Harus diisi',
         ];
     }
 
@@ -121,7 +129,9 @@ class EditPengurus extends Component
             'pendidikan' => $this->pendidikan,
             'pekerjaan' => $this->pekerjaan,
             'nik' => $this->nik,
-            'masa_bakti' => $this->masa_bakti,
+            'from' => $this->from,
+            'to' => $this->to,
+            'status' => $this->status,
         ]);
 
         return redirect()->to('profile-pengurus/' . $this->idpengurus)->with('message', 'Data pengurus berhasil diubah');

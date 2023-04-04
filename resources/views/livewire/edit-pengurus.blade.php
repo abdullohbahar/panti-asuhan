@@ -61,18 +61,35 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>Masa Bakti</label>
-                                <input type="text" wire:model="masa_bakti" class="form-control @error("masa_bakti") is-invalid @enderror" id="">
-                                @error("masa_bakti")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
+                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                            <label>Masa Bakti</label>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="">Dari</label>
+                                        <input type="date" wire:model="from" class="form-control @error('from') is-invalid @enderror" id="">
+                                        @error("from")
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                @enderror
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="">Sampai</label>
+                                        <input type="date" wire:model="to" class="form-control @error('to') is-invalid @enderror" id="">
+                                        @error("to")
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <label for="">&nbsp;</label>
                             <div class="form-group">
                                 <label>Nomor Telepon</label>
                                 <input type="text" wire:model="no_hp" class="form-control @error("no_hp") is-invalid @enderror" id="">
@@ -158,6 +175,22 @@
                                 <label>Pekerjaan</label>
                                 <input type="text" wire:model="pekerjaan" class="form-control @error("pekerjaan") is-invalid @enderror" id="">
                                 @error("pekerjaan")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Status Pengurus</label>
+                                <select wire:model="status" class="form-control @error("status") is-invalid @enderror" id="">
+                                    <option value="">-- Pilih Status --</option>
+                                    <option value="Pengurus Aktif">Pengurus Aktif</option>
+                                    <option value="Pengurus Mengundurkan Diri">Pengurus Mengundurkan Diri</option>
+                                    <option value="Pengurus Meninggal">Pengurus Meninggal</option>
+                                </select>
+                                @error("status")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

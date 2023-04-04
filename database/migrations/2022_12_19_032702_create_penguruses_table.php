@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('pendidikan')->nullable();
             $table->string('pekerjaan')->nullable();
-            $table->string('masa_bakti')->nullable();
+            $table->string('from')->nullable();
+            $table->string('to')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

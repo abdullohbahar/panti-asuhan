@@ -55,10 +55,18 @@
                     </tr>
                     <tr>
                       <td>
+                        <h6>Status Pengurus</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $pengurus->status }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
                         <h6>Masa Bakti</h6>
                       </td>
                       <td>
-                        <h6>: {{ $pengurus->masa_bakti }}</h6>
+                        <h6>: {{ \Carbon\Carbon::parse($pengurus->from)->format('d-m-Y') }} Sampai {{ \Carbon\Carbon::parse($pengurus->to)->format('d-m-Y') }}</h6>
                       </td>
                     </tr>
                     <tr>
