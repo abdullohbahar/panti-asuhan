@@ -19,6 +19,13 @@ class PengurusExport implements FromCollection, WithHeadings, WithMapping, Shoul
 
     protected $no = 1;
 
+    protected $status;
+
+    public function __construct($status)
+    {
+        $this->status = $status;
+    }
+
     public function headings(): array
     {
         return [
@@ -34,6 +41,7 @@ class PengurusExport implements FromCollection, WithHeadings, WithMapping, Shoul
             'Alamat',
             'Nomor HP',
             'Jabatan',
+            'Status',
             'Pekerjaan',
         ];
     }
@@ -45,7 +53,7 @@ class PengurusExport implements FromCollection, WithHeadings, WithMapping, Shoul
             '',
             $item->nik,
             $item->nama,
-            $item->masa_bakti,
+            \Carbon\Carbon::parse($item->from)->format('d-m-Y') . ' Sampai ' . \Carbon\Carbon::parse($item->to)->format('d-m-Y'),
             $item->jenis_kelamin,
             $item->tempat_lahir . ', ' . $item->tanggal_lahir,
             Carbon::parse($item->tanggal_lahir)->age,
@@ -53,13 +61,14 @@ class PengurusExport implements FromCollection, WithHeadings, WithMapping, Shoul
             $item->alamat,
             $item->no_hp,
             $item->jabatan,
+            $item->status,
             $item->pekerjaan,
         ];
     }
 
     public function collection()
     {
-        return Pengurus::get();
+        return Pengurus::where('status', $this->status)->get();
 
         // return view('cetak-data-anak-asuh', [
         //     'anakAsuhs' => $anakAsuhs,

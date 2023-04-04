@@ -54,12 +54,12 @@ class Pengurus extends Component
 
     public function exportExcel()
     {
-        return Excel::download(new PengurusExport, 'Data Pengurus.xlsx');
+        return Excel::download(new PengurusExport('Pengurus Aktif'), 'Data Pengurus Aktif.xlsx');
     }
 
     public function exportPdf()
     {
-        $penguruses = ModelsPengurus::get();
+        $penguruses = ModelsPengurus::where('status', 'Pengurus Aktif')->get();
 
         $data = [
             'penguruses' => $penguruses
@@ -71,6 +71,6 @@ class Pengurus extends Component
         $pdf->setPaper('F4', 'potrait');
         $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
 
-        return $pdf->download('Data Pengurus.pdf');
+        return $pdf->download('Data Pengurus Aktif.pdf');
     }
 }

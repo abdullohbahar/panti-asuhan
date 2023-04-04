@@ -264,6 +264,8 @@ Route::middleware('auth')->group(function () {
 
     // Export Pengurus
     Route::get('export-pengurus-pdf', [Pengurus::class, 'exportPdf'])->name('export.pengurus.pdf');
+    Route::get('export-pengurus-mengundurkan-pdf', [DataPengurusMengundurkanDiri::class, 'exportPdf'])->name('export.pengurus.mengundurkan.pdf');
+    Route::get('export-pengurus-meninggal-pdf', [DataPengurusMeninggal::class, 'exportPdf'])->name('export.pengurus.meninggal.pdf');
 
     // Surat masuk keluar yayasan
     Route::get('tambah-surat-yayasan', [LetterController::class, 'createLetterYayasan'])->name('create.letter.yayasan');

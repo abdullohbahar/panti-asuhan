@@ -5,6 +5,9 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Pengurus;
 use Livewire\WithPagination;
+use App\Exports\PengurusExport;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class DataPengurusMeninggal extends Component
 {
@@ -43,5 +46,27 @@ class DataPengurusMeninggal extends Component
         Pengurus::destroy($this->idPengurus);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Data Pengurus Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new PengurusExport('Pengurus Meninggal'), 'Data Pengurus Meninggal.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $penguruses = Pengurus::where('status', 'Pengurus Meninggal')->get();
+
+        $data = [
+            'penguruses' => $penguruses
+        ];
+
+        // return view('export.pengurus.pdf', $data);
+
+        $pdf = PDF::loadView('export.pengurus.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Data Pengurus Meninggal.pdf');
     }
 }

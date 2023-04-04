@@ -29,7 +29,7 @@
                                 <button wire:click="exportExcel" class="btn btn-success btn-sm btn-block"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
                             </div>
                             <div class="col-sm-12 col-md-6 mt-2">
-                                <a href="{{ route('export.pengurus.pdf') }}" class="btn btn-danger btn-sm btn-block"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
+                                <a href="{{ route('export.pengurus.mengundurkan.pdf') }}" class="btn btn-danger btn-sm btn-block"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                             </div>
                             {{-- <div class="col-sm-12 col-md-4">
                                 @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')

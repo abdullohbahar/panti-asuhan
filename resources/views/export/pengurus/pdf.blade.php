@@ -68,6 +68,7 @@
                 <th>Alamat</th>
                 <th>Nomor HP</th>
                 <th>Jabatan</th>
+                <th>Status</th>
                 <th>Pekerjaan</th>
             </tr>
         </thead>
@@ -90,7 +91,7 @@
                 <td><img src="data:image/jpeg;base64,{{ $image_data }}" style="width: 100%" alt="" srcset=""></td>
                 <td>{{ $pengurus->nik }}</td>
                 <td>{{ $pengurus->nama }}</td>
-                <td>{{ $pengurus->masa_bakti }}</td>
+                <td>{{ \Carbon\Carbon::parse($pengurus->from)->format('d-m-Y') }} Sampai {{ \Carbon\Carbon::parse($pengurus->to)->format('d-m-Y') }}</td>
                 <td>{{ $pengurus->jenis_kelamin }}</td>
                 <td>{{ $pengurus->tempat_lahir }}, {{ \Carbon\Carbon::parse($pengurus->tanggal_lahir)->format('d-m-Y') }}</td>
                 <td>{{ \Carbon\Carbon::parse($pengurus->tanggal_lahir)->age }}</td>
@@ -98,6 +99,7 @@
                 <td>{{ $pengurus->alamat }}</td>
                 <td>{{ $pengurus->no_hp }}</td>
                 <td>{{ $pengurus->jabatan }}</td>
+                <td>{{ $pengurus->status }}</td>
                 <td>{{ $pengurus->pekerjaan }}</td>
             </tr>
             @endforeach
