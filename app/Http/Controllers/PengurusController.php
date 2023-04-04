@@ -27,7 +27,7 @@ class PengurusController extends Controller
     {
         $data = [
             'id' => $id,
-            'active' => ''
+            'active' => 'show'
         ];
         return view('profil-pengurus', $data);
     }
@@ -36,7 +36,7 @@ class PengurusController extends Controller
     {
         $data = [
             'id' => $id,
-            'active' => ''
+            'active' => 'show'
         ];
         return view('edit-pengurus', $data);
     }

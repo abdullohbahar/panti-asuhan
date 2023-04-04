@@ -112,7 +112,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'pengurus' || $active == 'create-pengurus' || $active == 'data-pengurus-meninggal' || $active == 'data-pengurus-mengundurkan-diri' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'pengurus' || $active == 'create-pengurus' || $active == 'show' || $active == 'data-pengurus-meninggal' || $active == 'data-pengurus-mengundurkan-diri' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-users"></i>
         <p>
