@@ -20,6 +20,7 @@
     <div class="container-fluid chocolat-open">
         <div class="card">
             <div class="card-header">
+                <button class="btn btn-success" data-toggle="modal" data-target="#importSantri"><i class="fas fa-file-excel"></i> Import Melalui Excel</button>
             </div>
             <div class="card-body">
                 <form wire:submit.prevent="store">
@@ -241,5 +242,7 @@
         </div>
     </div>
   </section>
+
+  <livewire:import.import-santri>
   <!-- /.content -->
 </div>
