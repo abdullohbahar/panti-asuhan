@@ -104,4 +104,9 @@ class CreateAnakAsuh extends Component
             return redirect()->route('santri.alumni')->with('message', 'Data santri berhasil ditambahkan');
         }
     }
+
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import santri.xlsx'));
+    }
 }
