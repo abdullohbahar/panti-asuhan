@@ -34,7 +34,7 @@
         </div>
         <div class="row justify-content-center mt-5">
             <div class="col-12">
-                <table border="1" class="table table-bordered">
+                <table border="1" class="table table-bordered" style="font-size: 13px;">
                     <thead>
                         <tr>
                             <td>
