@@ -32,6 +32,7 @@ use App\Http\Livewire\DataOutcomeLksa;
 use App\Http\Livewire\DataPengeluaran;
 use App\Http\Livewire\DataPengurusMengundurkanDiri;
 use App\Http\Livewire\DataPengurusMeninggal;
+use App\Http\Livewire\DataSantriAlumni;
 use App\Http\Livewire\Export\ExportDonationPdf;
 use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
@@ -222,6 +223,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tambah-santri', [AnakAsuhController::class, 'create'])->name('create.santri');
     Route::get('/data-santri-dalam', [AnakAsuhController::class, 'index'])->name('santri.dalam');
     Route::get('/data-santri-luar', [AnakAsuhController::class, 'santriLuar'])->name('santri.luar');
+    Route::get('/data-alumni-santri', DataSantriAlumni::class)->name('santri.alumni');
 
     // Pengguna
     Route::get('/tambah-pengguna', [UserController::class, 'createUser'])->name('tambah.pengguna');

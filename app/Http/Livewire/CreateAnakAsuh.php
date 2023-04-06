@@ -100,6 +100,8 @@ class CreateAnakAsuh extends Component
             return redirect()->route('santri.dalam')->with('message', 'Data santri berhasil ditambahkan');
         } else if ($this->tipe == 'Santri Luar') {
             return redirect()->route('santri.luar')->with('message', 'Data santri berhasil ditambahkan');
+        } else if ($this->tipe == 'Alumni') {
+            return redirect()->route('santri.alumni')->with('message', 'Data santri berhasil ditambahkan');
         }
     }
 }

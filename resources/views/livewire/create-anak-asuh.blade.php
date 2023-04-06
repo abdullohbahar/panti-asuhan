@@ -154,6 +154,7 @@
                                     <option value="">-- Pilih Tipe --</option>
                                     <option value="Santri Dalam">Santri Dalam</option>
                                     <option value="Santri Luar">Santri Luar</option>
+                                    <option value="Alumni">Alumni</option>
                                 </select>
                                 @error("tipe")
                                     <div class="invalid-feedback">

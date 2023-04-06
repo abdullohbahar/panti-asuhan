@@ -10,7 +10,7 @@
         </p>
       </a>
     </li>
-    <li class="nav-item {{ $active == 'santri-dalam' || $active == 'santri-luar' || $active == 'create-santri' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'santri-dalam' || $active == 'santri-luar' || $active == 'alumni' || $active == 'create-santri' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-users"></i>
         <p>
@@ -40,6 +40,14 @@
             <i class="nav-icon far fa-circle"></i>
             <p>
               Data Santri Luar
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('santri.alumni') }}" class="nav-link {{ $active == 'alumni' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Data Alumni Santri
             </p>
           </a>
         </li>
