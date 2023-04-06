@@ -86,6 +86,57 @@
             </p>
           </a>
         </li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.warga.dusun') }}" class="nav-link {{ $active == 'data-warga-dusun' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Dusun
+            </p>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item {{ $active == 'pengurus' || $active == 'create-pengurus' || $active == 'show' || $active == 'data-pengurus-meninggal' || $active == 'data-pengurus-mengundurkan-diri' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-users"></i>
+        <p>
+          Pengurus
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('tambah.pengurus') }}" class="nav-link {{ $active == 'create-pengurus' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Tambah Pengurus
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Pengurus Aktif
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.pengurus.mengundurkan.diri') }}" class="nav-link {{ $active == 'data-pengurus-mengundurkan-diri' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Mengundurkan Diri
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.pengurus.meninggal') }}" class="nav-link {{ $active == 'data-pengurus-meninggal' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Pengurus Meninggal
+            </p>
+          </a>
+        </li>
       </ul>
     </li>
     <li class="nav-item {{ $active == 'donatur' || $active == 'tipe' || $active == 'create-donasi-barang' || $active == 'donasi' || $active == 'donasi-barang' || $active == 'donasi-transfer' || $active == 'data-donasi-tunai' || $active == 'data-donasi-transfer' ? 'menu-open' : '' }}">
@@ -191,14 +242,6 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item">
-      <a href="{{ route('pengurus') }}" class="nav-link {{ $active == 'pengurus' ? 'active' : '' }}">
-        <i class="nav-icon fas fa-users"></i>
-        <p>
-          Data Pengurus
-        </p>
-      </a>
-    </li>
     <li class="nav-item {{ $active == 'lksa-document' || $active == 'yayasan-document' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-file"></i>
@@ -224,7 +267,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'create-letter-yayasan' || $active == 'data-letter-yayasan' || $active == 'data-outcome-letter-yayasan' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'create-letter-yayasan' || $active == 'data-letter-yayasan' || $active == 'create-outgoing-letter-yayasan' || $active == 'data-outcome-letter-yayasan' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-envelope"></i>
         <p>
@@ -232,6 +275,15 @@
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-header">Surat Masuk</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('create.letter.yayasan') }}" class="nav-link {{ $active == 'create-letter-yayasan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Tambah Surat Masuk</p>
+          </a>
+        </li>
+      </ul>
       <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
           <a href="{{ route('data.incoming.letter.yayasan') }}" class="nav-link {{ $active == 'data-letter-yayasan' ? 'active' : '' }}">
@@ -241,6 +293,13 @@
         </li>
       </ul>
       <ul class="nav nav-treeview">
+        <li class="nav-header">Surat Keluar</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('create.outgoing.letter.yayasan') }}" class="nav-link {{ $active == 'create-outgoing-letter-yayasan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Tambah Surat Keluar</p>
+          </a>
+        </li>
         <li class="nav-item ml-2">
           <a href="{{ route('data.outcome.letter.yayasan') }}" class="nav-link {{ $active == 'data-outcome-letter-yayasan' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
@@ -249,7 +308,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'create-letter-lksa' || $active == 'data-letter-lksa' || $active == 'data-outcome-letter-lksa' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'create-letter-lksa' || $active == 'create-outgoing-letter-lksa' || $active == 'data-letter-lksa' || $active == 'data-outcome-letter-lksa' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-envelope"></i>
         <p>
@@ -258,10 +317,28 @@
         </p>
       </a>
       <ul class="nav nav-treeview">
+        <li class="nav-header">Surat Masuk</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('create.letter.lksa') }}" class="nav-link {{ $active == 'create-letter-lksa' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Tambah Surat Masuk</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
           <a href="{{ route('data.incoming.letter.lksa') }}" class="nav-link {{ $active == 'data-letter-lksa' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Surat Masuk</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-header">Surat Keluar</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('create.outgoing.letter.lksa') }}" class="nav-link {{ $active == 'create-outgoing-letter-lksa' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Tambah Surat Keluar</p>
           </a>
         </li>
       </ul>

@@ -27,7 +27,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'create-letter-lksa' || $active == 'data-letter-lksa' || $active == 'data-outcome-letter-lksa' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'create-letter-lksa' || $active == 'create-outgoing-letter-lksa' || $active == 'data-letter-lksa' || $active == 'data-outcome-letter-lksa' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-envelope"></i>
         <p>
@@ -36,10 +36,11 @@
         </p>
       </a>
       <ul class="nav nav-treeview">
+        <li class="nav-header">Surat Masuk</li>
         <li class="nav-item ml-2">
           <a href="{{ route('create.letter.lksa') }}" class="nav-link {{ $active == 'create-letter-lksa' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Tambah Surat</p>
+            <p>Tambah Surat Masuk</p>
           </a>
         </li>
       </ul>
@@ -48,6 +49,15 @@
           <a href="{{ route('data.incoming.letter.lksa') }}" class="nav-link {{ $active == 'data-letter-lksa' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Surat Masuk</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-header">Surat Keluar</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('create.outgoing.letter.lksa') }}" class="nav-link {{ $active == 'create-outgoing-letter-lksa' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Tambah Surat Keluar</p>
           </a>
         </li>
       </ul>
