@@ -122,4 +122,9 @@ class CreatePengurus extends Component
             $this->dispatchBrowserEvent('show-error', ['message' => 'Error, Coba untuk input data lagi atau hubungi developer']);
         }
     }
+
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import pengurus.xlsx'));
+    }
 }
