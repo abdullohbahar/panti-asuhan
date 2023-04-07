@@ -69,7 +69,7 @@
                                             {{ $citizen->alamat }}
                                         </td>
                                         <td data-label="Tempat, Tanggal Lahir">
-                                            {{ $citizen->tempat_lahir }}, {{ $citizen->tanggal_lahir }}
+                                            {{ $citizen->tempat_lahir }}, {{ Carbon\Carbon::parse($citizen->tanggal_lahir)->format('d-m-Y') }}
                                         </td>
                                         <td data-label="Aksi">
                                             <div class="btn-group-vertical" role="group" aria-label="Basic example">

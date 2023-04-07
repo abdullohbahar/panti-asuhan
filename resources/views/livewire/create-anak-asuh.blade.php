@@ -244,8 +244,8 @@
             </div>
         </div>
     </div>
+    <livewire:import.import-santri>
   </section>
 
-  <livewire:import.import-santri>
   <!-- /.content -->
 </div>

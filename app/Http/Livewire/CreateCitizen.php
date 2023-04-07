@@ -65,4 +65,9 @@ class CreateCitizen extends Component
 
         return redirect()->route('create.citizen')->with('message', 'Data warga berhasil ditambahkan');
     }
+
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import warga.xlsx'));
+    }
 }
