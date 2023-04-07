@@ -94,4 +94,9 @@ class IncomeAndExpenseReport extends Component
     {
         return Excel::download(new IncomeAndExpenseExport($date1, $date2), 'Laporan pemasukan pengeluaran LKSA.xlsx');
     }
+
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import keuangan LKSA.xlsx'));
+    }
 }

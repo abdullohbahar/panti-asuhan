@@ -150,6 +150,7 @@
       $('#importPengurus').modal('hide')
       $('#importSantri').modal('hide')
       $('#importWarga').modal('hide')
+      $('#import').modal('hide')
 
       // sweetalert success
       const Toast = Swal.mixin({
