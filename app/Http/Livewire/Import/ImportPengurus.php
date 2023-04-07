@@ -51,5 +51,6 @@ class ImportPengurus extends Component
         Excel::import(new ImportsImportPengurus, public_path('/storage/' . $fileName));
 
         $this->resetInput();
+        $this->dispatchBrowserEvent('success-import', ['message' => 'Berhasil melakukan import data']);
     }
 }

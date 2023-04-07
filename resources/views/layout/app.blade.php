@@ -144,6 +144,31 @@
       
       window.open(url, '', 'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=' + lebar + ',height=' + tinggi + ',top=' + top + ',left=' + left);
     }
+
+    window.addEventListener('success-import', event => {
+      // close modal
+      $('#importPengurus').modal('hide')
+      $('#importSantri').modal('hide')
+      $('#importWarga').modal('hide')
+
+      // sweetalert success
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: event.detail.message
+      })
+    })
   </script>
 
   @stack('addons-js')

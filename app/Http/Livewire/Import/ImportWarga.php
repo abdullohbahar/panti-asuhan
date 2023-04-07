@@ -51,5 +51,6 @@ class ImportWarga extends Component
         Excel::import(new ImportsImportWarga, public_path('/storage/' . $fileName));
 
         $this->resetInput();
+        $this->dispatchBrowserEvent('success-import', ['message' => 'Berhasil melakukan import data']);
     }
 }
