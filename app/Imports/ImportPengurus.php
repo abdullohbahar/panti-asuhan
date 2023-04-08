@@ -22,6 +22,10 @@ class ImportPengurus implements ToModel, WithStartRow
 
     public function model(array $row)
     {
+        if (!array_filter($row)) {
+            return null;
+        }
+
         return new Pengurus([
             'nik' => $row[1],
             'nama' => $row[2],

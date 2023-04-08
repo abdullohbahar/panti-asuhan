@@ -22,6 +22,10 @@ class ImportPemasukanPengeluaranLksa implements ToModel, WithStartRow
 
     public function model(array $row)
     {
+        if (!array_filter($row)) {
+            return null;
+        }
+
         return new LksaFinance([
             'tanggal' => $row[0] != null ? Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[0])) : NULL,
             'keterangan' => $row[1],
