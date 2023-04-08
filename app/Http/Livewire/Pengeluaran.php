@@ -119,4 +119,9 @@ class Pengeluaran extends Component
     {
         return (new DonationExport)->download('Laporan Donasi.xlsx');
     }
+
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import pengeluaran Yayasan.xlsx'));
+    }
 }
