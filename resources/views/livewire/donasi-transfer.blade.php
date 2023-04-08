@@ -20,6 +20,10 @@
     <div class="container-fluid chocolat-open">
         <div class="card">
             <div class="card-header">
+                &nbsp; Harap menggunakan file template excel jika ingin melakukan import data. Dan baca aturan untuk pengisian.
+                <button class="btn btn-warning mt-2" data-toggle="modal" data-target="#petunjuk"><i class="fas fa-exclamation-triangle"></i> Petunjuk Pengisian</button>
+                <button class="btn btn-info mt-2" wire:click="downloadTemplate"><i class="fas fa-download"></i> Download Template Excel</button>
+                <button class="btn btn-success mt-2" data-toggle="modal" data-target="#import"><i class="fas fa-file-excel"></i> Import Melalui Excel</button>
             </div>
             <div class="card-body">
                 <form wire:submit.prevent="store">
@@ -149,6 +153,7 @@
             </div>
         </div>
     </div>
+        <livewire:import.import-donasi-transfer>
   </section>
   <!-- /.content -->
 </div>

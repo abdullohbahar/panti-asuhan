@@ -46,7 +46,7 @@ class ImportDonasiTunai extends Component
     {
         $this->validate();
 
-        $fileName = $this->file->store('import/import-pengurus', 'public');
+        $fileName = $this->file->store('import/import-donasi-tunai', 'public');
 
         Excel::import(new ImportsImportDonasiTunai, public_path('/storage/' . $fileName));
 

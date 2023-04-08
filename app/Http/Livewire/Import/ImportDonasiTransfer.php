@@ -2,19 +2,20 @@
 
 namespace App\Http\Livewire\Import;
 
-use App\Imports\ImportDonatur as ImportsImportDonatur;
+use App\Imports\ImportDonasiTransfer as ImportsImportDonasiTransfer;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ImportDonatur extends Component
+
+class ImportDonasiTransfer extends Component
 {
     public $file, $iteration;
     use WithFileUploads;
 
     public function render()
     {
-        return view('livewire.import.import-donatur');
+        return view('livewire.import.import-donasi-transfer');
     }
 
     public function rules()
@@ -46,9 +47,9 @@ class ImportDonatur extends Component
     {
         $this->validate();
 
-        $fileName = $this->file->store('import/import-donatur', 'public');
+        $fileName = $this->file->store('import/import-donasi-transfer', 'public');
 
-        Excel::import(new ImportsImportDonatur, public_path('/storage/' . $fileName));
+        Excel::import(new ImportsImportDonasiTransfer, public_path('/storage/' . $fileName));
 
         $this->resetInput();
         $this->dispatchBrowserEvent('success-import', ['message' => 'Berhasil melakukan import data']);
