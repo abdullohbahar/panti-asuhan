@@ -161,4 +161,9 @@ class DonasiTunai extends Component
 
         curl_close($curl);
     }
+
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import donasi tunai.xlsx'));
+    }
 }
