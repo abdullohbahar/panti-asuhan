@@ -9,8 +9,8 @@
         
         @page { 
             size: 20.7cm potrait;
-            margin-bottom: 0px;
-            margin-left: 0px;
+            margin-bottom: 10px;
+            margin-left: 10px;
         }
 
         .bg-color{
@@ -124,6 +124,7 @@
                     <tr>
                         <td style="width: 150px !important;">Telah Diterima Dari</td>
                         <td>: <b>{{ $nama }}</b></td>
+                        <td rowspan="5"><img src="data:image/png;base64, {!! base64_encode($qr) !!} "></td>
                     </tr>
                     <tr>
                         <td style="width: 150px !important;">Alamat</td>
@@ -146,7 +147,7 @@
                         <td>: {{ $keterangan }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="text-align:center">
+                        <td colspan="3" style="text-align:center">
                             <h5 style="margin: 5px; font-size: 12px"><i>Wassalamu'alaikum Wr. Wb.</i></h5>
                         </td>
                     </tr>

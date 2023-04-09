@@ -32,9 +32,9 @@
         @page { 
             size: 20.7cm potrait;
             margin-bottom: 0px;
-            margin-left: 0px;
+            margin-left: 10px;
             margin-top: 5px;
-            margin-right: 5px;
+            margin-right: 10px;
         }
 
         body{
@@ -196,7 +196,10 @@
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 125px !important;">Telah Diterima Dari</td>
-                        <td>: <b>{{ $nama }}</b></td>
+                        <td style="width: 500px;">: <b>{{ $nama }}</b></td>
+                        <td rowspan="4">
+                            <img src="data:image/png;base64, {!! base64_encode($qr) !!}" style="margin-top: -15px; margin-bottom: -15px;">
+                        </td>
                     </tr>
                     <tr>
                         <td style="width: 125px !important;">Alamat</td>
@@ -211,7 +214,7 @@
                         <td>:</td>
                     </tr>
                 </table>
-                <table class="table table-bordered" style="width: 100%; margin-top: 5px;">
+                <table class="table table-bordered" style="width: 100%; margin-top: 10px;">
                     <tr>
                         <td>
                             <b>Nama Barang</b>

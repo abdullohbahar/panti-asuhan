@@ -21,6 +21,7 @@ use App\Models\ProofOfDonationNumber;
 use Illuminate\Database\QueryException;
 use App\Models\Donation as ModelsDonation;
 use Illuminate\Romans\Support\Facades\IntToRoman;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Donation extends Component
 {
@@ -217,6 +218,7 @@ class Donation extends Component
 
     public function printInvoiceDonation($id)
     {
+
         $donation = ModelsDonation::with('number', 'donatur')->where('id', $id)->first();
 
         $image_path = public_path('logo/kop.png');
@@ -225,6 +227,22 @@ class Donation extends Component
 
         $now = Carbon::now()->format('m');
         $romanMonth = IntToRoman::filter($now);
+
+        $createdDate = Carbon::parse($donation->created_at)->format('d-m-Y H:i:s');
+
+        $qr = QrCode::size(100)->generate(
+            "
+Telah Diterima Dari: {$donation->donatur->nama}\n
+Alamat: {$donation->donatur->alamat}\n
+Nomor HP: {$donation->donatur->no_hp}\n
+Uang Sejumlah: Rp. " . number_format($donation->pemasukan, 0, '', '.') . "\n
+Terbilang: {$donation->terbilang}\n
+Jenis Donasi: {$donation->tipe}\n
+Keterangan: {$donation->keterangan}\n
+Penerima: {$donation->penerima}\n
+Tanggal: {$createdDate}
+            "
+        );
 
         $data = [
             'nama' => $donation->donatur->nama,
@@ -239,7 +257,8 @@ class Donation extends Component
             'bulan' => $romanMonth,
             'image' => $image_data,
             'penerima' => $donation->penerima,
-            'created_at' => $donation->created_at
+            'created_at' => $createdDate,
+            'qr' => $qr
         ];
 
         if ($donation->number->name) {

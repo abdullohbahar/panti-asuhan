@@ -18,6 +18,7 @@
         "rawilk/laravel-printing": "^3.0",
         "rollbar/rollbar-laravel": "^7.2",
         "sentry/sentry-laravel": "^3.3",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "wandersonwhcr/illuminate-romans": "^3.0"
     },
     "require-dev": {

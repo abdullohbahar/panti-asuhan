@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\DetailGoodsDonation;
 use PDF;
 use Exception;
 use Carbon\Carbon;
@@ -11,8 +10,10 @@ use Livewire\Component;
 use App\Models\GoodsDonation;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\Models\DetailGoodsDonation;
 use Illuminate\Support\Facades\Log;
 use App\Models\ProofOfDonationNumber;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Romans\Support\Facades\IntToRoman;
 
 class CreateDonasiBarang extends Component
@@ -196,6 +197,28 @@ class CreateDonasiBarang extends Component
 
         $keterangans = DetailGoodsDonation::where('goods_donations_id', $id)->get();
 
+        $createdDate = Carbon::parse($donation->created_at)->format('d-m-Y H:i:s');
+
+        // menggabungkan array menggunakan koma
+        $results = '';
+        foreach ($donation->details as $value) {
+            $results .= $value->nama_barang . ' ' . $value->jumlah . ', ';
+        }
+
+        $results = rtrim($results, ', ');
+
+        $qr = QrCode::size(100)->generate(
+            "
+Telah Diterima Dari: {$donation->donatur->nama}\n
+Alamat: {$donation->donatur->alamat}\n
+Nomor HP: {$donation->donatur->no_hp}\n
+Keterangan: {$donation->keterangan}\n
+Penerima: {$donation->penerima}\n
+Tanggal: {$createdDate}\n
+Detail Barang: {$results}\n
+            "
+        );
+
         $data = [
             'nama' => $donation->donatur->nama,
             'no' => $donation->number->no ?? '',
@@ -207,7 +230,8 @@ class CreateDonasiBarang extends Component
             'bulan' => $romanMonth,
             'image' => $image_data,
             'penerima' => $donation->penerima,
-            'created_at' => $donation->created_at
+            'created_at' => $createdDate,
+            'qr' => $qr,
         ];
 
         if ($donation->number->name) {
