@@ -33,7 +33,7 @@
             size: 20.7cm potrait;
             margin-bottom: 0px;
             margin-left: 10px;
-            margin-top: 5px;
+            margin-top: 0px;
             margin-right: 10px;
         }
 
@@ -198,7 +198,7 @@
                         <td style="width: 125px !important;">Telah Diterima Dari</td>
                         <td style="width: 500px;">: <b>{{ $nama }}</b></td>
                         <td rowspan="4">
-                            <img src="data:image/png;base64, {!! base64_encode($qr) !!}" style="margin-top: -15px; margin-bottom: -15px;">
+                            <img src="data:image/png;base64, {!! base64_encode($qr) !!}" style="margin-top: -35px; margin-bottom: -15px;">
                         </td>
                     </tr>
                     <tr>
@@ -214,7 +214,7 @@
                         <td>:</td>
                     </tr>
                 </table>
-                <table class="table table-bordered" style="width: 100%; margin-top: 10px;">
+                <table class="table table-bordered" style="width: 100%; margin-top: 2px;">
                     <tr>
                         <td>
                             <b>Nama Barang</b>
@@ -240,7 +240,7 @@
                 </table>
             </div>
             
-            <table style="width: 100%">
+            <table style="width: 100%; margin-bottom: -20px;">
                 <tr>
                     <td colspan="3" style="text-align:center; font-size: 13px;">
                         <h5 style="margin: 5px"><i>Wassalamu'alaikum Wr. Wb.</i></h5>

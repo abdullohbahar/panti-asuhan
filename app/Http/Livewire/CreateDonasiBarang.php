@@ -207,7 +207,7 @@ class CreateDonasiBarang extends Component
 
         $results = rtrim($results, ', ');
 
-        $qr = QrCode::size(100)->generate(
+        $qr = QrCode::size(85)->generate(
             "
 Telah Diterima Dari: {$donation->donatur->nama}\n
 Alamat: {$donation->donatur->alamat}\n
