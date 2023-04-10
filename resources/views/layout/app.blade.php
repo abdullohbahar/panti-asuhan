@@ -67,7 +67,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{ route('dashboard') }}" class="brand-link text-center">
-        <span class="text-center font-weight-bold">AL-DZIKRO</span>
+        <span class="text-center font-weight-bold">AL DZIKRO</span>
       </a>
 
       <!-- Sidebar -->
@@ -109,7 +109,7 @@
       </div> --}}
       <!-- Default to the left -->
       {{-- <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. --}}
-      <strong>Panti Asuhan Al-Dzikro</strong>
+      <strong>Panti Asuhan Al Dzikro</strong>
     </footer>
 
     <!-- Control Sidebar -->

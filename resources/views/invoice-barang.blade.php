@@ -189,7 +189,7 @@
 
                 </div>
                 <p style="font-size:12px; font-weight:bold">TANDA TERIMA</p>
-                <h4 style="margin: 0px; font-size:12px; font-weight:bold">No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</h4>
+                <h4 style="margin: 0px; font-size:12px; font-weight:bold">No : {{ $no }} / Kw-Al Dzikro / {{ $bulan }} / {{ date('Y') }}</h4>
                 <h5 style="margin: 5px; font-size:12px; font-weight:bold"><i>Assalamu'alaikum Wr. Wb.</i></h5>
             </div>
             <div style="font-size: 11px;">

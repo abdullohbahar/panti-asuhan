@@ -109,7 +109,7 @@
 
                 </div>
                 <p style="margin: 2px; font-size: 14px"><b>TANDA TERIMA</b></p>
-                <p style="margin: 0px; font-size: 13px"><b>No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</b></p>
+                <p style="margin: 0px; font-size: 13px"><b>No : {{ $no }} / Kw-Al Dzikro / {{ $bulan }} / {{ date('Y') }}</b></p>
                 <input type="checkbox" id="Zakat" @if ($tipe == 'Zakat') checked @else class="check" @endif><label for="Zakat" style="font-size: 13px">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
                 {{-- <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq" style="font-size: 13px">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp; --}}
                 <input type="checkbox" id="Sodaqoh" @if ($tipe == 'Sodaqoh' || $tipe == 'Sodaqoh / Infaq') checked @else class="check" @endif><label for="Sodaqoh" style="font-size: 13px">Sodaqoh / Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
