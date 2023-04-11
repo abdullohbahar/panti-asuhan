@@ -58,7 +58,7 @@
                         <hr>
                         <b>Penjelasan Pengisian Kolom</b>
                         <ul>
-                            <li>Kolom <b>Tanggal Donasi</b> diisi dengan tanggal/bulan/tahun misal 20/31/2022</li>
+                            <li>Kolom <b>Tanggal Donasi</b> diisi dengan tanggal-bulan-tahun misal 20-31-2022</li>
                             <li>Kolom <b>Nominal</b> Diisi tanpa attribut RP maupun titik, misal Rp. 10.000 jadinya diisi dengan 10000</li>
                         </ul>
                     </div>

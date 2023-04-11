@@ -26,8 +26,16 @@ class ImportPengeluaranYayasan implements ToModel, WithStartRow
             return null;
         }
 
+        if (strpos($row[0], '-')) {
+            $tgl_donasi = Carbon::parse($row[0])->format('Y-m-d');
+        } else if (ctype_digit($row[0])) {
+            $tgl_donasi = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[0]));
+        } else {
+            $tgl_donasi = NULL;
+        }
+
         return new Donation([
-            'tanggal_donasi' => $row[0] != null ? Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[0])) : NULL,
+            'tanggal_donasi' => $tgl_donasi,
             'pengeluaran' => $row[2],
             'jenis_donasi' => 'pengeluaran',
             'keterangan' => $row[1],
