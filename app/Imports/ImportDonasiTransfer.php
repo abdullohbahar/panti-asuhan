@@ -23,7 +23,7 @@ class ImportDonasiTransfer implements ToCollection, WithStartRow
     {
         // dd($rows);
         foreach ($rows as $row) {
-            if (!empty($row[0]) && !empty($row[1]) && !empty($row[2]) && !empty($row[3]) && !empty($row[4]) && !empty($row[5]) && !empty($row[6]) && !empty($row[7]) && !empty($row[8])) {
+            if (!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) || !empty($row[5]) || !empty($row[6]) || !empty($row[7]) || !empty($row[8])) {
                 if (strpos($row[3], '-')) {
                     $tgl_donasi = Carbon::parse($row[3])->format('Y-m-d');
                 } else if (ctype_digit($row[3])) {

@@ -23,9 +23,8 @@ class ImportDonasiTunai implements ToCollection, WithStartRow
      */
     public function collection(Collection $rows)
     {
-        dd($rows);
         foreach ($rows as $row) {
-            if (!empty($row[0]) && !empty($row[1]) && !empty($row[2]) && !empty($row[3]) && !empty($row[4]) && !empty($row[5]) && !empty($row[6]) && !empty($row[7]) && !empty($row[8]) && !empty($row[9])) {
+            if (!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) || !empty($row[5]) || !empty($row[6]) || !empty($row[7]) || !empty($row[8]) || !empty($row[9])) {
                 // melakukan pengecekan apakh nomor null atau tidak
                 $checkNomor = ProofOfDonationNumber::orderBy('no', 'desc')->first();
 
