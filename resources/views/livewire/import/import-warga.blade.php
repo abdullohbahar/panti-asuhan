@@ -37,7 +37,7 @@
     </div>
 
     <div wire:ignore.self class="modal fade" id="petunjuk" aria-labelledby="petunjuk" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="petunjuk">Petunjuk</h5>
@@ -55,7 +55,15 @@
                             <li>Status (Dhuafa / Fakir Miskin / Jompo / Jamaah / Sudah Meninggal / Warga Dusun)</li>
                         </ul>
                         <p>Untuk kolom lain dikosongkan tidak masalah.</p>
-                        <p>Untuk Pengisian Jenis Kelamin dan Status harus disesuaikan dengan yang ada didalam kurung. <b>Jika STATUS tidak sesuai maka data tidak akan muncul dihalaman data warga</b></p>
+                        <hr>
+                        <b>Petunjuk Pengisian Kolom</b>
+                        <ul>
+                            <li>Kolom <b>Jenis Kelamin</b> Harus disesuaikan dengan yang ada di dalam kurung. <b><i>BESAR KECILNYA HURUF HARAP DIPERHATIKAN</i></b></li>
+                            <li>
+                                Kolom <b>Status</b> Harus disesuaikan dengan yang ada di dalam kurung. <b><i>BESAR KECILNYA HURUF HARAP DIPERHATIKAN</i>.
+                                </b><b style="color:red;">Jika STATUS tidak sesuai maka data tidak akan muncul dihalaman data warga</b>
+                            </li>
+                        </ul>
                         <p>Untuk import excel tidak support foto</p>
                     </div>
                 </div>

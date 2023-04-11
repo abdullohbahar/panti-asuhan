@@ -32,7 +32,7 @@ class ImportSantri implements ToModel, WithStartRow
         } else if (ctype_digit($row[5])) {
             $tgl_lahir = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[5]));
         } else {
-            $tgl_lahir = '';
+            $tgl_lahir = NULL;
         }
 
         if (strpos($row[10], '-')) {
@@ -40,7 +40,7 @@ class ImportSantri implements ToModel, WithStartRow
         } else if (ctype_digit($row[10])) {
             $tgl_masuk = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[10]));
         } else {
-            $tgl_masuk = '';
+            $tgl_masuk = NULL;
         }
 
         if (strpos($row[11], '-')) {
@@ -48,7 +48,7 @@ class ImportSantri implements ToModel, WithStartRow
         } else if (ctype_digit($row[11])) {
             $tgl_keluar = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[11]));
         } else {
-            $tgl_keluar = '';
+            $tgl_keluar = NULL;
         }
 
         return new AnakAsuh([
