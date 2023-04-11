@@ -27,7 +27,29 @@ class ImportSantri implements ToModel, WithStartRow
             return null;
         }
 
-        // dd($row[5]);
+        if (strpos($row[5], '-')) {
+            $tgl_lahir = Carbon::parse($row[5])->format('Y-m-d');
+        } else if (ctype_digit($row[5])) {
+            $tgl_lahir = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[5]));
+        } else {
+            $tgl_lahir = '';
+        }
+
+        if (strpos($row[10], '-')) {
+            $tgl_masuk = Carbon::parse($row[10])->format('Y-m-d');
+        } else if (ctype_digit($row[10])) {
+            $tgl_masuk = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[10]));
+        } else {
+            $tgl_masuk = '';
+        }
+
+        if (strpos($row[11], '-')) {
+            $tgl_keluar = Carbon::parse($row[11])->format('Y-m-d');
+        } else if (ctype_digit($row[11])) {
+            $tgl_keluar = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[11]));
+        } else {
+            $tgl_keluar = '';
+        }
 
         return new AnakAsuh([
             'id' => Str::uuid(),
@@ -36,13 +58,13 @@ class ImportSantri implements ToModel, WithStartRow
             'nama_lengkap' => $row[2], // required
             'jenis_kelamin' => $row[3], // required
             'tempat_lahir' => $row[4],
-            'tanggal_lahir' => $row[5] != null ? Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[5])) : '',
+            'tanggal_lahir' => $tgl_lahir,
             'pendidikan' => $row[6],
             'tipe' => $row[7], // required
             'alamat' => $row[8],
             'status' => $row[9], // required
-            'tgl_masuk' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[10])),
-            'tgl_keluar' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[11])),
+            'tgl_masuk' => $tgl_masuk,
+            'tgl_keluar' => $tgl_keluar,
             'nama_ayah_kandung' => $row[12],
             'nama_ibu_kandung' => $row[13],
             'nohp_ortu' => $row[14],
