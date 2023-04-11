@@ -38,7 +38,7 @@
 
     <!-- Modal -->
     <div wire:ignore.self class="modal fade" id="petunjuk" aria-labelledby="petunjuk" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="petunjuk">Petunjuk</h5>
@@ -65,8 +65,8 @@
                         <ul>
                             <li>Kolom <b>Urutan</b> diisi dengan dengan angka, kolom ini digunakan untuk menentukan urutan tampilan data.</li>
                             <li>Kolom <b>Jenis Kelamin</b> diisi sesuai dengan yang ada di dalam tanda kurung</li>
-                            <li>Kolom <b>Masa Bakti (Dari Tahun)</b> dan <b>Masa Bakti (Sampai Tahun)</b> diisi dengan tanggal/bulan/tahun misal 20/31/2022</li>
-                            <li>Kolom <b>Status</b> diisi sesuai yang ada pada tanda kurung diatas</li>
+                            <li>Kolom <b>Masa Bakti (Dari Tahun)</b> dan <b>Masa Bakti (Sampai Tahun)</b> diisi dengan tanggal-bulan-tahun misal 20/31/2022</li>
+                            <li>Kolom <b>Status</b> diisi sesuai yang ada pada tanda kurung diatas. <b><i>BESAR KECILNYA HURUF HARAP DIPERHATIKAN</i></b><b style="color:red;"> Jika STATUS tidak sesuai maka data tidak akan muncul dihalaman data pengurus</b></li>
                         </ul>
                     </div>
                 </div>

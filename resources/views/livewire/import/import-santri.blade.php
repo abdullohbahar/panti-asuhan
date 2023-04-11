@@ -61,7 +61,7 @@
                         <b>Penjelasan pengisian Kolom</b>
                         <ul>
                             <li>Kolom <b>Jenis Kelamin</b> Harus disesuaikan dengan yang ada di dalam kurung. <b><i>BESAR KECILNYA HURUF HARAP DIPERHATIKAN</i></b></li>
-                            <li>Kolom <b>Tipe</b> Harus disesuaikan dengan yang ada di dalam kurung. <b><i>BESAR KECILNYA HURUF HARAP DIPERHATIKAN</i></b style="color:red;"> Jika TIPE tidak sesuai maka data tidak akan muncul dihalaman data santri</li>
+                            <li>Kolom <b>Tipe</b> Harus disesuaikan dengan yang ada di dalam kurung. <b><i>BESAR KECILNYA HURUF HARAP DIPERHATIKAN</i></b><b style="color:red;"> Jika TIPE tidak sesuai maka data tidak akan muncul dihalaman data santri</b></li>
                             <li>Kolom <b>Status</b> Harus disesuaikan dengan yang ada di dalam kurung. <b><i>BESAR KECILNYA HURUF HARAP DIPERHATIKAN</i></b></li>
                             <li>Penulisan <b>Tanggal Lahir / Tanggal Masuk / Tanggal keluar</b> Harap mengikuti format berikut <b>Tanggal-Bulan-Tahun</b> misal <b>20-01-2003</b></li>
                         </ul>
