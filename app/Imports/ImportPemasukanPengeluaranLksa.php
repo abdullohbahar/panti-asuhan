@@ -26,8 +26,16 @@ class ImportPemasukanPengeluaranLksa implements ToModel, WithStartRow
             return null;
         }
 
+        if (strpos($row[0], '-')) {
+            $tgl_donasi = Carbon::parse($row[0])->format('Y-m-d');
+        } else if (ctype_digit($row[0])) {
+            $tgl_donasi = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[0]));
+        } else {
+            $tgl_donasi = NULL;
+        }
+
         return new LksaFinance([
-            'tanggal' => $row[0] != null ? Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[0])) : NULL,
+            'tanggal' => $tgl_donasi,
             'keterangan' => $row[1],
             'pemasukan' => $row[2],
             'pengeluaran' => $row[3],

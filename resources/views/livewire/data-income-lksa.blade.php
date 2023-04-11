@@ -83,9 +83,9 @@
                                 @foreach ($donations as $index => $donation)
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
-                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}</td>
                                         <td data-label="Tanggal">{{ $donation->tanggal }}</td>
                                         <td data-label="Uraian">{{ $donation->keterangan }}</td>
+                                        <td data-label="Nominal">{{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}</td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan')
                                             <td data-label="Aksi">
                                                 <button id="edit" wire:click="show('{{ $donation->id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>

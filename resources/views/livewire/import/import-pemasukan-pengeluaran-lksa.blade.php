@@ -58,8 +58,8 @@
                         <hr>
                         <b>Penjelasan Pengisian Kolom</b>
                         <ul>
-                            <li>Kolom <b>Tanggal</b> diisi dengan tanggal/bulan/tahun misal 20/31/2022</li>
-                            <li>Kolom <b>Jenis</b> diisi sesuai yang ada pada tanda kurung diatas</li>
+                            <li>Kolom <b>Tanggal</b> diisi dengan tanggal-bulan-tahun misal 20-31-2022</li>
+                            <li>Kolom <b>Jenis</b> diisi sesuai yang ada pada tanda kurung diatas. <b><i>BESAR KECILNYA HURUF HARAP DIPERHATIKAN</i></b style="color:red;"> Jika <b>JENIS</b> tidak sesuai maka data tidak akan muncul dihalaman data</li></li>
                         </ul>
                     </div>
                 </div>
