@@ -4,7 +4,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Import Donasi Tunai</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Import Donasi Transfer</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -58,7 +58,7 @@
                         <hr>
                         <b>Penjelasan Pengisian Kolom</b>
                         <ul>
-                            <li>Kolom <b>Tanggal Donasi</b> diisi dengan tanggal/bulan/tahun misal 20/31/2022</li>
+                            <li>Kolom <b>Tanggal Donasi</b> Harap mengikuti format berikut <b>Tanggal-Bulan-Tahun</b> misal <b>20-01-2003</b></li>
                             <li>Kolom <b>Nominal</b> Diisi tanpa attribut RP maupun titik, misal Rp. 10.000 jadinya diisi dengan 10000</li>
                         </ul>
                     </div>
