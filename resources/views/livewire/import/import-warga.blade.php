@@ -63,6 +63,7 @@
                                 Kolom <b>Status</b> Harus disesuaikan dengan yang ada di dalam kurung. <b><i>BESAR KECILNYA HURUF HARAP DIPERHATIKAN</i>.
                                 </b><b style="color:red;">Jika STATUS tidak sesuai maka data tidak akan muncul dihalaman data warga</b>
                             </li>
+                            <li>Penulisan <b>Tanggal Lahir</b> Harap mengikuti format berikut <b>Tanggal-Bulan-Tahun</b> misal <b>20-01-2003</b></li>
                         </ul>
                         <p>Untuk import excel tidak support foto</p>
                     </div>

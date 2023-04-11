@@ -38,7 +38,7 @@
 
     <!-- Modal -->
     <div wire:ignore.self class="modal fade" id="petunjuk" aria-labelledby="petunjuk" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="petunjuk">Petunjuk</h5>
@@ -52,7 +52,7 @@
                         Untuk melakukan pengisian excel, anda wajib mengisi kolom
                         <ul>
                             <li>Nama Donatur</li>
-                            <li>Tipe (Zakat | Operasional Yayasan | Sodaqoh / Infaq | Lain-lain)</li>
+                            <li>Tipe (<b> Zakat</b> | <b>Operasional Yayasan</b> | <b>Sodaqoh / Infaq</b> | <b>Lain-lain</b> )</li>
                             <li>Tanggal Donasi</li>
                             <li>Nominal</li>
                             <li>Penerima</li>
@@ -61,8 +61,11 @@
                         <hr>
                         <b>Penjelasan Pengisian Kolom</b>
                         <ul>
-                            <li>Kolom <b>Tipe</b> diisi sesuai dengan yang ada di dalam tanda kurung</li>
-                            <li>Kolom <b>Tanggal Donasi</b> diisi dengan tanggal/bulan/tahun misal 20/31/2022</li>
+                            <li>
+                                Kolom <b>Tipe</b> diisi sesuai dengan yang ada di dalam tanda kurung. 
+                                <b><i>BESAR KECILNYA HURUF HARAP DIPERHATIKAN</i>. </b><b style="color:red;">Jika STATUS tidak sesuai maka data tidak akan muncul dihalaman data donasi tunai</b>
+                            </li>
+                            <li>Penulisan <b>Tanggal Donasi</b> Harap mengikuti format berikut <b>Tanggal-Bulan-Tahun</b> misal <b>20-01-2003</b></li>
                             <li>Kolom <b>Nominal</b> Diisi tanpa attribut RP maupun titik, misal Rp. 10.000 jadinya diisi dengan 10000</li>
                         </ul>
                     </div>
