@@ -28,7 +28,7 @@
   @livewireStyles
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
   <!-- Site wrapper -->
   <div class="wrapper">
     <!-- Navbar -->
@@ -37,6 +37,9 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li>
+          <a href="#" class="nav-link"><b>PANTI ASUHAN AL DZIKRO WUKIRSARI IMOGIRI BANTUL</b></a>
         </li>
       </ul>
 
@@ -67,7 +70,15 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{ route('dashboard') }}" class="brand-link text-center">
-        <span class="text-center font-weight-bold">AL DZIKRO</span>
+        @php
+            if(strpos(auth()->user()->role, 'yayasan')){
+              $logo = '/logo-yayasan.png';
+            }else{
+              $logo = '/logo-lksa.jpg';
+            }
+        @endphp
+        <img src="{{ asset('./logo'.$logo) }}" class="img-circle elevation-3" style="opacity: .8; width: 60%; margin-top: -10px; margin-bottom: -10px;">
+        {{-- <span class="brand-text font-weight-bold">AL DZIKRO</span> --}}
       </a>
 
       <!-- Sidebar -->
