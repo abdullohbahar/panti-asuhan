@@ -17,5 +17,8 @@ class LetterLksa extends Model
         'tanggal',
         'file',
         'tipe',
+        'tanggal_diterima',
+        'disposisi_penugasan',
+        'file_dokumentasi',
     ];
 }

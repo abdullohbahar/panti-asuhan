@@ -22,6 +22,10 @@ class DataIncomeLetterLksa extends Component
     public $idLetter;
     public $iteration;
     public $destroyBerkas;
+    public $tanggal_diterima;
+    public $disposisi_penugasan;
+    public $file_dokumentasi;
+    public $old_file_dokumentasi;
     use WithFileUploads;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
@@ -59,6 +63,10 @@ class DataIncomeLetterLksa extends Component
             $this->isi_surat = $letter->isi_surat;
             $this->tanggal = $letter->tanggal;
             $this->perihal_surat = $letter->perihal_surat;
+            $this->oldSurat = $letter->file;
+            $this->tanggal_diterima = $letter->tanggal_diterima;
+            $this->disposisi_penugasan = $letter->disposisi_penugasan;
+            $this->old_file_dokumentasi = $letter->file_dokumentasi;
             $this->oldSurat = $letter->file;
         }
     }
@@ -105,12 +113,24 @@ class DataIncomeLetterLksa extends Component
                 'tanggal' => $this->tanggal,
                 'tipe' => 'Surat Masuk',
                 'isi_surat' => $this->isi_surat,
+                'tanggal_diterima' => $this->tanggal_diterima,
+                'disposisi_penugasan' => $this->disposisi_penugasan,
             ];
 
             if ($this->file) {
                 unlink(public_path('storage/' . $this->oldSurat));
                 $file = $this->file->store('lksa/surat-masuk', 'public');
                 $data['file'] = $file;
+            }
+
+            if ($this->file_dokumentasi) {
+                if (file_exists(public_path('storage/' . $this->old_file_dokumentasi))) {
+                    if ($this->old_file_dokumentasi) {
+                        unlink(public_path('storage/' . $this->old_file_dokumentasi));
+                    }
+                }
+                $fileDokumentasi = $this->file_dokumentasi->store('lksa/dokumentasi', 'public');
+                $data['file_dokumentasi'] = $fileDokumentasi;
             }
 
             // Update data

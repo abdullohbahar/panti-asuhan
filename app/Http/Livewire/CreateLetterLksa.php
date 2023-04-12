@@ -19,6 +19,9 @@ class CreateLetterLksa extends Component
     public $perihal_surat;
     public $tanggal;
     public $isi_surat;
+    public $tanggal_diterima;
+    public $disposisi_penugasan;
+    public $file_dokumentasi;
 
     public function render()
     {
@@ -63,6 +66,12 @@ class CreateLetterLksa extends Component
 
             $file = $this->file->store('lksa/surat-masuk', 'public');
 
+            if ($this->file_dokumentasi) {
+                $fileDokumentasi = $this->file_dokumentasi->store('lksa/dokumentasi', 'public');
+            } else {
+                $fileDokumentasi = "";
+            }
+
             LetterLksa::create([
                 'file' => $file,
                 'nama_pengirim' => $this->nama_pengirim,
@@ -71,6 +80,9 @@ class CreateLetterLksa extends Component
                 'tanggal' => $this->tanggal,
                 'tipe' => 'Surat Masuk',
                 'isi_surat' => $this->isi_surat,
+                'tanggal_diterima' => $this->tanggal_diterima,
+                'disposisi_penugasan' => $this->disposisi_penugasan,
+                'file_dokumentasi' => $fileDokumentasi,
             ]);
 
             DB::commit();

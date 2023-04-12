@@ -22,6 +22,9 @@ return new class extends Migration
             $table->date('tanggal');
             $table->text('file');
             $table->string('tipe');
+            $table->string('tanggal_diterima')->nullable();
+            $table->string('disposisi_penugasan')->nullable();
+            $table->string('file_dokumentasi')->nullable();
             $table->timestamps();
         });
     }
