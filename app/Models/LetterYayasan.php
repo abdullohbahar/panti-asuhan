@@ -17,5 +17,8 @@ class LetterYayasan extends Model
         'tanggal',
         'isi_surat',
         'tipe',
+        'tanggal_diterima',
+        'disposisi_penugasan',
+        'file_dokumentasi',
     ];
 }

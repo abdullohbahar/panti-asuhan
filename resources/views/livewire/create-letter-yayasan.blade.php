@@ -90,6 +90,45 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <hr>
+                            <h4><b>Disposisi</b><i style="font-size: 15px;"> *kosongkan saja jika tidak ingin mengisi</i></h4>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Tanggal Diterima</label>
+                                <input type="date" wire:model="tanggal_diterima" class="form-control @error("tanggal_diterima") is-invalid @enderror" id="">
+                                @error("tanggal_diterima")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Dokumentasi</label>
+                                <input type="file" wire:model="file_dokumentasi" class="form-control @error("file_dokumentasi") is-invalid @enderror" id="">
+                                @error("file_dokumentasi")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                <label for="">Disposisi / Penugasan</label>
+                                <textarea wire:model="disposisi_penugasan" class="form-control @error("disposisi_penugasan") is-invalid @enderror" cols="30" rows="10"></textarea>
+                                @error("disposisi_penugasan")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-12 mt-3">
                             <button class="btn btn-success btn-block" wire:loading.attr="disabled">
                                 Tambah Surat

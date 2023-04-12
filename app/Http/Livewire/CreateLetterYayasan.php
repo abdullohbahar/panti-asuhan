@@ -20,6 +20,10 @@ class CreateLetterYayasan extends Component
     public $perihal_surat;
     public $tanggal;
     public $isi_surat;
+    public $tanggal_diterima;
+    public $disposisi_penugasan;
+    public $file_dokumentasi;
+
 
     public function render()
     {
@@ -64,6 +68,12 @@ class CreateLetterYayasan extends Component
 
             $file = $this->file->store('yayasan/surat-masuk', 'public');
 
+            if ($this->file_dokumentasi) {
+                $fileDokumentasi = $this->file_dokumentasi->store('yayasan/dokumentasi', 'public');
+            } else {
+                $fileDokumentasi = "";
+            }
+
             LetterYayasan::create([
                 'file' => $file,
                 'nama_pengirim' => $this->nama_pengirim,
@@ -72,6 +82,9 @@ class CreateLetterYayasan extends Component
                 'tanggal' => $this->tanggal,
                 'tipe' => 'Surat Masuk',
                 'isi_surat' => $this->isi_surat,
+                'tanggal_diterima' => $this->tanggal_diterima,
+                'disposisi_penugasan' => $this->disposisi_penugasan,
+                'file_dokumentasi' => $fileDokumentasi,
             ]);
 
             DB::commit();
