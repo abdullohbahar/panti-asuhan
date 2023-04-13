@@ -1,6 +1,8 @@
 <div>
     {{-- Modal --}}
     @include('livewire.modal.surat.modal-edit-masuk')
+    @include('livewire.modal.surat.modal-detail-surat')
+
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
@@ -54,6 +56,7 @@
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'sekertariat-yayasan')
                                             <td data-label="Aksi">
                                                 <button id="edit" wire:click="show('{{ $letter->id }}')" data-jenis="{{ $letter->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-letter" data-toggle="tooltip" data-placement="top" title="Ubah Surat"><i class="fas fa-pencil-alt"></i></button>
+                                                <button wire:click="show('{{ $letter->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail-letter"><i class="fas fa-eye"></i></button>
                                                 <button wire:click="deleteConfirmation('{{ $letter->id }}','{{ $letter->file }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Surat"><i class="fas fa-trash-alt"></i></button>
                                             </td>
                                         @endif

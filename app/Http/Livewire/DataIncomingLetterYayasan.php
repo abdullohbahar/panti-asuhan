@@ -67,7 +67,6 @@ class DataIncomingLetterYayasan extends Component
             $this->tanggal_diterima = $letter->tanggal_diterima;
             $this->disposisi_penugasan = $letter->disposisi_penugasan;
             $this->old_file_dokumentasi = $letter->file_dokumentasi;
-            $this->oldSurat = $letter->file;
         }
     }
 
