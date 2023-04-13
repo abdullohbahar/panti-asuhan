@@ -61,6 +61,78 @@ use App\Http\Livewire\Pengurus;
 
 Route::get('/', [AuthController::class, 'index'])->middleware('guest');
 
+Route::get('/token', function () {
+
+    // $curl = curl_init();
+
+    // curl_setopt_array($curl, array(
+    //     CURLOPT_URL => 'https://api.fonnte.com/fetch-group',
+    //     CURLOPT_SSL_VERIFYPEER => FALSE,
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'POST',
+    //     CURLOPT_HTTPHEADER => array(
+    //         'Authorization: 2Ap5o4gaEsJrHmNuhLDH'
+    //     ),
+    // ));
+
+    // $response = curl_exec($curl);
+
+    // curl_close($curl);
+    // echo $response;
+
+    // curl_setopt_array($curl, array(
+    //     CURLOPT_URL => 'https://api.fonnte.com/get-whatsapp-group',
+    //     CURLOPT_SSL_VERIFYPEER => FALSE,
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'POST',
+    //     CURLOPT_HTTPHEADER => array(
+    //         'Authorization: 2Ap5o4gaEsJrHmNuhLDH'
+    //     ),
+    // ));
+
+    // $response = curl_exec($curl);
+
+    // curl_close($curl);
+    // echo $response;
+
+    // $curl = curl_init();
+
+    // curl_setopt_array($curl, array(
+    //     CURLOPT_URL => 'https://api.fonnte.com/send',
+    //     CURLOPT_SSL_VERIFYPEER => FALSE,
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'POST',
+    //     CURLOPT_POSTFIELDS => array(
+    //         'target' => env('PHONE_NUMBER'),
+    //         'message' => "DONASI BARANG \nBERHASIL",
+    //         'countryCode' => '62', //optional
+    //     ),
+    //     CURLOPT_HTTPHEADER => array(
+    //         'Authorization: ' . env('FONNTE_TOKEN') . '' //change TOKEN to your actual token
+    //     ),
+    // ));
+
+    // $response = curl_exec($curl);
+
+    // echo $response;
+    // curl_close($curl);
+});
+
 Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.admin.yayasan');
 

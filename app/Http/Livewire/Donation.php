@@ -207,7 +207,7 @@ class Donation extends Component
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: mfS1xFJqr4XeXm48TvjV' //change TOKEN to your actual token
+                'Authorization: ' . env('FONNTE_TOKEN') . '' //change TOKEN to your actual token
             ),
         ));
 
