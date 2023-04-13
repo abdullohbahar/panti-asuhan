@@ -83,8 +83,11 @@ class CreateDonasiBarang extends Component
         $checkNomor = ProofOfDonationNumber::latest()->first();
 
         if ($checkNomor) {
-            $monthDate = Carbon::now()->format('m-d');
-            if ($monthDate == '01-01') {
+            // jika nomor tidak null maka lakukan pengecekan apakah tahun yang latest dengan tahun sekarang sama
+            // jika tidak sama maka ulani nomor menjadi 1
+            $checkNomorYear = Carbon::parse($checkNomor->created_at)->format('Y');
+            $yearNow = Carbon::now()->format('Y');
+            if ($yearNow != $checkNomorYear) {
                 $no = '00001';
             } else {
                 $no = str_pad($checkNomor->no + 1, 5, 0, STR_PAD_LEFT);
