@@ -4,8 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\LetterLksa;
-use App\Models\OutgoingLetterLksa;
+use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use App\Models\OutgoingLetterLksa;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
@@ -29,6 +30,8 @@ class DataOutcomeLetterLksa extends Component
     public $destroyBerkas;
     use WithFileUploads;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {

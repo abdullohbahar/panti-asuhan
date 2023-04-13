@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\ScheduleActivity;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\ScheduleActivity;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -17,6 +18,8 @@ class Data extends Component
     public $pengundang;
     public $keterangan;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
