@@ -148,7 +148,7 @@ class DonasiTunai extends Component
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
-                'target' => '085701223722',
+                'target' => env('PHONE_NUMBER'),
                 'message' => "DONASI TUNAI \nBERHASIL \n$tgl $waktu \n$nama \nAlamat: $alamat \n$nominal \nPenerima: $penerima",
                 'countryCode' => '62', //optional
             ),
