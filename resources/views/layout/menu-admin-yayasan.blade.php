@@ -395,7 +395,7 @@
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-envelope"></i>
         <p>
-          Surat Masuk & Keluar LKSA
+          Surat LKSA
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>

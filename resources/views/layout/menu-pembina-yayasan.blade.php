@@ -267,11 +267,11 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item {{ $active == 'create-letter-yayasan' || $active == 'data-letter-yayasan' || $active == 'create-outgoing-letter-yayasan' || $active == 'data-outcome-letter-yayasan' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'create-letter-yayasan' || $active == 'data-penomoran-surat-yayasan' || $active == 'create-penomoran-surat-yayasan' || $active == 'data-letter-yayasan' || $active == 'create-outgoing-letter-yayasan' || $active == 'data-outcome-letter-yayasan' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-envelope"></i>
         <p>
-          Surat Masuk & Keluar Yayasan
+          Surat Yayasan
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>
@@ -293,6 +293,23 @@
         </li>
       </ul>
       <ul class="nav nav-treeview">
+        <li class="nav-header">Penomoran Surat</li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('create.numbering.letter.yayasan') }}" class="nav-link {{ $active == 'create-penomoran-surat-yayasan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Tambah Penomoran Surat</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.numbering.letter.yayasan') }}" class="nav-link {{ $active == 'data-penomoran-surat-yayasan' ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Data Penomoran Surat</p>
+          </a>
+        </li>
+      </ul>
+      {{-- <ul class="nav nav-treeview">
         <li class="nav-header">Surat Keluar</li>
         <li class="nav-item ml-2">
           <a href="{{ route('create.outgoing.letter.yayasan') }}" class="nav-link {{ $active == 'create-outgoing-letter-yayasan' ? 'active' : '' }}">
@@ -306,13 +323,13 @@
             <p>Surat Keluar</p>
           </a>
         </li>
-      </ul>
+      </ul> --}}
     </li>
-    <li class="nav-item {{ $active == 'create-letter-lksa' || $active == 'create-outgoing-letter-lksa' || $active == 'data-letter-lksa' || $active == 'data-outcome-letter-lksa' ? 'menu-open' : '' }}">
+    <li class="nav-item {{ $active == 'create-letter-lksa' || $active == 'data-penomoran-surat-lksa' || $active == 'create-penomoran-surat-lksa' || $active == 'create-outgoing-letter-lksa' || $active == 'data-letter-lksa' || $active == 'data-outcome-letter-lksa' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-envelope"></i>
         <p>
-          Surat Masuk & Keluar LKSA
+          Surat LKSA
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>
@@ -334,19 +351,19 @@
         </li>
       </ul>
       <ul class="nav nav-treeview">
-        <li class="nav-header">Surat Keluar</li>
+        <li class="nav-header">Penomoran Surat</li>
         <li class="nav-item ml-2">
-          <a href="{{ route('create.outgoing.letter.lksa') }}" class="nav-link {{ $active == 'create-outgoing-letter-lksa' ? 'active' : '' }}">
+          <a href="{{ route('create.numbering.letter.lksa') }}" class="nav-link {{ $active == 'create-penomoran-surat-lksa' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Tambah Surat Keluar</p>
+            <p>Tambah Penomoran Surat</p>
           </a>
         </li>
       </ul>
       <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
-          <a href="{{ route('data.outcome.letter.lksa') }}" class="nav-link {{ $active == 'data-outcome-letter-lksa' ? 'active' : '' }}">
+          <a href="{{ route('data.numbering.letter.lksa') }}" class="nav-link {{ $active == 'data-penomoran-surat-lksa' ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Surat Keluar</p>
+            <p>Data Penomoran Surat</p>
           </a>
         </li>
       </ul>
