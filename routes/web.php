@@ -42,6 +42,7 @@ use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
 use App\Http\Livewire\LksaDocument;
 use App\Http\Livewire\Pengurus;
+use App\Http\Livewire\ScheduleActivity\Create;
 
 /*
 |--------------------------------------------------------------------------
@@ -372,4 +373,7 @@ Route::middleware('auth')->group(function () {
     // penomoran surat lksa
     Route::get('penomoran-surat-lksa', CreatePenomoranSuratLksa::class)->name('create.numbering.letter.lksa');
     Route::get('data-penomoran-surat-lksa', DataPenomoranSuratLksa::class)->name('data.numbering.letter.lksa');
+
+    // Agenda kegiatan
+    Route::get('tambah-agenda-kegiatan', Create::class)->name('create.agenda.kegiatan');
 });

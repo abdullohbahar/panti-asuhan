@@ -10,6 +10,14 @@
         </p>
       </a>
     </li>
+    <li class="nav-item">
+      <a href="{{ route('create.agenda.kegiatan') }}" class="nav-link {{ $active == 'create-agenda' ? 'active' : '' }}">
+        <i class="nav-icon fas fa-calendar-alt"></i>
+        <p>
+          Agenda Kegiatan
+        </p>
+      </a>
+    </li>
     <li class="nav-item {{ $active == 'santri-dalam' || $active == 'santri-luar' || $active == 'alumni' || $active == 'create-santri' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-users"></i>
