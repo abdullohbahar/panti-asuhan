@@ -10,13 +10,32 @@
         </p>
       </a>
     </li>
-    <li class="nav-item">
-      <a href="{{ route('create.agenda.kegiatan') }}" class="nav-link {{ $active == 'create-agenda' ? 'active' : '' }}">
-        <i class="nav-icon fas fa-calendar-alt"></i>
+    <li class="nav-item {{ $active == 'create-agenda' || $active == 'data-agenda' ? 'menu-open' : '' }}">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-users"></i>
         <p>
-          Agenda Kegiatan
+          Santri
+          <i class="right fas fa-angle-left"></i>
         </p>
       </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item ml-2">
+          <a href="{{ route('create.agenda.kegiatan') }}" class="nav-link {{ $active == 'create-santri' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Tambah Agenda Kegiatan
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ml-2">
+          <a href="{{ route('data.agenda.kegiatan') }}" class="nav-link {{ $active == 'data-agenda' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              Data Agenda Kegiatan
+            </p>
+          </a>
+        </li>
+      </ul>
     </li>
     <li class="nav-item {{ $active == 'santri-dalam' || $active == 'santri-luar' || $active == 'alumni' || $active == 'create-santri' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">

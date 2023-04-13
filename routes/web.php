@@ -43,6 +43,7 @@ use App\Http\Livewire\LaporanPemasukanPengeluaran;
 use App\Http\Livewire\LksaDocument;
 use App\Http\Livewire\Pengurus;
 use App\Http\Livewire\ScheduleActivity\Create;
+use App\Http\Livewire\ScheduleActivity\Data;
 
 /*
 |--------------------------------------------------------------------------
@@ -376,4 +377,5 @@ Route::middleware('auth')->group(function () {
 
     // Agenda kegiatan
     Route::get('tambah-agenda-kegiatan', Create::class)->name('create.agenda.kegiatan');
+    Route::get('data-agenda-kegiatan', Data::class)->name('data.agenda.kegiatan');
 });

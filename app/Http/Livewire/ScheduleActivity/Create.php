@@ -67,7 +67,7 @@ class Create extends Component
             ]);
 
             DB::commit();
-            // return redirect()->route('data.outcome.letter.lksa')->with('message', 'Surat Keluar Berhasil Ditambahkan');
+            return redirect()->route('data.agenda.kegiatan')->with('message', 'Data Berhasil Ditambahkan');
         } catch (\Exception $e) {
             Log::critical($e);
             DB::rollBack();
