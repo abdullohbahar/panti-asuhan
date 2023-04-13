@@ -230,8 +230,14 @@ class Donation extends Component
 
         $createdDate = Carbon::parse($donation->created_at)->format('d-m-Y H:i:s');
 
+        $yearNow = Carbon::now()->format('Y');
+
         $qr = QrCode::size(100)->generate(
             "
+Yayasan Al Dzikro Wukirsari Imogiri Bantul Yogyakarta\n
+TANDA TERIMA\n
+No : {$donation->number->no} / Kw-Al Dzikro / {$romanMonth} / {$yearNow}\n
+\n
 Telah Diterima Dari: {$donation->donatur->nama}\n
 Alamat: {$donation->donatur->alamat}\n
 Nomor HP: {$donation->donatur->no_hp}\n

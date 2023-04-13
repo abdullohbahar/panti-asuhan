@@ -207,8 +207,14 @@ class CreateDonasiBarang extends Component
 
         $results = rtrim($results, ', ');
 
+        $yearNow = Carbon::now()->format('Y');
+
         $qr = QrCode::size(85)->generate(
             "
+Yayasan Al Dzikro Wukirsari Imogiri Bantul Yogyakarta\n
+TANDA TERIMA\n
+No : {$donation->number->no} / Kw-Al Dzikro / {$romanMonth} / {$yearNow}\n
+\n
 Telah Diterima Dari: {$donation->donatur->nama}\n
 Alamat: {$donation->donatur->alamat}\n
 Nomor HP: {$donation->donatur->no_hp}\n
