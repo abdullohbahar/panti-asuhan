@@ -26,12 +26,14 @@ use App\Http\Controllers\ProfileUserController;
 use App\Http\Livewire\CreateDonasiBarang;
 use App\Http\Livewire\CreateOutgoingLetterLksa;
 use App\Http\Livewire\CreateOutgoingLetterYayasan;
+use App\Http\Livewire\CreatePenomoranSuratYayasan;
 use App\Http\Livewire\DataDonasiTransfer;
 use App\Http\Livewire\DataIncomeLksa;
 use App\Http\Livewire\DataOutcomeLksa;
 use App\Http\Livewire\DataPengeluaran;
 use App\Http\Livewire\DataPengurusMengundurkanDiri;
 use App\Http\Livewire\DataPengurusMeninggal;
+use App\Http\Livewire\DataPenomoranSuratYayasan;
 use App\Http\Livewire\DataSantriAlumni;
 use App\Http\Livewire\Export\ExportDonationPdf;
 use App\Http\Livewire\IncomeAndExpenseReport;
@@ -288,4 +290,8 @@ Route::middleware('auth')->group(function () {
     // Pengurus
     Route::get('data-pengurus-mengundurkan-diri', DataPengurusMengundurkanDiri::class)->name('data.pengurus.mengundurkan.diri');
     Route::get('data-pengurus-meninggal', DataPengurusMeninggal::class)->name('data.pengurus.meninggal');
+
+    // penomoran surat yayasan
+    Route::get('penomoran-surat-yayasan', CreatePenomoranSuratYayasan::class)->name('create.numbering.letter.yayasan');
+    Route::get('data-penomoran-surat-yayasan', DataPenomoranSuratYayasan::class)->name('data.numbering.letter.yayasan');
 });
