@@ -29,7 +29,7 @@ class DataPenomoranSuratLksa extends Component
     {
         $dataPenomoranSuratLksa = NumberingLetterLksa::when(!empty($this->search), function ($query) {
             $query->where('perihal', 'like', "%$this->search%");
-        })->paginate(20);
+        })->orderBy('tgl_keluar', 'desc')->orderBy('nomor', 'asc')->paginate(20);
 
         $data = [
             'datas' => $dataPenomoranSuratLksa
@@ -89,6 +89,15 @@ class DataPenomoranSuratLksa extends Component
                 'tgl_keluar' => $this->tgl_keluar,
                 'tujuan' => $this->tujuan,
             ];
+
+            // Check is date already exist
+            // if already exist add number with highest number
+            $number = NumberingLetterLksa::where('tgl_keluar', $this->tgl_keluar)->orderBy('nomor', 'desc')->first();
+
+            // Increase number
+            if ($number?->nomor) {
+                $data['nomor'] = $number->nomor + 1;
+            }
 
             if ($this->file) {
                 // Get Filename
