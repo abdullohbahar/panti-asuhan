@@ -1,23 +1,47 @@
 <?php
 
-use App\Http\Controllers\AnakAsuhController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CitizenController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DonasiBarangController;
-use App\Http\Controllers\DonationController;
-use App\Http\Controllers\DonationTypeController;
-use App\Http\Controllers\DonaturController;
-use App\Http\Controllers\PengurusController;
-use App\Http\Controllers\SavingController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\UserController;
-use App\Http\Livewire\DonasiTunai;
 use App\Http\Livewire\Donation;
-use App\Http\Livewire\DonationGoods;
-use App\Http\Livewire\LaporanPemasukanPengeluaran;
+use App\Http\Livewire\DonasiTunai;
 use App\Http\Livewire\Pengeluaran;
+use Illuminate\Support\Facades\Log;
+use App\Http\Livewire\DonationGoods;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SavingController;
+use App\Http\Controllers\CitizenController;
+use App\Http\Controllers\DonaturController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\AnakAsuhController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\PengurusController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DonasiBarangController;
+use App\Http\Controllers\DonationTypeController;
+use App\Http\Controllers\KeuanganLksaController;
+use App\Http\Controllers\LetterController;
+use App\Http\Controllers\MasterDataController;
+use App\Http\Controllers\ProfileUserController;
+use App\Http\Livewire\CreateDonasiBarang;
+use App\Http\Livewire\CreateOutgoingLetterLksa;
+use App\Http\Livewire\CreateOutgoingLetterYayasan;
+use App\Http\Livewire\CreatePenomoranSuratLksa;
+use App\Http\Livewire\CreatePenomoranSuratYayasan;
+use App\Http\Livewire\DataDonasiTransfer;
+use App\Http\Livewire\DataIncomeLksa;
+use App\Http\Livewire\DataOutcomeLksa;
+use App\Http\Livewire\DataPengeluaran;
+use App\Http\Livewire\DataPengurusMengundurkanDiri;
+use App\Http\Livewire\DataPengurusMeninggal;
+use App\Http\Livewire\DataPenomoranSuratLksa;
+use App\Http\Livewire\DataPenomoranSuratYayasan;
+use App\Http\Livewire\DataSantriAlumni;
+use App\Http\Livewire\Export\ExportDonationPdf;
+use App\Http\Livewire\IncomeAndExpenseReport;
+use App\Http\Livewire\LaporanPemasukanPengeluaran;
+use App\Http\Livewire\LksaDocument;
+use App\Http\Livewire\Pengurus;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,11 +61,76 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'index'])->middleware('guest');
 
-Route::get('/export-santri/{tipe}', [AnakAsuhController::class, 'exportSantriPdf'])->name('export.santri');
-Route::get('/export-donatur', [DonaturController::class, 'exportDonaturPdf'])->name('export.donatur');
-Route::get('/export-warga/{status}', [CitizenController::class, 'exportWargaPdf'])->name('export.warga');
-Route::get('welcome', function () {
-    return view('invoice-dummy');
+Route::get('/token', function () {
+
+    // $curl = curl_init();
+
+    // curl_setopt_array($curl, array(
+    //     CURLOPT_URL => 'https://api.fonnte.com/fetch-group',
+    //     CURLOPT_SSL_VERIFYPEER => FALSE,
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'POST',
+    //     CURLOPT_HTTPHEADER => array(
+    //         'Authorization: 2Ap5o4gaEsJrHmNuhLDH'
+    //     ),
+    // ));
+
+    // $response = curl_exec($curl);
+
+    // curl_close($curl);
+    // echo $response;
+
+    // curl_setopt_array($curl, array(
+    //     CURLOPT_URL => 'https://api.fonnte.com/get-whatsapp-group',
+    //     CURLOPT_SSL_VERIFYPEER => FALSE,
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'POST',
+    //     CURLOPT_HTTPHEADER => array(
+    //         'Authorization: 2Ap5o4gaEsJrHmNuhLDH'
+    //     ),
+    // ));
+
+    // $response = curl_exec($curl);
+
+    // curl_close($curl);
+    // echo $response;
+
+    // $curl = curl_init();
+
+    // curl_setopt_array($curl, array(
+    //     CURLOPT_URL => 'https://api.fonnte.com/send',
+    //     CURLOPT_SSL_VERIFYPEER => FALSE,
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'POST',
+    //     CURLOPT_POSTFIELDS => array(
+    //         'target' => env('PHONE_NUMBER'),
+    //         'message' => "DONASI BARANG \nBERHASIL",
+    //         'countryCode' => '62', //optional
+    //     ),
+    //     CURLOPT_HTTPHEADER => array(
+    //         'Authorization: ' . env('FONNTE_TOKEN') . '' //change TOKEN to your actual token
+    //     ),
+    // ));
+
+    // $response = curl_exec($curl);
+
+    // echo $response;
+    // curl_close($curl);
 });
 
 Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
@@ -82,6 +171,40 @@ Route::prefix('admin-yayasan')->middleware('admin-yayasan')->group(function () {
     Route::get('/data-warga-meninggal', [CitizenController::class, 'dataWargaMeninggal'])->name('data.warga.meninggal');
     Route::get('/profil-warga/{id}', [CitizenController::class, 'profileWarga'])->name('profil.warga');
     Route::get('/edit-warga/{id}', [CitizenController::class, 'editCitizen'])->name('edit.warga');
+});
+
+Route::prefix('pembina-yayasan')->middleware('pembina-yayasan')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.pembina.yayasan');
+    Route::get('/data-santri-dalam', [AnakAsuhController::class, 'index'])->name('santri.dalam.pembina.yayasan');
+    Route::get('/data-santri-luar', [AnakAsuhController::class, 'santriLuar'])->name('santri.luar.pembina.yayasan');
+});
+
+Route::prefix('ketua-yayasan')->middleware('ketua-yayasan')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.ketua.yayasan');
+});
+
+Route::prefix('bendahara-yayasan')->middleware('bendahara-yayasan')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.bendahara.yayasan');
+});
+
+Route::prefix('admin-donasi')->middleware('admin-donasi')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.admin.donasi');
+});
+
+Route::prefix('sekertariat-yayasan')->middleware('sekertariat-yayasan')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.sekertariat.yayasan');
+});
+
+Route::prefix('ketua-lksa')->middleware('ketua-lksa')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.ketua.lksa');
+});
+
+Route::prefix('bendahara-lksa')->middleware('bendahara-lksa')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.bendahara.lksa');
+});
+
+Route::prefix('sekertariat-lksa')->middleware('sekertariat-lksa')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.sekertariat.lksa');
 });
 
 Route::middleware('auth')->group(function () {
@@ -135,6 +258,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/send-tanda-terima-tunai/{data}', [DonasiTunai::class, 'sendWa']);
     Route::get('/update-tanda-terima-tunai/{data}', [Donation::class, 'updateSendWa']);
 
+    Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-lksa/{date1}/{date2}', [IncomeAndExpenseReport::class, 'printPDFLaporan'])->name('cetak.laporan.pemasukan.pengeluaran.lksa');
+    Route::get('/cetak-laporan-pemasukan-pengeluaran-donasi-excel-lksa/{date1}/{date2}', [IncomeAndExpenseReport::class, 'exportExcel'])->name('export.excel.laporan');
+
     Route::get('tambah-donasi-barang', [DonasiBarangController::class, 'create'])->name('create.donasi.barang');
     Route::post('tambah-donasi-barang', [DonasiBarangController::class, 'store'])->name('store.donasi.barang');
 
@@ -142,4 +268,108 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'pengaturan'], function () {
         Route::get('/satuan', [SettingController::class, 'unit'])->name('satuan');
     });
+
+    Route::get('/export-santri/{tipe}', [AnakAsuhController::class, 'exportSantriPdf'])->name('export.santri');
+    Route::get('/export-donatur', [DonaturController::class, 'exportDonaturPdf'])->name('export.donatur');
+    Route::get('/export-warga/{status}', [CitizenController::class, 'exportWargaPdf'])->name('export.warga');
+
+    Route::get('/data-donasi-tunai', [DonationController::class, 'index'])->name('donation.tunai');
+
+    Route::get('/print-invoice-donation/{id}', [Donation::class, 'printInvoiceDonation'])->name('print.invoice.donation');
+    Route::get('/print-invoice-donation-goods/{id}', [CreateDonasiBarang::class, 'printInvoiceDonation'])->name('print.invoice.donation.goods');
+
+    Route::get('/donasi-barang', [DonationController::class, 'donationGoods'])->name('donation.goods');
+
+    // LKSA DOCUMENT
+    Route::get('/dokumen-lksa', [DocumentController::class, 'lksa'])->name('lksa.document');
+    Route::get('/dokumen-yayasan', [DocumentController::class, 'yayasan'])->name('yayasan.document');
+
+    // Warga
+    Route::get('/tambah-data-warga', [CitizenController::class, 'createCitizen'])->name('create.citizen');
+    Route::get('/data-warga-dhuafa', [CitizenController::class, 'dataWargaDhuafa'])->name('data.warga.dhuafa');
+    Route::get('/data-warga-fakir-miskin', [CitizenController::class, 'dataWargaFakirMiskin'])->name('data.warga.fakir.miskin');
+    Route::get('/data-warga-jompo', [CitizenController::class, 'dataWargaJompo'])->name('data.warga.jompo');
+    Route::get('/data-warga-jamaah', [CitizenController::class, 'dataWargaJamaah'])->name('data.warga.jamaah');
+    Route::get('/data-warga-meninggal', [CitizenController::class, 'dataWargaMeninggal'])->name('data.warga.meninggal');
+    Route::get('/data-warga-dusun', [CitizenController::class, 'dataWargaDusun'])->name('data.warga.dusun');
+    Route::get('/profil-warga/{id}', [CitizenController::class, 'profileWarga'])->name('profil.warga');
+    Route::get('/edit-warga/{id}', [CitizenController::class, 'editCitizen'])->name('edit.warga');
+
+    // menu santri
+    Route::get('/tambah-santri', [AnakAsuhController::class, 'create'])->name('create.santri');
+    Route::get('/data-santri-dalam', [AnakAsuhController::class, 'index'])->name('santri.dalam');
+    Route::get('/data-santri-luar', [AnakAsuhController::class, 'santriLuar'])->name('santri.luar');
+    Route::get('/data-alumni-santri', DataSantriAlumni::class)->name('santri.alumni');
+
+    // Pengguna
+    Route::get('/tambah-pengguna', [UserController::class, 'createUser'])->name('tambah.pengguna');
+    Route::get('/data-pengguna', [UserController::class, 'dataUser'])->name('data.pengguna');
+    Route::get('/ubah-pengguna/{id}', [UserController::class, 'editUser'])->name('edit.pengguna');
+
+    // Income Lksa
+    Route::get('/tambah-pemasukan-lksa', [KeuanganLksaController::class, 'pemasukan'])->name('income.lksa');
+    Route::get('/data-pemasukan-lksa', [KeuanganLksaController::class, 'dataPemasukan'])->name('data.income.lksa');
+    Route::get('/export-data-pemasukan-lksa-pdf', [KeuanganLksaController::class, 'exportDataPemasukan'])->name('export.data.income.lksa.pdf');
+
+    // Outcome LKSA
+    Route::get('tambah-pengeluaran-lksa', [KeuanganLksaController::class, 'pengeluaran'])->name('outcome.lksa');
+    Route::get('data-pengeluaran-lksa', [KeuanganLksaController::class, 'dataPengeluaran'])->name('data.outcome.lksa');
+
+    // income and expense report
+    Route::get('data-pemasukan-pengeluaran-lksa', [KeuanganLksaController::class, 'laporan'])->name('data.income.outcome.lksa');
+
+    // Master data pendidikan
+    Route::get('master-data-pendidikan', [MasterDataController::class, 'pendidikan'])->name('master.data.pendidikan');
+    Route::get('master-data-position', [MasterDataController::class, 'position'])->name('master.data.position');
+
+    // Export Donasi Tunai PDF
+    Route::get('export-donasi-tunai-pdf', [Donation::class, 'exportPdf'])->name('export.donasi.tunai.pdf');
+
+    // Export Donasi Transfer PDF
+    Route::get('export-donasi-transfer-pdf', [DataDonasiTransfer::class, 'exportPdf'])->name('export.donasi.transfer.pdf');
+
+    // Export Donasi Barang PDF
+    Route::get('export-donasi-barang-pdf', [DonationGoods::class, 'exportPdf'])->name('export.donasi.barang.pdf');
+
+    // Export Pengeluaran Yayasan
+    Route::get('export-pengeluaran-yayasan', [DataPengeluaran::class, 'exportPdf'])->name('export.pengeluaran.yayasan.pdf');
+
+    // Export Pemasukan Yayasan
+    Route::get('export-pemasukan-lksa', [DataIncomeLksa::class, 'exportPdf'])->name('export.pemasukan.lksa.pdf');
+
+    // Export Pemasukan Yayasan
+    Route::get('export-pengeluaran-lksa', [DataOutcomeLksa::class, 'exportPdf'])->name('export.pengeluaran.lksa.pdf');
+
+    // Export Pengurus
+    Route::get('export-pengurus-pdf', [Pengurus::class, 'exportPdf'])->name('export.pengurus.pdf');
+    Route::get('export-pengurus-mengundurkan-pdf', [DataPengurusMengundurkanDiri::class, 'exportPdf'])->name('export.pengurus.mengundurkan.pdf');
+    Route::get('export-pengurus-meninggal-pdf', [DataPengurusMeninggal::class, 'exportPdf'])->name('export.pengurus.meninggal.pdf');
+
+    // Surat masuk keluar yayasan
+    Route::get('tambah-surat-yayasan', [LetterController::class, 'createLetterYayasan'])->name('create.letter.yayasan');
+    Route::get('data-surat-masuk-yayasan', [LetterController::class, 'dataIncomingLetterYayasan'])->name('data.incoming.letter.yayasan');
+    Route::get('tambah-surat-keluar-yayasan', CreateOutgoingLetterYayasan::class)->name('create.outgoing.letter.yayasan');
+    Route::get('data-surat-keluar-yayasan', [LetterController::class, 'dataOutcomeLetterYayasan'])->name('data.outcome.letter.yayasan');
+
+    // Surat masuk keluar lksa
+    Route::get('tambah-surat-lksa', [LetterController::class, 'createLetterLksa'])->name('create.letter.lksa');
+    Route::get('data-surat-masuk-lksa', [LetterController::class, 'dataIncomingLetterLksa'])->name('data.incoming.letter.lksa');
+    Route::get('tambah-surat-keluar-lksa', CreateOutgoingLetterLksa::class)->name('create.outgoing.letter.lksa');
+    Route::get('data-surat-keluar-lksa', [LetterController::class, 'dataOutcomeLetterLksa'])->name('data.outcome.letter.lksa');
+
+    Route::get('profile-user', [ProfileUserController::class, 'index'])->name('profile.user');
+
+    Route::get('export-donasi-pdf/{date1}/{date2}/{type}', [ExportDonationPdf::class, 'export'])->name('export.donasi.pdf');
+
+    // Pengurus
+    Route::get('data-pengurus-mengundurkan-diri', DataPengurusMengundurkanDiri::class)->name('data.pengurus.mengundurkan.diri');
+    Route::get('data-pengurus-meninggal', DataPengurusMeninggal::class)->name('data.pengurus.meninggal');
+
+    // penomoran surat yayasan
+    Route::get('penomoran-surat-yayasan', CreatePenomoranSuratYayasan::class)->name('create.numbering.letter.yayasan');
+    Route::get('data-penomoran-surat-yayasan', DataPenomoranSuratYayasan::class)->name('data.numbering.letter.yayasan');
+
+    // penomoran surat lksa
+    Route::get('penomoran-surat-lksa', CreatePenomoranSuratLksa::class)->name('create.numbering.letter.lksa');
+    Route::get('data-penomoran-surat-lksa', DataPenomoranSuratLksa::class)->name('data.numbering.letter.lksa');
 });

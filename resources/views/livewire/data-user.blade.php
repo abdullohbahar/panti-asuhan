@@ -23,9 +23,9 @@
   <section class="content">
     <div class="container-fluid">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="row justify-content-end">
-                    <div class="col-0 mr-2">
+                    <div class="col-0 mr-3 mt-2">
                         <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari">
                     </div>
                     <div class="col-12 mt-2">
@@ -35,7 +35,9 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Hak Akses</th>
-                                    <th scope="col">Aksi</th>
+                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+                                        <th scope="col">Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,12 +55,15 @@
                                         <td data-label="Hak Akses">
                                             {{ str_replace("-", " ",$user->role) }}
                                         </td>
-                                        <td data-label="Aksi">
-                                            <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                                <a href="{{ route('edit.pengguna.admin.yayasan',$user->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Ubah Pengguna"><i class="fas fa-pencil-alt"></i> Ubah</a>
-                                                <button wire:click="deleteConfirmation('{{ $user->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Pengguna"><i class="fas fa-trash"></i> Hapus</button>
-                                            </div>
-                                        </td>
+                                        @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+                                            <td data-label="Aksi">
+                                                <div class="btn-group-horizontal" role="group" aria-label="Basic example">
+                                                    <a href="{{ route('edit.pengguna',$user->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Ubah Pengguna"><i class="fas fa-pencil-alt"></i> Ubah</a>
+                                                    <button wire:click="resetConfirmation('{{ $user->id }}')" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Reset passwor"><i class="fas fa-key"></i> Reset Password</button>
+                                                    <button wire:click="deleteConfirmation('{{ $user->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Pengguna"><i class="fas fa-trash"></i> Hapus</button>
+                                                </div>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

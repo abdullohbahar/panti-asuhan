@@ -2,14 +2,18 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Donatur;
 use Livewire\Component;
 use App\Models\Donation;
-use App\Models\Donatur;
 use Livewire\WithPagination;
+use App\Models\MasterDataBank;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DonasiTransferExport;
+use PDF;
 
 class DataDonasiTransfer extends Component
 {
-    public $nama_donatur, $no_hp, $alamat, $donation_id, $donatur_id, $pemasukan, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $tipe, $terbilang, $bank, $norek;
+    public $nomor_transaksi, $nama_donatur, $no_hp, $alamat, $donation_id, $donatur_id, $pemasukan, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $tipe, $terbilang, $bank, $norek, $other_bank;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -37,10 +41,15 @@ class DataDonasiTransfer extends Component
         $donations = $query->orderBy('tanggal_donasi', 'desc')->paginate(10);
         $count = $donations->count();
 
+        $banks = MasterDataBank::orderBy('name', 'asc')->get();
+
+
         $data = [
             'donaturs' => $donaturs,
             'donations' => $donations,
             'count' => $count,
+            'banks' => $banks,
+
         ];
 
         return view('livewire.data-donasi-transfer', $data);
@@ -78,6 +87,14 @@ class DataDonasiTransfer extends Component
     public function show($id, $donaturs)
     {
         $donation = Donation::find($id);
+        $banks = MasterDataBank::where('name', $donation->bank)->first();
+
+        if ($banks) {
+            $this->bank = $donation->bank;
+        } else {
+            $this->bank = "lainnya";
+            $this->other_bank = $donation->bank;
+        }
 
         if ($donation) {
             $this->donation_id = $donation->id;
@@ -86,8 +103,8 @@ class DataDonasiTransfer extends Component
             $this->terbilang = $donation->terbilang;
             $this->keterangan = $donation->keterangan;
             $this->tipe = $donation->tipe;
-            $this->bank = $donation->bank;
             $this->norek = $donation->norek;
+            $this->nomor_transaksi = $donation->nomor_transaksi;
         }
 
         $donatur = Donatur::find($donaturs);
@@ -109,14 +126,21 @@ class DataDonasiTransfer extends Component
         $removeChar = ['R', 'p', '.', ','];
         $pemasukan = str_replace($removeChar, "", $this->pemasukan);
 
+        if ($this->bank == "lainnya") {
+            $bank = $this->other_bank;
+        } else {
+            $bank = $this->bank;
+        }
+
         // Update data
         Donation::where('id', $this->donation_id)->update([
             'pemasukan' => $pemasukan,
             'tanggal_donasi' => $this->tanggal_donasi,
             'terbilang' => $this->terbilang,
             'keterangan' => $this->keterangan,
-            'bank' => $this->bank,
+            'bank' => $bank,
             'norek' => $this->norek,
+            'nomor_transaksi' => $this->nomor_transaksi,
         ]);
 
         Donatur::where('id', $this->donatur_id)->update([
@@ -138,5 +162,25 @@ class DataDonasiTransfer extends Component
     {
         Donation::destroy($this->donation_id);
         $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new DonasiTransferExport, 'Donasi Transfer.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $donations = Donation::with('donaturName')->where('jenis_donasi', 'Transfer')->get();
+
+        $data = [
+            'donations' => $donations
+        ];
+
+        $pdf = PDF::loadView('export.donasi-transfer.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Donasi Transfer.pdf');
     }
 }

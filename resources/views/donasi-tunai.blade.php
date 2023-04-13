@@ -34,6 +34,37 @@
       })
     </script>
 @endif
+
+@if (session()->has('id'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        window.location.href = 'print-invoice-donation/{{ session('id') }}';
+      }, 1500);
+    });
+  </script>
+@endif
+
+@if (session()->has('error'))
+    <script>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'error',
+        title: '{{ session('error') }}'
+      })
+    </script>
+@endif
 <script>
   window.addEventListener('close-modal', event => {
     // close modal
@@ -56,6 +87,14 @@
       icon: 'success',
       title: event.detail.message
     })
+  })
+
+  window.addEventListener('show-error', event => {
+      Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: event.detail.message
+      })
   })
 
   // Delete Confirmation

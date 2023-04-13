@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('savings', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignUuid('anak_asuh_id')->onUpdate('cascade')->onDelete('set null');
             $table->integer('total_tabungan');
             $table->timestamps();

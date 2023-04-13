@@ -36,7 +36,7 @@ class ProfilePengurus extends Component
     {
         return [
             'nama_dokumen' => 'required',
-            'file' => 'required',
+            'file' => 'required|max:2048|mimes:pdf,png,jpg',
         ];
     }
 
@@ -44,7 +44,9 @@ class ProfilePengurus extends Component
     {
         return [
             'nama_dokumen.required' => 'Nama Berkas Harus Diisi',
-            'file.required' => 'Berkas Harus Diisi'
+            'file.required' => 'Berkas Harus Diisi',
+            'file.max' => 'Ukuran max 2MB',
+            'file.mimes' => 'File harus berupa PDF, PNG, JPG',
         ];
     }
 

@@ -28,7 +28,7 @@
   @livewireStyles
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
   <!-- Site wrapper -->
   <div class="wrapper">
     <!-- Navbar -->
@@ -37,6 +37,9 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li>
+          <a href="#" class="nav-link"><b>PANTI ASUHAN AL DZIKRO WUKIRSARI IMOGIRI BANTUL</b></a>
         </li>
       </ul>
 
@@ -50,7 +53,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="{{ route('profile.user') }}" class="dropdown-item">
               <i class="fas fa-user mr-2"></i> Profil
             </a>
             <div class="dropdown-divider"></div>
@@ -67,17 +70,37 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{ route('dashboard') }}" class="brand-link text-center">
-        <span class="text-center font-weight-bold">AL-DZIKRO</span>
+        @php
+            if(strpos(auth()->user()->role, 'yayasan')){
+              $logo = '/logo-yayasan.png';
+            }else{
+              $logo = '/logo-lksa.jpg';
+            }
+        @endphp
+        <img src="{{ asset('./logo'.$logo) }}" class="img-circle elevation-3" style="opacity: .8; width: 60%; margin-top: -10px; margin-bottom: -10px;">
+        {{-- <span class="brand-text font-weight-bold">AL DZIKRO</span> --}}
       </a>
 
       <!-- Sidebar -->
       <div class="sidebar">
 
         <!-- Sidebar Menu -->
-        @if (Auth()->user()->role == 'admin-yayasan')
+        @if (Auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
           @include('layout.menu-admin-yayasan')
-        @else
-            
+        @elseif(Auth()->user()->role == 'pembina-yayasan')
+          @include('layout.menu-pembina-yayasan')
+        @elseif(Auth()->user()->role == 'bendahara-yayasan')
+          @include('layout.menu-bendahara-yayasan')
+        @elseif(Auth()->user()->role == 'admin-donasi')
+          @include('layout.menu-admin-donasi')
+        @elseif(Auth()->user()->role == 'sekertariat-yayasan')
+          @include('layout.menu-sekertariat-yayasan')
+        @elseif(Auth()->user()->role == 'ketua-lksa')
+          @include('layout.menu-ketua-lksa')
+        @elseif(Auth()->user()->role == 'bendahara-lksa')
+          @include('layout.menu-bendahara-lksa')
+        @elseif(Auth()->user()->role == 'sekertariat-lksa')
+          @include('layout.menu-sekertariat-lksa')
         @endif
         <!-- /.sidebar-menu -->
       </div>
@@ -97,7 +120,7 @@
       </div> --}}
       <!-- Default to the left -->
       {{-- <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. --}}
-      <strong>Panti Asuhan Al-Dzikro</strong>
+      <strong>Panti Asuhan Al Dzikro</strong>
     </footer>
 
     <!-- Control Sidebar -->
@@ -122,9 +145,48 @@
   {{-- format idr --}}
   <script src="{{ asset('./js/rupiah.js') }}"></script>
 
+  <script>
+    function openWindowPopup(url, lebar, tinggi) {
+      var left = (screen.width / 2) - (lebar / 2);
+      var top = (screen.height / 2) - (tinggi / 2);
+
+      console.log(screen.width);
+      console.log(screen.height);
+      
+      window.open(url, '', 'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=' + lebar + ',height=' + tinggi + ',top=' + top + ',left=' + left);
+    }
+
+    window.addEventListener('success-import', event => {
+      // close modal
+      $('#importPengurus').modal('hide')
+      $('#importSantri').modal('hide')
+      $('#importWarga').modal('hide')
+      $('#import').modal('hide')
+
+      // sweetalert success
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: event.detail.message
+      })
+    })
+  </script>
+
   @stack('addons-js')
   @stack('component-scripts')
   @livewireScripts
+  @stack('sortable-scripts')
   {{-- <script>
       $('.select2').select2();
   </script> --}}

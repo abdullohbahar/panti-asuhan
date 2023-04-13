@@ -4,7 +4,10 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Exports\PengurusExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Pengurus as ModelsPengurus;
+use PDF;
 
 class Pengurus extends Component
 {
@@ -13,25 +16,27 @@ class Pengurus extends Component
     protected $paginationTheme = 'bootstrap';
     protected $listeners = ['deleteConfirmed' => 'destroy'];
 
-
     public function render()
     {
         $search = '';
 
-        $query = ModelsPengurus::where(function ($q) use ($search) {
+        $penguruses = ModelsPengurus::where('status', 'Pengurus Aktif')->where(function ($q) use ($search) {
             $q->orwhere('nama', 'like', '%' . $this->search . '%')
                 ->orwhere('jabatan', 'like', '%' . $this->search . '%');
-        });
-
-        $penguruses = $query->orderBy('nama', 'asc')->paginate(10);
-        $count = $penguruses->count();
+        })->orderBy('order', 'asc')->get();
 
         $data =  [
             'penguruses' => $penguruses,
-            'count' => $count
         ];
 
         return view('livewire.pengurus', $data);
+    }
+
+    public function updatePengurusOrder($list)
+    {
+        foreach ($list as $item) {
+            ModelsPengurus::find($item['value'])->update(['order' => $item['order']]);
+        }
     }
 
     public function deleteConfirmation($id)
@@ -45,5 +50,27 @@ class Pengurus extends Component
         ModelsPengurus::destroy($this->idPengurus);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Data Pengurus Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new PengurusExport('Pengurus Aktif'), 'Data Pengurus Aktif.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $penguruses = ModelsPengurus::where('status', 'Pengurus Aktif')->get();
+
+        $data = [
+            'penguruses' => $penguruses
+        ];
+
+        // return view('export.pengurus.pdf', $data);
+
+        $pdf = PDF::loadView('export.pengurus.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Data Pengurus Aktif.pdf');
     }
 }

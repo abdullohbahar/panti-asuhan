@@ -20,6 +20,10 @@
     <div class="container-fluid chocolat-open">
         <div class="card">
             <div class="card-header">
+                &nbsp; Harap menggunakan file template excel jika ingin melakukan import data. Dan baca aturan untuk pengisian.
+                <button class="btn btn-warning mt-2" data-toggle="modal" data-target="#petunjuk"><i class="fas fa-exclamation-triangle"></i> Petunjuk Pengisian</button>
+                <button class="btn btn-info mt-2" wire:click="downloadTemplate"><i class="fas fa-download"></i> Download Template Excel</button>
+                <button class="btn btn-success mt-2" data-toggle="modal" data-target="#importSantri"><i class="fas fa-file-excel"></i> Import Melalui Excel</button>
             </div>
             <div class="card-body">
                 <form wire:submit.prevent="store">
@@ -38,6 +42,28 @@
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
                             {{-- preview image --}}
                             <img wire:ignore.self src="" class="image-fluid w-50 mb-2" id="imagePreview">
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Nomor Induk Santri</label>
+                                <input type="text" wire:model="nis" class="form-control @error("nis") is-invalid @enderror" id="">
+                                @error("nis")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>NIK</label>
+                                <input type="text" wire:model="nik" class="form-control @error("nik") is-invalid @enderror" id="">
+                                @error("nik")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
@@ -132,6 +158,7 @@
                                     <option value="">-- Pilih Tipe --</option>
                                     <option value="Santri Dalam">Santri Dalam</option>
                                     <option value="Santri Luar">Santri Luar</option>
+                                    <option value="Alumni">Alumni</option>
                                 </select>
                                 @error("tipe")
                                     <div class="invalid-feedback">
@@ -150,33 +177,6 @@
                             <div class="form-group">
                                 <label>Tanggal Keluar</label>
                                 <input type="date" class="form-control" wire:model="tgl_keluar" id="">
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>No Handphone</label>
-                                <input type="text" wire:model="nohp_ortu" class="form-control @error("nohp_ortu") is-invalid @enderror" id="">
-                                @error("nohp_ortu")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>Pemilik No Handphone</label>
-                                {{-- <select name="pemilik_nohp" class="form-control" id="">
-                                    <option value="Ayah">Ayah</option>
-                                    <option value="Ibu">Ibu</option>
-                                    <option value="Lain-lain">Lain-lain</option>
-                                </select> --}}
-                                <input type="text" wire:model="pemilik_nohp" class="form-control @error("pemilik_nohp") is-invalid @enderror" id="">
-                                @error("pemilik_nohp")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -201,6 +201,39 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>No Handphone Wali</label>
+                                <input type="text" wire:model="nohp_ortu" class="form-control @error("nohp_ortu") is-invalid @enderror" id="">
+                                @error("nohp_ortu")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Nama Wali</label>
+                                <input type="text" wire:model="pemilik_nohp" class="form-control @error("pemilik_nohp") is-invalid @enderror" id="">
+                                @error("pemilik_nohp")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Rekomendasi / Penanggung Jawab</label>
+                                <input type="text" wire:model="wali_anak" class="form-control @error("wali_anak") is-invalid @enderror" id="">
+                                @error("wali_anak")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-12 mt-3">
                             <button class="btn btn-success btn-block" wire:loading.attr="disabled">
                                 Tambah Data Anak
@@ -211,6 +244,8 @@
             </div>
         </div>
     </div>
+    <livewire:import.import-santri>
   </section>
+
   <!-- /.content -->
 </div>

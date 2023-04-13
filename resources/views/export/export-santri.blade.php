@@ -34,7 +34,7 @@
         </div>
         <div class="row justify-content-center mt-5">
             <div class="col-12">
-                <table border="1" class="table table-bordered">
+                <table border="1" class="table table-bordered" style="font-size: 13px;">
                     <thead>
                         <tr>
                             <td>
@@ -44,7 +44,16 @@
                                 Foto
                             </td>
                             <td>
+                                Nomor Induk Santri
+                            </td>
+                            <td>
+                                Nomor Induk Keluarga
+                            </td>
+                            <td>
                                 Nama
+                            </td>
+                            <td>
+                                Jenis Kelamin
                             </td>
                             <td>
                                 Tempat, Tanggal Lahir
@@ -65,25 +74,25 @@
                                 Status
                             </td>
                             <td>
-                                Nama Ayah Kandung
-                            </td>
-                            <td>
-                                Nama Ibu Kandung
-                            </td>
-                            <td>
-                                Nomor HP
-                            </td>
-                            <td>
-                                Pemilik Nomor HP
-                            </td>
-                            <td>
                                 Tanggal masuk
                             </td>
                             <td>
                                 Tanggal Keluar
                             </td>
                             <td>
-                                Keterangan
+                                Nama Ayah Kandung
+                            </td>
+                            <td>
+                                Nama Ibu Kandung
+                            </td>
+                            <td>
+                                Nomor HP Wali
+                            </td>
+                            <td>
+                                Nama Wali
+                            </td>
+                            <td>
+                                Rekomendasi / Penanggung Jawab
                             </td>
                         </tr>
                     </thead>
@@ -100,7 +109,16 @@
                                     <img src="{{ asset('storage/'.$santri->foto) }}" class="w-100" alt="" srcset="">
                                 </td>
                                 <td>
+                                    {{ $santri->nik }}
+                                </td>
+                                <td>
+                                    {{ $santri->nis }}
+                                </td>
+                                <td>
                                     {{ $santri->nama_lengkap }}
+                                </td>
+                                <td>
+                                    {{ $santri->jenis_kelamin }}
                                 </td>
                                 <td>
                                     {{ $santri->tempat_lahir }}, {{ $santri->tanggal_lahir }}
@@ -121,6 +139,12 @@
                                     {{ $santri->status }}
                                 </td>
                                 <td>
+                                    {{ $santri->tgl_masuk }}
+                                </td>
+                                <td>
+                                    {{ $santri->tgl_keluar }}
+                                </td>
+                                <td>
                                     {{ $santri->nama_ayah_kandung }}
                                 </td>
                                 <td>
@@ -133,13 +157,7 @@
                                     {{ $santri->pemilik_nohp }}
                                 </td>
                                 <td>
-                                    {{ $santri->tgl_masuk }}
-                                </td>
-                                <td>
-                                    {{ $santri->tgl_keluar }}
-                                </td>
-                                <td>
-                                    {{ $santri->keterangan }}
+                                    {{ $santri->wali_anak }}
                                 </td>
                             </tr>
                         @endforeach

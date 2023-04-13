@@ -20,6 +20,10 @@
     <div class="container-fluid chocolat-open">
         <div class="card">
             <div class="card-header">
+                &nbsp; Harap menggunakan file template excel jika ingin melakukan import data. Dan baca aturan untuk pengisian.
+                <button class="btn btn-warning mt-2" data-toggle="modal" data-target="#petunjuk"><i class="fas fa-exclamation-triangle"></i> Petunjuk Pengisian</button>
+                <button class="btn btn-info mt-2" wire:click="downloadTemplate"><i class="fas fa-download"></i> Download Template Excel</button>
+                <button class="btn btn-success mt-2" data-toggle="modal" data-target="#import"><i class="fas fa-file-excel"></i> Import Melalui Excel</button>
             </div>
             <div class="card-body">
                 <form wire:submit.prevent="store">
@@ -66,15 +70,28 @@
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label>Bank</label>
-                                <select wire:model="bank" class="form-control" id="">
+                                <select wire:model="bank" name="bank" class="form-control select2" id="bank">
                                     <option value="">-- Pilih Bank --</option>
-                                    <option value="BRI">BRI</option>
-                                    <option value="BPD">BPD</option>
-                                    <option value="BCA">BCA</option>
-                                    <option value="BNI">BNI</option>
-                                    <option value="MANDIRI">MANDIRI</option>
+                                    @foreach ($banks as $bank)
+                                        <option value="{{ $bank->name }}">{{ $bank->name }}</option>
+                                    @endforeach
+                                    <option value="lainnya">Lainnya</option>
                                 </select>
                                 @error("bank")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" wire:model="other_bank" name="other_bank" placeholder="masukkan nama bank" hidden id="other_bank" wire:ignore>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>Nomor Rekening</label>
+                                <input type="text" wire:model="norek" class="form-control @error("norek") is-invalid @enderror">
+                                @error("norek")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -83,9 +100,9 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Nomor Rekening</label>
-                                <input type="text" wire:model="norek" class="form-control @error("norek") is-invalid @enderror">
-                                @error("norek")
+                                <label>Nomor Transaksi</label>
+                                <input type="text" wire:model="nomor_transaksi" class="form-control @error("nomor_transaksi") is-invalid @enderror">
+                                @error("nomor_transaksi")
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -136,6 +153,7 @@
             </div>
         </div>
     </div>
+        <livewire:import.import-donasi-transfer>
   </section>
   <!-- /.content -->
 </div>
@@ -147,8 +165,8 @@
         $(document).on("livewire:load", function(){
             $('.select2').select2();
 
-            $("body").on("change", "select[name='donatur_id']", function(){
-                @this.donatur_id = $(this).val()
+            $("body").on("change", "select[name='bank']", function(){
+                @this.bank = $(this).val()
             })
 
             $("body").on("click","#search", () => {
@@ -167,6 +185,16 @@
                 @this.terbilang = terbilang + ' rupiah'
                 $("#terbilang").val(terbilang)
             })
+        })
+
+        $("#bank").on("change", function(){
+            var val = $(this).val();
+            console.log(val)
+            if(val == "lainnya"){
+                $("#other_bank").prop("hidden",false);
+            }else{
+                $("#other_bank").prop("hidden",true);
+            }
         })
 
 

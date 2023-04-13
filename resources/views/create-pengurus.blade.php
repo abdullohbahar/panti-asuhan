@@ -5,6 +5,8 @@ Tambah Data Pengurus
 @endsection
 
 @push('addons-css')
+  <link rel="stylesheet" href="{{ asset('./template/plugins/daterangepicker/daterangepicker.css') }}">
+
 <style>
   .table-data {
     border: 1px solid #ccc;
@@ -168,5 +170,23 @@ Tambah Data Pengurus
       imagePreview.src = URL.createObjectURL(file);
     }
   };
+</script>
+<script>
+    window.addEventListener('show-error', event => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: event.detail.message
+        })
+    })
+</script>
+<script src="{{ asset('./template/plugins/moment/moment.min.js') }}"></script>
+<script src="{{ asset('./template/plugins/daterangepicker/daterangepicker.js') }}"></script>
+<script>
+  $('#reservation').daterangepicker({
+    locale: {
+      format: 'DD/MM/YYYY'
+    }
+  })
 </script>
 @endpush

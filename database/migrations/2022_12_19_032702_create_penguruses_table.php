@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('penguruses', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
+            $table->string('nik')->nullable();
             $table->string('nama')->nullable();
             $table->string('no_hp')->nullable();
             $table->string('tempat_lahir')->nullable();
@@ -25,6 +26,9 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('pendidikan')->nullable();
             $table->string('pekerjaan')->nullable();
+            $table->string('from')->nullable();
+            $table->string('to')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

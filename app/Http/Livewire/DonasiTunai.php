@@ -2,18 +2,23 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Donation as LivewireDonation;
+use PDF;
+use Carbon\Carbon;
 use App\Models\Donatur;
+use App\Models\Invoice;
 use Livewire\Component;
 use App\Models\Donation;
 use App\Models\GoodsDonation;
-use App\Models\Invoice;
-use Carbon\Carbon;
+use App\Models\ProofOfDonationNumber;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use PDF;
+use Illuminate\Support\Facades\Log;
 
 class DonasiTunai extends Component
 {
-    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $nominal, $terbilang, $keterangan, $tipe;
+    public $nama_donatur, $no_hp, $alamat, $tanggal_donasi, $nominal, $terbilang, $keterangan, $tipe, $penerima;
     public function render()
     {
         $data = [
@@ -30,6 +35,7 @@ class DonasiTunai extends Component
             'tanggal_donasi' => 'required',
             'nominal' => 'required',
             'terbilang' => 'required',
+            'penerima' => 'required',
         ];
     }
 
@@ -40,6 +46,7 @@ class DonasiTunai extends Component
             'tanggal_donasi.required' => 'Tanggal sumbangan harus diisi',
             'nominal.required' => 'Nominal harus diisi',
             'terbilang.required' => 'Terbilang harus diisi',
+            'penerima.required' => 'Penerima harus diisi',
         ];
     }
 
@@ -58,93 +65,78 @@ class DonasiTunai extends Component
 
         $nominal = str_replace(' ', '', $nominal);
 
-        $donation = Donation::orderBy('no', 'desc')->first();
-        $goodsDonation = GoodsDonation::orderBy('no', 'desc')->first();
+        // melakukan pengecekan apakh nomor null atau tidak
+        $checkNomor = ProofOfDonationNumber::latest()->first();
 
-        // Melakukan pengecekan untuk penomoran
-        // jika donasi not null dan donasi barang null maka nomor urut diambil dari tabel donasi
-        if ($donation && $goodsDonation == null) {
-            $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
-
-            // Selain itu jika donasi barang not null dan donasi barang null maka nomor urut diambil dari tabel donasi barang
-        } elseif ($goodsDonation && $donation == null) {
-            $no = str_pad($goodsDonation->no + 1, 5, 0, STR_PAD_LEFT);
-
-            // jika donasi barang dan donasi not null
-            // maka lakukan perbandingan apakah nomor di tabel donasi lebih besar
-            // jika nomor di tabel donasi lebih besar maka menggunakan nomor dari donasi
-            // jika nomor di tabel donasi barang maka menggunakan nomor dari donasi barang
-        } elseif ($goodsDonation && $donation) {
-            if ($donation->no > $goodsDonation->no) {
-                $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
+        if ($checkNomor) {
+            // jika nomor tidak null maka lakukan pengecekan apakah tahun yang latest dengan tahun sekarang sama
+            // jika tidak sama maka ulani nomor menjadi 1
+            $checkNomorYear = Carbon::parse($checkNomor->created_at)->format('Y');
+            $yearNow = Carbon::now()->format('Y');
+            if ($yearNow != $checkNomorYear) {
+                $no = '00001';
             } else {
-                $no = str_pad($goodsDonation->no + 1, 5, 0, STR_PAD_LEFT);
+                $no = str_pad($checkNomor->no + 1, 5, 0, STR_PAD_LEFT);
             }
-
-            // jika semua null maka nomor dimulai dari 1
-        } elseif ($donation == null && $goodsDonation == null) {
+        } else {
             $no = '00001';
         }
 
-        $createDoantur = Donatur::create([
-            'nama' => $this->nama_donatur,
-            'no_hp' => $this->no_hp,
-            'alamat' => $this->alamat,
-        ]);
+        try {
+            DB::beginTransaction();
+            $createDoantur = Donatur::create([
+                'nama' => $this->nama_donatur,
+                'no_hp' => $this->no_hp,
+                'alamat' => $this->alamat,
+            ]);
 
-        $data = Donation::create([
-            'no' => $no,
-            'donatur_id' => $createDoantur->id,
-            'jenis_donasi' => 'Tunai',
-            'terbilang' => $this->terbilang,
-            'pemasukan' => $nominal,
-            'keterangan' => $this->keterangan,
-            'tipe' => $this->tipe,
-            'tanggal_donasi' => $this->tanggal_donasi,
-            'transaksi' => 'pemasukan'
-        ]);
+            $createDonation = Donation::create([
+                'donatur_id' => $createDoantur->id,
+                'jenis_donasi' => 'Tunai',
+                'terbilang' => $this->terbilang,
+                'pemasukan' => $nominal,
+                'keterangan' => $this->keterangan,
+                'tipe' => $this->tipe,
+                'tanggal_donasi' => $this->tanggal_donasi,
+                'transaksi' => 'pemasukan',
+                'penerima' => $this->penerima,
+            ]);
 
-        return redirect()->to('send-tanda-terima-tunai/' . $data)->with('message', 'Donasi berhasil ditambahkan');
+            ProofOfDonationNumber::create([
+                'donation_id' => $createDonation->id,
+                'no' => $no,
+            ]);
+
+            DB::commit();
+
+            $data = [
+                'tanggal_donasi' => $this->tanggal_donasi,
+                'nama' => $this->nama_donatur,
+                'nominal' => $nominal,
+                'alamat' => $this->alamat,
+                'penerima' => $this->penerima,
+            ];
+
+            $this->kirimBukti($data);
+            return redirect()->route('donation.tunai')->with([
+                'message' => 'Donasi berhasil ditambahkan',
+                'id' => $createDonation->id
+            ]);
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::debug($e);
+            $this->dispatchBrowserEvent('show-error', ['message' => 'Error, Coba untuk input data lagi atau hubungi developer']);
+        }
     }
 
-    public function sendWa($data)
+    public function kirimBukti($data)
     {
-        // membuat bulan menjadi romawi
-        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
-        $bln = $array_bln[date('n')];
-
-        $data = json_decode($data);
-        $donatur = Donatur::where('id', $data->donatur_id)->first();
-        $date = date(now());
-
-        $no = $data->no;
-
-        $image_path = public_path('logo/kop.png');
-
-        $image_data = base64_encode(file_get_contents($image_path));
-
-        $data = [
-            'id' => $data->id,
-            'nama' => $donatur->nama,
-            'no' => $data->no,
-            'nominal' => $data->pemasukan,
-            'terbilang' => $data->terbilang,
-            'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
-            'tipe' => $data->tipe,
-            'keterangan' => $data->keterangan,
-            'alamat' => $donatur->alamat,
-            'no_hp' => $donatur->no_hp,
-            'bulan' => $bln,
-            'image' => $image_data
-        ];
-
-        $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
-
-
-        $pdf = PDF::loadView('invoice', $data);
-        $pdf->setPaper('F4', 'potrait');
-        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
-        $pdf->save($name);
+        $nama = strtoupper($data['nama']);
+        $tgl = Carbon::parse($data['tanggal_donasi'])->format('d-m-Y');
+        $nominal = "Rp. " . number_format($data['nominal'], 2, ',', '.');
+        $waktu = Carbon::now()->format('H:i:s');
+        $alamat = $data['alamat'];
+        $penerima = $data['penerima'];
 
         $curl = curl_init();
 
@@ -159,27 +151,22 @@ class DonasiTunai extends Component
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
-                'target' => '085701223722',
-                'message' => 'test message',
+                'target' => env('PHONE_NUMBER'),
+                'message' => "DONASI TUNAI \nBERHASIL \n$tgl $waktu \n$nama \nAlamat: $alamat \n$nominal \nPenerima: $penerima",
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: mfS1xFJqr4XeXm48TvjV' //change TOKEN to your actual token
+                'Authorization: ' . env('FONNTE_TOKEN') . '' //change TOKEN to your actual token
             ),
         ));
-
-        Invoice::create([
-            'donation_id' => $data['id'],
-            'file' => $name
-        ]);
 
         $response = curl_exec($curl);
 
         curl_close($curl);
+    }
 
-        $role = Auth::user()->role;
-        if ($role == 'admin-yayasan') {
-            return redirect()->route('donation.tunai.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
-        }
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import donasi tunai.xlsx'));
     }
 }

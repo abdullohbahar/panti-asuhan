@@ -47,10 +47,10 @@
                                             <option value="ketua-yayasan">Ketua Yayasan</option>
                                             <option value="bendahara-yayasan">Bendahara Yayasan</option>
                                             <option value="admin-donasi">Admin Donasi</option>
-                                            <option value="sekretariat-yayasan">Sekertariat Yayasan</option>
-                                            <option value="ketua-LKSA">Ketua LKSA</option>
-                                            <option value="bendahara-LKSA">Bendahara LKSA</option>
-                                            <option value="sekretariat-LKSA">Sekertariat LKSA</option>
+                                            <option value="sekertariat-yayasan">Sekertariat Yayasan</option>
+                                            <option value="ketua-lksa">Ketua LKSA</option>
+                                            <option value="bendahara-lksa">Bendahara LKSA</option>
+                                            <option value="sekertariat-lksa">Sekertariat LKSA</option>
                                         </select>
                                         @error("role")
                                             <div class="invalid-feedback">
@@ -62,7 +62,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" wire:model="password" class="form-control @error("password") is-invalid @enderror" id="">
+                                        <input type="password" autocomplete="new-password" wire:model="password" class="form-control @error("password") is-invalid @enderror" id="">
                                         @error("password")
                                             <div class="invalid-feedback">
                                                 {{ $message }}

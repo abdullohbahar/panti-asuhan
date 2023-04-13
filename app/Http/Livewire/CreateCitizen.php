@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateCitizen extends Component
 {
-    public $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $status, $no_hp;
+    public $nama_lengkap, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat, $status, $no_hp, $nik;
 
     public function render()
     {
@@ -24,6 +24,7 @@ class CreateCitizen extends Component
             'tempat_lahir' => 'required',
             'alamat' => 'required',
             'status' => 'required',
+            'nik' => 'unique:citizens,nik',
         ];
     }
 
@@ -35,6 +36,7 @@ class CreateCitizen extends Component
             'status.required' => 'Status harus diisi',
             'alamat.required' => 'alamat harus diisi',
             'tempat_lahir.required' => 'tempat lahir harus diisi',
+            'nik.unique' => 'NIK sudah dipakai',
         ];
     }
 
@@ -54,12 +56,18 @@ class CreateCitizen extends Component
             'tempat_lahir' => $this->tempat_lahir,
             'tanggal_lahir' => $this->tanggal_lahir,
             'alamat' => $this->alamat,
-            'no_hp' => $this->no_hp
+            'no_hp' => $this->no_hp,
+            'nik' => $this->nik
         ]);
 
         $role = Auth::user()->role;
 
 
         return redirect()->route('create.citizen')->with('message', 'Data warga berhasil ditambahkan');
+    }
+
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import warga.xlsx'));
     }
 }

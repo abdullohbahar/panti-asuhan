@@ -50,30 +50,49 @@
                 @enderror
               </div>
             </div>
-            {{-- <div class="col-12">
-              <div class="form-group">
-                <label>Jumlah</label>
-                <div class="input-group">
-                  <input wire:model="jumlah" type="text" class="form-control">
-                  <select wire:model="satuan" class="form-control" id="">
-                    <option>-- Pilih Satuan --</option>
-                    @foreach ($units as $unit)
-                      <option value="{{ $unit->unit }}">{{ $unit->unit }}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-            </div> --}}
             <div class="col-12">
-              <div class="form-group">
-                  <label>Keterangan</label>
-                  <textarea wire:model="keterangan" class="form-control @error('keterangan') is-invalid @enderror"></textarea>
-                  @error('keterangan')
+                <div class="form-group">
+                    <label for="">Penerima</label>
+                    <input type="text" wire:model="penerima" name="penerima" class="form-control @error('penerima') is-invalid @enderror">
+                    @error('penerima')
                       <div class="invalid-feedback">
-                          {{ $message }}
+                        {{ $message }}
                       </div>
-                  @enderror
-              </div>
+                    @enderror
+                </div>
+            </div>
+            @foreach ($inputs as $key => $input)
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Nama Barang</label>
+                        <input type="text" class="form-control @error('inputs.'.$key.'.nama_barang') is-invalid @enderror" wire:model="inputs.{{ $key }}.nama_barang" id="">
+                        @error('inputs.'.$key.'.nama_barang')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Jumlah Barang</label>
+                        <input type="text" class="form-control @error('inputs.'.$key.'.jumlah') is-invalid @enderror" wire:model="inputs.{{ $key }}.jumlah" id="">
+                        @error('inputs.'.$key.'.jumlah')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="" style="color:white">hapus</label><br>
+                        <a href="javascript:void(0)" wire:click="removeInput({{ $key }})" class="btn btn-danger">Hapus</a>
+                    </div>
+                </div>
+            @endforeach
+            <div class="col-12 text-right">
+                <a href="javascript:void(0)" wire:click="addInput" class="btn btn-warning">Tambah barang </a>
             </div>
             <div class="col-12">
               <button type="submit" class="btn btn-success btn-block mt-2">Ubah Donasi</button>

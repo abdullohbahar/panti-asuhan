@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Laporan Pemasukan Pengeluaran</h1>
+          <h1>Laporan Pemasukan Pengeluaran Yayasan</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Laporan Pemasukan Pengeluaran</li>
+            <li class="breadcrumb-item active">Laporan Pemasukan Pengeluaran Yayasan</li>
           </ol>
         </div>
       </div>
@@ -73,13 +73,14 @@
                 </div>
             </div>
             @if ($date1)
-                <div class="card-body">
+                <div class="card-body p-0">
                     <div class="row justify-content-end">
                         <div class="col-12 mt-2">
                             <table class="table-data">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Donatur</th>
                                         <th scope="col">Tanggal</th>
                                         <th scope="col">Uraian</th>
                                         <th scope="col">Jenis Donasi</th>
@@ -99,7 +100,7 @@
                                     $no = 1; ?>
                                     <tr>
                                         <td></td>
-                                        <td colspan="3">Saldo Bulan Sebelumnya</td>
+                                        <td colspan="4">Saldo Bulan Sebelumnya</td>
                                         <td></td>
                                         <td></td>
                                         <td>{{ "Rp " . number_format($saldo, 2, ',', '.'); }}</td>
@@ -114,6 +115,7 @@
                                         @endphp
                                         <tr>
                                             <td data-label="#">{{ $no++ }}</td>
+                                            <td data-label="Donatur">{{ $donation->donaturName != null ? $donation->donaturName->nama : '' }}</td>
                                             <td data-label="Tanggal">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
                                             <td data-label="Uraian">{{ $donation->keterangan }}</td>
                                             <td data-label="Jenis Donasi">
@@ -142,7 +144,7 @@
                                         <td colspan="4" class="text-right">
                                             <b>Saldo Akhir</b>
                                         </td>
-                                        <td colspan="3">
+                                        <td colspan="4">
                                             <b>
                                                 {{ "Rp " . number_format($saldo, 2, ',', '.'); }}
                                             </b>

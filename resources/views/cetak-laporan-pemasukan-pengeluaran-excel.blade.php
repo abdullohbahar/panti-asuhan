@@ -1,19 +1,24 @@
 <table class="table-data">
     <thead>
-        <tr>
-            <th colspan="5" style="height: 80; text-align:center;">
+        {{-- <tr>
+            <th colspan="7" style="height: 80; text-align:center;">
                 <p style="font-size: 200px">YAYASAN AL DZIKRO</p>
                 <p> Manggung RT 07, Wukirsari, Imogiri, Bantul, Yogyakarta 55782, Telp: (0274)2810607</p>
                 <p> Keputusan Menteri Hukum dan HAM RI No. Nomor: AHU-4001. AH.01.02. Tahun 2008</p>
                 <p> Keputusan Kepala BKPM DIY No: 223/323/GR.I/2015 Tentang Ijin Operasional</p>
                 <p>Kelompok Sasaran: Anak Yatim, Piatu, Yatim Piatu, Masyarakat dan Orang Jompo</p>
+                <img src="data:image/jpeg;base64,{{ $image }}" style="width: 100%" alt="" srcset="">
             </th>
+        </tr> --}}
+        <tr>
+            <th colspan="7" style="height:100;"></th>
         </tr>
         <tr>
-            <th colspan="5"></th>
+            <th colspan="7"></th>
         </tr>
         <tr style="background-color: #D2D3D4">
             <th>No</th>
+            <th style="width: 20">Donatur</th>
             <th style="width: 20">Tanggal</th>
             <th style="width: 50">Uraian</th>
             <th style="width: 20">Pemasukan</th>
@@ -33,6 +38,7 @@
             <td style="text-align: center">Saldo Bulan Sebelumnya</td>
             <td></td>
             <td></td>
+            <td></td>
             @if ($saldo != 0)
                 <td data-format="{{ $format }}" style="text-align: center">{{ $saldo }}</td>
             @else
@@ -49,6 +55,7 @@
         @endphp
         <tr>
             <td>{{ $no++ }}</td>
+            <td>{{ $donation->donaturName != null ? $donation->donaturName->nama : '' }}</td>
             <td>{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
             <td>{{ $donation->keterangan }}</td>
             <td data-format="{{ $format }}">{{ $donation->pemasukan }}</td>
@@ -60,6 +67,7 @@
         @endforeach
         <tr>
             <td colspan="3" style="text-align: right"><b>Saldo Akhir</b></td>
+            <td></td>
             <td></td>
             <td></td>
             <td data-format="{{ $format }}" style="text-align: left">{{ $saldo }}</td>

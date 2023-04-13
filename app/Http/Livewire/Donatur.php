@@ -116,4 +116,9 @@ class Donatur extends Component
     {
         return (new DonaturExport)->download('Donatur.xlsx');
     }
+
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import donatur.xlsx'));
+    }
 }

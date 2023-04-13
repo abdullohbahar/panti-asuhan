@@ -77,11 +77,10 @@
                   <label>Bank</label>
                   <select wire:model="bank" class="form-control" id="">
                       <option value="">-- Pilih Bank --</option>
-                      <option value="BRI">BRI</option>
-                      <option value="BPD">BPD</option>
-                      <option value="BCA">BCA</option>
-                      <option value="BNI">BNI</option>
-                      <option value="MANDIRI">MANDIRI</option>
+                      @foreach ($banks as $b)
+                          <option value="{{ $b->name }}">{{ $b->name }}</option>
+                      @endforeach
+                      <option value="lainnya">Lainnya</option>
                   </select>
                   @error("bank")
                       <div class="invalid-feedback">
@@ -91,10 +90,27 @@
               </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+              <div class="form-group">
+                  <label for="" {{ $bank == 'lainnya' ? '' : 'hidden' }}>Bank lainnya</label>
+                  <input type="text" {{ $bank == 'lainnya' ? '' : 'hidden' }} class="form-control" wire:model="other_bank" name="other_bank" placeholder="masukkan nama bank" id="other_bank">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
-                    <label>Nomor Rekening</label>
+                    <label>Nomor Rekening </label>
                     <input type="text" wire:model="norek" class="form-control @error("norek") is-invalid @enderror">
                     @error("norek")
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label>Nomor Transaksi</label>
+                    <input type="text" wire:model="nomor_transaksi" class="form-control @error("nomor_transaksi") is-invalid @enderror">
+                    @error("nomor_transaksi")
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

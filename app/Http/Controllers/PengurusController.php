@@ -18,7 +18,7 @@ class PengurusController extends Controller
     public function create()
     {
         $data = [
-            'active' => 'pengurus'
+            'active' => 'create-pengurus'
         ];
         return view('create-pengurus', $data);
     }
@@ -27,7 +27,7 @@ class PengurusController extends Controller
     {
         $data = [
             'id' => $id,
-            'active' => 'pengurus'
+            'active' => 'show'
         ];
         return view('profil-pengurus', $data);
     }
@@ -36,7 +36,7 @@ class PengurusController extends Controller
     {
         $data = [
             'id' => $id,
-            'active' => 'pengurus'
+            'active' => 'show'
         ];
         return view('edit-pengurus', $data);
     }

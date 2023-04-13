@@ -44,11 +44,21 @@
                             <a href="{{ route('data.pengeluaran') }}" class="btn btn-warning btn-block">Reset Filter</a>
                         </div>
                     </div>
+                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                        <div class="form-group">
+                            <button wire:click="exportExcel" class="btn btn-success btn-block"><i class="fas fa-file-excel"></i> Export Excel</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                        <div class="form-group">
+                            <a href="{{ route('export.pengeluaran.yayasan.pdf') }}" class="btn btn-danger btn-block"><i class="fas fa-file-pdf"></i> Export PDF</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="row justify-content-end">
-                    <div class="col-0 mr-2">
+                    <div class="col-0 mr-3 mt-2">
                         <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Nama Donatur">
                     </div>
                     <div class="col-12 mt-2">
@@ -57,27 +67,31 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Tanggal</th>
-                                    <th scope="col">Nominal</th>
                                     <th scope="col">Uraian</th>
-                                    <th scope="col">Aksi</th>
+                                    <th scope="col">Nominal</th>
+                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan')
+                                        <th scope="col">Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
                                 @if ($count == 0)
                                     <tr>
-                                        <td colspan="7">Data Not Found</td>
+                                        <td colspan="5">Data Not Found</td>
                                     </tr>
                                 @endif
                                 @foreach ($donations as $index => $donation)
                                     <tr>
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
-                                        <td data-label="Nama Donatur">{{ $donation->tanggal_donasi }}</td>
+                                        <td data-label="Tanggal">{{ $donation->tanggal_donasi }}</td>
+                                        <td data-label="Uraian">{{ $donation->keterangan }}</td>
                                         <td data-label="Nominal">{{ "Rp " . number_format($donation->pengeluaran, 2, ',', '.'); }}</td>
-                                        <td data-label="No Rek">{{ $donation->keterangan }}</td>
-                                        <td data-label="Aksi">
-                                            <button id="edit" wire:click="show('{{ $donation->id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
-                                        </td>
+                                        @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan')
+                                            <td data-label="Aksi">
+                                                <button id="edit" wire:click="show('{{ $donation->id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                                <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

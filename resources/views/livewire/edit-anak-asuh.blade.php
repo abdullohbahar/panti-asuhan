@@ -36,7 +36,29 @@
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
                                 {{-- preview image --}}
-                                <img wire:ignore.self src="{{ asset('storage/'.$foto) }}" class="image-fluid w-50 mb-2" id="imagePreview">
+                                <img wire:ignore.self src="{{ asset('storage/'.$fotos) }}" class="image-fluid w-50 mb-2" id="imagePreview">
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label>Nomor Induk Santri</label>
+                                    <input type="text" wire:model="nis" class="form-control @error("nis") is-invalid @enderror" id="">
+                                    @error("nis")
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label>NIK</label>
+                                    <input type="text" wire:model="nik" class="form-control @error("nik") is-invalid @enderror" id="">
+                                    @error("nik")
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
@@ -136,6 +158,7 @@
                                     <option value="">-- Pilih Tipe --</option>
                                     <option value="Santri Dalam">Santri Dalam</option>
                                     <option value="Santri Luar">Santri Luar</option>
+                                    <option value="Alumni">Alumni</option>
                                 </select>
                                 @error("tipe")
                                     <div class="invalid-feedback">
@@ -158,33 +181,6 @@
                         </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
-                                    <label>No Handphone</label>
-                                    <input type="text" wire:model="nohp_ortu" class="form-control @error("nohp_ortu") is-invalid @enderror" id="">
-                                    @error("nohp_ortu")
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="form-group">
-                                    <label>Pemilik No Handphone</label>
-                                    {{-- <select name="pemilik_nohp" class="form-control" id="">
-                                        <option value="Ayah">Ayah</option>
-                                        <option value="Ibu">Ibu</option>
-                                        <option value="Lain-lain">Lain-lain</option>
-                                    </select> --}}
-                                    <input type="text" wire:model="pemilik_nohp" class="form-control @error("pemilik_nohp") is-invalid @enderror" id="">
-                                    @error("pemilik_nohp")
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="form-group">
                                     <label>Nama Ayah Kandung</label>
                                     <input type="text" wire:model="nama_ayah_kandung" class="form-control @error("nama_ayah_kandung") is-invalid @enderror" id="">
                                     @error("nama_ayah_kandung")
@@ -202,6 +198,39 @@
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label>No Handphone Wali</label>
+                                    <input type="text" wire:model="nohp_ortu" class="form-control @error("nohp_ortu") is-invalid @enderror" id="">
+                                    @error("nohp_ortu")
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label>Nama Wali</label>
+                                    <input type="text" wire:model="pemilik_nohp" class="form-control @error("pemilik_nohp") is-invalid @enderror" id="">
+                                    @error("pemilik_nohp")
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label>Rekomendasi / Penanggung Jawab</label>
+                                    <input type="text" wire:model="wali_anak" class="form-control @error("wali_anak") is-invalid @enderror" id="">
+                                    @error("wali_anak")
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
                             </div>

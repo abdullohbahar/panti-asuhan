@@ -37,9 +37,9 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="row justify-content-end">
-                    <div class="col-0 mr-2">
+                    <div class="col-0 mr-3 mt-2">
                         <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari">
                     </div>
                     <div class="col-12 mt-2">
@@ -48,6 +48,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nama</th>
+                                    <th scope="col">Alamat</th>
                                     <th scope="col">Tempat, Tanggal Lahir</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -61,17 +62,22 @@
                                 @foreach ($citizens as $index => $citizen)
                                     <tr>
                                         <td data-label="#">{{ $citizens->firstItem() + $index }}</td>
-                                        <td data-label="Nama Lengkap">
+                                        <td data-label="Nama">
                                             {{ $citizen->nama_lengkap }}
                                         </td>
+                                        <td data-label="Alamat">
+                                            {{ $citizen->alamat }}
+                                        </td>
                                         <td data-label="Tempat, Tanggal Lahir">
-                                            {{ $citizen->tempat_lahir }}, {{ $citizen->tanggal_lahir }}
+                                            {{ $citizen->tempat_lahir }}, {{ Carbon\Carbon::parse($citizen->tanggal_lahir)->format('d-m-Y') }}
                                         </td>
                                         <td data-label="Aksi">
                                             <div class="btn-group-vertical" role="group" aria-label="Basic example">
                                                 <a href="{{ route('profil.warga',$citizen->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Warga Dhuafa"><i class="fas fa-user"></i> Profil Warga</a>
                                                 {{-- <a href="{{ route('berkas.anak.asuh',$citizen->id) }}" class="btn btn-info btn-sm my-2" data-toggle="tooltip" data-placement="top" title="Unggah Berkas"><i class="fas fa-upload"></i> Unggah Berkas</a> --}}
-                                                <button wire:click="deleteConfirmation('{{ $citizen->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Warga Dhuafa"><i class="fas fa-trash"></i> Hapus</button>
+                                                @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+                                                    <button wire:click="deleteConfirmation('{{ $citizen->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Warga Dhuafa"><i class="fas fa-trash"></i> Hapus</button>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

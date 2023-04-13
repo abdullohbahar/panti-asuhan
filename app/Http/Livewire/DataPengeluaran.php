@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Donation;
+use App\Exports\ExportPengeluaranYayasan;
 use Livewire\Component;
+use App\Models\Donation;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class DataPengeluaran extends Component
 {
-    public $donatur_id, $pengeluaran, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId;
+    public $donatur_id, $pengeluaran, $tanggal_donasi, $keterangan, $search, $date1, $date2, $filterDonaturId, $donation_id;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -24,7 +27,7 @@ class DataPengeluaran extends Component
             $query->whereBetween('tanggal_donasi', [$this->date1, $this->date2]);
         });
 
-        $donations = $query->orderBy('tanggal_donasi', 'desc')->paginate(10);
+        $donations = $query->orderBy('tanggal_donasi', 'desc')->paginate(15);
         $count = $donations->count();
 
         $data = [
@@ -103,6 +106,26 @@ class DataPengeluaran extends Component
     public function destroy()
     {
         Donation::destroy($this->donation_id);
-        $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Pengeluaran Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new ExportPengeluaranYayasan, 'Pengeluaran Yayasan.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $donations = Donation::where('jenis_donasi', 'pengeluaran')->where('transaksi', 'pengeluaran')->get();
+
+        $data = [
+            'donations' => $donations
+        ];
+
+        $pdf = PDF::loadView('export.pengeluaran-yayasan.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Pengeluaran Yayasan.pdf');
     }
 }

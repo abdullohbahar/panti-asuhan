@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>No</th>
+            <th>NIK</th>
             <th>Nama Lengkap</th>
             <th>Jenis Kelamin</th>
             <th>Tempat Lahir</th>
@@ -19,6 +20,7 @@
         @foreach ($wargas as $warga)
         <tr>
             <td>{{ $no++ }}</td>
+            <td>{{ $warga->nik }}</td>
             <td>{{ $warga->nama_lengkap }}</td>
             <td>{{ $warga->jenis_kelamin }}</td>
             <td>{{ $warga->tempat_lahir }}</td>

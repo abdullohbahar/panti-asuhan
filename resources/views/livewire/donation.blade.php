@@ -1,5 +1,7 @@
 <div>
     {{-- Modal --}}
+      <livewire:export.export-donation>
+      <livewire:export.export-donation-pdf>
     @include('livewire.modal.donation.modal-edit-donation')
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -24,8 +26,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-between">
-                    <div class="col-8">
+                    <div class="col-sm-12 col-md-8">
                         <h5><b>Donasi Berupa Tunai</b></h5>
+                    </div>
+                    <div class="col-sm-12 col-md-4 text-right">
+                        {{-- <button wire:click="exportExcel" class="btn btn-success btn-sm"><b><i class="fas fa-file-excel"></i> Export Excel</b></button> --}}
+                        {{-- <a href="{{ route('export.donasi.tunai.pdf') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a> --}}
+                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-export-excel"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
+                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-export-pdf"><b><i class="fas fa-file-pdf"></i> Export PDF</b></button>
                     </div>
                 </div>
             </div>
@@ -41,16 +49,6 @@
                             <input type="date" wire:model.defer="date2" class="form-control" name="" id="">
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                        <div class="form-group">
-                            <select name="filterDonaturId" wire:model.defer="filterDonaturId" style="width: 100%" class="select2" id="donaturs">
-                                    <option value="">Semua Donatur</option>
-                                @foreach ($donaturs as $donatur)
-                                    <option value="{{ $donatur->id }}">{{ $donatur->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
                             <button wire:click="search" id="search" class="btn btn-info btn-block">Filter Data</button>
@@ -63,9 +61,9 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="row justify-content-end">
-                    <div class="col-0 mr-2">
+                    <div class="col-0 mr-3 mt-2">
                         <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Nama Donatur">
                     </div>
                     <div class="col-12 mt-2">
@@ -90,12 +88,15 @@
                                         <td data-label="#">{{ $donations->firstItem() + $index }}</td>
                                         <td data-label="Nama Donatur">{{ $donation->donatur->nama }}</td>
                                         <td data-label="Nominal">{{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}</td>
-                                        <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
+                                        <td data-label="Tanggal Donasi">{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }} {{ \Carbon\Carbon::parse($donation->created_at)->format('H:i:s') }}</td>
                                         <td data-label="Aksi">
                                             {{-- <button wire:click="sendConfirmation('{{ $donation->id }}')" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fab fa-whatsapp"></i></button> --}}
-                                            <button wire:click="printInvoice('{{ $donation->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fas fa-print"></i></button>
-                                            <button id="edit" wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
+                                            {{-- <button wire:click="printInvoiceDonation('{{ $donation->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="download bukti"><i class="fas fa-print"></i></button> --}}
+                                            <a onclick="openWindowPopup('/print-invoice-donation/{{ $donation->id }}', 1200, 800)" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="download bukti"><i class="fas fa-print"></i></a>
+                                            @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan'|| Auth()->user()->role == 'admin-donasi')
+                                                <button id="edit" wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                                <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

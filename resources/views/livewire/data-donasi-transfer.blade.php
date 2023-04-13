@@ -6,12 +6,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Donasi</h1>
+          <h1>Donasi Transfer</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Donasi</li>
+            <li class="breadcrumb-item active">Donasi Transfer</li>
           </ol>
         </div>
       </div>
@@ -24,8 +24,12 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-between">
-                    <div class="col-8">
-                        <h5><b>Donasi Berupa Transfer</b></h5>
+                    <div class="col-sm-12 col-md-8">
+                        <h5><b>Donasi Transfer</b></h5>
+                    </div>
+                    <div class="col-sm-12 col-md-4 text-right">
+                        <button wire:click="exportExcel" class="btn btn-success btn-sm"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
+                        <a href="{{ route('export.donasi.transfer.pdf') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                     </div>
                 </div>
             </div>
@@ -41,16 +45,6 @@
                             <input type="date" wire:model.defer="date2" class="form-control" name="" id="">
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                        <div class="form-group">
-                            <select name="filterDonaturId" wire:model.defer="filterDonaturId" style="width: 100%" class="select2" id="donaturs">
-                                    <option value="">Semua Donatur</option>
-                                @foreach ($donaturs as $donatur)
-                                    <option value="{{ $donatur->id }}">{{ $donatur->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                         <div class="form-group">
                             <button wire:click="search" id="search" class="btn btn-info btn-block">Filter Data</button>
@@ -63,9 +57,9 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="row justify-content-end">
-                    <div class="col-0 mr-2">
+                    <div class="col-0 mr-3 mt-2">
                         <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Nama Donatur">
                     </div>
                     <div class="col-12 mt-2">
@@ -78,7 +72,9 @@
                                     <th scope="col">No Rek</th>
                                     <th scope="col">Bank</th>
                                     <th scope="col">Tanggal Donasi</th>
-                                    <th scope="col">Aksi</th>
+                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan' || Auth()->user()->role == 'admin-donasi')
+                                        <th scope="col">Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -98,8 +94,10 @@
                                         <td data-label="Aksi">
                                             {{-- <button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fab fa-whatsapp"></i></button> --}}
                                             {{-- <button wire:click="show('{{ $donation->id }}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-print"></i></button> --}}
-                                            <button id="edit" wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
-                                            <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
+                                            @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan' || Auth()->user()->role == 'admin-donasi')
+                                                <button id="edit" wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                                <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -143,6 +141,16 @@
                 @this.terbilang = terbilang + ' rupiah'
                 $("#terbilang").val(terbilang)
             })
+        })
+
+        $("#bank").on("change", function(){
+            var val = $(this).val();
+            console.log(val)
+            if(val == "lainnya"){
+                $("#other_bank").prop("hidden",false);
+            }else{
+                $("#other_bank").prop("hidden",true);
+            }
         })
 
 

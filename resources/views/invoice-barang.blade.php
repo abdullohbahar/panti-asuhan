@@ -29,6 +29,14 @@
 
         }
 
+        @page { 
+            size: 20.7cm potrait;
+            margin-bottom: 0px;
+            margin-left: 10px;
+            margin-top: 0px;
+            margin-right: 10px;
+        }
+
         body{
             font-family:Arial, Helvetica, sans-serif !important;
         }
@@ -46,9 +54,9 @@
             text-align: right !important;
         }
 
-        table{
+        /* table{
             border-collapse: collapse;
-        }
+        } */
 
         .p-1{
             padding: 0.25rem!important;
@@ -110,6 +118,48 @@
             color: black;
         }
 
+        .table {
+            width: 100%;
+            margin-bottom: 0.15rem;
+            color: #212529;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.15rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .table-sm th,
+        .table-sm td {
+            padding: 0.15rem;
+        }
+
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #dee2e6;
+        }
+
+        .table-bordered thead th,
+        .table-bordered thead td {
+            border-bottom-width: 2px;
+        }
+
 
         </style>
         <title>Laporan Keuangan</title>
@@ -133,20 +183,23 @@
             </div> --}}
             <div class="row text-center">
                 <div class="col-12 font-12">
-                    <img src="data:image/jpeg;base64,{{ $image }}" style="width: 100%" alt="" srcset="">
+                    <img src="data:image/jpeg;base64,{{ $image }}" style="width: 70%" alt="" srcset="">
                 </div>
                 <div class="garis">
 
                 </div>
-                <h3>TANDA TERIMA</h3>
-                <h4 style="margin: 0px">No : {{ $no }} / Al-Dzikro / {{ $bulan }} / {{ date('Y') }}</h4>
-                <h5 style="margin: 5px"><i>Assalamu'alaikum Wr. Wb.</i></h5>
+                <p style="font-size:12px; font-weight:bold">TANDA TERIMA</p>
+                <h4 style="margin: 0px; font-size:12px; font-weight:bold">No : {{ $no }} / Kw-Al Dzikro / {{ $bulan }} / {{ date('Y') }}</h4>
+                <h5 style="margin: 5px; font-size:12px; font-weight:bold"><i>Assalamu'alaikum Wr. Wb.</i></h5>
             </div>
-            <div style="font-size: 13px;">
+            <div style="font-size: 11px;">
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 125px !important;">Telah Diterima Dari</td>
-                        <td>: <b>{{ $nama }}</b></td>
+                        <td style="width: 500px;">: <b>{{ $nama }}</b></td>
+                        <td rowspan="4">
+                            <img src="data:image/png;base64, {!! base64_encode($qr) !!}" style="margin-top: -35px; margin-bottom: -15px;">
+                        </td>
                     </tr>
                     <tr>
                         <td style="width: 125px !important;">Alamat</td>
@@ -157,28 +210,52 @@
                         <td>: {{ $no_hp }}</td>
                     </tr>
                     <tr>
-                        <td>Keterangan</td>
-                        <td>: {{ $keterangan }}</td>
+                        <td>Keterangan Barang</td>
+                        <td>:</td>
                     </tr>
+                </table>
+                <table class="table table-bordered" style="width: 100%; margin-top: 2px;">
                     <tr>
-                        <td colspan="2" style="text-align:center">
-                            <h5 style="margin: 5px"><i>Wassalamu'alaikum Wr. Wb.</i></h5>
+                        <td>
+                            <b>Nama Barang</b>
+                        </td>
+                        <td>
+                            <b>Jumlah</b>
                         </td>
                     </tr>
+                    @foreach ($keterangans as $keterangan)
+                        <tr>
+                            <td>
+                                <p style="margin:1px">
+                                    {{ $keterangan->nama_barang }}
+                                </p>
+                            </td>
+                            <td>
+                                <p style="margin:1px">
+                                    {{ $keterangan->jumlah }}
+                                </p>
+                            </td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
             
-            <table style="width: 100%">
+            <table style="width: 100%; margin-bottom: -20px;">
+                <tr>
+                    <td colspan="3" style="text-align:center; font-size: 13px;">
+                        <h5 style="margin: 5px"><i>Wassalamu'alaikum Wr. Wb.</i></h5>
+                    </td>
+                </tr>
                 <tr>
                     <td style="width: 215px;">
-                        <p style="font-size: 12px">Donatur / Yang Menyerahkan</p>
+                        <p style="font-size: 11px">Donatur / Yang Menyerahkan</p>
                     </td>
                     <td style="text-align: center">
                         <i style="font-size: 10px;">Jazakumullahu Ahsanul Jaza</i>
                     </td>
                     <td>
-                        <p style="font-size: 12px;">Wukirsari, {{ $tanggal }}</p>
-                        <p style="font-size: 12px">Yang Menerima</p>
+                        <p style="font-size: 11px;">Wukirsari, {{ $tanggal }}</p>
+                        <p style="font-size: 11px">Yang Menerima</p>
                     </td>
                 </tr>
                 <tr>
@@ -206,14 +283,19 @@
                 </tr>
                 <tr>
                     <td>
-                        (......................................)
+                        <p style="font-size: 11px;">
+                            (&nbsp; {{ $nama }} &nbsp;)
+                        </p>
                     </td>
                     <td></td>
                     <td>
-                        (......................................)
+                        <p style="font-size: 11px;">
+                            (&nbsp; {{ $penerima }} &nbsp;)
+                        </p>
                     </td>
                 </tr>
             </table>
+            <p style="font-size: 10px; margin-top:20px; text-align:center">{{ $created_at }}</p>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

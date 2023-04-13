@@ -3,12 +3,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Input Data Pengeluaran</h1>
+          <h1>Input Data Pengeluaran Yayasan</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Input Data Pengeluaran</li>
+            <li class="breadcrumb-item active">Input Data Pengeluaran Yayasan</li>
           </ol>
         </div>
       </div>
@@ -21,6 +21,12 @@
         <div class="row justify-content-center">
             <div class="col-10">
                 <div class="card">
+                    <div class="card-header">
+                        &nbsp; Harap menggunakan file template excel jika ingin melakukan import data. Dan baca aturan untuk pengisian.
+                        <button class="btn btn-warning mt-2" data-toggle="modal" data-target="#petunjuk"><i class="fas fa-exclamation-triangle"></i> Petunjuk Pengisian</button>
+                        <button class="btn btn-info mt-2" wire:click="downloadTemplate"><i class="fas fa-download"></i> Download Template Excel</button>
+                        <button class="btn btn-success mt-2" data-toggle="modal" data-target="#import"><i class="fas fa-file-excel"></i> Import Melalui Excel</button>
+                    </div>
                     <div class="card-header">
                         <h5>Saldo bulan ini : {{ "Rp. " . number_format($totalSaldo, 2, ',', '.'); }}</h5>
                     </div>
@@ -72,6 +78,7 @@
             </div>
         </div>
     </div>
+    <livewire:import.import-pengeluaran-yayasan>
   </section>
   <!-- /.content -->
 </div>

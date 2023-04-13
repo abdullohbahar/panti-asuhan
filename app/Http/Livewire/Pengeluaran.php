@@ -69,17 +69,13 @@ class Pengeluaran extends Component
 
         $donation = Donation::orderBy('urutan', 'desc')->first();
 
-        if ($nominal > $this->saldo) {
-            $this->dispatchBrowserEvent('show-error');
-            return false;
-        }
-
         Donation::create([
             'tanggal_donasi' => $this->tanggal_donasi,
             'pengeluaran' => $nominal,
             'jenis_donasi' => 'pengeluaran',
             'keterangan' => $this->keterangan,
-            'transaksi' => 'pengeluaran'
+            'transaksi' => 'pengeluaran',
+            'penerima' => ' '
         ]);
 
         $this->dispatchBrowserEvent('close-modal', ['message' => 'Berhasil']);
@@ -122,5 +118,10 @@ class Pengeluaran extends Component
     public function exportExcel()
     {
         return (new DonationExport)->download('Laporan Donasi.xlsx');
+    }
+
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import pengeluaran Yayasan.xlsx'));
     }
 }

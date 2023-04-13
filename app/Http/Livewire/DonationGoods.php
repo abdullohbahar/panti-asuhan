@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use PDF;
+use Exception;
 use Carbon\Carbon;
 use App\Models\Unit;
 use App\Models\Donatur;
@@ -13,9 +14,17 @@ use Livewire\WithPagination;
 use App\Models\GoodsDonation;
 use Livewire\WithFileUploads;
 use App\Models\BuktiSumbangan;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use App\Exports\DonasiBarangExport;
+use App\Models\DetailGoodsDonation;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Models\ProofOfDonationNumber;
 use Illuminate\Support\Facades\Storage;
+
 
 
 class DonationGoods extends Component
@@ -24,9 +33,19 @@ class DonationGoods extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $donation_id, $donatur_id, $tanggal_donasi, $keterangan, $search, $jumlah, $satuan, $nama, $no_hp, $alamat, $idDonaturs;
+    public $donation_id, $donatur_id, $tanggal_donasi, $search, $jumlah, $satuan, $nama, $no_hp, $alamat, $idDonaturs, $penerima;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
+    public Collection $inputs;
 
+    public function mount()
+    {
+        $this->fill([
+            'inputs' => collect([[
+                'nama_barang' => '',
+                'jumlah' => ''
+            ]]),
+        ]);
+    }
 
     public function render()
     {
@@ -36,9 +55,8 @@ class DonationGoods extends Component
 
         $query = GoodsDonation::whereHas('donatur', function ($q) use ($search) {
             $q->where('nama', 'like', '%' . $this->search . '%')
-                ->orwhere('tanggal_donasi', 'like', '%' . $this->search . '%')
-                ->orwhere('keterangan', 'like', '%' . $this->search . '%');
-        })->orderBy('tanggal_donasi', 'desc');
+                ->orwhere('tanggal_donasi', 'like', '%' . $this->search . '%');
+        })->orderBy('created_at', 'desc');
 
         $donations = $query->paginate(10);
         $count = $donations->count();
@@ -55,12 +73,25 @@ class DonationGoods extends Component
         return view('livewire.donation-goods', $data);
     }
 
+    public function addInput()
+    {
+        $this->inputs->push([
+            'nama_barang' => '',
+            'jumlah' => ''
+        ]);
+    }
+
+    public function removeInput($key)
+    {
+        $this->inputs->pull($key);
+    }
+
     public function rules()
     {
         return [
             'donatur_id' => 'required',
             'tanggal_donasi' => 'required',
-            'keterangan' => 'required',
+            'penerima' => 'required',
         ];
     }
 
@@ -69,7 +100,7 @@ class DonationGoods extends Component
         return [
             'donatur_id.required' => 'Donatur harus diisi',
             'tanggal_donasi.required' => 'Tanggal harus diisi',
-            'keterangan.required' => 'Keterangan harus diisi',
+            'penerima.required' => 'Penerima harus diisi',
         ];
     }
 
@@ -78,105 +109,10 @@ class DonationGoods extends Component
         $this->validateOnly($fields);
     }
 
-    public function store()
-    {
-        $validateData = $this->validate();
-
-        $donation = Donation::orderBy('no', 'desc')->first();
-        $goodsDonation = GoodsDonation::orderBy('no', 'desc')->first();
-
-        // Melakukan pengecekan untuk penomoran
-        // jika donasi not null dan donasi barang null maka nomor urut diambil dari tabel donasi
-        if ($donation && $goodsDonation == null) {
-            $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
-
-            // Selain itu jika donasi barang not null dan donasi barang null maka nomor urut diambil dari tabel donasi barang
-        } elseif ($goodsDonation && $donation == null) {
-            $no = str_pad($goodsDonation->no + 1, 5, 0, STR_PAD_LEFT);
-
-            // jika donasi barang dan donasi not null
-            // maka lakukan perbandingan apakah nomor di tabel donasi lebih besar
-            // jika nomor di tabel donasi lebih besar maka menggunakan nomor dari donasi
-            // jika nomor di tabel donasi barang maka menggunakan nomor dari donasi barang
-        } elseif ($goodsDonation && $donation) {
-            if ($donation->no > $goodsDonation->no) {
-                $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
-            } else {
-                $no = str_pad($goodsDonation->no + 1, 5, 0, STR_PAD_LEFT);
-            }
-
-            // jika semua null maka nomor dimulai dari 1
-        } elseif ($donation == null && $goodsDonation == null) {
-            $no = '00001';
-        }
-
-        $data = GoodsDonation::create([
-            'donatur_id' => $this->donatur_id,
-            'no' => $no,
-            'tanggal_donasi' => $this->tanggal_donasi,
-            'keterangan' => $this->keterangan,
-        ]);
-
-        return redirect()->to('send-tanda-terima-barang/' . $data)->with('message', 'Donasi berhasil ditambahkan');
-    }
-
-    public function saveInvoice($data)
-    {
-        // membuat bulan menjadi romawi
-        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
-        $bln = $array_bln[date('n')];
-
-        $data = json_decode($data);
-        $donatur = Donatur::where('id', $data->donatur_id)->first();
-        $date = date(now());
-
-        $no = $data->no;
-
-        $image_path = public_path('logo/kop.png');
-
-        $image_data = base64_encode(file_get_contents($image_path));
-
-        $data = [
-            'id' => $data->id,
-            'nama' => $donatur->nama,
-            'no' => $data->no,
-            'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
-            'keterangan' => $data->keterangan,
-            'alamat' => $donatur->alamat,
-            'no_hp' => $donatur->no_hp,
-            'bulan' => $bln,
-            'image' => $image_data
-        ];
-
-        $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
-
-        $pdf = PDF::loadView('invoice-barang', $data);
-        $pdf->setPaper('F4', 'potrait');
-        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
-        $pdf->save($name);
-
-        Invoice::create([
-            'donation_id' => $data['id'],
-            'file' => $name
-        ]);
-
-        $role = Auth::user()->role;
-        if ($role == 'admin-yayasan') {
-            return redirect()->route('donation.goods.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
-        }
-    }
-
-    public function resetInput()
-    {
-        $this->donatur_id = '';
-        $this->tanggal_donasi = '';
-        $this->keterangan = '';
-        $this->jumlah = '';
-        $this->satuan = '';
-    }
-
     public function show($id, $idDonatur)
     {
+        $this->inputs = collect()->make();
+
         $donation = GoodsDonation::find($id);
         $donatur = Donatur::find($idDonatur);
 
@@ -191,7 +127,17 @@ class DonationGoods extends Component
             $this->donation_id = $donation->id;
             $this->donatur_id = $donation->donatur_id;
             $this->tanggal_donasi = $donation->tanggal_donasi;
-            $this->keterangan = $donation->keterangan;
+            $this->penerima = $donation->penerima;
+        }
+
+        $details = DetailGoodsDonation::where('goods_donations_id', $this->donation_id)->get();
+
+        foreach ($details as $detail) {
+            $pushData = [
+                'nama_barang' => $detail->nama_barang,
+                'jumlah' => $detail->jumlah,
+            ];
+            $this->inputs->push($pushData);
         }
     }
 
@@ -199,92 +145,111 @@ class DonationGoods extends Component
     {
         $validateData = $this->validate();
 
-        GoodsDonation::where('id', $this->donation_id)->update([
-            'donatur_id' => $this->donatur_id,
-            'tanggal_donasi' => $this->tanggal_donasi,
-            'keterangan' => $this->keterangan,
-        ]);
+        try {
+            DB::beginTransaction();
 
-        Donatur::where('id', $this->idDonaturs)->update([
-            'nama' => $this->nama,
-            'no_hp' => $this->no_hp,
-            'alamat' => $this->alamat,
-        ]);
+            GoodsDonation::where('id', $this->donation_id)->update([
+                'donatur_id' => $this->donatur_id,
+                'tanggal_donasi' => $this->tanggal_donasi,
+                'penerima' => $this->penerima
+            ]);
 
-        $data = [
-            'donation_id' => $this->donation_id,
-            'donatur_id' => $this->donatur_id,
-            'tanggal_donasi' => $this->tanggal_donasi,
-            'keterangan' => $this->keterangan,
-        ];
+            Donatur::where('id', $this->idDonaturs)->update([
+                'nama' => $this->nama,
+                'no_hp' => $this->no_hp,
+                'alamat' => $this->alamat,
+            ]);
 
-        $encode = json_encode($data);
+            $checkName = ProofOfDonationNumber::where('donation_id', $this->donation_id)->first();
 
-        return redirect()->to('update-tanda-terima-barang/' . $encode)->with('message', 'Donasi berhasil ditambahkan');
-    }
-
-    public function updateInvoice($data)
-    {
-        // membuat bulan menjadi romawi
-        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
-        $bln = $array_bln[date('n')];
-
-        $data = json_decode($data);
-
-        $donatur = Donatur::where('id', $data->donatur_id)->first();
-        $date = date(now());
-
-        $getData = GoodsDonation::find($data->donation_id);
-
-        $no = $getData->no;
-
-        $invoice = Invoice::where('donation_id', $data->donation_id)->first();
-
-        if ($invoice) {
-            if (File::exists($invoice->file)) {
-                unlink($invoice->file);
+            if ($checkName->name) {
+                ProofOfDonationNumber::where('donation_id', $this->donation_id)->increment('name', 1);
+            } else {
+                ProofOfDonationNumber::where('donation_id', $this->donation_id)->update([
+                    'name' => '1'
+                ]);
             }
-            $invoice->delete();
-        }
 
-        $image_path = public_path('logo/kop.png');
+            // cek apakah detail sudah ada
+            $checkDetail = DetailGoodsDonation::where('goods_donations_id', $this->donation_id)->get();
 
-        $image_data = base64_encode(file_get_contents($image_path));
+            // jika ada maka hapus terlebih dahulu
+            if ($checkDetail) {
+                DetailGoodsDonation::where('goods_donations_id', $this->donation_id)->delete();
+            }
 
-        $data = [
-            'id' => $data->donation_id,
-            'nama' => $donatur->nama,
-            'no' => $no,
-            'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
-            'keterangan' => $data->keterangan,
-            'alamat' => $donatur->alamat,
-            'no_hp' => $donatur->no_hp,
-            'bulan' => $bln,
-            'image' => $image_data
-        ];
+            $results = '';
+            foreach ($this->inputs as $key => $value) {
+                DetailGoodsDonation::create([
+                    'nama_barang' => $this->inputs[$key]['nama_barang'],
+                    'jumlah' => $this->inputs[$key]['jumlah'],
+                    'goods_donations_id' => $this->donation_id
+                ]);
 
-        $name = 'invoice/Tanda Terima - ' . $no . ' - ' . $donatur->nama . '.pdf';
+                $results .= $this->inputs[$key]['nama_barang'] . ' ' . $this->inputs[$key]['jumlah'] . ', ';
+            }
 
-        $pdf = PDF::loadView('invoice-barang', $data);
-        $pdf->setPaper('F4', 'potrait');
-        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
-        $pdf->save($name);
+            $results = rtrim($results, ', ');
 
-        Invoice::create([
-            'donation_id' => $data['id'],
-            'file' => $name
-        ]);
+            $data = [
+                'tanggal_donasi' => $this->tanggal_donasi,
+                'nama' => $this->nama,
+                'alamat' => $this->alamat,
+                'keterangan' => $results,
+                'penerima' => $this->penerima,
+            ];
 
-        $role = Auth::user()->role;
-        if ($role == 'admin-yayasan') {
-            return redirect()->route('donation.goods.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
+            DB::commit();
+
+            $this->kirimBukti($data);
+
+            return redirect()->route('donation.goods')->with([
+                'message' => 'Donasi berhasil diubah',
+                'id' => $this->donation_id
+            ]);
+        } catch (Exception $e) {
+            Log::debug($e);
+            DB::rollBack();
+            return redirect()->route('donation.goods')->with([
+                'error' => 'Ooops, ada yang error. Silahkan Hubungi Developer',
+            ]);
         }
     }
 
-    public function printInvoice($id)
+    public function kirimBukti($data)
     {
-        $invoice = Invoice::where('donation_id', $id)->first();
-        return response()->download(public_path($invoice->file));
+        $nama = strtoupper($data['nama']);
+        $tgl = Carbon::parse($data['tanggal_donasi'])->format('d-m-Y');
+        $waktu = Carbon::now()->format('H:i:s');
+        $alamat = $data['alamat'];
+        $keterangan = $data['keterangan'];
+        $penerima = $data['penerima'];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.fonnte.com/send',
+            CURLOPT_SSL_VERIFYPEER => FALSE,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array(
+                'target' => '085701223722',
+                'message' => "DONASI BARANG \nDIUBAH \n$tgl $waktu \n$nama \nAlamat: $alamat \nKeterangan Barang: $keterangan \nPenerima: $penerima",
+                'countryCode' => '62', //optional
+            ),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: mfS1xFJqr4XeXm48TvjV' //change TOKEN to your actual token
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
     }
 
     public function deleteConfirmation($id)
@@ -307,5 +272,25 @@ class DonationGoods extends Component
         GoodsDonation::destroy($this->donation_id);
 
         $this->dispatchBrowserEvent('deleted', ['message' => 'Donasi Berhasil Dihapus']);
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new DonasiBarangExport, 'Donasi Barang.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $donations = GoodsDonation::with('donatur', 'detail')->get();
+
+        $data = [
+            'donations' => $donations
+        ];
+
+        $pdf = PDF::loadView('export.donasi-barang.pdf', $data);
+        $pdf->setPaper('F4', 'potrait');
+        $pdf->setOptions(['dpi' => 96, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->download('Donasi Barang.pdf');
     }
 }

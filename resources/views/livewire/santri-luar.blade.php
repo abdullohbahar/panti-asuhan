@@ -19,15 +19,15 @@
   <section class="content">
     <div class="container-fluid">
         <div class="card">
-            <div class="card-header">
-                <div class="col-sm-12 col-md-6">
-                    <button wire:click="exportExcel" class="btn btn-warning btn-sm"><b><i class="fas fa-print"></i> Export</b></button>
+            <div class="card-header text-right">
+                <div class="col-sm-12 col-md-12">
+                    <button wire:click="exportExcel" class="btn btn-success btn-sm"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
                     <a href="{{ url('export-santri/Santri Luar') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="row justify-content-end">
-                    <div class="col-0 mr-2">
+                    <div class="col-0 mr-3 mt-2">
                         <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari">
                     </div>
                     <div class="col-12 mt-2">
@@ -57,17 +57,19 @@
                                                 <img src="{{ asset('./template/dist/img/default-picture.png') }}" class="img-fluid img-thumbnail w-50" alt="{{ $child->nama_lengkap }}" srcset="">
                                             @endif
                                         </td>
-                                        <td data-label="Nama Lengkap">
+                                        <td data-label="Nama">
                                             {{ $child->nama_lengkap }}
                                         </td>
                                         <td data-label="Tempat, Tanggal Lahir">
-                                            {{ $child->tempat_lahir }}, {{ $child->tanggal_lahir }}
+                                            {{ $child->tempat_lahir }}, {{ Carbon\Carbon::parse($child->tanggal_lahir)->format('d-m-Y') }}
                                         </td>
                                         <td data-label="Aksi">
                                             <div class="btn-group-vertical" role="group" aria-label="Basic example">
                                                 <a href="{{ route('profile.anak.asuh',$child->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" data-placement="top" title="Profil Santri Luar"><i class="fas fa-user"></i> Profil Anak</a>
                                                 {{-- <a href="{{ route('berkas.anak.asuh',$child->id) }}" class="btn btn-info btn-sm my-2" data-toggle="tooltip" data-placement="top" title="Unggah Berkas"><i class="fas fa-upload"></i> Unggah Berkas</a> --}}
-                                                <button wire:click="deleteConfirmation('{{ $child->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Santri Luar"><i class="fas fa-trash"></i> Hapus</button>
+                                                @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+                                                    <button wire:click="deleteConfirmation('{{ $child->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Santri Luar"><i class="fas fa-trash"></i> Hapus</button>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

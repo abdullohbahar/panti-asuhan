@@ -14,10 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('goods_donations', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->string('no');
+            $table->uuid('id')->primary();
             $table->foreignUuid('donatur_id')->onUpdate('cascade')->onDelete('set null');
-            $table->text('keterangan')->nullable();
             $table->date('tanggal_donasi')->nullable();
             $table->timestamps();
         });

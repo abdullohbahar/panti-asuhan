@@ -79,7 +79,7 @@ class Kernel extends HttpKernel
         'ketua-lksa' => KetuaLKSA::class,
         'ketua-yayasan' => KetuaYayasan::class,
         'pembina-yayasan' => PembinaYayasan::class,
-        'sekretariat-yayasan' => SekertariatYayasan::class,
-        'sekreatriat-lksa' => SekretariatLKSA::class,
+        'sekertariat-yayasan' => SekertariatYayasan::class,
+        'sekertariat-lksa' => SekretariatLKSA::class,
     ];
 }

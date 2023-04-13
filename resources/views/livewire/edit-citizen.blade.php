@@ -25,6 +25,17 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
+                                    <label>NIK</label>
+                                    <input type="text" wire:model="nik" class="form-control @error("nik") is-invalid @enderror" id="">
+                                    @error("nik")
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
                                     <label>Nama Lengkap</label>
                                     <input type="text" wire:model="nama_lengkap" class="form-control @error("nama_lengkap") is-invalid @enderror" id="">
                                     @error("nama_lengkap")

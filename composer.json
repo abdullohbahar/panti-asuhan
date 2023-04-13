@@ -14,7 +14,12 @@
         "livewire/livewire": "^2.10",
         "maatwebsite/excel": "^3.1",
         "pharaonic/livewire-select2": "^1.2",
-        "psr/simple-cache": "2.0"
+        "psr/simple-cache": "2.0",
+        "rawilk/laravel-printing": "^3.0",
+        "rollbar/rollbar-laravel": "^7.2",
+        "sentry/sentry-laravel": "^3.3",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "wandersonwhcr/illuminate-romans": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

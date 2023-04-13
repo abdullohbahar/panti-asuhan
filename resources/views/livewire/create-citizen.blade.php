@@ -20,10 +20,25 @@
     <div class="container-fluid chocolat-open">
         <div class="card">
             <div class="card-header">
+                &nbsp; Harap menggunakan file template excel jika ingin melakukan import data. Dan baca aturan untuk pengisian.
+                <button class="btn btn-warning mt-2" data-toggle="modal" data-target="#petunjuk"><i class="fas fa-exclamation-triangle"></i> Petunjuk Pengisian</button>
+                <button class="btn btn-info mt-2" wire:click="downloadTemplate"><i class="fas fa-download"></i> Download Template Excel</button>
+                <button class="btn btn-success mt-2" data-toggle="modal" data-target="#importWarga"><i class="fas fa-file-excel"></i> Import Melalui Excel</button>
             </div>
             <div class="card-body">
                 <form wire:submit.prevent="store">
                     <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label>NIK</label>
+                                <input type="text" wire:model="nik" class="form-control @error("nik") is-invalid @enderror" id="">
+                                @error("nik")
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label>Nama Lengkap</label>
@@ -93,6 +108,7 @@
                                     <option value="Jompo">Jompo</option>
                                     <option value="Jamaah">Jamaah</option>
                                     <option value="Sudah Meninggal">Sudah Meninggal</option>
+                                    <option value="Warga Dusun">Warga Dusun</option>
                                 </select>
                                 @error("status")
                                     <div class="invalid-feedback">
@@ -122,6 +138,7 @@
             </div>
         </div>
     </div>
+    <livewire:import.import-warga>
   </section>
   <!-- /.content -->
 </div>

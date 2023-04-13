@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-  Laporan Pemasukan dan Pengeluaran
+  Laporan Pemasukan dan Pengeluaran Yayasan
 @endsection
 
 @push('addons-css')

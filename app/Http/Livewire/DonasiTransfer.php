@@ -2,20 +2,38 @@
 
 namespace App\Http\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Donatur;
 use Livewire\Component;
 use App\Models\Donation;
 use App\Models\GoodsDonation;
+use App\Models\MasterDataBank;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ProofOfDonationNumber;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class DonasiTransfer extends Component
 {
-    public $nama_donatur, $no_hp, $alamat, $donatur_id, $tanggal_donasi, $nominal, $terbilang, $bank, $norek, $keterangan;
+    public $nama_donatur, $no_hp, $alamat, $donatur_id, $tanggal_donasi, $nominal, $terbilang, $bank, $norek, $keterangan, $other_bank, $nomor_transaksi;
+
+    public function showOtherBank()
+    {
+        if ($this->bank !== 'lainnya') {
+            $this->other_bank = null;
+        } else {
+            $this->other_bank = "lainnya";
+        }
+    }
 
     public function render()
     {
+        $banks = MasterDataBank::orderBy('name', 'asc')->get();
+
         $data = [
             'donaturs' => Donatur::orderBy('nama', 'asc')->get(),
+            'banks' => $banks,
         ];
 
         return view('livewire.donasi-transfer', $data);
@@ -56,55 +74,46 @@ class DonasiTransfer extends Component
 
         $nominal = str_replace(' ', '', $nominal);
 
-        $donation = Donation::orderBy('no', 'desc')->first();
-        $goodsDonation = GoodsDonation::orderBy('no', 'desc')->first();
-
-        // Melakukan pengecekan untuk penomoran
-        // jika donasi not null dan donasi barang null maka nomor urut diambil dari tabel donasi
-        if ($donation && $goodsDonation == null) {
-            $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
-
-            // Selain itu jika donasi barang not null dan donasi barang null maka nomor urut diambil dari tabel donasi barang
-        } elseif ($goodsDonation && $donation == null) {
-            $no = str_pad($goodsDonation->no + 1, 5, 0, STR_PAD_LEFT);
-
-            // jika donasi barang dan donasi not null
-            // maka lakukan perbandingan apakah nomor di tabel donasi lebih besar
-            // jika nomor di tabel donasi lebih besar maka menggunakan nomor dari donasi
-            // jika nomor di tabel donasi barang maka menggunakan nomor dari donasi barang
-        } elseif ($goodsDonation && $donation) {
-            if ($donation->no > $goodsDonation->no) {
-                $no = str_pad($donation->no + 1, 5, 0, STR_PAD_LEFT);
-            } else {
-                $no = str_pad($goodsDonation->no + 1, 5, 0, STR_PAD_LEFT);
-            }
-
-            // jika semua null maka nomor dimulai dari 1
-        } elseif ($donation == null && $goodsDonation == null) {
-            $no = '00001';
+        if ($this->bank == "lainnya") {
+            $bank = $this->other_bank;
+        } else {
+            $bank = $this->bank;
         }
 
-        $createDoantur = Donatur::create([
-            'nama' => $this->nama_donatur,
-            'no_hp' => $this->no_hp,
-            'alamat' => $this->alamat,
-        ]);
+        try {
+            DB::beginTransaction();
 
-        Donation::create([
-            'donatur_id' => $createDoantur->id,
-            'jenis_donasi' => 'Transfer',
-            'terbilang' => $this->terbilang,
-            'pemasukan' => $nominal,
-            'keterangan' => $this->keterangan,
-            'tanggal_donasi' => $this->tanggal_donasi,
-            'bank' => $this->bank,
-            'norek' => $this->norek,
-            'transaksi' => 'pemasukan',
-        ]);
+            $createDoantur = Donatur::create([
+                'nama' => $this->nama_donatur,
+                'no_hp' => $this->no_hp,
+                'alamat' => $this->alamat,
+            ]);
 
-        $role = Auth::user()->role;
-        if ($role == 'admin-yayasan') {
-            return redirect()->route('data.donasi.transfer.admin.yayasan')->with('message', 'Donasi berhasil ditambahkan');
+            Donation::create([
+                'donatur_id' => $createDoantur->id,
+                'jenis_donasi' => 'Transfer',
+                'terbilang' => $this->terbilang,
+                'pemasukan' => $nominal,
+                'keterangan' => $this->keterangan,
+                'tanggal_donasi' => $this->tanggal_donasi,
+                'bank' => $bank,
+                'norek' => $this->norek,
+                'transaksi' => 'pemasukan',
+                'penerima' => $bank,
+                'nomor_transaksi' => $this->nomor_transaksi,
+            ]);
+
+            DB::commit();
+            return redirect()->route('data.donasi.transfer')->with('message', 'Donasi berhasil ditambahkan');
+        } catch (Exception $e) {
+            Log::debug($e);
+            DB::rollBack();
+            $this->dispatchBrowserEvent('show-error', ['message' => 'Error, Coba untuk input data lagi atau hubungi developer']);
         }
+    }
+
+    public function downloadTemplate()
+    {
+        return response()->download(public_path('template/import/template import donasi transfer.xlsx'));
     }
 }

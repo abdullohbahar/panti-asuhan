@@ -23,9 +23,11 @@
       <div class="card">
         <div class="card-header">
           <div class="row">
-            <div class="col-12 text-right">
-              <a href="{{ route('edit.data.anak.asuh',$anak->id) }}" class="btn btn-warning">Ubah Data</a>
-            </div>
+            @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+              <div class="col-12 text-right">
+                <a href="{{ route('edit.data.anak.asuh',$anak->id) }}" class="btn btn-warning">Ubah Data</a>
+              </div>
+            @endif
           </div>
         </div>
         <div class="card-body">
@@ -37,6 +39,22 @@
               <div class="row">
                 <div class="col-12">
                   <table class="table table-borderless">
+                    <tr>
+                      <td>
+                        <h6>Nomor Induk Santri</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $anak->nis }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Nomor Induk Keluarga</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $anak->nik }}</h6>
+                      </td>
+                    </tr>
                     <tr>
                       <td>
                         <h6>Nama</h6>
@@ -66,7 +84,7 @@
                         <h6>Tempat, Tanggal lahir</h6>
                       </td>
                       <td>
-                        <h6>: {{ $anak->tempat_lahir }}, {{ $anak->tanggal_lahir }}</h6>
+                        <h6>: {{ $anak->tempat_lahir }}, {{ $anak->tanggal_lahir != null ? \Carbon\Carbon::parse($anak->tanggal_lahir)->format('d-m-Y') : '-' }}</h6>
                       </td>
                     </tr>
                     <tr>
@@ -106,7 +124,7 @@
                         <h6>Tanggal Masuk</h6>
                       </td>
                       <td>
-                        <h6>: {{ date('d-m-Y',strtotime($anak->tgl_masuk)) }}</h6>
+                        <h6>: {{ $anak->tgl_masuk != null ? \Carbon\Carbon::parse($anak->tgl_masuk)->format('d-m-Y') : '-' }}</h6>
                       </td>
                     </tr>
                     <tr>
@@ -114,7 +132,7 @@
                         <h6>Tanggal Keluar</h6>
                       </td>
                       <td>
-                        <h6>: {{ date('d-m-Y',strtotime($anak->tgl_keluar)) }}</h6>
+                        <h6>: {{ $anak->tgl_keluar != null ? \Carbon\Carbon::parse($anak->tgl_keluar)->format('d-m-Y') : '-' }}</h6>
                       </td>
                     </tr>
                     <tr>
@@ -135,10 +153,26 @@
                     </tr>
                     <tr>
                       <td>
-                        <h6>Nomor HP</h6>
+                        <h6>Nama Wali</h6>
                       </td>
                       <td>
-                        <h6>: {{ $anak->nohp_ortu }} (Pemilik No HP : {{ $anak->pemilik_nohp }})</h6>
+                        <h6>: {{ $anak->pemilik_nohp }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Nomor HP Wali</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $anak->nohp_ortu }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Rekomendasi / Penanggung Jawab</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $anak->wali_anak }}</h6>
                       </td>
                     </tr>
                   </table>
@@ -159,9 +193,11 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
               <input type="text" wire:model="search" class="form-control rounded-pill" placeholder="Cari Nama Berkas">
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8 text-right">
-              <button class="btn btn-success" data-toggle="modal" data-target="#unggahBerkas">Unggah Berkas</button>
-            </div>
+            @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+              <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8 text-right">
+                <button class="btn btn-success" data-toggle="modal" data-target="#unggahBerkas">Unggah Berkas</button>
+              </div>
+            @endif
           </div>
         </div>
         <div class="card-body">
@@ -191,7 +227,9 @@
                     </td>
                     <td style="height: 50px">
                       <button wire:click="download('{{ $document->file }}','{{ $document->nama_dokumen }}')" class="btn btn-info btn-sm">Unduh Berkas</button>
-                      <button wire:click="deleteConfirmation('{{ $document->file }}','{{ $document->id }}')" class="btn btn-danger btn-sm">Hapus Berkas</button>
+                      @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan')
+                        <button wire:click="deleteConfirmation('{{ $document->file }}','{{ $document->id }}')" class="btn btn-danger btn-sm">Hapus Berkas</button>
+                      @endif
                     </td>
                   </tr>
                   @endforeach

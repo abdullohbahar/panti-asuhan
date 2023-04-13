@@ -39,10 +39,34 @@
                   <table class="table table-borderless">
                     <tr>
                       <td>
+                        <h6>NIK</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $pengurus->nik }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
                         <h6>Nama</h6>
                       </td>
                       <td>
                         <h6>: {{ $pengurus->nama }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Status Pengurus</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ $pengurus->status }}</h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h6>Masa Bakti</h6>
+                      </td>
+                      <td>
+                        <h6>: {{ \Carbon\Carbon::parse($pengurus->from)->format('d-m-Y') }} Sampai {{ \Carbon\Carbon::parse($pengurus->to)->format('d-m-Y') }}</h6>
                       </td>
                     </tr>
                     <tr>
@@ -66,7 +90,7 @@
                         <h6>Tempat, Tanggal lahir</h6>
                       </td>
                       <td>
-                        <h6>: {{ $pengurus->tempat_lahir }}, {{ $pengurus->tanggal_lahir }}</h6>
+                        <h6>: {{ $pengurus->tempat_lahir }}, {{ $pengurus->tanggal_lahir != null ? \Carbon\Carbon::parse($pengurus->tanggal_lahir)->format('d-m-Y') : '-' }}</h6>
                       </td>
                     </tr>
                     <tr>

@@ -12,6 +12,7 @@ class Pengurus extends Model
     use HasUuids;
 
     protected $fillable = [
+        'nik',
         'nama',
         'alamat',
         'no_hp',
@@ -22,6 +23,10 @@ class Pengurus extends Model
         'jenis_kelamin',
         'pendidikan',
         'pekerjaan',
+        'from',
+        'to',
+        'order',
+        'status',
     ];
 
     public function documents()

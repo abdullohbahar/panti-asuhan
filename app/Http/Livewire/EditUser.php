@@ -63,6 +63,6 @@ class EditUser extends Component
         // store data
         User::where('id', $this->iduser)->update($data);
 
-        return redirect()->route('data.pengguna.admin.yayasan')->with('message', 'Pengguna berhasil diubah');
+        return redirect()->route('data.pengguna')->with('message', 'Pengguna berhasil diubah');
     }
 }

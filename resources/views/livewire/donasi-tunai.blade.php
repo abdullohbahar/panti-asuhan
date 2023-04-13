@@ -21,6 +21,12 @@
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-10">
                 <div class="card">
+                    <div class="card-header">
+                        &nbsp; Harap menggunakan file template excel jika ingin melakukan import data. Dan baca aturan untuk pengisian.
+                        <button class="btn btn-warning mt-2" data-toggle="modal" data-target="#petunjuk"><i class="fas fa-exclamation-triangle"></i> Petunjuk Pengisian</button>
+                        <button class="btn btn-info mt-2" wire:click="downloadTemplate"><i class="fas fa-download"></i> Download Template Excel</button>
+                        <button class="btn btn-success mt-2" data-toggle="modal" data-target="#import"><i class="fas fa-file-excel"></i> Import Melalui Excel</button>
+                    </div>
                     <div class="card-body">
                         <form wire:submit.prevent="store">
                             <div class="row">
@@ -63,23 +69,23 @@
                                             </div>
                                             <div class="col-sm-12 col-md-6">
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="Infaq" value="Infaq">
-                                                    <label class="form-check-label" for="Infaq">Infaq</label>
+                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="Infaq" value="Sodaqoh / Infaq">
+                                                    <label class="form-check-label" for="Infaq">Sodaqoh / Infaq</label>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12 col-md-6">
+                                            {{-- <div class="col-sm-12 col-md-6">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" wire:model="tipe" id="Sodaqoh" value="Sodaqoh">
                                                     <label class="form-check-label" for="Sodaqoh">Sodaqoh</label>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-sm-12 col-md-6">
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="OperasiYayasan" value="Operasi Yayasan">
-                                                    <label class="form-check-label" for="OperasiYayasan">Operasi Yayasan</label>
+                                                    <input class="form-check-input" type="radio" wire:model="tipe" id="OperasiYayasan" value="Operasional Yayasan">
+                                                    <label class="form-check-label" for="OperasiYayasan">Operasional Yayasan</label>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12 col-md-6">
+                                            {{-- <div class="col-sm-12 col-md-6">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" wire:model="tipe" id="BiayaPendidikan" value="Biaya Pendidikan">
                                                     <label class="form-check-label" for="BiayaPendidikan">Biaya Pendidikan</label>
@@ -90,7 +96,7 @@
                                                     <input class="form-check-input" type="radio" wire:model="tipe" id="TabunganAnak" value="Tabungan Anak">
                                                     <label class="form-check-label" for="TabunganAnak">Tabungan Anak</label>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-sm-12 col-md-6">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" wire:model="tipe" id="Lain-lain" value="Lain-lain">
@@ -116,6 +122,17 @@
                                         <label>Nominal</label>
                                         <input type="text" wire:model="nominal" class="form-control @error("nominal") is-invalid @enderror" id="nominal">
                                         @error("nominal")
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label>Penerima</label>
+                                        <input type="text" wire:model="penerima" class="form-control @error("penerima") is-invalid @enderror" id="penerima">
+                                        @error("penerima")
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -157,6 +174,7 @@
             </div>
         </div>
     </div>
+    <livewire:import.import-donasi-tunai>
   </section>
   <!-- /.content -->
 </div>

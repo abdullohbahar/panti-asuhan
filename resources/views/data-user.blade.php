@@ -182,5 +182,30 @@
         'success'
       )
     })
+
+    // Reset passwod
+    window.addEventListener('show-reset-confirmation',event =>{
+      Swal.fire({
+        title: 'Anda yakin ingin mereset password ini?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Reset!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Livewire.emit('resetConfirmed')
+        }
+      })
+
+    })
+
+    window.addEventListener('reseted', event =>{
+      Swal.fire(
+        'Berhasil',
+        event.detail.message,
+        'success'
+      )
+    })
 </script>
 @endpush
