@@ -12,7 +12,7 @@
     </li>
     <li class="nav-item {{ $active == 'create-agenda' || $active == 'data-agenda' ? 'menu-open' : '' }}">
       <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-users"></i>
+        <i class="nav-icon fas fa-calendar-alt"></i>
         <p>
           Agenda Kegiatan
           <i class="right fas fa-angle-left"></i>
