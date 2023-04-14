@@ -20,7 +20,7 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item ml-2">
-          <a href="{{ route('create.agenda.kegiatan') }}" class="nav-link {{ $active == 'create-santri' ? 'active' : '' }}">
+          <a href="{{ route('create.agenda.kegiatan') }}" class="nav-link {{ $active == 'create-agenda' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
               Tambah Agenda Kegiatan
