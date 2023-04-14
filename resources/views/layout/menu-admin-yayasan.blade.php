@@ -14,7 +14,7 @@
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-users"></i>
         <p>
-          Santri
+          Agenda Kegiatan
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>
