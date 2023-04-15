@@ -118,6 +118,7 @@ class DonasiTunai extends Component
             ];
 
             $this->kirimBukti($data);
+
             if (auth()->user()->role != 'penerima-donasi') {
                 return redirect()->route('donation.tunai')->with([
                     'message' => 'Donasi berhasil ditambahkan',

@@ -70,4 +70,12 @@
     }, 800);
   </script>
 @endif
+
+@if (session()->has('idBarang'))
+  <script>
+      setTimeout(() => {
+        openWindowPopup('/print-invoice-donation-goods/{{ session('idBarang') }}', 1200, 800)
+      }, 800);
+  </script>
+@endif
 @endpush
