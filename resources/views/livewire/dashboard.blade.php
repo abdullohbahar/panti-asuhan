@@ -5,9 +5,9 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1>Dashboard 
-            @if (Auth()->user()->role == 'penerima-donasi')
+            {{-- @if (Auth()->user()->role == 'penerima-donasi')
               <a href="#" onclick="shutdown()" class="btn btn-danger">Matikan Komputer</a>
-            @endif
+            @endif --}}
           </h1>
         </div>
         <div class="col-sm-6">
