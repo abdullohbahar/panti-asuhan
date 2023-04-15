@@ -118,10 +118,17 @@ class DonasiTunai extends Component
             ];
 
             $this->kirimBukti($data);
-            return redirect()->route('donation.tunai')->with([
-                'message' => 'Donasi berhasil ditambahkan',
-                'id' => $createDonation->id
-            ]);
+            if (auth()->user()->role != 'penerima-donasi') {
+                return redirect()->route('donation.tunai')->with([
+                    'message' => 'Donasi berhasil ditambahkan',
+                    'id' => $createDonation->id
+                ]);
+            } else {
+                return redirect()->route('dashboard.penerima.donasi')->with([
+                    'message' => 'Donasi berhasil ditambahkan',
+                    'id' => $createDonation->id
+                ]);
+            }
         } catch (Exception $e) {
             DB::rollBack();
             Log::debug($e);

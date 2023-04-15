@@ -209,6 +209,10 @@ Route::prefix('sekertariat-lksa')->middleware('sekertariat-lksa')->group(functio
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.sekertariat.lksa');
 });
 
+Route::prefix('penerima-donasi')->middleware('penerima-donasi')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.penerima.donasi');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

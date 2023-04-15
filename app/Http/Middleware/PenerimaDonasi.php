@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminDonasi
+class PenerimaDonasi
 {
     /**
      * Handle an incoming request.

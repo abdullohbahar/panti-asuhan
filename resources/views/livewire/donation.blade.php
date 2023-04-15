@@ -32,8 +32,10 @@
                     <div class="col-sm-12 col-md-4 text-right">
                         {{-- <button wire:click="exportExcel" class="btn btn-success btn-sm"><b><i class="fas fa-file-excel"></i> Export Excel</b></button> --}}
                         {{-- <a href="{{ route('export.donasi.tunai.pdf') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a> --}}
-                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-export-excel"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
-                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-export-pdf"><b><i class="fas fa-file-pdf"></i> Export PDF</b></button>
+                        @if (auth()->user()->role != 'penerima-donasi')
+                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-export-excel"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-export-pdf"><b><i class="fas fa-file-pdf"></i> Export PDF</b></button>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -93,6 +95,9 @@
                                             {{-- <button wire:click="sendConfirmation('{{ $donation->id }}')" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim ke whatsapp"><i class="fab fa-whatsapp"></i></button> --}}
                                             {{-- <button wire:click="printInvoiceDonation('{{ $donation->id }}')" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="download bukti"><i class="fas fa-print"></i></button> --}}
                                             <a onclick="openWindowPopup('/print-invoice-donation/{{ $donation->id }}', 1200, 800)" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="download bukti"><i class="fas fa-print"></i></a>
+                                            @if (auth()->user()->role == 'penerima-donasi')
+                                                <button id="edit" wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                            @endif
                                             @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan'|| Auth()->user()->role == 'admin-donasi')
                                                 <button id="edit" wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" data-jenis="{{ $donation->jenis_donasi }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>
                                                 <button wire:click="deleteConfirmation('{{ $donation->id }}')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Donasi"><i class="fas fa-trash-alt"></i></button>
