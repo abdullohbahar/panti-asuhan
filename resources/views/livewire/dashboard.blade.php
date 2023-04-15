@@ -4,7 +4,11 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Dashboard</h1>
+          <h1>Dashboard 
+            @if (Auth()->user()->role == 'penerima-donasi')
+              <a href="#" onclick="shutdown()" class="btn btn-danger">Matikan Komputer</a>
+            @endif
+          </h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -78,4 +82,28 @@
       }, 800);
   </script>
 @endif
+
+<script>
+    function shutdown(){
+      Swal.fire({
+        text: "Apakah kamu ingin mematikan komputer ini?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Matikan!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '{{ route("shutdown") }}', true);
+          xhr.onload = function () {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            }
+          };
+          xhr.send();
+        }
+      })
+    }
+  </script>
 @endpush

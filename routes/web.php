@@ -382,4 +382,6 @@ Route::middleware('auth')->group(function () {
     // Agenda kegiatan
     Route::get('tambah-agenda-kegiatan', Create::class)->name('create.agenda.kegiatan');
     Route::get('data-agenda-kegiatan', Data::class)->name('data.agenda.kegiatan');
+
+    Route::get('shutdown', [DashboardController::class, 'shutdown'])->name('shutdown');
 });

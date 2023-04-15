@@ -45,7 +45,6 @@
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
@@ -53,9 +52,11 @@
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <div class="dropdown-divider"></div>
-            <a href="{{ route('profile.user') }}" class="dropdown-item">
-              <i class="fas fa-user mr-2"></i> Profil
-            </a>
+            @if (auth()->user()->role != 'penerima-donasi')
+              <a href="{{ route('profile.user') }}" class="dropdown-item">
+                <i class="fas fa-user mr-2"></i> Profil
+              </a>
+            @endif
             <div class="dropdown-divider"></div>
             <a href="{{ route('logout') }}" class="dropdown-item">
               <i class="fas fa-sign-out-alt mr-2"></i> Logout
