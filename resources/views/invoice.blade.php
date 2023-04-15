@@ -9,8 +9,9 @@
         
         @page { 
             size: 20.7cm potrait;
-            margin-bottom: 10px;
-            margin-left: 10px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-top: 0px;
         }
 
         .bg-color{
@@ -119,7 +120,7 @@
                 <input type="checkbox" id="Lain-lain......" @if ($tipe == 'Lain-lain') checked @else class="check" @endif><label style="margin-top: 100px; font-size: 13px;" for="Lain-lain......">Lain-lain..............</label>
                 <p style="margin: 5px; font-size: 12px"><b><i>Assalamu'alaikum Wr. Wb.</i></b></p>
             </div>
-            <div style="font-size: 12px;">
+            <div style="font-size: 12.5px;">
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 150px !important;">Telah Diterima Dari</td>
