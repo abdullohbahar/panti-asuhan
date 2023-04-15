@@ -13,17 +13,6 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="form-group">
-                        <label>Nomor Urut</label>
-                        <input type="text" wire:model="nomor_urut" class="form-control @error("nomor_urut") is-invalid @enderror" id="">
-                        @error("nomor_urut")
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="form-group">
                         <label>Tanggal</label>
                         <input type="date" wire:model="tanggal" class="form-control @error("tanggal") is-invalid @enderror" id="">
                         @error("tanggal")
@@ -49,6 +38,17 @@
                         <label>Pengundang</label>
                         <input type="text" wire:model="pengundang" class="form-control @error("pengundang") is-invalid @enderror" id="">
                         @error("pengundang")
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                        <label>Nomor HP Pengundang</label>
+                        <input type="text" wire:model="nomor_hp_pengundang" class="form-control @error("nomor_hp_pengundang") is-invalid @enderror" id="">
+                        @error("nomor_hp_pengundang")
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

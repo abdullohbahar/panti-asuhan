@@ -12,10 +12,10 @@ class ScheduleActivity extends Model
     use HasUuids;
 
     protected $fillable = [
-        'nomor_urut',
         'tanggal',
         'acara',
         'pengundang',
+        'nomor_hp_pengundang',
         'keterangan'
     ];
 }

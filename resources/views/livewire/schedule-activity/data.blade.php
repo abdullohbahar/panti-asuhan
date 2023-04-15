@@ -31,9 +31,10 @@
                         <table class="table-data">
                             <thead>
                                 <tr>
-                                    <th scope="col">Nomor Urut</th>
+                                    <th scope="col">#</th>
                                     <th scope="col">Acara</th>
                                     <th scope="col">Pengundang</th>
+                                    <th scope="col">No HP Pengundang</th>
                                     <th scope="col">Tanggal</th>
                                     <th scope="col">Keterangan</th>
                                     @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'sekertariat-yayasan')
@@ -44,11 +45,12 @@
                             <tbody>
                                 @foreach ($agendas as $index => $agenda)
                                     <tr>
-                                        <td data-label="#">{{ $agenda->nomor_urut }}</td>
-                                        <td data-label="Nomor Surat">{{ $agenda->acara }}</td>
-                                        <td data-label="Perihal">{{ $agenda->pengundang }}</td>
+                                        <td data-label="#">{{ $agendas->firstItem() + $index }}</td>
+                                        <td data-label="Acara">{{ $agenda->acara }}</td>
+                                        <td data-label="Pengundang">{{ $agenda->pengundang }}</td>
+                                        <td data-label="No HP Pengundang">{{ $agenda->nomor_hp_pengundang }}</td>
                                         <td data-label="Tanggal">{{ $agenda->tanggal }}</td>
-                                        <td data-label="Tujuan">{{ $agenda->keterangan }}</td>
+                                        <td data-label="Keterangan">{{ $agenda->keterangan }}</td>
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'sekertariat-yayasan')
                                             <td data-label="Aksi">
                                                 <button id="edit" wire:click="show('{{ $agenda->id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-agenda" data-toggle="tooltip" data-placement="top" title="Ubah Donasi"><i class="fas fa-pencil-alt"></i></button>

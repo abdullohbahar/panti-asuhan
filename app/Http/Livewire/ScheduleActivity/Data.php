@@ -12,7 +12,7 @@ class Data extends Component
 {
     public $search;
     public $agendaId;
-    public $nomor_urut;
+    public $nomor_hp_pengundang;
     public $tanggal;
     public $acara;
     public $pengundang;
@@ -25,7 +25,7 @@ class Data extends Component
     {
         $agendas = ScheduleActivity::when(!empty($this->search), function ($query) {
             $query->where('acara', $this->search);
-        })->orderBy('nomor_urut')->paginate(20);
+        })->orderBy('tanggal')->paginate(20);
 
         $data = [
             'agendas' => $agendas
@@ -42,7 +42,7 @@ class Data extends Component
 
         $agendas = ScheduleActivity::findorfail($id);
 
-        $this->nomor_urut = $agendas->nomor_urut;
+        $this->nomor_hp_pengundang = $agendas->nomor_hp_pengundang;
         $this->tanggal = $agendas->tanggal;
         $this->acara = $agendas->acara;
         $this->pengundang = $agendas->pengundang;
@@ -52,7 +52,7 @@ class Data extends Component
     public function rules()
     {
         return [
-            'nomor_urut' => 'required|numeric',
+            'nomor_hp_pengundang' => 'required',
             'tanggal' => 'required',
             'acara' => 'required',
             'pengundang' => 'required',
@@ -63,8 +63,7 @@ class Data extends Component
     public function messages()
     {
         return [
-            'nomor_urut.required' => 'Nomor urut harus diisi',
-            'nomor_urut.numeric' => 'Nomor urut harus ANGKA',
+            'nomor_hp_pengundang.required' => 'Nomor urut harus diisi',
             'tanggal.required' => 'Tanggal harus diisi',
             'acara.required' => 'Acara harus diisi',
             'pengundang.required' => 'Pengundang harus diisi',
@@ -81,7 +80,7 @@ class Data extends Component
 
             // update data
             ScheduleActivity::where('id', $this->agendaId)->update([
-                'nomor_urut' => $this->nomor_urut,
+                'nomor_hp_pengundang' => $this->nomor_hp_pengundang,
                 'tanggal' => $this->tanggal,
                 'acara' => $this->acara,
                 'pengundang' => $this->pengundang,

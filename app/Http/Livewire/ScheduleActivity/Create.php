@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    public $nomor_urut;
+    public $nomor_hp_pengundang;
     public $tanggal;
     public $acara;
     public $pengundang;
@@ -25,7 +25,7 @@ class Create extends Component
     public function rules()
     {
         return [
-            'nomor_urut' => 'required|numeric',
+            'nomor_hp_pengundang' => 'required',
             'tanggal' => 'required',
             'acara' => 'required',
             'pengundang' => 'required',
@@ -36,8 +36,7 @@ class Create extends Component
     public function messages()
     {
         return [
-            'nomor_urut.required' => 'Nomor urut harus diisi',
-            'nomor_urut.numeric' => 'Nomor urut harus ANGKA',
+            'nomor_hp_pengundang.required' => 'Nomor urut harus diisi',
             'tanggal.required' => 'Tanggal harus diisi',
             'acara.required' => 'Acara harus diisi',
             'pengundang.required' => 'Pengundang harus diisi',
@@ -59,7 +58,7 @@ class Create extends Component
 
             // Store data
             ScheduleActivity::create([
-                'nomor_urut' => $this->nomor_urut,
+                'nomor_hp_pengundang' => $this->nomor_hp_pengundang,
                 'tanggal' => $this->tanggal,
                 'acara' => $this->acara,
                 'pengundang' => $this->pengundang,
