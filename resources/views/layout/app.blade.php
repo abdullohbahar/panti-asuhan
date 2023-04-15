@@ -101,6 +101,8 @@
           @include('layout.menu-bendahara-lksa')
         @elseif(Auth()->user()->role == 'sekertariat-lksa')
           @include('layout.menu-sekertariat-lksa')
+        @elseif(Auth()->user()->role == 'penerima-donasi')
+          @include('layout.menu-penerima-donasi')
         @endif
         <!-- /.sidebar-menu -->
       </div>

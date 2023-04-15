@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class BendaharaLKSA
+class AdminDonasi
 {
     /**
      * Handle an incoming request.
@@ -50,7 +50,7 @@ class BendaharaLKSA
         }
 
         if (Auth::user()->role == 'bendahara-lksa') {
-            return $next($request);
+            return redirect()->route('dashboard.bendahara.lksa');
         }
 
         if (Auth::user()->role == 'sekertariat-lksa') {
@@ -58,7 +58,7 @@ class BendaharaLKSA
         }
 
         if (Auth::user()->role == 'penerima-donasi') {
-            return redirect()->route('dashboard.penerima.donasi');
+            return $next($request);
         }
     }
 }
