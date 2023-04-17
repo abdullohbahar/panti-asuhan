@@ -384,6 +384,4 @@ Route::middleware('auth')->group(function () {
     Route::get('data-agenda-kegiatan', Data::class)->name('data.agenda.kegiatan');
 
     Route::get('shutdown', [DashboardController::class, 'shutdown'])->name('shutdown');
-
-    Route::get('tes-download', [CitizenController::class, 'exportExcel']);
 });

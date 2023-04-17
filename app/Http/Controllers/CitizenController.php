@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Citizen;
-use App\Exports\WargaExport;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class CitizenController extends Controller
 {
@@ -99,12 +97,5 @@ class CitizenController extends Controller
         ];
 
         return view('export.export-warga-pdf', $data);
-    }
-
-    public function exportExcel()
-    {
-        $filename = 'Data_Warga_Dhuafa.xlsx';
-        (new WargaExport('Dhuafa'))->store($filename, 'public');
-        return response()->json(['url' => env('APP_URL') . Storage::url($filename)]);
     }
 }
