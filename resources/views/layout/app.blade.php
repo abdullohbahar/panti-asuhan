@@ -189,6 +189,7 @@
       fetch('/tes-download')
           .then(response => response.json())
           .then(data => {
+            consoloe.log(data);
               // Send the downloadable URL to the Android WebView
               window.location.href = 'download://' + data.url;
           });

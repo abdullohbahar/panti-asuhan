@@ -105,6 +105,6 @@ class CitizenController extends Controller
     {
         $filename = 'Data_Warga_Dhuafa.xlsx';
         (new WargaExport('Dhuafa'))->store($filename, 'public');
-        return response()->json(['url' => Storage::url($filename)]);
+        return response()->json(['url' => env('APP_URL') . Storage::url($filename)]);
     }
 }
