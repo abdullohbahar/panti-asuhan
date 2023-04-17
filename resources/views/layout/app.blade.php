@@ -185,12 +185,14 @@
       })
     })
 
-    const reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = function () {
-        const dataUrl = reader.result;
-        alert(dataUrl);
-    };
+    function downloadFile() {
+      fetch('/tes-download')
+          .then(response => response.json())
+          .then(data => {
+              // Send the downloadable URL to the Android WebView
+              window.location.href = 'download://' + data.url;
+          });
+    }
   </script>
 
   @stack('addons-js')
