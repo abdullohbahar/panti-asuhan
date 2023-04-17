@@ -28,7 +28,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 text-right">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
-                                <button wire:click="exportExcel" class="btn btn-success btn-sm btn-block mt-2" onclick="downloadFile()"><b><i class="fas fa-print"></i> Export Excel</b></button>
+                                <button class="btn btn-success btn-sm btn-block mt-2" onclick="downloadFile()"><b><i class="fas fa-print"></i> Export Excel</b></button>
                             </div>
                             <div class="col-ms-12 col-md-6">
                                 <a href="{{ route('export.warga','Dhuafa') }}" class="btn btn-danger btn-sm btn-block mt-2"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
