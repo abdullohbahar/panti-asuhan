@@ -184,6 +184,13 @@
         title: event.detail.message
       })
     })
+
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = function () {
+        const dataUrl = reader.result;
+        alert(dataUrl);
+    };
   </script>
 
   @stack('addons-js')
