@@ -74,8 +74,10 @@
         @php
             if(strpos(auth()->user()->role, 'yayasan')){
               $logo = '/logo-yayasan.png';
-            }else{
+            }else if(strpos(auth()->user()->role, 'lksa')){
               $logo = '/logo-lksa.jpg';
+            }else{
+              $logo = '/logo-yayasan.png';
             }
         @endphp
         <img src="{{ asset('./logo'.$logo) }}" class="img-circle elevation-3" style="opacity: .8; width: 60%; margin-top: -10px; margin-bottom: -10px;">
