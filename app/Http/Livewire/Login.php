@@ -63,8 +63,11 @@ class Login extends Component
                 case 'sekertariat-lksa':
                     return redirect()->route('dashboard.sekertariat.lksa');
                     break;
+                case 'penerima-donasi':
+                    return redirect()->route('dashboard.penerima.donasi');
+                    break;
                 default:
-                    return redirect()->to('login');
+                    return redirect()->to('/');
             }
         }
 

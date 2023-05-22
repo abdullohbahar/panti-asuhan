@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\LetterLksa;
+use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -28,6 +29,8 @@ class DataIncomeLetterLksa extends Component
     public $old_file_dokumentasi;
     use WithFileUploads;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
 
     public function render()

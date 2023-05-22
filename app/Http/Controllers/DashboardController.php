@@ -85,4 +85,11 @@ class DashboardController extends Controller
     {
         //
     }
+
+    public function shutdown()
+    {
+        $command = escapeshellcmd('C:/shutdown.bat');
+        $output = shell_exec($command);
+        echo $output;
+    }
 }

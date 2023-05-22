@@ -45,7 +45,6 @@
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
@@ -53,9 +52,11 @@
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <div class="dropdown-divider"></div>
-            <a href="{{ route('profile.user') }}" class="dropdown-item">
-              <i class="fas fa-user mr-2"></i> Profil
-            </a>
+            @if (auth()->user()->role != 'penerima-donasi')
+              <a href="{{ route('profile.user') }}" class="dropdown-item">
+                <i class="fas fa-user mr-2"></i> Profil
+              </a>
+            @endif
             <div class="dropdown-divider"></div>
             <a href="{{ route('logout') }}" class="dropdown-item">
               <i class="fas fa-sign-out-alt mr-2"></i> Logout
@@ -73,8 +74,10 @@
         @php
             if(strpos(auth()->user()->role, 'yayasan')){
               $logo = '/logo-yayasan.png';
-            }else{
+            }else if(strpos(auth()->user()->role, 'lksa')){
               $logo = '/logo-lksa.jpg';
+            }else{
+              $logo = '/logo-yayasan.png';
             }
         @endphp
         <img src="{{ asset('./logo'.$logo) }}" class="img-circle elevation-3" style="opacity: .8; width: 60%; margin-top: -10px; margin-bottom: -10px;">
@@ -101,6 +104,8 @@
           @include('layout.menu-bendahara-lksa')
         @elseif(Auth()->user()->role == 'sekertariat-lksa')
           @include('layout.menu-sekertariat-lksa')
+        @elseif(Auth()->user()->role == 'penerima-donasi')
+          @include('layout.menu-penerima-donasi')
         @endif
         <!-- /.sidebar-menu -->
       </div>

@@ -2,15 +2,16 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\KetuaLKSA;
 use App\Http\Middleware\AdminDonasi;
 use App\Http\Middleware\AdminYayasan;
-use App\Http\Middleware\BendaharaLKSA;
-use App\Http\Middleware\BendaharaYayasan;
-use App\Http\Middleware\KetuaLKSA;
 use App\Http\Middleware\KetuaYayasan;
+use App\Http\Middleware\BendaharaLKSA;
 use App\Http\Middleware\PembinaYayasan;
-use App\Http\Middleware\SekertariatYayasan;
+use App\Http\Middleware\PenerimaDonasi;
 use App\Http\Middleware\SekretariatLKSA;
+use App\Http\Middleware\BendaharaYayasan;
+use App\Http\Middleware\SekertariatYayasan;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -81,5 +82,6 @@ class Kernel extends HttpKernel
         'pembina-yayasan' => PembinaYayasan::class,
         'sekertariat-yayasan' => SekertariatYayasan::class,
         'sekertariat-lksa' => SekretariatLKSA::class,
+        'penerima-donasi' => PenerimaDonasi::class,
     ];
 }

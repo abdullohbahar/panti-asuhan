@@ -56,5 +56,9 @@ class SekretariatLKSA
         if (Auth::user()->role == 'sekertariat-lksa') {
             return $next($request);
         }
+
+        if (Auth::user()->role == 'penerima-donasi') {
+            return redirect()->route('dashboard.penerima.donasi');
+        }
     }
 }

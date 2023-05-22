@@ -42,6 +42,8 @@ use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
 use App\Http\Livewire\LksaDocument;
 use App\Http\Livewire\Pengurus;
+use App\Http\Livewire\ScheduleActivity\Create;
+use App\Http\Livewire\ScheduleActivity\Data;
 
 /*
 |--------------------------------------------------------------------------
@@ -205,6 +207,10 @@ Route::prefix('bendahara-lksa')->middleware('bendahara-lksa')->group(function ()
 
 Route::prefix('sekertariat-lksa')->middleware('sekertariat-lksa')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.sekertariat.lksa');
+});
+
+Route::prefix('penerima-donasi')->middleware('penerima-donasi')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.penerima.donasi');
 });
 
 Route::middleware('auth')->group(function () {
@@ -372,4 +378,10 @@ Route::middleware('auth')->group(function () {
     // penomoran surat lksa
     Route::get('penomoran-surat-lksa', CreatePenomoranSuratLksa::class)->name('create.numbering.letter.lksa');
     Route::get('data-penomoran-surat-lksa', DataPenomoranSuratLksa::class)->name('data.numbering.letter.lksa');
+
+    // Agenda kegiatan
+    Route::get('tambah-agenda-kegiatan', Create::class)->name('create.agenda.kegiatan');
+    Route::get('data-agenda-kegiatan', Data::class)->name('data.agenda.kegiatan');
+
+    Route::get('shutdown', [DashboardController::class, 'shutdown'])->name('shutdown');
 });

@@ -28,8 +28,10 @@
                         <h5><b>Donasi Barang</b></h5>
                     </div>
                     <div class="col-sm-12 col-md-4 text-right">
-                        <button wire:click="exportExcel" class="btn btn-success btn-sm"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
-                        <a href="{{ route('export.donasi.barang.pdf') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
+                        @if (Auth()->user()->role != 'penerima-donasi')
+                            <button wire:click="exportExcel" class="btn btn-success btn-sm"><b><i class="fas fa-file-excel"></i> Export Excel</b></button>
+                            <a href="{{ route('export.donasi.barang.pdf') }}" class="btn btn-danger btn-sm"><b><i class="fas fa-file-pdf"></i> Export PDF</b></a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -47,7 +49,7 @@
                                     <th scope="col">Keterangan Barang</th>
                                     <th scope="col">Penerima</th>
                                     <th scope="col">Tanggal Donasi</th>
-                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan' || Auth()->user()->role == 'admin-donasi')
+                                    @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan' || Auth()->user()->role == 'admin-donasi' || Auth()->user()->role == 'penerima-donasi')
                                         <th scope="col">Aksi</th>
                                     @endif
                                 </tr>
@@ -76,6 +78,13 @@
                                         </td>
                                         <td data-label="Penerima">{{ $donation->penerima }}</td>
                                         <td data-label="Tanggal Donasi">{{ $donation->tanggal_donasi }}</td>
+                                        @if (Auth()->user()->role == 'penerima-donasi')
+                                            <td data-label="Aksi">
+                                                <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Bukti Donasi"><i class="fas fa-upload"></i></a>
+                                                <a onclick="openWindowPopup('/print-invoice-donation-goods/{{ $donation->id }}', 1200, 800)" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak tanda donasi"><i class="fas fa-print"></i></a>
+                                                <button wire:click="show('{{ $donation->id }}','{{ $donation->donatur_id }}')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-donation-item" data-toggle="tooltip" data-placement="top" title="Edit Donasi"><i class="fas fa-pencil-alt"></i></button>
+                                            </td>
+                                        @endif
                                         @if (auth()->user()->role == 'admin-yayasan' || Auth()->user()->role == 'ketua-yayasan' || Auth()->user()->role == 'bendahara-yayasan' || Auth()->user()->role == 'admin-donasi')
                                             <td data-label="Aksi">
                                                 <a href="{{ route('proof.of.donation',$donation->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Bukti Donasi"><i class="fas fa-upload"></i></a>

@@ -56,5 +56,9 @@ class AdminYayasan
         if (Auth::user()->role == 'sekertariat-lksa') {
             return redirect()->route('dashboard.sekertariat.lksa');
         }
+
+        if (Auth::user()->role == 'penerima-donasi') {
+            return redirect()->route('dashboard.penerima.donasi');
+        }
     }
 }

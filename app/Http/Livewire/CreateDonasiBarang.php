@@ -140,10 +140,22 @@ class CreateDonasiBarang extends Component
             $this->kirimBukti($data);
             DB::commit();
 
-            return redirect()->route('donation.goods')->with([
-                'message' => 'Donasi berhasil ditambahkan',
-                'id' => $createDonation->id
-            ]);
+            if (auth()->user()->role == 'penerima-donasi') {
+                return redirect()->route('dashboard.penerima.donasi')->with([
+                    'message' => 'Donasi berhasil ditambahkan',
+                    'idBarang' => $createDonation->id
+                ]);
+            } elseif (auth()->user()->role == 'admin-donasi') {
+                return redirect()->route('dashboard.admin.donasi')->with([
+                    'message' => 'Donasi berhasil ditambahkan',
+                    'idBarang' => $createDonation->id
+                ]);
+            } else {
+                return redirect()->route('donation.tunai')->with([
+                    'message' => 'Donasi berhasil ditambahkan',
+                    'idBarang' => $createDonation->id
+                ]);
+            }
         } catch (Exception $e) {
             Log::debug($e);
             DB::rollBack();

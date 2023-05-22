@@ -32,9 +32,9 @@
         @page { 
             size: 20.7cm potrait;
             margin-bottom: 0px;
-            margin-left: 10px;
-            margin-top: 0px;
-            margin-right: 10px;
+            margin-left: 0px;
+            margin-top: 10px;
+            margin-right: 0px;
         }
 
         body{
@@ -192,7 +192,7 @@
                 <h4 style="margin: 0px; font-size:12px; font-weight:bold">No : {{ $no }} / Kw-Al Dzikro / {{ $bulan }} / {{ date('Y') }}</h4>
                 <h5 style="margin: 5px; font-size:12px; font-weight:bold"><i>Assalamu'alaikum Wr. Wb.</i></h5>
             </div>
-            <div style="font-size: 11px;">
+            <div style="font-size: 12.5px;">
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 125px !important;">Telah Diterima Dari</td>

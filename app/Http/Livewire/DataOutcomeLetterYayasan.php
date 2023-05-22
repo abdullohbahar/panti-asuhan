@@ -3,12 +3,13 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\LetterYayasan;
-use App\Models\OutgoingLetterYayasan;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Models\OutgoingLetterYayasan;
 use Illuminate\Database\QueryException;
-use Livewire\WithFileUploads;
 
 class DataOutcomeLetterYayasan extends Component
 {
@@ -29,6 +30,8 @@ class DataOutcomeLetterYayasan extends Component
     public $destroyBerkas;
     use WithFileUploads;
     protected $listeners = ['deleteConfirmed' => 'destroy'];
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
