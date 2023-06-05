@@ -28,7 +28,7 @@
   @livewireStyles
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini">
   <!-- Site wrapper -->
   <div class="wrapper">
     <!-- Navbar -->
@@ -39,7 +39,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li>
-          <a href="#" class="nav-link"><b>PANTI ASUHAN AL DZIKRO WUKIRSARI IMOGIRI BANTUL</b></a>
+          <a href="#" class="nav-link"><b>YAYASAN AL DZIKRO WUKIRSARI IMOGIRI BANTUL</b></a>
         </li>
       </ul>
 
@@ -121,11 +121,11 @@
     <footer class="main-footer">
       <!-- To the right -->
       {{-- <div class="float-right d-none d-sm-inline">
-        Panti Asuhan AL-Dzikro
+        YAYASAN AL-Dzikro
       </div> --}}
       <!-- Default to the left -->
       {{-- <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. --}}
-      <strong>Panti Asuhan Al Dzikro</strong>
+      <strong>YAYASAN AL DZIKRO WUKIRSARI IMOGIRI BANTUL</strong>
     </footer>
 
     <!-- Control Sidebar -->
