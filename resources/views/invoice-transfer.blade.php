@@ -110,23 +110,9 @@
 
             </div>
             <p style="margin: 2px; font-size: 14px"><b>TANDA TERIMA</b></p>
-            <p style="margin: 0px; font-size: 13px"><b>No : {{ $no }} / Kw-Al Dzikro / {{ $bulan }} /
+            <p style="margin: 0px; font-size: 13px"><b>No : {{ $no }} / Kw-Al Dzikro / {{ $bulan }}
+                    /
                     {{ date('Y') }}</b></p>
-            <input type="checkbox" id="Zakat"
-                @if ($tipe == 'Zakat') checked @else class="check" @endif><label for="Zakat"
-                style="font-size: 13px">Zakat</label> &nbsp; &nbsp; &nbsp; &nbsp;
-            {{-- <input type="checkbox" id="Infaq" @if ($tipe == 'Infaq') checked @else class="check" @endif><label for="Infaq" style="font-size: 13px">Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp; --}}
-            <input type="checkbox" id="Sodaqoh"
-                @if ($tipe == 'Sodaqoh' || $tipe == 'Sodaqoh / Infaq') checked @else class="check" @endif><label for="Sodaqoh"
-                style="font-size: 13px">Sodaqoh / Infaq</label> &nbsp; &nbsp; &nbsp; &nbsp;
-            <input type="checkbox" id="OperasiYayasan"
-                @if ($tipe == 'Operasional Yayasan') checked @else class="check" @endif><label for="OperasiYayasan"
-                style="font-size: 13px">Operasional Yayasan</label> &nbsp; &nbsp; &nbsp; &nbsp;
-            {{-- <input type="checkbox" id="BiayaPendidikan" @if ($tipe == 'Biaya Pendidikan') checked @else class="check" @endif><label for="BiayaPendidikan" style="font-size: 13px">Biaya Pendidikan</label> &nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" id="TabunganAnak" @if ($tipe == 'Tabungan Anak') checked @else class="check" @endif><label for="TabunganAnak" style="font-size: 13px">Tabungan Anak</label> &nbsp; &nbsp; &nbsp; &nbsp; --}}
-            <input type="checkbox" id="Lain-lain......"
-                @if ($tipe == 'Lain-lain') checked @else class="check" @endif><label
-                style="margin-top: 100px; font-size: 13px;" for="Lain-lain......">Lain-lain..............</label>
             <p style="margin: 5px; font-size: 12px"><b><i>Assalamu'alaikum Wr. Wb.</i></b></p>
         </div>
         <div style="font-size: 12.5px;">
@@ -149,13 +135,18 @@
                     <td>: {{ 'Rp. ' . number_format($nominal, 0, '', '.') }}</td>
                 </tr>
                 <tr>
-                    <td>Terbilang</td>
-                    <td>: {{ $terbilang }}
+                    <td>Nomor Rekening</td>
+                    <td>: {{ $nomor_rekening }}
                     <td>
                 </tr>
                 <tr>
-                    <td>Keterangan</td>
-                    <td>: {{ $keterangan }}</td>
+                    <td>Nomor Transaksi</td>
+                    <td>: {{ $nomor_transaksi }}</td>
+                </tr>
+                <tr>
+                    <td>Bank</td>
+                    <td>: {{ $bank }}
+                    <td>
                 </tr>
                 <tr>
                     <td colspan="3" style="text-align:center">
@@ -210,7 +201,8 @@
                 <td></td>
                 <td>
                     <p style="font-size: 12px;">
-                        (&nbsp; {{ $penerima }} &nbsp;)
+                        (&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
                     </p>
                 </td>
             </tr>

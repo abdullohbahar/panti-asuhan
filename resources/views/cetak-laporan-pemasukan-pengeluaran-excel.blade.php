@@ -28,9 +28,9 @@
     </thead>
     <tbody>
         @php
-        $no = 1;
-        $saldo = $saldoBulanSebelumnya;
-        $format = '_-[$Rp-id-ID]* #,##0_-;-[$Rp-id-ID]* #,##0_-;_-[$Rp-id-ID]* "-"_-;_-@_-';
+            $no = 1;
+            $saldo = $saldoBulanSebelumnya;
+            $format = '_-[$Rp-id-ID]* #,##0_-;-[$Rp-id-ID]* #,##0_-;_-[$Rp-id-ID]* "-"_-;_-@_-';
         @endphp
         <tr>
             <td></td>
@@ -46,24 +46,24 @@
             @endif
         </tr>
         @foreach ($donations as $index => $donation)
-        @php
-            if($donation->transaksi == "pemasukan"){
-                $saldo += $donation->pemasukan;
-            }else{
-                $saldo -= $donation->pengeluaran;
-            }
-        @endphp
-        <tr>
-            <td>{{ $no++ }}</td>
-            <td>{{ $donation->donaturName != null ? $donation->donaturName->nama : '' }}</td>
-            <td>{{ date('d-m-Y',strtotime($donation->tanggal_donasi)) }}</td>
-            <td>{{ $donation->keterangan }}</td>
-            <td data-format="{{ $format }}">{{ $donation->pemasukan }}</td>
-            <td data-format="{{ $format }}">{{ $donation->pengeluaran }}</td>
-            <td data-format="{{ $saldo == 0 ? '' : $format }}">
-                {{ $saldo }}
-            </td>
-        </tr>
+            @php
+                if ($donation->transaksi == 'pemasukan') {
+                    $saldo += $donation->pemasukan;
+                } else {
+                    $saldo -= $donation->pengeluaran;
+                }
+            @endphp
+            <tr>
+                <td>{{ $no++ }}</td>
+                <td>{{ $donation->donaturName != null ? $donation->donaturName->nama : '' }}</td>
+                <td>{{ date('d-m-Y', strtotime($donation->tanggal_donasi)) }}</td>
+                <td>{{ $donation->keterangan }}</td>
+                <td data-format="{{ $format }}">{{ $donation->pemasukan }}</td>
+                <td data-format="{{ $format }}">{{ $donation->pengeluaran }}</td>
+                <td data-format="{{ $saldo == 0 ? '' : $format }}">
+                    {{ $saldo }}
+                </td>
+            </tr>
         @endforeach
         <tr>
             <td colspan="3" style="text-align: right"><b>Saldo Akhir</b></td>
