@@ -37,6 +37,7 @@ use App\Http\Livewire\DataPengurusMeninggal;
 use App\Http\Livewire\DataPenomoranSuratLksa;
 use App\Http\Livewire\DataPenomoranSuratYayasan;
 use App\Http\Livewire\DataSantriAlumni;
+use App\Http\Livewire\DonasiTransfer;
 use App\Http\Livewire\Export\ExportDonationPdf;
 use App\Http\Livewire\IncomeAndExpenseReport;
 use App\Http\Livewire\LaporanPemasukanPengeluaran;
@@ -283,6 +284,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/print-invoice-donation/{id}', [Donation::class, 'printInvoiceDonation'])->name('print.invoice.donation');
     Route::get('/print-invoice-donation-goods/{id}', [CreateDonasiBarang::class, 'printInvoiceDonation'])->name('print.invoice.donation.goods');
+    Route::get('/print-invoice-donation-transfer/{id}', [DonasiTransfer::class, 'printInvoiceDonationTransfer'])->name('print.invoice.donation.transfer');
 
     Route::get('/donasi-barang', [DonationController::class, 'donationGoods'])->name('donation.goods');
 

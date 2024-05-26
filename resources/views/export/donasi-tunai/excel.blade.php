@@ -11,17 +11,18 @@
     </thead>
     <tbody>
         @php
-        $no = 1;
+            $no = 1;
         @endphp
         @foreach ($donations as $donation)
-        <tr>
-            <td>{{ $no++ }}</td>
-            <td>{{ $donation->donaturName->nama }}</td>
-            <td>{{ $donation->tipe }}</td>
-            <td>{{ \Carbon\Carbon::parse($donation->tanggal_donasi)->format('d-m-Y') }} {{ \Carbon\Carbon::parse($donation->created_at)->format('H:i:s') }}</td>
-            <td>{{ "Rp " . number_format($donation->pemasukan, 2, ',', '.'); }}</td>
-            <td>{{ $donation->keterangan }}</td>
-        </tr>
+            <tr>
+                <td>{{ $no++ }}</td>
+                <td>{{ $donation->donaturName->nama }}</td>
+                <td>{{ $donation->tipe }}</td>
+                <td>{{ \Carbon\Carbon::parse($donation->tanggal_donasi)->format('d-m-Y') }}
+                    {{ \Carbon\Carbon::parse($donation->created_at)->format('H:i:s') }}</td>
+                <td>{{ 'Rp ' . number_format($donation->pemasukan, 2, ',', '.') }}</td>
+                <td>{{ $donation->keterangan }}</td>
+            </tr>
         @endforeach
     </tbody>
 </table>
