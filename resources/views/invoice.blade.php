@@ -10,7 +10,7 @@
         @page {
             size: 20.7cm potrait;
             margin-bottom: 0px;
-            margin-left: 0px;
+            margin-left: 10px;
             margin-top: 10px;
         }
 
