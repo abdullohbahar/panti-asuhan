@@ -82,7 +82,7 @@ class Donatur extends Component
         if ($donatur) {
             $this->id_donatur = $donatur->id;
             $this->nama = $donatur->nama;
-            $this->no_hp = $donatur->no_hp;
+            $this->no_hp = $donatur->no_hp ?? '-';
             $this->alamat = $donatur->alamat;
         }
     }

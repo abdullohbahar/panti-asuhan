@@ -175,7 +175,7 @@
                 </td>
                 <td>
                     <p style="font-size: 12px;">Wukirsari, {{ $tanggal }}</p>
-                    <p style="font-size: 12px">Yang Menerima</p>
+                    <p style="font-size: 12px; padding-top: 5px">Yang Menerima</p>
                 </td>
             </tr>
             <tr>
